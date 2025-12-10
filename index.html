@@ -7,12 +7,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* Əsas rənglər */
         .bg-primary-dark { background-color: #00525d; }
         .bg-primary-hover { background-color: #003f47; }
         .text-primary-dark { color: #00525d; }
         .border-primary-dark { border-color: #00525d; }
         .focus-ring-primary { --tw-ring-color: #00525d; }
         
+        /* Ümumi stil */
         html, body {
             margin: 0 !important;
             padding: 0 !important;
@@ -34,6 +36,7 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
+        /* Gecə rejimi stilləri */
         .dark body {
             background-color: #1a202c;
             color: #fcfcfc;
@@ -96,11 +99,12 @@
 
         #resultFrame {
             width: 100%;
-            height: 80vh; 
+            height: 80vh; /* Önizləmə çərçivəsi üçün hündürlük */
             border: none;
             border-radius: 0.75rem;
         }
 
+        /* Xüsusi seçim (select) sahəsinin stili */
         .custom-select-icon {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23ffffff'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath%3e%3c/svg%3e");
             background-repeat: no-repeat;
@@ -126,18 +130,7 @@
             z-index: 100;
         }
         
-        @keyframes blink {
-            0% { content: "."; }
-            33% { content: ".."; }
-            66% { content: "..."; }
-            100% { content: "."; }
-        }
-
-        #loading-dots::after {
-            content: ".";
-            animation: blink 1.5s infinite;
-        }
-
+        /* Başlıq Mətninin Ölçüsü */
         .header-title-text {
             font-size: 1.15rem;
         }
@@ -147,18 +140,32 @@
                 font-size: 1.5rem;
             }
         }
+
+        /* Yüklənmə Animasiyası üçün CSS */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-logo {
+            animation: spin 1.5s linear infinite;
+        }
+
     </style>
 </head>
 <body class="bg-primary-dark">
+    <!-- Başlıq / Header -->
     <header class="bg-white header-bg shadow-xl relative z-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-5">
+                <!-- Loqo (Toxunulmaz Qalır) -->
                 <img id="school-logo" 
                      src="https://i.imgur.com/a3FuVV8.png" 
                      alt="Okul Logosu" 
                      class="w-20 h-20 object-contain rounded-full border-2 logo-border p-1"
                      onerror="this.onerror=null; this.src='https://placehold.co/80x80/ccc/333?text=Logo';" 
                 />
+                <!-- Məktəb adı -->
                 <div class="flex flex-col items-start leading-tight">
                     <p class="text-base sm:text-lg font-medium text-tmv">
                         🇹🇷 🇦🇿 Türkiyə Maarif Vəqfi
@@ -171,6 +178,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Gecə/Gündüz Rejimi Düyməsi -->
             <div class="flex items-center space-x-4">
                 <button id="theme-toggle" onclick="toggleTheme()" class="p-2 rounded-full text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300">
                     <svg id="sun-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
@@ -180,7 +188,9 @@
         </div>
     </header>
 
+    <!-- Əsas Məzmun -->
     <main class="flex flex-col items-center justify-start p-6 pt-12 min-h-screen">
+        <!-- Nəticə Sorgulama Kartı -->
         <div id="query-card" class="w-full max-w-lg bg-white p-8 sm:p-12 rounded-2xl shadow-3xl transition-all duration-300">
             <div class="text-center mb-10">
                 <h2 class="text-4xl font-semibold text-primary-dark text-primary-dark-override mb-2">
@@ -224,15 +234,18 @@
             </form>
         </div>
 
+        <!-- Nəticə Önizləmə Konteyneri -->
         <div id="result-container" class="hidden w-full max-w-5xl mt-10 transition-opacity duration-500 opacity-0">
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 overflow-hidden">
                 <div class="bg-primary-dark bg-primary-dark-override px-6 py-4 border-b border-primary-hover flex flex-wrap justify-between items-center">
                     <h3 class="text-xl font-normal text-white">Şagirdin Nəticəsinə Baxış</h3>
                     <div class="flex space-x-3 mt-2 sm:mt-0">
+                        <!-- Yükləmə düyməsi -->
                         <button onclick="downloadResult()" class="text-sm px-4 py-2 bg-yellow-500 text-gray-900 rounded-lg font-normal hover:bg-yellow-600 transition flex items-center shadow-md transform hover:scale-[1.05]">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             Yüklə (Tam Görünüş)
                         </button>
+                        <!-- Gizlət/Yeni Axtarış düyməsi -->
                         <button onclick="resetSearch()" class="text-sm px-4 py-2 bg-gray-600 text-white rounded-lg font-normal hover:bg-gray-700 transition flex items-center shadow-md">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                             Gizlət / Yeni Axtarış
@@ -240,26 +253,35 @@
                     </div>
                 </div>
                 <div class="p-2 bg-gray-100 dark:bg-gray-700">
+                    <!-- Nəticəni göstərmək üçün iframe -->
                     <iframe id="resultFrame" src="" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
 
+        <!-- Yüklənmə Overlay'i (Axtarış zamanı) -->
         <div id="overlay" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden flex-col items-center justify-center">
-            <div class="relative">
-                <div class="w-24 h-24 border-6 border-gray-400 border-t-yellow-500 rounded-full animate-spin"></div>
-                <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-white font-normal text-2xl" id="loading-dots"></div>
+            <div class="relative flex items-center justify-center">
+                <!-- Yeni Fırlanan Loqo Animasiyası -->
+                <img id="loading-logo" 
+                     src="https://i.imgur.com/d0hRX2m.png" 
+                     alt="Yüklənir" 
+                     class="w-28 h-28 object-contain"
+                     onerror="this.onerror=null; this.src='https://placehold.co/112x112/ccc/333?text=Logo';" 
+                />
             </div>
-            <p class="text-white mt-6 text-xl font-normal animate-pulse">Nəticə axtarılır<span id="dots-placeholder"></span></p>
+            <p class="text-white mt-8 text-xl font-normal animate-pulse">Nəticə axtarılır</p>
             <p class="text-gray-300 mt-2 text-sm font-light">Zəhmət olmasa gözləyin</p>
         </div>
 
+        <!-- Toast Bildiriş Sahəsi -->
         <div id="toast" class="fixed top-5 right-5 z-100 hidden transform transition-all duration-500 translate-x-full">
             <div id="toast-content" class="bg-white border-l-8 p-4 rounded-xl shadow-2xl flex items-start min-w-[350px]">
                 <div id="toast-icon" class="mr-3 mt-0.5"></div>
                 <div class="flex-1">
                     <p id="toast-message" class="text-base font-normal text-gray-800"></p>
                 </div>
+                <!-- Bildirişi bağlamaq üçün düymə -->
                 <button onclick="hideToast()" class="ml-4 p-1 rounded-full text-red-600 hover:bg-red-100 transition duration-150">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
@@ -268,6 +290,7 @@
     </main>
 
     <script>
+        // API skript URL-ləri
         const LOG_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzpUvW4OAhTzuunQCjJw2Ldwd2cZyrDCw88pBD9MKB_oLumwwEPqHBT1Vcd8zK6DMDIFA/exec';
         const RESULT_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzX-Q13oP9_XH-gHobQKqjNmzICQa_maDt4cbVNRAsDHkLZRHDgeQw2bqYq0pYSuY38/exec";
         
@@ -275,10 +298,15 @@
         let toastTimeout;
         const TOAST_DURATION = 5000;
 
+        /**
+         * Uğur bildirişi üçün səs effekti.
+         */
         function playSuccessTone() {
             try {
+                // AudioContext yalnız istifadəçi hərəkəti ilə işə salına bilər.
                 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 if (!audioContext) return;
+                
                 const oscillator = audioContext.createOscillator();
                 const gainNode = audioContext.createGain();
                 oscillator.connect(gainNode);
@@ -298,9 +326,12 @@
 
                 oscillator.start();
                 oscillator.stop(audioContext.currentTime + 0.4);
-            } catch (e) { console.error("Səs xətası:", e); }
+            } catch (e) { console.error("Səs xətası: playSuccessTone:", e); }
         }
 
+        /**
+         * Xəta bildirişi üçün səs effekti.
+         */
         function playErrorTone() {
             try {
                 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -322,9 +353,12 @@
 
                 oscillator.start();
                 oscillator.stop(audioContext.currentTime + 0.4);
-            } catch (e) { console.error("Səs xətası:", e); }
+            } catch (e) { console.error("Səs xətası: playErrorTone:", e); }
         }
         
+        /**
+         * Bildiriş pəncərəsini gizlədir.
+         */
         function hideToast() {
             const toast = document.getElementById('toast');
             clearTimeout(toastTimeout);
@@ -332,6 +366,12 @@
             setTimeout(() => toast.classList.add('hidden'), 500); 
         }
 
+        /**
+         * Bildiriş pəncərəsini göstərir və səsi çalır.
+         * @param {string} message - Göstəriləcək mesaj.
+         * @param {('success'|'error'|'announcement'|'info')} type - Bildiriş tipi.
+         * @param {boolean} autoHide - Avtomatik gizlənsin ya yox.
+         */
         function showNotification(message, type = 'info', autoHide = true) {
             clearTimeout(toastTimeout); 
             
@@ -344,28 +384,33 @@
             
             let borderColor, iconHtml;
 
+            // Səs çalma məntiqi
+            if (type === 'success' || type === 'announcement' || type === 'info') {
+                playSuccessTone();
+            } else if (type === 'error') {
+                playErrorTone();
+            }
+
+
             if (type === 'success') {
                 borderColor = 'border-green-500';
                 iconHtml = '<svg class="w-7 h-7 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-                playSuccessTone();
             } else if (type === 'error') {
                 borderColor = 'border-red-500';
                 iconHtml = '<svg class="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-                playErrorTone();
             } else if (type === 'announcement') {
-                borderColor = 'border-yellow-500';
+                borderColor = 'border-yellow-500'; 
                 iconHtml = '<span class="text-3xl">🔔</span>';
-                playSuccessTone();
-            } else {
+            } else { // info
                 borderColor = 'border-blue-500';
                 iconHtml = '<svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-                playSuccessTone();
             }
             
             const isDark = document.documentElement.classList.contains('dark');
             const bgColor = isDark ? 'bg-gray-800' : 'bg-white';
             const textColor = isDark ? 'text-gray-200' : 'text-gray-800';
             
+            // Kontenti yeniləyir və rəngi tətbiq edir
             content.className = `${bgColor} border-l-8 ${borderColor} p-4 rounded-xl shadow-2xl flex items-start min-w-[350px]`;
             msgEl.className = `text-base font-normal ${textColor}`;
             iconEl.innerHTML = iconHtml;
@@ -380,6 +425,9 @@
             }
         }
         
+        /**
+         * İlkin mövzunu (tem) təyin edir.
+         */
         function setInitialTheme() {
             const isDarkMode = localStorage.getItem('theme') === 'dark' || 
                               (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -392,11 +440,17 @@
             updateThemeIcons(isDarkMode);
         }
 
+        /**
+         * Mövzu dəyişdikdə ikonları yeniləyir.
+         */
         function updateThemeIcons(isDark) {
             document.getElementById('sun-icon').classList.toggle('hidden', isDark);
             document.getElementById('moon-icon').classList.toggle('hidden', !isDark);
         }
 
+        /**
+         * Mövzunu Gündüz/Gecə rejimi arasında dəyişdirir.
+         */
         function toggleTheme() {
             const wasDark = document.documentElement.classList.contains('dark');
             const isDark = !wasDark;
@@ -405,58 +459,58 @@
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             updateThemeIcons(isDark);
             
-            const message = isDark ? "Gecə rejimi aktivləşdirildi." : "Gündüz rejimi aktivləşdirildi.";
-            showNotification(message, 'info'); 
+            showNotification(isDark ? "Gecə rejimi aktivləşdirildi." : "Gündüz rejimi aktivləşdirildi.", 'info'); 
         }
 
-        let intervalId;
-        
+        /**
+         * Yüklənmə animasiyasını (fırlanan loqo) başladır.
+         */
         function startLoadingAnimation() {
-            const loadingDots = document.getElementById('loading-dots');
-            loadingDots.textContent = "";
-            let dotCount = 0;
-            
-            const placeholder = document.getElementById('dots-placeholder');
-            
-            intervalId = setInterval(() => {
-                dotCount = (dotCount % 3) + 1;
-                placeholder.textContent = '.'.repeat(dotCount);
-            }, 500);
+            const loadingLogo = document.getElementById('loading-logo');
+            loadingLogo.classList.add('loading-logo');
         }
 
+        /**
+         * Yüklənmə animasiyasını dayandırır.
+         */
         function stopLoadingAnimation() {
-            clearInterval(intervalId);
-            document.getElementById('dots-placeholder').textContent = '';
+            const loadingLogo = document.getElementById('loading-logo');
+            loadingLogo.classList.remove('loading-logo');
         }
 
+        /**
+         * Nəticəni axtarır və göstərir.
+         */
         async function viewResult() {
             const idValue = document.getElementById("id").value.trim();
             const examValue = document.getElementById("exam").value;
 
+            // Giriş yoxlaması
             if (!idValue || !examValue) {
                 showNotification("Zəhmət olmasa imtahan növünü seçin və Şagird ID-ni daxil edin.", "error");
-                playErrorTone();
                 return;
             }
 
-            const sixDigitRegex = /^\d{6}$/;
+            const sixDigitRegex = /^\d{6}$/i;
             if (!sixDigitRegex.test(idValue)) {
                 showNotification("Şagird ID yalnız 6 rəqəmdən ibarət olmalıdır.", "error");
-                playErrorTone();
                 return;
             }
 
             const overlay = document.getElementById("overlay");
             const resultContainer = document.getElementById("result-container");
 
+            // Nəticə konteynerini gizlət
             resultContainer.classList.add("opacity-0"); 
             resultContainer.classList.add("hidden"); 
 
+            // Yüklənmə overlay'ini göstər və animasiyanı başlat
             overlay.classList.remove("hidden");
             overlay.classList.add("flex");
             startLoadingAnimation();
 
             try {
+                // Nəticəni API-dən alır
                 const response = await fetch(RESULT_SCRIPT_URL + "?id=" + encodeURIComponent(idValue) + "&exam=" + encodeURIComponent(examValue));
                 const data = await response.json();
 
@@ -474,6 +528,7 @@
                     lastPreviewUrl = "";
                 }
 
+                // Log funksiyası (asinxron)
                 fetch(LOG_SCRIPT_URL, {
                     method: 'POST',
                     body: new URLSearchParams({
@@ -483,11 +538,14 @@
                     })
                 }).catch(e => console.error("Log xətası:", e));
 
+                // Qısa bir gecikmədən sonra nəticəni göstər
                 setTimeout(() => {
                     overlay.classList.add("hidden");
                     overlay.classList.remove("flex");
 
                     if (data.status === "found" && data.preview) {
+                        
+                        // Uğurlu bildiriş: Yaşıl rəngli pop-up 
                         showNotification("Nəticə uğurla tapıldı! Önizləməyə baxın.", "success");
                         
                         const frame = document.getElementById("resultFrame");
@@ -496,11 +554,12 @@
                         resultContainer.classList.remove("hidden");
                         setTimeout(() => resultContainer.classList.remove("opacity-0"), 50);
                         
+                        // Nəticəyə fokuslanmaq üçün səhifəni aşağı çək
                         resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
                     } else {
+                        // Xəta bildirişi: Qırmızı rəngli pop-up
                         showNotification("Təəssüf ki, nəticə tapılmadı. Məlumatları yoxlayın.", "error");
-                        playErrorTone();
                     }
                 }, 500); 
 
@@ -508,10 +567,10 @@
                 stopLoadingAnimation();
                 console.error("Fetch xətası:", error);
                 overlay.classList.add("hidden");
-                overlay.classList.remove("flex");
+                overlay.classList.remove("flex"); 
                 showNotification("Sistem xətası baş verdi. İnternet əlaqəsini və ya API keçidini yoxlayın.", "error");
-                playErrorTone();
                 
+                // Xətanı log et
                 fetch(LOG_SCRIPT_URL, {
                     method: 'POST',
                     body: new URLSearchParams({
@@ -523,6 +582,9 @@
             }
         }
 
+        /**
+         * Nəticə önizləməsini gizlədir və formanı sıfırlayır.
+         */
         function resetSearch() {
             const resultContainer = document.getElementById("result-container");
             const resultFrame = document.getElementById("resultFrame");
@@ -537,22 +599,27 @@
             }, 300);
         }
 
+        /**
+         * Tam nəticə sənədini yeni pəncərədə açır (yükləmək üçün).
+         */
         function downloadResult() {
             if(lastPreviewUrl && lastPreviewUrl !== "about:blank") {
                 window.open(lastPreviewUrl, '_blank');
             } else {
                 showNotification("Yükləmək üçün əvvəlcə bir nəticə tapılmalıdır.", "error");
-                playErrorTone();
             }
         }
 
+        // Səhifə yükləndikdə başlanğıc funksiyaları
         document.addEventListener('DOMContentLoaded', () => {
              setInitialTheme();
 
+             // İmtahan nəticələrinin elanı bildirişi (Səs effekti showNotification-da idarə olunur)
              setTimeout(() => {
-                showNotification("🔔 Kiçik Summativ Qiymətləndirmə II nəticələri elan edilmişdir!", 'announcement');
+                showNotification("🔔 Kiçik Summativ Qiymətləndirmə II nəticələri elan edilmişdir!", 'announcement'); 
              }, 500);
 
+             // Enter düyməsi ilə axtarışı təsdiqləmə
              document.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     const activeElement = document.activeElement;
@@ -566,3 +633,4 @@
     </script>
 </body>
 </html>
+
