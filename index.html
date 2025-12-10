@@ -1,69 +1,62 @@
-<!-- Chosen Palette: Primary Dark Teal (00525d) and Vibrant White (fcfcfc) -->
 <!DOCTYPE html>
 <html lang="az">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Azərbaycan Beynəlxalq Maarif | İmtahan Nəticəsi Sorgulama</title>
-    <!-- Tailwind CSS kütüphanesini yüklüyoruz -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Yeni Font: Poppins -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Ana renk kodlarını ve custom gölgeyi tanımlama */
         .bg-primary-dark { background-color: #00525d; }
         .bg-primary-hover { background-color: #003f47; }
         .text-primary-dark { color: #00525d; }
         .border-primary-dark { border-color: #00525d; }
         .focus-ring-primary { --tw-ring-color: #00525d; }
         
-        /* ******************************************************************* */
-        /* TAM EKRAN VƏ BOŞLUQ HƏLLİ (Google Sites üçün) - Daha Aqressiv Həll */
-        /* ******************************************************************* */
         html, body {
-            margin: 0 !important; /* Mütləq sıfırlama */
-            padding: 0 !important; /* Mütləq sıfırlama */
+            margin: 0 !important;
+            padding: 0 !important;
             width: 100% !important;
-            height: 100% !important; /* min-height yox, birbaşa 100% */
-            /* Box-sizing tənzimləməsi: padding və border'in eni genişlətməsinin qarşısını alır */
+            height: 100% !important;
             box-sizing: border-box; 
-            overflow-x: hidden; /* Yan sürüşmə çubuğunu önləyir */
+            overflow-x: hidden;
         }
         
-        /* main elementi üçün hündürlüyü təmin edək */
         main {
-            min-height: calc(100vh - 78px); /* Header hündürlüyünü çıxarırıq */
+            min-height: calc(100vh - 78px);
         }
 
-        /* ******************************************************************* */
-
-        /* Poppins fontunu uygulama ve sayfa arka planını koyu teal yapma (Default: Light Mode) */
         body {
             font-family: 'Poppins', sans-serif;
-            font-weight: 400; /* Bütün sənəd üçün Poppins Normal (400) */
-            background-color: #00525d; /* Koyu Teal Arka Plan */
-            color: #fcfcfc; /* Açık font rengi */
+            font-weight: 400;
+            background-color: #00525d;
+            color: #fcfcfc;
             transition: background-color 0.3s, color 0.3s;
         }
 
-        /* ******************************************************************* */
-        /* DARK MODE STYLES */
-        /* ******************************************************************* */
         .dark body {
-            background-color: #1a202c; /* Koyu Gri Arka Plan */
+            background-color: #1a202c;
             color: #fcfcfc;
         }
 
         .dark .header-bg {
-             background-color: #2d3748; /* Koyu Başlık */
+             background-color: #2d3748;
         }
         
         .dark .text-header-title {
             color: #fcfcfc;
         }
 
+        .text-tmv {
+            color: #4a5568;
+        }
+
+        .dark .text-tmv {
+            color: #fcfcfc;
+        }
+
         .dark #query-card {
-            background-color: #2d3748; /* Koyu Kart */
+            background-color: #2d3748;
             border: 1px solid #4a5568;
         }
 
@@ -72,13 +65,13 @@
         }
         
         .dark .form-input-bg {
-             background-color: #4a5568; /* Koyu Form Alanı */
-             color: #fcfcfc; /* Açık Metin */
+             background-color: #4a5568;
+             color: #fcfcfc;
              border-color: #4a5568;
         }
 
         .dark .text-primary-dark-override {
-            color: #4fd1c5; /* Açık Teal */
+            color: #4fd1c5;
         }
         
         .dark .bg-primary-dark-override {
@@ -93,29 +86,22 @@
             background-color: #2d3748;
         }
         
-        /* Loqo border rəngini CSS-ə əlavə edirik */
         .logo-border {
-            border-color: #00adba; /* Sizin istədiyiniz rəng */
+            border-color: #00adba;
         }
-        /* ******************************************************************* */
 
-        /* Custom 3XL Gölge (daha belirgin ve derin) */
         .shadow-3xl {
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
         }
 
-        /* Iframe stilleri: Hündürlük ekranın 80%-i olaraq təyin edildi. */
         #resultFrame {
             width: 100%;
-            /* Çərçivənin hündürlüyü dinamik olaraq 80% viewport hündürlüyü ilə təyin edilir */
             height: 80vh; 
             border: none;
-            border-radius: 0.75rem; /* Daha yuvarlak köşeler */
+            border-radius: 0.75rem;
         }
 
-        /* Select (Açılır Menü) stilini özelleştirme */
         .custom-select-icon {
-            /* Select ikonunu beyaz/açık renk yaptık, koyu arka plana uyum sağlasın */
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23ffffff'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: right 0.75rem center;
@@ -126,97 +112,90 @@
             padding-right: 2.5rem; 
         }
 
-        /* Form elemanlarının yeni stili: Koyu arka planda beyaz zemin */
         .form-input-bg {
              background-color: #fcfcfc;
-             color: #1f2937; /* Koyu Metin */
+             color: #1f2937;
              border: 1px solid #d1d5db;
         }
+        
+        .dark .custom-select-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%231f2937'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath%3e%3c/svg%3e");
+        }
 
-        /* Toast bildirimi için daha yüksek bir z-index */
         #toast {
             z-index: 100;
         }
+        
+        @keyframes blink {
+            0% { content: "."; }
+            33% { content: ".."; }
+            66% { content: "..."; }
+            100% { content: "."; }
+        }
 
+        #loading-dots::after {
+            content: ".";
+            animation: blink 1.5s infinite;
+        }
+
+        .header-title-text {
+            font-size: 1.15rem;
+        }
+
+        @media (min-width: 640px) {
+            .header-title-text {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body class="bg-primary-dark">
-
-    <!-- Başlık Alanı (Açık renkli) -->
     <header class="bg-white header-bg shadow-xl relative z-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            
-            <!-- Logo və Məktəb Adı Bloku -->
-            <div class="flex items-center space-x-5"> <!-- space-x-3 -> space-x-5: Loqo böyüdüyü üçün məsafəni artırdıq -->
-                
-                <!-- Logo Resmi: Ölçü bütün ekranlarda w-20 h-20 (80x80px) olaraq YENİLƏNDİ. -->
+            <div class="flex items-center space-x-5">
                 <img id="school-logo" 
                      src="https://i.imgur.com/a3FuVV8.png" 
                      alt="Okul Logosu" 
                      class="w-20 h-20 object-contain rounded-full border-2 logo-border p-1"
                      onerror="this.onerror=null; this.src='https://placehold.co/80x80/ccc/333?text=Logo';" 
                 />
-                
-                <!-- Məktəb Adı və Kampus Bilgisi (Dikey Hiza) -->
                 <div class="flex flex-col items-start leading-tight">
-                    
-                    <!-- Üst Başlık (Türkiyə Maarif Vəqfi + Emojis) -->
-                    <p class="text-base sm:text-lg font-medium text-gray-800 dark:text-gray-200">
+                    <p class="text-base sm:text-lg font-medium text-tmv">
                         🇹🇷 🇦🇿 Türkiyə Maarif Vəqfi
                     </p>
-
-                    <!-- Məktəb Adı -->
-                    <h1 class="text-xl sm:text-2xl font-normal text-gray-900 text-header-title tracking-tight mt-0.5">
+                    <h1 class="header-title-text font-normal text-gray-900 text-header-title tracking-tight mt-0.5 sm:text-2xl">
                         Azərbaycan Beynəlxalq Maarif Məktəbləri
                     </h1>
-                    
-                    <!-- Kampüs Bilgisi -->
                     <div class="mt-1 text-xs sm:text-sm text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 px-3 py-0.5 rounded-full font-medium">
                         Nəsimi Kampusu
                     </div>
                 </div>
             </div>
-
             <div class="flex items-center space-x-4">
-                 <!-- Gecə/Gündüz Modu Butonu -->
                 <button id="theme-toggle" onclick="toggleTheme()" class="p-2 rounded-full text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300">
-                    <!-- Default: Sun Icon (Gündüz/Aydınlıq) -->
                     <svg id="sun-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                    <!-- Moon Icon (Gecə/Qaranlıq) -->
                     <svg id="moon-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Ana İçerik Alanı -->
     <main class="flex flex-col items-center justify-start p-6 pt-12 min-h-screen">
-        
-        <!-- Sorgulama Formu Kartı (Şeffaf Beyaz Zemin) -->
         <div id="query-card" class="w-full max-w-lg bg-white p-8 sm:p-12 rounded-2xl shadow-3xl transition-all duration-300">
-            
             <div class="text-center mb-10">
-                <!-- İmtahan Nəticəsi: font-semibold və rəng dəyişikliyi -->
                 <h2 class="text-4xl font-semibold text-primary-dark text-primary-dark-override mb-2">
                     İmtahan Nəticəsi
                 </h2>
-                <!-- font-normal korundu -->
                 <p class="text-xl text-primary-dark text-primary-dark-override font-normal">
                     Şagird Məlumatları ilə Yoxlamaq
                 </p>
             </div>
-            
-            <!-- Form -->
             <form id="resultForm" class="space-y-7" onsubmit="event.preventDefault(); viewResult();">
-                
-                <!-- 1. İmtahan Seçimi -->
                 <div>
-                    <!-- font-normal korundu -->
                     <label for="exam" class="block text-sm font-normal text-gray-700 form-label mb-1">İmtahanı Seçin</label>
                     <div class="relative">
                         <select id="exam" required class="custom-select-icon block w-full px-4 py-3 border border-gray-300 rounded-xl shadow-md form-input-bg focus:outline-none focus:ring-2 focus:ring-[#00525d] focus:ring-offset-0 focus-ring-primary text-base transition duration-150 ease-in-out">
                             <option value="" disabled selected>-- İmtahanı seçin --</option>
-                            <!-- Sınav İsimleri tersten sıralandı (Sondan öne doğru) -->
                             <option value="Mövzu Sınağı II">Mövzu Sınağı II</option>
                             <option value="Kiçik Summativ Qiymətləndirmə II">Kiçik Summativ Qiymətləndirmə II</option>
                             <option value="Mövzu Sınağı I">Mövzu Sınağı I</option>
@@ -225,13 +204,9 @@
                         </select>
                     </div>
                 </div>
-
-                <!-- 2. Şagird ID Girişi -->
                 <div>
-                    <!-- font-normal korundu -->
                     <label for="id" class="block text-sm font-normal text-gray-700 form-label mb-1">Şagird ID (Son 6 rəqəm)</label>
                     <div class="relative">
-                        <!-- Şagird ID inputu, 6 rəqəm məhdudiyyəti əlavə edildi və mobil cihazlar üçün klaviatura növü dəyişdirildi -->
                         <input type="tel" id="id" required 
                                class="appearance-none block w-full px-4 py-3 rounded-xl shadow-md form-input-bg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00525d] focus:ring-offset-0 focus-ring-primary text-base transition duration-150 ease-in-out" 
                                placeholder="Məsələn: 123456"
@@ -240,10 +215,7 @@
                                inputmode="numeric">
                     </div>
                 </div>
-                
-                <!-- Axtar Butonu -->
                 <div>
-                    <!-- font-normal korundu -->
                     <button type="submit" id="search-btn" class="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg text-lg font-normal text-white bg-primary-dark bg-primary-dark-override hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00525d] transition duration-300 ease-in-out transform hover:scale-[1.01] hover:shadow-xl">
                         <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                         Nəticəni Axtar
@@ -252,130 +224,162 @@
             </form>
         </div>
 
-        <!-- Nəticə Bölməsi (Sorğunun Altında Görünür) -->
         <div id="result-container" class="hidden w-full max-w-5xl mt-10 transition-opacity duration-500 opacity-0">
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                <!-- Nəticə Başlığı və Butonlar (Başlıq dəyişdirildi) -->
                 <div class="bg-primary-dark bg-primary-dark-override px-6 py-4 border-b border-primary-hover flex flex-wrap justify-between items-center">
-                    <!-- font-normal korundu -->
                     <h3 class="text-xl font-normal text-white">Şagirdin Nəticəsinə Baxış</h3>
                     <div class="flex space-x-3 mt-2 sm:mt-0">
-                        <!-- font-normal korundu -->
                         <button onclick="downloadResult()" class="text-sm px-4 py-2 bg-yellow-500 text-gray-900 rounded-lg font-normal hover:bg-yellow-600 transition flex items-center shadow-md transform hover:scale-[1.05]">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             Yüklə (Tam Görünüş)
                         </button>
-                        <!-- font-normal korundu -->
                         <button onclick="resetSearch()" class="text-sm px-4 py-2 bg-gray-600 text-white rounded-lg font-normal hover:bg-gray-700 transition flex items-center shadow-md">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                             Gizlət / Yeni Axtarış
                         </button>
                     </div>
                 </div>
-                
-                <!-- İframe (Real Nəticə Buraya Yüklənəcək) -->
                 <div class="p-2 bg-gray-100 dark:bg-gray-700">
                     <iframe id="resultFrame" src="" allowfullscreen></iframe>
                 </div>
-
             </div>
         </div>
 
-        <!-- Yüklənmə Ekranı (Overlay) -->
         <div id="overlay" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden flex-col items-center justify-center">
             <div class="relative">
                 <div class="w-24 h-24 border-6 border-gray-400 border-t-yellow-500 rounded-full animate-spin"></div>
-                <!-- font-normal korundu. Real API Sorğusu sözü silindi. -->
-                <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-white font-normal text-2xl" id="countdown">5</div>
+                <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center text-white font-normal text-2xl" id="loading-dots"></div>
             </div>
-            <!-- font-normal korundu. Real API Sorğusu sözü silindi. -->
-            <p class="text-white mt-6 text-xl font-normal animate-pulse">Nəticə axtarılır...</p>
-            <!-- font-light korundu -->
+            <p class="text-white mt-6 text-xl font-normal animate-pulse">Nəticə axtarılır<span id="dots-placeholder"></span></p>
             <p class="text-gray-300 mt-2 text-sm font-light">Zəhmət olmasa gözləyin</p>
         </div>
 
-        <!-- Xəta/Bildiriş Mesajı (Toast) -->
         <div id="toast" class="fixed top-5 right-5 z-100 hidden transform transition-all duration-500 translate-x-full">
-            <div id="toast-content" class="bg-white border-l-8 p-4 rounded-xl shadow-2xl flex items-center min-w-[350px]">
-                <div id="toast-icon" class="mr-3"></div>
+            <div id="toast-content" class="bg-white border-l-8 p-4 rounded-xl shadow-2xl flex items-start min-w-[350px]">
+                <div id="toast-icon" class="mr-3 mt-0.5"></div>
                 <div class="flex-1">
-                    <!-- font-normal korundu -->
                     <p id="toast-message" class="text-base font-normal text-gray-800"></p>
                 </div>
+                <button onclick="hideToast()" class="ml-4 p-1 rounded-full text-red-600 hover:bg-red-100 transition duration-150">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
             </div>
         </div>
-
     </main>
-    
-    <!-- Footer tamamilə silindi -->
 
     <script>
-        // Sizin təqdim etdiyiniz Apps Script URL-ləri
-        // DİQQƏT: LOG_SCRIPT_URL SİZİN İSTƏYİNİZƏ UYĞUN OLARAQ YENİLƏNDİ.
         const LOG_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzpUvW4OAhTzuunQCjJw2Ldwd2cZyrDCw88pBD9MKB_oLumwwEPqHBT1Vcd8zK6DMDIFA/exec';
         const RESULT_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzX-Q13oP9_XH-gHobQKqjNmzICQa_maDt4cbVNRAsDHkLZRHDgeQw2bqYq0pYSuY38/exec";
         
-        let lastPreviewUrl = ""; // Son tapılan URL-i saxlamaq üçün
-        
-        // ************************************************************
-        // SƏS FUNKSİYALARI (Success/Error Tone Generator)
-        // ************************************************************
+        let lastPreviewUrl = "";
+        let toastTimeout;
+        const TOAST_DURATION = 5000;
 
         function playSuccessTone() {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            if (!audioContext) return;
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                if (!audioContext) return;
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
 
-            // Success: Two short, high-pitched tones (G5, C6)
-            oscillator.type = 'triangle';
-            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-            gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.01);
+                oscillator.type = 'triangle';
+                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.01);
 
-            // First tone (G5 - 784 Hz)
-            oscillator.frequency.setValueAtTime(784, audioContext.currentTime);
-            gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.15);
-            gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.15);
+                oscillator.frequency.setValueAtTime(784, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.15);
+                gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.15);
 
-            // Second tone (C6 - 1047 Hz)
-            oscillator.frequency.setValueAtTime(1047, audioContext.currentTime + 0.15);
-            gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.20);
-            gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.35);
+                oscillator.frequency.setValueAtTime(1047, audioContext.currentTime + 0.15);
+                gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.20);
+                gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.35);
 
-            oscillator.start();
-            oscillator.stop(audioContext.currentTime + 0.4);
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.4);
+            } catch (e) { console.error("Səs xətası:", e); }
         }
 
         function playErrorTone() {
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            if (!audioContext) return;
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                if (!audioContext) return;
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
 
-            // Error: Descending tone (C4, G3)
-            oscillator.type = 'sawtooth';
-            gainNode.gain.setValueAtTime(0, audioContext.currentTime);
-            gainNode.gain.linearRampToValueAtTime(0.4, audioContext.currentTime + 0.01);
-            
-            // Start high (C4 - 261 Hz)
-            oscillator.frequency.setValueAtTime(261, audioContext.currentTime);
-            oscillator.frequency.linearRampToValueAtTime(196, audioContext.currentTime + 0.3); // Drop to G3
-            
-            gainNode.gain.linearRampToValueAtTime(0.05, audioContext.currentTime + 0.3);
-            gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.4);
+                oscillator.type = 'sawtooth';
+                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.4, audioContext.currentTime + 0.01);
+                
+                oscillator.frequency.setValueAtTime(261, audioContext.currentTime);
+                oscillator.frequency.linearRampToValueAtTime(196, audioContext.currentTime + 0.3);
+                
+                gainNode.gain.linearRampToValueAtTime(0.05, audioContext.currentTime + 0.3);
+                gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.4);
 
-            oscillator.start();
-            oscillator.stop(audioContext.currentTime + 0.4);
+                oscillator.start();
+                oscillator.stop(audioContext.currentTime + 0.4);
+            } catch (e) { console.error("Səs xətası:", e); }
+        }
+        
+        function hideToast() {
+            const toast = document.getElementById('toast');
+            clearTimeout(toastTimeout);
+            toast.classList.add('translate-x-full');
+            setTimeout(() => toast.classList.add('hidden'), 500); 
         }
 
-        // ************************************************************
-        // GECƏ/GÜNDÜZ MODU FUNKSİYALARI
-        // ************************************************************
+        function showNotification(message, type = 'info', autoHide = true) {
+            clearTimeout(toastTimeout); 
+            
+            const toast = document.getElementById('toast');
+            const content = document.getElementById('toast-content');
+            const msgEl = document.getElementById('toast-message');
+            const iconEl = document.getElementById('toast-icon');
 
+            msgEl.textContent = message;
+            
+            let borderColor, iconHtml;
+
+            if (type === 'success') {
+                borderColor = 'border-green-500';
+                iconHtml = '<svg class="w-7 h-7 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
+                playSuccessTone();
+            } else if (type === 'error') {
+                borderColor = 'border-red-500';
+                iconHtml = '<svg class="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
+                playErrorTone();
+            } else if (type === 'announcement') {
+                borderColor = 'border-yellow-500';
+                iconHtml = '<span class="text-3xl">🔔</span>';
+                playSuccessTone();
+            } else {
+                borderColor = 'border-blue-500';
+                iconHtml = '<svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
+                playSuccessTone();
+            }
+            
+            const isDark = document.documentElement.classList.contains('dark');
+            const bgColor = isDark ? 'bg-gray-800' : 'bg-white';
+            const textColor = isDark ? 'text-gray-200' : 'text-gray-800';
+            
+            content.className = `${bgColor} border-l-8 ${borderColor} p-4 rounded-xl shadow-2xl flex items-start min-w-[350px]`;
+            msgEl.className = `text-base font-normal ${textColor}`;
+            iconEl.innerHTML = iconHtml;
+            
+            toast.classList.add('translate-x-full');
+            toast.classList.remove('hidden'); 
+            
+            setTimeout(() => toast.classList.remove('translate-x-full'), 10);
+
+            if (autoHide) {
+                toastTimeout = setTimeout(() => hideToast(), TOAST_DURATION); 
+            }
+        }
+        
         function setInitialTheme() {
             const isDarkMode = localStorage.getItem('theme') === 'dark' || 
                               (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -394,102 +398,74 @@
         }
 
         function toggleTheme() {
-            const isDark = document.documentElement.classList.toggle('dark');
+            const wasDark = document.documentElement.classList.contains('dark');
+            const isDark = !wasDark;
+            
+            document.documentElement.classList.toggle('dark', isDark);
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             updateThemeIcons(isDark);
-        }
-
-        // ************************************************************
-        // API SORĞU VƏ UI FUNKSİYALARI
-        // ************************************************************
-
-        function showNotification(message, type = 'info') {
-            const toast = document.getElementById('toast');
-            const content = document.getElementById('toast-content');
-            const msgEl = document.getElementById('toast-message');
-            const iconEl = document.getElementById('toast-icon');
-
-            msgEl.textContent = message;
             
-            // Stil ayarlamaları
-            if (type === 'success') {
-                content.className = "bg-white dark:bg-gray-800 border-l-8 border-green-500 p-4 rounded-xl shadow-2xl flex items-center min-w-[350px]";
-                msgEl.className = "text-base font-normal text-gray-800 dark:text-gray-200";
-                iconEl.innerHTML = '<svg class="w-7 h-7 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-            } else if (type === 'error') {
-                content.className = "bg-white dark:bg-gray-800 border-l-8 border-red-500 p-4 rounded-xl shadow-2xl flex items-center min-w-[350px]";
-                msgEl.className = "text-base font-normal text-gray-800 dark:text-gray-200";
-                iconEl.innerHTML = '<svg class="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-            } else {
-                content.className = "bg-white dark:bg-gray-800 border-l-8 border-blue-500 p-4 rounded-xl shadow-2xl flex items-center min-w-[350px]";
-                msgEl.className = "text-base font-normal text-gray-800 dark:text-gray-200";
-                iconEl.innerHTML = '<svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-            }
-
-            toast.classList.remove('hidden');
-            // Toast'ı sağa doğru hareket ettirerek görünür yap
-            setTimeout(() => toast.classList.remove('translate-x-full'), 10);
-
-            setTimeout(() => {
-                // Toast'ı tekrar sağa kaydırarak gizle
-                toast.classList.add('translate-x-full');
-                setTimeout(() => toast.classList.add('hidden'), 500); // Animation süresine uygun gecikme
-            }, 4000);
+            const message = isDark ? "Gecə rejimi aktivləşdirildi." : "Gündüz rejimi aktivləşdirildi.";
+            showNotification(message, 'info'); 
         }
+
+        let intervalId;
         
-        // Real API çağırışı funksiyası
+        function startLoadingAnimation() {
+            const loadingDots = document.getElementById('loading-dots');
+            loadingDots.textContent = "";
+            let dotCount = 0;
+            
+            const placeholder = document.getElementById('dots-placeholder');
+            
+            intervalId = setInterval(() => {
+                dotCount = (dotCount % 3) + 1;
+                placeholder.textContent = '.'.repeat(dotCount);
+            }, 500);
+        }
+
+        function stopLoadingAnimation() {
+            clearInterval(intervalId);
+            document.getElementById('dots-placeholder').textContent = '';
+        }
+
         async function viewResult() {
             const idValue = document.getElementById("id").value.trim();
             const examValue = document.getElementById("exam").value;
 
-            // 1. İlkin Boşluq Yoxlaması
             if (!idValue || !examValue) {
                 showNotification("Zəhmət olmasa imtahan növünü seçin və Şagird ID-ni daxil edin.", "error");
-                playErrorTone(); 
+                playErrorTone();
                 return;
             }
 
-            // 2. Şagird ID Validasiyası: Yalnız 6 rəqəm olmalıdır
             const sixDigitRegex = /^\d{6}$/;
             if (!sixDigitRegex.test(idValue)) {
                 showNotification("Şagird ID yalnız 6 rəqəmdən ibarət olmalıdır.", "error");
-                playErrorTone(); 
+                playErrorTone();
                 return;
             }
 
-            // UI yeniləmələri (Yüklənmə başlayır)
             const overlay = document.getElementById("overlay");
-            const countdownEl = document.getElementById("countdown");
             const resultContainer = document.getElementById("result-container");
 
-            // Nəticə konteynerini yenidən axtarışdan əvvəl gizlət
             resultContainer.classList.add("opacity-0"); 
             resultContainer.classList.add("hidden"); 
 
             overlay.classList.remove("hidden");
             overlay.classList.add("flex");
+            startLoadingAnimation();
 
-            // Geri sayım
-            let countdown = 5;
-            countdownEl.textContent = countdown;
-            const timer = setInterval(() => {
-                countdown--;
-                if(countdown > 0) countdownEl.textContent = countdown;
-            }, 1000);
-
-            // API Sorğusu
             try {
-                // Real API call to get the image URL
                 const response = await fetch(RESULT_SCRIPT_URL + "?id=" + encodeURIComponent(idValue) + "&exam=" + encodeURIComponent(examValue));
                 const data = await response.json();
 
-                clearInterval(timer); 
-                countdownEl.textContent = "✓"; 
+                stopLoadingAnimation();
 
                 let statusToLog;
                 if (data.status === 'found') {
                     statusToLog = 'Nəticə tapıldı';
-                    lastPreviewUrl = data.preview || ""; // URL'yi kaydet
+                    lastPreviewUrl = data.preview || "";
                 } else if (data.status === 'not found') {
                     statusToLog = 'Nəticə tapılmadı';
                     lastPreviewUrl = "";
@@ -498,7 +474,6 @@
                     lastPreviewUrl = "";
                 }
 
-                // Loglama (Arxa planda)
                 fetch(LOG_SCRIPT_URL, {
                     method: 'POST',
                     body: new URLSearchParams({
@@ -508,35 +483,35 @@
                     })
                 }).catch(e => console.error("Log xətası:", e));
 
-                // Nəticəyə görə UI yeniləməsi
                 setTimeout(() => {
                     overlay.classList.add("hidden");
                     overlay.classList.remove("flex");
 
                     if (data.status === "found" && data.preview) {
                         showNotification("Nəticə uğurla tapıldı! Önizləməyə baxın.", "success");
-                        playSuccessTone(); // Uğurlu səs
                         
                         const frame = document.getElementById("resultFrame");
-                        frame.src = data.preview; // Real Google Apps Script-dən gələn URL
+                        frame.src = data.preview;
 
                         resultContainer.classList.remove("hidden");
                         setTimeout(() => resultContainer.classList.remove("opacity-0"), 50);
+                        
+                        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
                     } else {
                         showNotification("Təəssüf ki, nəticə tapılmadı. Məlumatları yoxlayın.", "error");
-                        playErrorTone(); // Xəta səsi
+                        playErrorTone();
                     }
                 }, 500); 
 
             } catch (error) {
-                clearInterval(timer);
+                stopLoadingAnimation();
                 console.error("Fetch xətası:", error);
                 overlay.classList.add("hidden");
                 overlay.classList.remove("flex");
                 showNotification("Sistem xətası baş verdi. İnternet əlaqəsini və ya API keçidini yoxlayın.", "error");
-                playErrorTone(); // Xəta səsi
+                playErrorTone();
                 
-                // Xəta logu
                 fetch(LOG_SCRIPT_URL, {
                     method: 'POST',
                     body: new URLSearchParams({
@@ -548,7 +523,6 @@
             }
         }
 
-        // Sadece sonucu gizler ve formu sıfırlar.
         function resetSearch() {
             const resultContainer = document.getElementById("result-container");
             const resultFrame = document.getElementById("resultFrame");
@@ -556,17 +530,15 @@
             resultContainer.classList.add("opacity-0");
             setTimeout(() => {
                 resultContainer.classList.add("hidden");
-                resultFrame.src = ""; // İframe-i təmizlə
-                lastPreviewUrl = ""; // URL'yi sıfırla
+                resultFrame.src = "";
+                lastPreviewUrl = "";
                 document.getElementById("resultForm").reset();
                 showNotification("Axtarış nəticəsi gizlədildi. Yeni axtarış edə bilərsiniz.", "info");
             }, 300);
         }
 
-        // Sonucu tam görünüşte açar veya indirir.
         function downloadResult() {
             if(lastPreviewUrl && lastPreviewUrl !== "about:blank") {
-                // Yeni səhifədə açmaq həm tam ekran görməyə, həm də endirməyə imkan verir
                 window.open(lastPreviewUrl, '_blank');
             } else {
                 showNotification("Yükləmək üçün əvvəlcə bir nəticə tapılmalıdır.", "error");
@@ -574,15 +546,15 @@
             }
         }
 
-        // ************************************************************
-        // ENTER DÜYMƏSİ İLƏ TƏSDİQ ET
-        // ************************************************************
         document.addEventListener('DOMContentLoaded', () => {
-             setInitialTheme(); // İlk açılışda mövzunu ayarla
+             setInitialTheme();
+
+             setTimeout(() => {
+                showNotification("🔔 Kiçik Summativ Qiymətləndirmə II nəticələri elan edilmişdir!", 'announcement');
+             }, 500);
 
              document.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
-                    // Enter basıldığında, aktif element bir input veya select ise formu gönder
                     const activeElement = document.activeElement;
                     if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'SELECT') {
                         e.preventDefault(); 
@@ -592,6 +564,5 @@
             });
         });
     </script>
-
 </body>
 </html>
