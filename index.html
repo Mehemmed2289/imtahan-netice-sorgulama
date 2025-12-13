@@ -99,7 +99,7 @@
 
         #resultFrame {
             width: 100%;
-            height: 80vh; /* Önizləmə çərçivəsi üçün hündürlük */
+            height: 85vh; 
             border: none;
             border-radius: 0.75rem;
         }
@@ -154,7 +154,7 @@
     </style>
 </head>
 <body class="bg-primary-dark">
-    <!-- Başlıq / Header -->
+    <!-- Başlıq / Header (Sabitləmə ləğv edildi) -->
     <header class="bg-white header-bg shadow-xl relative z-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-5">
@@ -188,17 +188,15 @@
         </div>
     </header>
 
-    <!-- Əsas Məzmun -->
-    <main class="flex flex-col items-center justify-start p-6 pt-12 min-h-screen">
+    <!-- Əsas Məzmun (Padding əvvəlki halına qaytarıldı) -->
+    <main class="flex flex-col items-center justify-start p-4 sm:p-6 pt-8 sm:pt-12 min-h-screen">
         <!-- Nəticə Sorgulama Kartı -->
         <div id="query-card" class="w-full max-w-lg bg-white p-8 sm:p-12 rounded-2xl shadow-3xl transition-all duration-300">
-            <div class="text-center mb-10">
-                <h2 class="text-4xl font-semibold text-primary-dark text-primary-dark-override mb-2">
-                    İmtahan Nəticəsi
+            <div class="text-center mb-8">
+                <!-- Font ölçüsü azaldıldı (text-xl sm:text-2xl) və alt yazı silindi -->
+                <h2 class="text-xl sm:text-2xl font-semibold text-primary-dark text-primary-dark-override mb-3 leading-tight">
+                    İmtahan Nəticələri Yoxlama Sisteminə Xoş Gəlmisiniz!
                 </h2>
-                <p class="text-xl text-primary-dark text-primary-dark-override font-normal">
-                    Şagird Məlumatları ilə Yoxlamaq
-                </p>
             </div>
             <form id="resultForm" class="space-y-7" onsubmit="event.preventDefault(); viewResult();">
                 <div>
@@ -235,7 +233,7 @@
         </div>
 
         <!-- Nəticə Önizləmə Konteyneri -->
-        <div id="result-container" class="hidden w-full max-w-5xl mt-10 transition-opacity duration-500 opacity-0">
+        <div id="result-container" class="hidden w-full mt-10 transition-opacity duration-500 opacity-0">
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 overflow-hidden">
                 <div class="bg-primary-dark bg-primary-dark-override px-6 py-4 border-b border-primary-hover flex flex-wrap justify-between items-center">
                     <h3 class="text-xl font-normal text-white">Şagirdin Nəticəsinə Baxış</h3>
@@ -633,4 +631,5 @@
     </script>
 </body>
 </html>
+
 
