@@ -160,37 +160,38 @@
             background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
         }
 
-/* Şagird məlumatları yazı rəngləri - YENİ (TAMAMEN DEĞİŞTİRİLDİ) */
-/* Gündüz modu: mavi (#00525d) arka plan, beyaz yazılar */
-.student-info-card .bg-white {
-    background-color: #00525d !important;
-    border-color: #003f47 !important;
-}
+        /* Şagird məlumatları yazı rəngləri - YENİ (TAMAMEN DEĞİŞTİRİLDİ) */
+        /* Gündüz modu: mavi (#00525d) arka plan, beyaz yazılar */
+        .student-info-card .bg-white {
+            background-color: #00525d !important;
+            border-color: #003f47 !important;
+        }
 
-/* ÇERÇEVELER İÇİN: Gündüz modunda beyaz yazı, Gece modunda beyaz yazı */
-.student-info-card .bg-white span, /* Çerçeve içindeki yazılar */
-.student-info-card .text-xs,       /* "Sinif:", "ID Nömrəsi:" gibi küçük yazılar */
-.student-info-card #student-class,
-.student-info-card #student-id-display,
-.student-info-card #exam-name-display {
-    color: #ffffff !important;
-}
+        /* ÇERÇEVELER İÇİN: Gündüz modunda beyaz yazı, Gece modunda beyaz yazı */
+        .student-info-card .bg-white span, /* Çerçeve içindeki yazılar */
+        .student-info-card .text-xs,       /* "Sinif:", "ID Nömrəsi:" gibi küçük yazılar */
+        .student-info-card #student-class,
+        .student-info-card #student-id-display,
+        .student-info-card #exam-name-display {
+            color: #ffffff !important;
+        }
 
-/* ŞAGİRD ADI SOYADI: Gündüz modunda siyah, Gece modunda beyaz */
-.student-info-card #student-fullname {
-    color: #00525d !important;
-}
-.dark .student-info-card #student-fullname {
-    color: #ffffff !important;
-}
+        /* ŞAGİRD ADI SOYADI: Gündüz modunda siyah, Gece modunda beyaz */
+        .student-info-card #student-fullname {
+            color: #00525d !important;
+        }
+        .dark .student-info-card #student-fullname {
+            color: #ffffff !important;
+        }
 
-/* "Şagirdin Adı və Soyadı" başlığı: Gündüz modunda gri, Gece modunda gri */
-.student-info-card h4 {
-    color: #4a5568 !important;
-}
-.dark .student-info-card h4 {
-    color: #cbd5e0 !important;
-}
+        /* "Şagirdin Adı və Soyadı" başlığı: Gündüz modunda gri, Gece modunda gri */
+        .student-info-card h4 {
+            color: #4a5568 !important;
+        }
+        .dark .student-info-card h4 {
+            color: #cbd5e0 !important;
+        }
+        
         /* Gecə modu: ağ yazılar */
         .dark .student-info-card h4,
         .dark .student-info-card #student-fullname,
@@ -224,6 +225,46 @@
             color: #4fd1c5 !important;
         }
 
+        /* GEÇE/GÜNDÜZ DÜĞMESİ DAİRE STİLİ - YENİ */
+        .theme-toggle-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        /* Gündüz modu: mavi daire içinde gece düğmesi */
+        .theme-toggle-circle {
+            background-color: #00525d;
+        }
+        
+        /* Gece modu: beyaz daire içinde gündüz düğmesi */
+        .dark .theme-toggle-circle {
+            background-color: #ffffff;
+        }
+        
+        .theme-toggle-circle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .dark .theme-toggle-circle:hover {
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+        }
+        
+        /* AY İKONU RENGİ - SON HALİ */
+        #moon-icon, #sun-icon {
+            stroke: #ffffff !important;
+        }
+        
+        .dark #moon-icon, .dark #sun-icon {
+            stroke: #00525d !important;
+        }
+
     </style>
 </head>
 <body class="bg-primary-dark">
@@ -253,10 +294,12 @@
             </div>
             <!-- Gecə/Gündüz Rejimi Düyməsi -->
             <div class="flex items-center space-x-4">
-                <button id="theme-toggle" onclick="toggleTheme()" class="p-2 rounded-full text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300">
-                    <svg id="sun-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                    <svg id="moon-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                </button>
+                <div class="theme-toggle-circle">
+                    <button id="theme-toggle" onclick="toggleTheme()" class="p-2 rounded-full text-gray-700 dark:text-gray-200 transition duration-300">
+                        <svg id="sun-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        <svg id="moon-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -692,12 +735,28 @@
         }
         
         function setInitialTheme() {
-            const isDarkMode = localStorage.getItem('theme') === 'dark' || 
-                              (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            // Önce localStorage'dan kontrol et
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             
-            if (isDarkMode) document.documentElement.classList.add('dark');
-            else document.documentElement.classList.remove('dark');
+            let isDarkMode;
+            
+            if (savedTheme) {
+                // Kullanıcı tercihi varsa onu kullan
+                isDarkMode = savedTheme === 'dark';
+            } else {
+                // Yoksa sistem tercihini kullan (OTOMATİK MOD)
+                isDarkMode = prefersDark;
+            }
+            
+            if (isDarkMode) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
             updateThemeIcons(isDarkMode);
+            // localStorage'a kaydet
+            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
         }
 
         function updateThemeIcons(isDark) {
@@ -708,9 +767,13 @@
         function toggleTheme() {
             const wasDark = document.documentElement.classList.contains('dark');
             const isDark = !wasDark;
+            
             document.documentElement.classList.toggle('dark', isDark);
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
             updateThemeIcons(isDark);
+            
+            // Kullanıcı tercihini localStorage'a kaydet
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            
             showNotification(isDark ? "Gecə rejimi aktivləşdirildi." : "Gündüz rejimi aktivləşdirildi.", 'info'); 
         }
 
@@ -838,12 +901,24 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-             setInitialTheme();
-             setTimeout(() => {
+            setInitialTheme();
+            
+            // Sistem teması değiştiğinde otomatik güncelle (sadece kullanıcı tercihi yoksa)
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    const isDark = e.matches;
+                    document.documentElement.classList.toggle('dark', isDark);
+                    updateThemeIcons(isDark);
+                    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                    showNotification(isDark ? "Sistem gece moduna geçti." : "Sistem gündüz moduna geçti.", 'info');
+                }
+            });
+            
+            setTimeout(() => {
                 showNotification("KSQ-2 və MS-2 imtahanlarının nəticələri elan edilmişdir!", 'announcement'); 
-             }, 500);
+            }, 500);
 
-             document.addEventListener('keypress', function(e) {
+            document.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     const activeElement = document.activeElement;
                     if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'SELECT') {
