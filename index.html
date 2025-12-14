@@ -150,15 +150,88 @@
         .loading-logo {
             animation: spin 1.5s linear infinite;
         }
+        
+        /* Şagird Məlumat Kartı Stili - YENİLƏNİB */
+        .student-info-card {
+            background: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
+            font-family: 'Poppins', sans-serif;
+        }
+        .dark .student-info-card {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+        }
+
+/* Şagird məlumatları yazı rəngləri - YENİ (TAMAMEN DEĞİŞTİRİLDİ) */
+/* Gündüz modu: mavi (#00525d) arka plan, beyaz yazılar */
+.student-info-card .bg-white {
+    background-color: #00525d !important;
+    border-color: #003f47 !important;
+}
+
+/* ÇERÇEVELER İÇİN: Gündüz modunda beyaz yazı, Gece modunda beyaz yazı */
+.student-info-card .bg-white span, /* Çerçeve içindeki yazılar */
+.student-info-card .text-xs,       /* "Sinif:", "ID Nömrəsi:" gibi küçük yazılar */
+.student-info-card #student-class,
+.student-info-card #student-id-display,
+.student-info-card #exam-name-display {
+    color: #ffffff !important;
+}
+
+/* ŞAGİRD ADI SOYADI: Gündüz modunda siyah, Gece modunda beyaz */
+.student-info-card #student-fullname {
+    color: #000000 !important;
+}
+.dark .student-info-card #student-fullname {
+    color: #ffffff !important;
+}
+
+/* "Şagirdin Adı və Soyadı" başlığı: Gündüz modunda gri, Gece modunda gri */
+.student-info-card h4 {
+    color: #4a5568 !important;
+}
+.dark .student-info-card h4 {
+    color: #cbd5e0 !important;
+}
+        /* Gecə modu: ağ yazılar */
+        .dark .student-info-card h4,
+        .dark .student-info-card #student-fullname,
+        .dark .student-info-card #student-class,
+        .dark .student-info-card #student-id-display,
+        .dark .student-info-card #exam-name-display,
+        .dark .student-info-card .text-xs,
+        .dark .student-info-card .bg-gray-700 {
+            color: #ffffff !important;
+        }
+
+        /* Font stilleri */
+        .student-info-card h4 {
+            font-weight: 500 !important;
+        }
+
+        .student-info-card #student-fullname,
+        .student-info-card #student-class,
+        .student-info-card #student-id-display,
+        .student-info-card #exam-name-display {
+            font-weight: 600 !important;
+        }
+
+        /* Gündüz modunda "İmtahan" yazısının rengi - açık mavi */
+        .student-info-card #exam-name-display {
+            color: #4fd1c5 !important;
+        }
+
+        /* Gecə modunda "İmtahan" yazısının rengi - açık mavi */
+        .dark .student-info-card #exam-name-display {
+            color: #4fd1c5 !important;
+        }
 
     </style>
 </head>
 <body class="bg-primary-dark">
-    <!-- Başlıq / Header (Sabitləmə ləğv edildi) -->
+    <!-- Başlıq / Header -->
     <header class="bg-white header-bg shadow-xl relative z-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-5">
-                <!-- Loqo (Toxunulmaz Qalır) -->
+                <!-- Loqo -->
                 <img id="school-logo" 
                      src="https://i.imgur.com/a3FuVV8.png" 
                      alt="Okul Logosu" 
@@ -188,12 +261,11 @@
         </div>
     </header>
 
-    <!-- Əsas Məzmun (Padding əvvəlki halına qaytarıldı) -->
+    <!-- Əsas Məzmun -->
     <main class="flex flex-col items-center justify-start p-4 sm:p-6 pt-8 sm:pt-12 min-h-screen">
         <!-- Nəticə Sorgulama Kartı -->
         <div id="query-card" class="w-full max-w-lg bg-white p-8 sm:p-12 rounded-2xl shadow-3xl transition-all duration-300">
             <div class="text-center mb-8">
-                <!-- Font ölçüsü azaldıldı (text-xl sm:text-2xl) və alt yazı silindi -->
                 <h2 class="text-xl sm:text-2xl font-semibold text-primary-dark text-primary-dark-override mb-3 leading-tight">
                     İmtahan Nəticələri Yoxlama Sisteminə Xoş Gəlmisiniz!
                 </h2>
@@ -203,7 +275,7 @@
                     <label for="exam" class="block text-sm font-normal text-gray-700 form-label mb-1">İmtahanı Seçin</label>
                     <div class="relative">
                         <select id="exam" required class="custom-select-icon block w-full px-4 py-3 border border-gray-300 rounded-xl shadow-md form-input-bg focus:outline-none focus:ring-2 focus:ring-[#00525d] focus:ring-offset-0 focus-ring-primary text-base transition duration-150 ease-in-out">
-                            <option value="" disabled selected>-- İmtahanı seçin --</option>
+                            <option value="" disabled selected>İmtahanı seçin</option>
                             <option value="Mövzu Sınağı II">Mövzu Sınağı II</option>
                             <option value="Kiçik Summativ Qiymətləndirmə II">Kiçik Summativ Qiymətləndirmə II</option>
                             <option value="Mövzu Sınağı I">Mövzu Sınağı I</option>
@@ -217,7 +289,7 @@
                     <div class="relative">
                         <input type="tel" id="id" required 
                                class="appearance-none block w-full px-4 py-3 rounded-xl shadow-md form-input-bg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00525d] focus:ring-offset-0 focus-ring-primary text-base transition duration-150 ease-in-out" 
-                               placeholder="Məsələn: 123456"
+                               placeholder="Şagirdin ID nömrəsinin son 6 rəqəmi"
                                pattern="\d{6}" 
                                maxlength="6" 
                                inputmode="numeric">
@@ -233,34 +305,68 @@
         </div>
 
         <!-- Nəticə Önizləmə Konteyneri -->
-        <div id="result-container" class="hidden w-full mt-10 transition-opacity duration-500 opacity-0">
+        <div id="result-container" class="hidden w-full max-w-5xl mt-10 transition-opacity duration-500 opacity-0">
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 overflow-hidden">
                 <div class="bg-primary-dark bg-primary-dark-override px-6 py-4 border-b border-primary-hover flex flex-wrap justify-between items-center">
                     <h3 class="text-xl font-normal text-white">Şagirdin Nəticəsinə Baxış</h3>
                     <div class="flex space-x-3 mt-2 sm:mt-0">
-                        <!-- Yükləmə düyməsi -->
                         <button onclick="downloadResult()" class="text-sm px-4 py-2 bg-yellow-500 text-gray-900 rounded-lg font-normal hover:bg-yellow-600 transition flex items-center shadow-md transform hover:scale-[1.05]">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                            Yüklə (Tam Görünüş)
+                            Yüklə
                         </button>
-                        <!-- Gizlət/Yeni Axtarış düyməsi -->
                         <button onclick="resetSearch()" class="text-sm px-4 py-2 bg-gray-600 text-white rounded-lg font-normal hover:bg-gray-700 transition flex items-center shadow-md">
                             <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                            Gizlət / Yeni Axtarış
+                            Yeni Axtarış
                         </button>
                     </div>
                 </div>
+
+                <!-- Şagird Məlumatları Bölməsi (YENİLƏNİB) -->
+                <div id="student-info-section" class="p-6 border-b border-gray-200 dark:border-gray-600 student-info-card hidden">
+                    <div class="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
+                        <!-- Profil İkonu (Loqo ilə dəyişdirildi) -->
+                        <div class="flex-shrink-0">
+                            <img src="https://i.imgur.com/a3FuVV8.png" 
+                                 alt="Okul Logosu" 
+                                 class="w-16 h-16 object-contain rounded-full border-2 logo-border p-1 shadow-lg"
+                                 onerror="this.onerror=null; this.src='https://placehold.co/64x64/ccc/333?text=Logo';" 
+                            />
+                        </div>
+                        <!-- Mətn Məlumatları -->
+                        <div class="text-center sm:text-left flex-1">
+                            <h4 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Şagirdin Adı və Soyadı</h4>
+                            <p id="student-fullname" class="text-2xl font-bold text-gray-900 dark:text-white mt-1">Məlumat tapılmadı</p>
+                            
+                            <div class="flex flex-wrap justify-center sm:justify-start gap-4 mt-3">
+                                <!-- Sinif -->
+                                <div class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
+                                    <span class="text-xs text-gray-500 dark:text-gray-400">Sinif:</span>
+                                    <span id="student-class" class="ml-1 font-bold text-gray-800 dark:text-gray-200">--</span>
+                                </div>
+                                <!-- ID Nömrəsi -->
+                                <div class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
+                                    <span class="text-xs text-gray-500 dark:text-gray-400">ID Nömrəsi:</span>
+                                    <span id="student-id-display" class="ml-1 font-bold text-gray-800 dark:text-gray-200">--</span>
+                                </div>
+                                <!-- İmtahan Adı (YENİ) -->
+                                <div class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
+                                    <span class="text-xs text-gray-500 dark:text-gray-400">İmtahan:</span>
+                                    <span id="exam-name-display" class="ml-1 font-bold text-primary-dark text-primary-dark-override">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="p-2 bg-gray-100 dark:bg-gray-700">
-                    <!-- Nəticəni göstərmək üçün iframe -->
                     <iframe id="resultFrame" src="" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
 
-        <!-- Yüklənmə Overlay'i (Axtarış zamanı) -->
+        <!-- Overlay -->
         <div id="overlay" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden flex-col items-center justify-center">
             <div class="relative flex items-center justify-center">
-                <!-- Yeni Fırlanan Loqo Animasiyası -->
                 <img id="loading-logo" 
                      src="https://i.imgur.com/d0hRX2m.png" 
                      alt="Yüklənir" 
@@ -268,27 +374,26 @@
                      onerror="this.onerror=null; this.src='https://placehold.co/112x112/ccc/333?text=Logo';" 
                 />
             </div>
-            <p class="text-white mt-8 text-xl font-normal animate-pulse">Nəticə axtarılır</p>
-            <p class="text-gray-300 mt-2 text-sm font-light">Zəhmət olmasa gözləyin</p>
+            <p class="text-white mt-8 text-xl font-normal animate-pulse">Nəticə axtarılır...</p>
+            <p class="text-gray-300 mt-2 text-sm font-light">Səbriniz üçün təşəkkür edirik!</p>
         </div>
 
-        <!-- Toast Bildiriş Sahəsi -->
+        <!-- Toast Bildiriş -->
         <div id="toast" class="fixed top-5 right-5 z-100 hidden transform transition-all duration-500 translate-x-full">
             <div id="toast-content" class="bg-white border-l-8 p-4 rounded-xl shadow-2xl flex items-start min-w-[350px]">
                 <div id="toast-icon" class="mr-3 mt-0.5"></div>
                 <div class="flex-1">
                     <p id="toast-message" class="text-base font-normal text-gray-800"></p>
                 </div>
-                <!-- Bildirişi bağlamaq üçün düymə -->
                 <button onclick="hideToast()" class="ml-4 p-1 rounded-full text-red-600 hover:bg-red-100 transition duration-150">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
         </div>
     </main>
 
     <script>
-        // API skript URL-ləri
+        // API URL-ləri
         const LOG_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzpUvW4OAhTzuunQCjJw2Ldwd2cZyrDCw88pBD9MKB_oLumwwEPqHBT1Vcd8zK6DMDIFA/exec';
         const RESULT_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzX-Q13oP9_XH-gHobQKqjNmzICQa_maDt4cbVNRAsDHkLZRHDgeQw2bqYq0pYSuY38/exec";
         
@@ -296,40 +401,223 @@
         let toastTimeout;
         const TOAST_DURATION = 5000;
 
-        /**
-         * Uğur bildirişi üçün səs effekti.
-         */
+        // --- ŞAGİRD MƏLUMAT BAZASI (TAM YENİLƏNİB) ---
+        const studentData = {
+             "759382": { name: "Allahverdi İsmail", class: "3A" },
+"103947": { name: "Cəfərzadə Suada", class: "3A" },
+"582016": { name: "Xankişiyev Fateh", class: "3A" },
+"490273": { name: "İmanlı Əli", class: "3A" },
+"816495": { name: "İsmayılova Aişə", class: "3A" },
+"237580": { name: "Qarayeva Zəhra", class: "3A" },
+"905621": { name: "Məmmədli Cəlal", class: "3A" },
+"374812": { name: "Məmmədzadə Əslinur", class: "3A" },
+"618493": { name: "Məmmədzadə Mahinur", class: "3A" },
+"250179": { name: "Muradlı Ömər", class: "3A" },
+"491036": { name: "Musayev Cəsur", class: "3A" },
+"807251": { name: "Novruzlu Xədicə", class: "3A" },
+"364720": { name: "Rəhimli Rüstəm", class: "3A" },
+"593481": { name: "Sərdar Mehdi", class: "3A" },
+"178409": { name: "Əliyeva İnci", class: "3B" },
+"640523": { name: "Əliyeva Şəms", class: "3B" },
+"927184": { name: "Əlizadə Hümeyra", class: "3B" },
+"301576": { name: "Əmirov Ali", class: "3B" },
+"485092": { name: "Hüseynzadə Enes", class: "3B" },
+"762401": { name: "Karauçoğlu Alparslan", class: "3B" },
+"819630": { name: "Kayıkçıoğlu Ömər Aras", class: "3B" },
+"253914": { name: "Kazım Mətin", class: "3B" },
+"470185": { name: "Qayıblı Altay", class: "3B" },
+"694328": { name: "Məmmədzadə Əhməd", class: "3B" },
+"135970": { name: "Musavi Həsən", class: "3B" },
+"280461": { name: "Səfərli Onur", class: "3B" },
+"956327": { name: "Vəli Dəfnə", class: "3B" },
+"473198": { name: "Bektaşoğlu Zelihanur", class: "4A" },
+"612495": { name: "Əliyeva Nəzakət", class: "4A" },
+"804716": { name: "Əsədli Zeynəb", class: "4A" },
+"159208": { name: "Hüseynzadə Melissa", class: "4A" },
+"347590": { name: "Xankişiyeva İlayda", class: "4A" },
+"580246": { name: "İbrahimov Ziya", class: "4A" },
+"921637": { name: "Quluzadə Murad", class: "4A" },
+"430785": { name: "Məmmədova Aylin", class: "4A" },
+"267914": { name: "Musavi Nüman", class: "4A" },
+"805316": { name: "Musayev Adil", class: "4A" },
+"149027": { name: "Musa-zadə Ayxan", class: "4A" },
+"376582": { name: "Vəlizadə İsmayıl", class: "4A" },
+"602493": { name: "Ağayeva Fidan", class: "4B" },
+"250398": { name: "Bayramov Uğur", class: "4B" },
+"683147": { name: "Göyüşzadə Ayan", class: "4B" },
+"107582": { name: "İbrahimova İpək", class: "4B" },
+"592364": { name: "Qəmbərli Zəhra", class: "4B" },
+"834197": { name: "Mehdizadə Aysel", class: "4B" },
+"461205": { name: "Məmmədli Emil", class: "4B" },
+"708913": { name: "Musayev Fateh", class: "4B" },
+"129684": { name: "Nəsirov Nihad", class: "4B" },
+"354270": { name: "Zülfüqarlı Hicran", class: "4B" },
+"619485": { name: "Ağazadə Zəhra", class: "5A" },
+"914076": { name: "Baxışlı Suada", class: "5A" },
+"872031": { name: "Çokal Elif Ece", class: "5A" },
+"240597": { name: "Əbdülsalamova Müjgan", class: "5A" },
+"503618": { name: "Əliyeva Banu", class: "5A" },
+"976204": { name: "İmamzadə Xədicə", class: "5A" },
+"381695": { name: "İsmayılov Çingiz", class: "5A" },
+"147082": { name: "Karataş Elif Nur", class: "5A" },
+"650493": { name: "Qasımova Aylin", class: "5A" },
+"812736": { name: "Mehdizadə Fidan", class: "5A" },
+"295041": { name: "Məmmədova Gülay", class: "5A" },
+"470286": { name: "Məsimli Zeynəb", class: "5A" },
+"598314": { name: "Musayev Fateh", class: "5A" },
+"136975": { name: "Müslüm Məryəm", class: "5A" },
+"407218": { name: "Novruzlu Kadir", class: "5A" },
+"695082": { name: "Rəsulov Camal", class: "5A" },
+"230491": { name: "Sadmaliyeva Sara", class: "5A" },
+"872604": { name: "Salmanov Ömər", class: "5A" },
+"510738": { name: "Zəbiyeva Nilufər", class: "5A" },
+"349216": { name: "Ağayev Ömər", class: "5B" },
+"706529": { name: "Əhmədli Rəşid", class: "5B" },
+"481032": { name: "Əhmədov Nazim", class: "5B" },
+"920674": { name: "Əlizadə Amal", class: "5B" },
+"157843": { name: "Hüseynli Şəbnəm", class: "5B" },
+"634281": { name: "Hüseynli Zeynəb", class: "5B" },
+"805392": { name: "Işılak Esmanur", class: "5B" },
+"241067": { name: "İsgəndərli İlayda", class: "5B" },
+"578193": { name: "İsmayılov Məhyəddin", class: "5B" },
+"902746": { name: "Məmmədli Aida", class: "5B" },
+"316085": { name: "Məmmədova Məryəm", class: "5B" },
+"479320": { name: "Məmmədzadə Aminə", class: "5B" },
+"150287": { name: "Osmanlı İnci", class: "5B" },
+"397614": { name: "Paşa Mahmud", class: "5B" },
+"521083": { name: "Rayi Məryəm Nilufər", class: "5B" },
+"860472": { name: "Surxayzadə Xədicə", class: "5B" },
+"273915": { name: "Yunus İnci", class: "5B" },
+"409678": { name: "Calalova Məryəm", class: "6A" },
+"735124": { name: "Cəfərzadə Atilla", class: "6A" },
+"608391": { name: "Əhmədli Məryəm", class: "6A" },
+"254087": { name: "Əlizadə Aylin", class: "6A" },
+"491630": { name: "İmamzadə Fatimə", class: "6A" },
+"876204": { name: "İsmayıllı Xalid", class: "6A" },
+"312597": { name: "Kazımlı Ceyla", class: "6A" },
+"540286": { name: "Qənbərli Turqut", class: "6A" },
+"729814": { name: "Manaflı Murad", class: "6A" },
+"183057": { name: "Məmmədli Fərhad", class: "6A" },
+"406291": { name: "Məmmədli Hüseyn", class: "6A" },
+"598327": { name: "Muradova Selcan", class: "6A" },
+"274068": { name: "Nağıyev Səyyad", class: "6A" },
+"815439": { name: "Osmanova Məryəm", class: "6A" },
+"103952": { name: "Sərdarlı Xədicə", class: "6A" },
+"642708": { name: "Sultanov Fateh", class: "6A" },
+"379164": { name: "Təhməzli Mete", class: "6A" },
+"587231": { name: "Vəliyeva Zəhra", class: "6A" },
+"920648": { name: "Alqayeva Kamilə", class: "6B" },
+"136785": { name: "Eyvazova Məryəm", class: "6B" },
+"472509": { name: "Əhmədov Azər", class: "6B" },
+"603821": { name: "Əlirzayev Həsən", class: "6B" },
+"815430": { name: "Əsgərova Aylin", class: "6B" },
+"257694": { name: "Həşimli Zeynəb", class: "6B" },
+"490862": { name: "Hüseynli Mustafa", class: "6B" },
+"731045": { name: "Hüseynli Zəhra", class: "6B" },
+"602198": { name: "İsmayıl Ayxan", class: "6B" },
+"149376": { name: "İsmayılzadə Mikayıl", class: "6B" },
+"384072": { name: "Mahmudlu Altay", class: "6B" },
+"526194": { name: "Mahmudova Zümrüd", class: "6B" },
+"871430": { name: "Məmmədli Ağa", class: "6B" },
+"310685": { name: "Məmmədova Ləman", class: "6B" },
+"479206": { name: "Mustafa Muhammed", class: "6B" },
+"695314": { name: "Namazlı Banu", class: "6B" },
+"123987": { name: "Paşazadə Xədicə", class: "6B" },
+"450678": { name: "Şahmərdanov Ramal", class: "6B" },
+"807145": { name: "Ağayeva Əzizə", class: "7A" },
+"256093": { name: "Əliyev Yusif", class: "7A" },
+"591427": { name: "Göyüşlü Aişə", class: "7A" },
+"843210": { name: "Hüseynli Əminə", class: "7A" },
+"317596": { name: "İbrahimov Ömər", class: "7A" },
+"482063": { name: "Karahan Taha", class: "7A" },
+"748931": { name: "Qədməliyev Murad", class: "7A" },
+"709815": { name: "Qəhrəmanova Qəmər", class: "7A" },
+"154320": { name: "Quliyev Asim", class: "7A" },
+"386297": { name: "Quliyev Ömər", class: "7A" },
+"620514": { name: "Quluzadə Əhməd", class: "7A" },
+"971430": { name: "Məmmədzadə Mustafa", class: "7A" },
+"245086": { name: "Namazlı Zeynəb", class: "7A" },
+"617903": { name: "Paşazadə Mədinə", class: "7A" },
+"507312": { name: "Rəfiyeva Zəhra", class: "7A" },
+"863429": { name: "Abdullayev İskəndər", class: "7B" },
+"139506": { name: "Cenikoğlu Kaan", class: "7B" },
+"472380": { name: "Eyvazova Zəhra", class: "7B" },
+"685214": { name: "Əsədullazadə Nur", class: "7B" },
+"518406": { name: "Həşimli Şəms", class: "7B" },
+"792631": { name: "Quluzadə İlkin", class: "7B" },
+"346205": { name: "Mehdizadə Ramin", class: "7B" },
+"479130": { name: "Nəsibli Mehriban", class: "7B" },
+"608492": { name: "Nəsibov Elcan", class: "7B" },
+"251078": { name: "Novruzov Rövşən", class: "7B" },
+"824516": { name: "Təhməzli Xəlil", class: "7B" },
+"130497": { name: "Vəlizadə Ayxan", class: "7B" },
+"472861": { name: "Zalov Levent", class: "7B" },
+"748206": { name: "Calalova Zeynəb", class: "8A" },
+"698205": { name: "Cəfərli Cavidan", class: "8A" },
+"341607": { name: "Əhmədov Hüseyn", class: "8A" },
+"509382": { name: "Hüseynli Fatimə", class: "8A" },
+"872054": { name: "Kərimli Fərhad", class: "8A" },
+"263491": { name: "Quluzadə Nəzrin", class: "8A" },
+"504318": { name: "Manaflı Mürsəl", class: "8A" },
+"739205": { name: "Məmmədov Tuncay", class: "8A" },
+"182046": { name: "Məmmədzadə Nuriyyə", class: "8A" },
+"467193": { name: "Nəsibli Cavanşir", class: "8A" },
+"407905": { name: "Nəzirli Uğur", class: "8A" },
+"591628": { name: "Novruzlu Elcan", class: "8A" },
+"274093": { name: "Cahangirov Gündüz", class: "8B" },
+"860471": { name: "Əhmədov Məhəmməd", class: "8B" },
+"315208": { name: "Əkbərli Ömər", class: "8B" },
+"487362": { name: "Əlizadə Cavad", class: "8B" },
+"703914": { name: "Hacıyev Cavanşir", class: "8B" },
+"156024": { name: "Həsənova Nurgül", class: "8B" },
+"392186": { name: "Hüseynli Leyla", class: "8B" },
+"625470": { name: "İsmayılzadə Sədi", class: "8B" },
+"981236": { name: "Quluzadə Safiyyə", class: "8B" },
+"247053": { name: "Məlikova Aylin", class: "8B" },
+"513698": { name: "Musayeva Fidan", class: "8B" },
+"867402": { name: "Sultanova Fatimə", class: "8B" },
+"139587": { name: "Şərifova Şərqiyyə", class: "8B" },
+"470291": { name: "Abbaslı Ruqəyya", class: "9A" },
+"681304": { name: "Əhmədli Gülbahar", class: "9A" },
+"205473": { name: "Əlizadə Pakizə", class: "9A" },
+"529140": { name: "Əmirov Amin", class: "9A" },
+"790631": { name: "Hüseynli Dəniz", class: "9A" },
+"341276": { name: "İbrahimov Ayaz", class: "9A" },
+"456920": { name: "Mahmudov Xalid", class: "9A" },
+"603782": { name: "Məmmədzadə Kürsüm", class: "9A" },
+"218497": { name: "Mütəllimli Selcan", class: "9A" },
+"574130": { name: "Zalova Süheyla", class: "9A" },
+"802964": { name: "Zeynalov İbrahim", class: "9A" },
+"371805": { name: "Əsgərova Ləman", class: "9B" },
+"490263": { name: "Məmmədxanlı Aslan", class: "9B" },
+"678124": { name: "Məmmədova Nuray", class: "9B" },
+"135079": { name: "Murad Renat", class: "9B" },
+"402185": { name: "Novruzlu Nübar", class: "9B" },
+"569371": { name: "Vəlizadə İnci", class: "9B" },
+};
+
         function playSuccessTone() {
             try {
-                // AudioContext yalnız istifadəçi hərəkəti ilə işə salına bilər.
                 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 if (!audioContext) return;
-                
                 const oscillator = audioContext.createOscillator();
                 const gainNode = audioContext.createGain();
                 oscillator.connect(gainNode);
                 gainNode.connect(audioContext.destination);
-
                 oscillator.type = 'triangle';
                 gainNode.gain.setValueAtTime(0, audioContext.currentTime);
                 gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.01);
-
                 oscillator.frequency.setValueAtTime(784, audioContext.currentTime);
                 gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.15);
                 gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.15);
-
                 oscillator.frequency.setValueAtTime(1047, audioContext.currentTime + 0.15);
                 gainNode.gain.linearRampToValueAtTime(0.3, audioContext.currentTime + 0.20);
                 gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.35);
-
                 oscillator.start();
                 oscillator.stop(audioContext.currentTime + 0.4);
-            } catch (e) { console.error("Səs xətası: playSuccessTone:", e); }
+            } catch (e) { console.error("Səs xətası:", e); }
         }
 
-        /**
-         * Xəta bildirişi üçün səs effekti.
-         */
         function playErrorTone() {
             try {
                 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -338,25 +626,18 @@
                 const gainNode = audioContext.createGain();
                 oscillator.connect(gainNode);
                 gainNode.connect(audioContext.destination);
-
                 oscillator.type = 'sawtooth';
                 gainNode.gain.setValueAtTime(0, audioContext.currentTime);
                 gainNode.gain.linearRampToValueAtTime(0.4, audioContext.currentTime + 0.01);
-                
                 oscillator.frequency.setValueAtTime(261, audioContext.currentTime);
                 oscillator.frequency.linearRampToValueAtTime(196, audioContext.currentTime + 0.3);
-                
                 gainNode.gain.linearRampToValueAtTime(0.05, audioContext.currentTime + 0.3);
                 gainNode.gain.linearRampToValueAtTime(0, audioContext.currentTime + 0.4);
-
                 oscillator.start();
                 oscillator.stop(audioContext.currentTime + 0.4);
-            } catch (e) { console.error("Səs xətası: playErrorTone:", e); }
+            } catch (e) { console.error("Səs xətası:", e); }
         }
         
-        /**
-         * Bildiriş pəncərəsini gizlədir.
-         */
         function hideToast() {
             const toast = document.getElementById('toast');
             clearTimeout(toastTimeout);
@@ -364,12 +645,6 @@
             setTimeout(() => toast.classList.add('hidden'), 500); 
         }
 
-        /**
-         * Bildiriş pəncərəsini göstərir və səsi çalır.
-         * @param {string} message - Göstəriləcək mesaj.
-         * @param {('success'|'error'|'announcement'|'info')} type - Bildiriş tipi.
-         * @param {boolean} autoHide - Avtomatik gizlənsin ya yox.
-         */
         function showNotification(message, type = 'info', autoHide = true) {
             clearTimeout(toastTimeout); 
             
@@ -382,40 +657,33 @@
             
             let borderColor, iconHtml;
 
-            // Səs çalma məntiqi
-            if (type === 'success' || type === 'announcement' || type === 'info') {
-                playSuccessTone();
-            } else if (type === 'error') {
-                playErrorTone();
-            }
-
+            if (type === 'success' || type === 'announcement' || type === 'info') playSuccessTone();
+            else if (type === 'error') playErrorTone();
 
             if (type === 'success') {
                 borderColor = 'border-green-500';
-                iconHtml = '<svg class="w-7 h-7 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
+                iconHtml = '<svg class="w-7 h-7 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
             } else if (type === 'error') {
                 borderColor = 'border-red-500';
-                iconHtml = '<svg class="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
+                iconHtml = '<svg class="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
             } else if (type === 'announcement') {
                 borderColor = 'border-yellow-500'; 
                 iconHtml = '<span class="text-3xl">🔔</span>';
-            } else { // info
+            } else {
                 borderColor = 'border-blue-500';
-                iconHtml = '<svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
+                iconHtml = '<svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
             }
             
             const isDark = document.documentElement.classList.contains('dark');
             const bgColor = isDark ? 'bg-gray-800' : 'bg-white';
             const textColor = isDark ? 'text-gray-200' : 'text-gray-800';
             
-            // Kontenti yeniləyir və rəngi tətbiq edir
             content.className = `${bgColor} border-l-8 ${borderColor} p-4 rounded-xl shadow-2xl flex items-start min-w-[350px]`;
             msgEl.className = `text-base font-normal ${textColor}`;
             iconEl.innerHTML = iconHtml;
             
             toast.classList.add('translate-x-full');
             toast.classList.remove('hidden'); 
-            
             setTimeout(() => toast.classList.remove('translate-x-full'), 10);
 
             if (autoHide) {
@@ -423,67 +691,45 @@
             }
         }
         
-        /**
-         * İlkin mövzunu (tem) təyin edir.
-         */
         function setInitialTheme() {
             const isDarkMode = localStorage.getItem('theme') === 'dark' || 
                               (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
             
-            if (isDarkMode) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
+            if (isDarkMode) document.documentElement.classList.add('dark');
+            else document.documentElement.classList.remove('dark');
             updateThemeIcons(isDarkMode);
         }
 
-        /**
-         * Mövzu dəyişdikdə ikonları yeniləyir.
-         */
         function updateThemeIcons(isDark) {
             document.getElementById('sun-icon').classList.toggle('hidden', isDark);
             document.getElementById('moon-icon').classList.toggle('hidden', !isDark);
         }
 
-        /**
-         * Mövzunu Gündüz/Gecə rejimi arasında dəyişdirir.
-         */
         function toggleTheme() {
             const wasDark = document.documentElement.classList.contains('dark');
             const isDark = !wasDark;
-            
             document.documentElement.classList.toggle('dark', isDark);
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             updateThemeIcons(isDark);
-            
             showNotification(isDark ? "Gecə rejimi aktivləşdirildi." : "Gündüz rejimi aktivləşdirildi.", 'info'); 
         }
 
-        /**
-         * Yüklənmə animasiyasını (fırlanan loqo) başladır.
-         */
         function startLoadingAnimation() {
-            const loadingLogo = document.getElementById('loading-logo');
-            loadingLogo.classList.add('loading-logo');
+            document.getElementById('loading-logo').classList.add('loading-logo');
         }
 
-        /**
-         * Yüklənmə animasiyasını dayandırır.
-         */
         function stopLoadingAnimation() {
-            const loadingLogo = document.getElementById('loading-logo');
-            loadingLogo.classList.remove('loading-logo');
+            document.getElementById('loading-logo').classList.remove('loading-logo');
         }
 
-        /**
-         * Nəticəni axtarır və göstərir.
-         */
         async function viewResult() {
-            const idValue = document.getElementById("id").value.trim();
-            const examValue = document.getElementById("exam").value;
+            const idInput = document.getElementById("id");
+            const examSelect = document.getElementById("exam");
+            
+            const idValue = idInput.value.trim();
+            const examValue = examSelect.value;
+            const examText = examSelect.options[examSelect.selectedIndex].text;
 
-            // Giriş yoxlaması
             if (!idValue || !examValue) {
                 showNotification("Zəhmət olmasa imtahan növünü seçin və Şagird ID-ni daxil edin.", "error");
                 return;
@@ -494,70 +740,67 @@
                 showNotification("Şagird ID yalnız 6 rəqəmdən ibarət olmalıdır.", "error");
                 return;
             }
+            
+            // Şagird məlumatını yoxlamaq
+            const student = studentData[idValue];
+            if (!student) {
+                showNotification(`"${idValue}" ID nömrəli şagird bazada tapılmadı. Zəhmət olmasa ID-ni yoxlayın.`, "error");
+                return;
+            }
+
 
             const overlay = document.getElementById("overlay");
             const resultContainer = document.getElementById("result-container");
+            const studentInfoSection = document.getElementById("student-info-section");
 
-            // Nəticə konteynerini gizlət
-            resultContainer.classList.add("opacity-0"); 
-            resultContainer.classList.add("hidden"); 
-
-            // Yüklənmə overlay'ini göstər və animasiyanı başlat
+            resultContainer.classList.add("opacity-0", "hidden"); 
             overlay.classList.remove("hidden");
             overlay.classList.add("flex");
             startLoadingAnimation();
 
             try {
-                // Nəticəni API-dən alır
+                // API-dən nəticəni yoxlayır
                 const response = await fetch(RESULT_SCRIPT_URL + "?id=" + encodeURIComponent(idValue) + "&exam=" + encodeURIComponent(examValue));
                 const data = await response.json();
 
                 stopLoadingAnimation();
 
-                let statusToLog;
-                if (data.status === 'found') {
-                    statusToLog = 'Nəticə tapıldı';
-                    lastPreviewUrl = data.preview || "";
-                } else if (data.status === 'not found') {
-                    statusToLog = 'Nəticə tapılmadı';
-                    lastPreviewUrl = "";
-                } else {
-                    statusToLog = 'Naməlum xəta';
-                    lastPreviewUrl = "";
-                }
-
-                // Log funksiyası (asinxron)
+                // Loglamanı fon rejimində edirik
                 fetch(LOG_SCRIPT_URL, {
                     method: 'POST',
                     body: new URLSearchParams({
                         'id': idValue,
                         'exam': examValue,
-                        'status': statusToLog
+                        'status': data.status === 'found' ? 'Nəticə tapıldı' : 'Nəticə tapılmadı'
                     })
-                }).catch(e => console.error("Log xətası:", e));
+                }).catch(e => console.error("Log error", e));
 
-                // Qısa bir gecikmədən sonra nəticəni göstər
                 setTimeout(() => {
                     overlay.classList.add("hidden");
                     overlay.classList.remove("flex");
 
                     if (data.status === "found" && data.preview) {
+                        // YENİ: Sınav adını da bildiriş mesajına ekle
+                        showNotification(`"${student.name}" üçün "${examText}" nəticəsi uğurla tapıldı!`, "success");
                         
-                        // Uğurlu bildiriş: Yaşıl rəngli pop-up 
-                        showNotification("Nəticə uğurla tapıldı! Önizləməyə baxın.", "success");
+                        lastPreviewUrl = data.preview;
+                        document.getElementById("resultFrame").src = data.preview;
+
+                        // --- ŞAGİRD VƏ İMTAHAN MƏLUMATINI YERLƏŞDİR (YENİLƏNİB) ---
+                        document.getElementById("student-fullname").textContent = student.name;
+                        document.getElementById("student-class").textContent = student.class;
+                        document.getElementById("student-id-display").textContent = idValue;
+                        document.getElementById("exam-name-display").textContent = examText; 
                         
-                        const frame = document.getElementById("resultFrame");
-                        frame.src = data.preview;
+                        studentInfoSection.classList.remove("hidden");
 
                         resultContainer.classList.remove("hidden");
                         setTimeout(() => resultContainer.classList.remove("opacity-0"), 50);
-                        
-                        // Nəticəyə fokuslanmaq üçün səhifəni aşağı çək
                         resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
                     } else {
-                        // Xəta bildirişi: Qırmızı rəngli pop-up
-                        showNotification("Təəssüf ki, nəticə tapılmadı. Məlumatları yoxlayın.", "error");
+                        showNotification(`"${student.name}" şagirdi üçün "${examText}" nəticəsi tapılmadı.`, "error");
+                        studentInfoSection.classList.add("hidden"); // Məlumat tapılmadısa məlumat kartını gizlət
                     }
                 }, 500); 
 
@@ -566,23 +809,10 @@
                 console.error("Fetch xətası:", error);
                 overlay.classList.add("hidden");
                 overlay.classList.remove("flex"); 
-                showNotification("Sistem xətası baş verdi. İnternet əlaqəsini və ya API keçidini yoxlayın.", "error");
-                
-                // Xətanı log et
-                fetch(LOG_SCRIPT_URL, {
-                    method: 'POST',
-                    body: new URLSearchParams({
-                        'id': idValue,
-                        'exam': examValue,
-                        'status': 'error'
-                    })
-                });
+                showNotification("Sistem xətası baş verdi.", "error");
             }
         }
 
-        /**
-         * Nəticə önizləməsini gizlədir və formanı sıfırlayır.
-         */
         function resetSearch() {
             const resultContainer = document.getElementById("result-container");
             const resultFrame = document.getElementById("resultFrame");
@@ -593,13 +823,12 @@
                 resultFrame.src = "";
                 lastPreviewUrl = "";
                 document.getElementById("resultForm").reset();
-                showNotification("Axtarış nəticəsi gizlədildi. Yeni axtarış edə bilərsiniz.", "info");
+                // Təmizləyəndə məlumat kartını da gizlət
+                document.getElementById("student-info-section").classList.add("hidden");
+                showNotification("Axtarış nəticəsi gizlədildi.", "info");
             }, 300);
         }
 
-        /**
-         * Tam nəticə sənədini yeni pəncərədə açır (yükləmək üçün).
-         */
         function downloadResult() {
             if(lastPreviewUrl && lastPreviewUrl !== "about:blank") {
                 window.open(lastPreviewUrl, '_blank');
@@ -608,16 +837,12 @@
             }
         }
 
-        // Səhifə yükləndikdə başlanğıc funksiyaları
         document.addEventListener('DOMContentLoaded', () => {
              setInitialTheme();
-
-             // İmtahan nəticələrinin elanı bildirişi (Səs effekti showNotification-da idarə olunur)
              setTimeout(() => {
                 showNotification("KSQ-2 və MS-2 imtahanlarının nəticələri elan edilmişdir!", 'announcement'); 
              }, 500);
 
-             // Enter düyməsi ilə axtarışı təsdiqləmə
              document.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     const activeElement = document.activeElement;
@@ -631,5 +856,3 @@
     </script>
 </body>
 </html>
-
-
