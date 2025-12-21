@@ -1082,24 +1082,33 @@
             }
         }
 
-        // YENİ: FAQ Accordion Funksiyası
-        function toggleFAQ(id) {
-            const answer = document.getElementById(`faq-answer-${id}`);
-            const icon = document.getElementById(`faq-icon-${id}`);
-            
-            const isOpen = answer.classList.contains('open');
-            
-            // Əgər bağlı idisə, aç
-            if (!isOpen) {
-                answer.classList.add('open');
-                icon.classList.add('rotate-180');
-            } else {
-                // Əgər açıq idisə, bağla
-                answer.classList.remove('open');
-                icon.classList.remove('rotate-180');
-            }
+// YENİ: FAQ Accordion Funksiyası (TƏKMİLLƏŞDİRİLMİŞ)
+function toggleFAQ(id) {
+    const answer = document.getElementById(`faq-answer-${id}`);
+    const icon = document.getElementById(`faq-icon-${id}`);
+    
+    const isOpen = answer.classList.contains('open');
+    
+    // Bütün digər sualları bağla
+    document.querySelectorAll('.faq-answer').forEach(item => {
+        if (item.id !== `faq-answer-${id}`) {
+            item.classList.remove('open');
+            const otherId = item.id.split('-')[2];
+            const otherIcon = document.getElementById(`faq-icon-${otherId}`);
+            if (otherIcon) otherIcon.classList.remove('rotate-180');
         }
-
+    });
+    
+    // Əgər bağlı idisə, aç
+    if (!isOpen) {
+        answer.classList.add('open');
+        icon.classList.add('rotate-180');
+    } else {
+        // Əgər açıq idisə, bağla
+        answer.classList.remove('open');
+        icon.classList.remove('rotate-180');
+    }
+}
         // YENİ: İmtahan statistikalarını yenilə
         function updateExamStats() {
             try {
