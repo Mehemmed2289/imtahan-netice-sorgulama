@@ -265,6 +265,98 @@
             stroke: #00525d !important;
         }
 
+        /* YENİ: Nav Düymələri Stili */
+        .nav-btn {
+            transition: all 0.3s ease;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-btn.active {
+            background-color: #00525d;
+            color: white;
+        }
+        
+        .dark .nav-btn.active {
+            background-color: #4fd1c5;
+            color: #00525d;
+        }
+        
+        .nav-btn:not(.active) {
+            background-color: #f3f4f6;
+            color: #4b5563;
+        }
+        
+        .dark .nav-btn:not(.active) {
+            background-color: #374151;
+            color: #d1d5db;
+        }
+        
+        .nav-btn:hover:not(.active) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .nav-btn:hover:not(.active) {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* YENİ: FAQ Accordion Stili */
+        .faq-item {
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .dark .faq-item {
+            border-bottom: 1px solid #4b5563;
+        }
+        .faq-question {
+            transition: all 0.3s ease;
+        }
+        .faq-question:hover {
+            background-color: #f9fafb;
+        }
+        .dark .faq-question:hover {
+            background-color: #374151;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-answer.open {
+            max-height: 500px;
+        }
+
+        /* YENİ: Panel Göstəriciləri */
+        .panel-section {
+            display: block;
+        }
+        
+        .panel-section.hidden {
+            display: none;
+        }
+
+        /* YENİ: Statistika ikonları rengi */
+        .stat-icon {
+            color: #00525d;
+        }
+        
+        .dark .stat-icon {
+            color: #ffffff;
+        }
+
+        /* YENİ: FAQ nömrələri */
+        .faq-number {
+            color: #00525d;
+        }
+        
+        .dark .faq-number {
+            color: #ffffff;
+        }
+
     </style>
 </head>
 <body class="bg-primary-dark">
@@ -304,105 +396,358 @@
         </div>
     </header>
 
+    <!-- YENİ: Naviqasiya Düymələri -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div class="flex flex-wrap gap-4 justify-center">
+            <button id="nav-search" class="nav-btn active" onclick="showSection('search-section')">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                Nəticə Axtarışı
+            </button>
+            <button id="nav-stats" class="nav-btn" onclick="showSection('stats-section')">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                </svg>
+                Statistika
+            </button>
+            <button id="nav-faq" class="nav-btn" onclick="showSection('faq-section')">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Suallar
+            </button>
+        </div>
+    </div>
+
     <!-- Əsas Məzmun -->
-    <main class="flex flex-col items-center justify-start p-4 sm:p-6 pt-8 sm:pt-12 min-h-screen">
-        <!-- Nəticə Sorgulama Kartı -->
-        <div id="query-card" class="w-full max-w-lg bg-white p-8 sm:p-12 rounded-2xl shadow-3xl transition-all duration-300">
-            <div class="text-center mb-8">
-                <h2 class="text-xl sm:text-2xl font-semibold text-primary-dark text-primary-dark-override mb-3 leading-tight">
-                    İmtahan Nəticələri Yoxlama Sisteminə Xoş Gəlmisiniz!
-                </h2>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
+        <!-- PANEL 1: Nəticə Axtarışı -->
+        <div id="search-section" class="panel-section">
+            <div class="flex flex-col lg:flex-row items-start justify-center gap-8">
+                <!-- Nəticə Axtarış Kartı -->
+                <div class="w-full lg:w-1/2">
+                    <div id="query-card" class="w-full bg-white p-8 sm:p-12 rounded-2xl shadow-3xl transition-all duration-300">
+                        <div class="text-center mb-8">
+                            <h2 class="text-xl sm:text-2xl font-semibold text-primary-dark text-primary-dark-override mb-3 leading-tight">
+                                İmtahan Nəticələri Yoxlama Sisteminə Xoş Gəlmisiniz!
+                            </h2>
+                        </div>
+                        <form id="resultForm" class="space-y-7" onsubmit="event.preventDefault(); viewResult();">
+                            <div>
+                                <label for="exam" class="block text-sm font-normal text-gray-700 form-label mb-1">İmtahanı Seçin</label>
+                                <div class="relative">
+                                    <select id="exam" required class="custom-select-icon block w-full px-4 py-3 border border-gray-300 rounded-xl shadow-md form-input-bg focus:outline-none focus:ring-2 focus:ring-[#00525d] focus:ring-offset-0 focus-ring-primary text-base transition duration-150 ease-in-out">
+                                        <option value="" disabled selected>İmtahanı seçin</option>
+                                        <option value="Mövzu Sınağı II">Mövzu Sınağı II</option>
+                                        <option value="Kiçik Summativ Qiymətləndirmə II">Kiçik Summativ Qiymətləndirmə II</option>
+                                        <option value="Mövzu Sınağı I">Mövzu Sınağı I</option>
+                                        <option value="Kiçik Summativ Qiymətləndirmə I">Kiçik Summativ Qiymətləndirmə I</option>
+                                        <option value="Diaqnostik qiymətləndirmə">Diaqnostik qiymətləndirmə</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="id" class="block text-sm font-normal text-gray-700 form-label mb-1">Şagird ID (Son 6 rəqəm)</label>
+                                <div class="relative">
+                                    <input type="tel" id="id" required 
+                                           class="appearance-none block w-full px-4 py-3 rounded-xl shadow-md form-input-bg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00525d] focus:ring-offset-0 focus-ring-primary text-base transition duration-150 ease-in-out" 
+                                           placeholder="Şagirdin ID nömrəsinin son 6 rəqəmi"
+                                           pattern="\d{6}" 
+                                           maxlength="6" 
+                                           inputmode="numeric">
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" id="search-btn" class="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg text-lg font-normal text-white bg-primary-dark bg-primary-dark-override hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00525d] transition duration-300 ease-in-out transform hover:scale-[1.01] hover:shadow-xl">
+                                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                    Nəticəni Axtar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Nəticə Önizləmə Konteyneri -->
+                    <div id="result-container" class="hidden w-full mt-8 transition-opacity duration-500 opacity-0">
+                        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                            <div class="bg-primary-dark bg-primary-dark-override px-6 py-4 border-b border-primary-hover flex flex-wrap justify-between items-center">
+                                <h3 class="text-xl font-normal text-white">Şagirdin Nəticəsinə Baxış</h3>
+                                <div class="flex space-x-3 mt-2 sm:mt-0">
+                                    <button onclick="downloadResult()" class="text-sm px-4 py-2 bg-yellow-500 text-gray-900 rounded-lg font-normal hover:bg-yellow-600 transition flex items-center shadow-md transform hover:scale-[1.05]">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                        Yüklə
+                                    </button>
+                                    <button onclick="resetSearch()" class="text-sm px-4 py-2 bg-gray-600 text-white rounded-lg font-normal hover:bg-gray-700 transition flex items-center shadow-md">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                                        Yeni Axtarış
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Şagird Məlumatları Bölməsi -->
+                            <div id="student-info-section" class="p-6 border-b border-gray-200 dark:border-gray-600 student-info-card hidden">
+                                <div class="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
+                                    <!-- Profil İkonu -->
+                                    <div class="flex-shrink-0">
+                                        <img src="https://i.imgur.com/a3FuVV8.png" 
+                                             alt="Okul Logosu" 
+                                             class="w-16 h-16 object-contain rounded-full border-2 logo-border p-1 shadow-lg"
+                                             onerror="this.onerror=null; this.src='https://placehold.co/64x64/ccc/333?text=Logo';" 
+                                        />
+                                    </div>
+                                    <!-- Mətn Məlumatları -->
+                                    <div class="text-center sm:text-left flex-1">
+                                        <h4 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Şagirdin Adı və Soyadı</h4>
+                                        <p id="student-fullname" class="text-2xl font-bold text-gray-900 dark:text-white mt-1">Məlumat tapılmadı</p>
+                                        
+                                        <div class="flex flex-wrap justify-center sm:justify-start gap-4 mt-3">
+                                            <!-- Sinif -->
+                                            <div class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
+                                                <span class="text-xs text-gray-500 dark:text-gray-400">Sinif:</span>
+                                                <span id="student-class" class="ml-1 font-bold text-gray-800 dark:text-gray-200">--</span>
+                                            </div>
+                                            <!-- ID Nömrəsi -->
+                                            <div class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
+                                                <span class="text-xs text-gray-500 dark:text-gray-400">ID Nömrəsi:</span>
+                                                <span id="student-id-display" class="ml-1 font-bold text-gray-800 dark:text-gray-200">--</span>
+                                            </div>
+                                            <!-- İmtahan Adı -->
+                                            <div class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
+                                                <span class="text-xs text-gray-500 dark:text-gray-400">İmtahan:</span>
+                                                <span id="exam-name-display" class="ml-1 font-bold text-primary-dark text-primary-dark-override">--</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-2 bg-gray-100 dark:bg-gray-700">
+                                <iframe id="resultFrame" src="" allowfullscreen class="w-full h-96"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- İnfo Qutusu -->
+                <div class="w-full lg:w-1/2">
+                    <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700">
+                        <h3 class="text-xl font-semibold text-primary-dark dark:text-primary-dark-override mb-4">📋 Sistem Haqqında</h3>
+                        <div class="space-y-4">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                Bu sistem vasitəsilə Azərbaycan Beynəlxalq Maarif Məktəblərinin şagirdləri imtahan nəticələrini onlayn yoxlaya bilərlər.
+                            </p>
+                            <div class="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg">
+                                <p class="text-blue-700 dark:text-blue-300 text-sm">
+                                    <strong>Qeyd:</strong> Nəticəni yoxlamaq üçün şagird ID-nizin son 6 rəqəmini və imtahan növünü daxil etməlisiniz.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <form id="resultForm" class="space-y-7" onsubmit="event.preventDefault(); viewResult();">
-                <div>
-                    <label for="exam" class="block text-sm font-normal text-gray-700 form-label mb-1">İmtahanı Seçin</label>
-                    <div class="relative">
-                        <select id="exam" required class="custom-select-icon block w-full px-4 py-3 border border-gray-300 rounded-xl shadow-md form-input-bg focus:outline-none focus:ring-2 focus:ring-[#00525d] focus:ring-offset-0 focus-ring-primary text-base transition duration-150 ease-in-out">
-                            <option value="" disabled selected>İmtahanı seçin</option>
-                            <option value="Mövzu Sınağı II">Mövzu Sınağı II</option>
-                            <option value="Kiçik Summativ Qiymətləndirmə II">Kiçik Summativ Qiymətləndirmə II</option>
-                            <option value="Mövzu Sınağı I">Mövzu Sınağı I</option>
-                            <option value="Kiçik Summativ Qiymətləndirmə I">Kiçik Summativ Qiymətləndirmə I</option>
-                            <option value="Diaqnostik qiymətləndirmə">Diaqnostik qiymətləndirmə</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <label for="id" class="block text-sm font-normal text-gray-700 form-label mb-1">Şagird ID (Son 6 rəqəm)</label>
-                    <div class="relative">
-                        <input type="tel" id="id" required 
-                               class="appearance-none block w-full px-4 py-3 rounded-xl shadow-md form-input-bg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00525d] focus:ring-offset-0 focus-ring-primary text-base transition duration-150 ease-in-out" 
-                               placeholder="Şagirdin ID nömrəsinin son 6 rəqəmi"
-                               pattern="\d{6}" 
-                               maxlength="6" 
-                               inputmode="numeric">
-                    </div>
-                </div>
-                <div>
-                    <button type="submit" id="search-btn" class="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg text-lg font-normal text-white bg-primary-dark bg-primary-dark-override hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00525d] transition duration-300 ease-in-out transform hover:scale-[1.01] hover:shadow-xl">
-                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                        Nəticəni Axtar
-                    </button>
-                </div>
-            </form>
         </div>
 
-        <!-- Nəticə Önizləmə Konteyneri -->
-        <div id="result-container" class="hidden w-full max-w-5xl mt-10 transition-opacity duration-500 opacity-0">
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                <div class="bg-primary-dark bg-primary-dark-override px-6 py-4 border-b border-primary-hover flex flex-wrap justify-between items-center">
-                    <h3 class="text-xl font-normal text-white">Şagirdin Nəticəsinə Baxış</h3>
-                    <div class="flex space-x-3 mt-2 sm:mt-0">
-                        <button onclick="downloadResult()" class="text-sm px-4 py-2 bg-yellow-500 text-gray-900 rounded-lg font-normal hover:bg-yellow-600 transition flex items-center shadow-md transform hover:scale-[1.05]">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                            Yüklə
-                        </button>
-                        <button onclick="resetSearch()" class="text-sm px-4 py-2 bg-gray-600 text-white rounded-lg font-normal hover:bg-gray-700 transition flex items-center shadow-md">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                            Yeni Axtarış
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Şagird Məlumatları Bölməsi (YENİLƏNİB) -->
-                <div id="student-info-section" class="p-6 border-b border-gray-200 dark:border-gray-600 student-info-card hidden">
-                    <div class="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
-                        <!-- Profil İkonu (Loqo ilə dəyişdirildi) -->
-                        <div class="flex-shrink-0">
-                            <img src="https://i.imgur.com/a3FuVV8.png" 
-                                 alt="Okul Logosu" 
-                                 class="w-16 h-16 object-contain rounded-full border-2 logo-border p-1 shadow-lg"
-                                 onerror="this.onerror=null; this.src='https://placehold.co/64x64/ccc/333?text=Logo';" 
-                            />
-                        </div>
-                        <!-- Mətn Məlumatları -->
-                        <div class="text-center sm:text-left flex-1">
-                            <h4 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Şagirdin Adı və Soyadı</h4>
-                            <p id="student-fullname" class="text-2xl font-bold text-gray-900 dark:text-white mt-1">Məlumat tapılmadı</p>
-                            
-                            <div class="flex flex-wrap justify-center sm:justify-start gap-4 mt-3">
-                                <!-- Sinif -->
-                                <div class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
-                                    <span class="text-xs text-gray-500 dark:text-gray-400">Sinif:</span>
-                                    <span id="student-class" class="ml-1 font-bold text-gray-800 dark:text-gray-200">--</span>
-                                </div>
-                                <!-- ID Nömrəsi -->
-                                <div class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
-                                    <span class="text-xs text-gray-500 dark:text-gray-400">ID Nömrəsi:</span>
-                                    <span id="student-id-display" class="ml-1 font-bold text-gray-800 dark:text-gray-200">--</span>
-                                </div>
-                                <!-- İmtahan Adı (YENİ) -->
-                                <div class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
-                                    <span class="text-xs text-gray-500 dark:text-gray-400">İmtahan:</span>
-                                    <span id="exam-name-display" class="ml-1 font-bold text-primary-dark text-primary-dark-override">--</span>
-                                </div>
+        <!-- PANEL 2: Statistika -->
+        <div id="stats-section" class="panel-section hidden">
+            <div class="w-full">
+                <!-- Sistem Haqqında Bölümü -->
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 mb-8">
+                    <h3 class="text-xl font-semibold text-primary-dark dark:text-primary-dark-override mb-4">📋 Sistem Haqqında</h3>
+                    <div class="space-y-4">
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Bu sistem vasitəsilə Azərbaycan Beynəlxalq Maarif Məktəblərinin şagirdləri imtahan nəticələrini onlayn yoxlaya bilərlər.
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 mt-6">
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                <div class="text-2xl font-bold text-primary-dark dark:text-primary-dark-override mb-1" id="total-results-count">Yoxlanılır...</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">Nəticə Sayı</div>
+                            </div>
+                            <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                                <div class="text-2xl font-bold text-primary-dark dark:text-primary-dark-override mb-1" id="total-exams-count">5</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">İmtahan Növü</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="p-2 bg-gray-100 dark:bg-gray-700">
-                    <iframe id="resultFrame" src="" allowfullscreen></iframe>
+                <!-- Statistika Kartları -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <div class="bg-primary-dark bg-primary-dark-override px-6 py-4 border-b border-primary-hover">
+                        <h3 class="text-xl font-normal text-white flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                            Statistika
+                        </h3>
+                    </div>
+                    <div class="p-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <!-- Ümumi Sorğu Sayı -->
+                            <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-primary-dark bg-primary-dark-override p-3 rounded-full">
+                                        <svg class="w-7 h-7 text-white stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Ümumi Sorğu Sayı</p>
+                                <p id="stat-total-queries" class="text-4xl font-bold text-primary-dark dark:text-primary-dark-override mt-2">0</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Google Sheets-dəki ümumi sətir sayı</p>
+                            </div>
+                            
+                            <!-- Populyar İmtahan -->
+                            <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-primary-dark bg-primary-dark-override p-3 rounded-full">
+                                        <svg class="w-7 h-7 text-white stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Populyar İmtahan</p>
+                                <p id="stat-popular-exam" class="text-2xl font-bold text-gray-800 dark:text-gray-200 mt-2 truncate">Yoxlanılır...</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">C sütununda ən çox təkrarlanan</p>
+                            </div>
+                            
+                            <!-- Sinif Sayı -->
+                            <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl border border-gray-200 dark:border-gray-600 shadow-sm">
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="bg-primary-dark bg-primary-dark-override p-3 rounded-full">
+                                        <svg class="w-7 h-7 text-white stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">Sinif Sayı</p>
+                                <p id="stat-class-count" class="text-4xl font-bold text-primary-dark dark:text-primary-dark-override mt-2">14</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">Sabit dəyər</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8 p-6 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                            <h4 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">📊 Məlumat Mənbəyi</h4>
+                            <p class="text-gray-600 dark:text-gray-300 mb-2">
+                                Statistika məlumatları real vaxt rejimində Google Sheets-dən gəlir. Hər yeni sorğu zamanı məlumatlar avtomatik yenilənir.
+                            </p>
+                            <div class="flex items-center text-sm text-gray-500 dark:text-gray-400">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                Son yenilənmə: <span id="last-update-time" class="ml-1 font-medium">Hazırda</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 3: Suallar -->
+        <div id="faq-section" class="panel-section hidden">
+            <div class="w-full">
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                    <div class="bg-primary-dark bg-primary-dark-override px-6 py-4 border-b border-primary-hover">
+                        <h3 class="text-xl font-normal text-white flex items-center">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            Tez-tez verilən suallar
+                        </h3>
+                    </div>
+                    <div class="p-8">
+                        <div class="space-y-4" id="faq-accordion">
+                            <!-- Sual 1 -->
+                            <div class="faq-item">
+                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center" onclick="toggleFAQ(1)">
+                                    <div class="flex items-center">
+                                        <span class="text-lg font-bold faq-number mr-3">1.</span>
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">İmtahan nəticələrimi necə yoxlaya bilərəm?</span>
+                                    </div>
+                                    <svg id="faq-icon-1" class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                                <div id="faq-answer-1" class="faq-answer">
+                                    <div class="p-4 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+                                        Cavab: Sistemdəki formu dolduraraq şagird ID-nizi və imtahan növünüzü seçin, daha sonra "Nəticəni Axtar" düyməsinə klikləyin.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Sual 2 -->
+                            <div class="faq-item">
+                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center" onclick="toggleFAQ(2)">
+                                    <div class="flex items-center">
+                                        <span class="text-lg font-bold faq-number mr-3">2.</span>
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Şagird ID-ni haradan tapa bilərəm?</span>
+                                    </div>
+                                    <svg id="faq-icon-2" class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                                <div id="faq-answer-2" class="faq-answer">
+                                    <div class="p-4 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+                                        Cavab: Şagird ID-nizi məktəb administrasiyasından və ya sinif rəhbərinizdən əldə edə bilərsiniz. ID 6 rəqəmdən ibarətdir.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Sual 3 -->
+                            <div class="faq-item">
+                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center" onclick="toggleFAQ(3)">
+                                    <div class="flex items-center">
+                                        <span class="text-lg font-bold faq-number mr-3">3.</span>
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Nəticələrimi çap edə və ya yükləyə bilərəmmi?</span>
+                                    </div>
+                                    <svg id="faq-icon-3" class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                                <div id="faq-answer-3" class="faq-answer">
+                                    <div class="p-4 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+                                        Cavab: Bəli, nəticə tapıldıqdan sonra "Yüklə" düyməsinə klikləyərək nəticələrinizi PDF formatında yükləyə bilərsiniz.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Sual 4 -->
+                            <div class="faq-item">
+                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center" onclick="toggleFAQ(4)">
+                                    <div class="flex items-center">
+                                        <span class="text-lg font-bold faq-number mr-3">4.</span>
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Əgər nəticə tapılmasa nə etməliyəm?</span>
+                                    </div>
+                                    <svg id="faq-icon-4" class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                                <div id="faq-answer-4" class="faq-answer">
+                                    <div class="p-4 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+                                        Cavab: Əvvəlcə ID nömrənizi və imtahan növünü düzgün daxil etdiyinizdən əmin olun. Problem davam edərsə, məktəb administrasiyası ilə əlaqə saxlayın.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Sual 5 -->
+                            <div class="faq-item">
+                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center" onclick="toggleFAQ(5)">
+                                    <div class="flex items-center">
+                                        <span class="text-lg font-bold faq-number mr-3">5.</span>
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Nəticələr nə vaxt yenilənir?</span>
+                                    </div>
+                                    <svg id="faq-icon-5" class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                                <div id="faq-answer-5" class="faq-answer">
+                                    <div class="p-4 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+                                        Cavab: İmtahan nəticələri müəllimlər tərəfindən daxil edildikdən sonra avtomatik olaraq sistemdə görünür. Adətən imtahandan 3-5 iş günü sonra.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -440,9 +785,23 @@
         const LOG_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzpUvW4OAhTzuunQCjJw2Ldwd2cZyrDCw88pBD9MKB_oLumwwEPqHBT1Vcd8zK6DMDIFA/exec';
         const RESULT_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzX-Q13oP9_XH-gHobQKqjNmzICQa_maDt4cbVNRAsDHkLZRHDgeQw2bqYq0pYSuY38/exec";
         
+        // YENİ: Google Sheets ID
+        const SHEET_ID = "1aqvXhB1Fg4_hM8yFEtDNj0TCB3i66bvCZhg0MnenQQ0";
+        const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+        
         let lastPreviewUrl = "";
         let toastTimeout;
         const TOAST_DURATION = 5000;
+
+        // YENİ: İmtahanlar və nəticə sayı (nümunə dəyərlər)
+        // Bu dəyərlər real drive məlumatları ilə əvəz olunmalıdır
+        const examData = {
+            "Mövzu Sınağı II": 45,
+            "Kiçik Summativ Qiymətləndirmə II": 52,
+            "Mövzu Sınağı I": 38,
+            "Kiçik Summativ Qiymətləndirmə I": 47,
+            "Diaqnostik qiymətləndirmə": 29
+        };
 
         // --- ŞAGİRD MƏLUMAT BAZASI (TAM YENİLƏNİB) ---
         const studentData = {
@@ -635,6 +994,133 @@
 "402185": { name: "Novruzlu Nübar", class: "9B" },
 "569371": { name: "Vəlizadə İnci", class: "9B" },
 };
+
+        // YENİ: Panel göstərici funksiyası
+        function showSection(sectionId) {
+            // Bütün panelləri gizlət
+            document.querySelectorAll('.panel-section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Seçilmiş paneli göstər
+            document.getElementById(sectionId).classList.remove('hidden');
+            
+            // Bütün nav düymələrini deaktiv et
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Aktiv nav düyməsini aktiv et
+            if (sectionId === 'search-section') {
+                document.getElementById('nav-search').classList.add('active');
+            } else if (sectionId === 'stats-section') {
+                document.getElementById('nav-stats').classList.add('active');
+                // Statistika panelinə keçəndə məlumatları yenilə
+                fetchStats();
+                updateExamStats();
+            } else if (sectionId === 'faq-section') {
+                document.getElementById('nav-faq').classList.add('active');
+            }
+        }
+
+        // YENİ: FAQ Accordion Funksiyası
+        function toggleFAQ(id) {
+            const answer = document.getElementById(`faq-answer-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            
+            const isOpen = answer.classList.contains('open');
+            
+            // Əgər bağlı idisə, aç
+            if (!isOpen) {
+                answer.classList.add('open');
+                icon.classList.add('rotate-180');
+            } else {
+                // Əgər açıq idisə, bağla
+                answer.classList.remove('open');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        // YENİ: İmtahan statistikalarını yenilə
+        function updateExamStats() {
+            try {
+                // Ümumi nəticə sayını hesabla
+                let totalResults = 0;
+                Object.values(examData).forEach(count => {
+                    totalResults += count;
+                });
+                
+                // İmtahan sayı
+                const totalExams = Object.keys(examData).length;
+                
+                // Dəyərləri yenilə
+                document.getElementById("total-results-count").textContent = totalResults;
+                document.getElementById("total-exams-count").textContent = totalExams;
+                
+            } catch (error) {
+                console.error("İmtahan statistikaları yenilənərkən xəta:", error);
+                document.getElementById("total-results-count").textContent = "Xəta";
+                document.getElementById("total-exams-count").textContent = "5";
+            }
+        }
+
+        // YENİ: Statistika məlumatlarını Google Sheets-dən çəkən funksiya
+        async function fetchStats() {
+            try {
+                const response = await fetch(SHEET_URL);
+                const text = await response.text();
+                const json = JSON.parse(text.substring(47).slice(0, -2));
+                
+                // Məlumatları çıxart
+                const rows = json.table.rows;
+                
+                // 1. Ümumi sorğu sayı - bütün sətirlərin sayı
+                const totalQueries = rows.length;
+                
+                // 2. Populyar imtahanı tap (C sütunu - index 2)
+                const examCounts = {};
+                let popularExam = "Məlumat yoxdur";
+                let maxCount = 0;
+                
+                rows.forEach(row => {
+                    if (row.c && row.c[2] && row.c[2].v) {
+                        const examName = row.c[2].v;
+                        examCounts[examName] = (examCounts[examName] || 0) + 1;
+                        
+                        if (examCounts[examName] > maxCount) {
+                            maxCount = examCounts[examName];
+                            popularExam = examName;
+                        }
+                    }
+                });
+                
+                // 3. Sinif sayı həmişə 14 (sabit)
+                const classCount = 14;
+                
+                // Statistika göstəricilərini yenilə
+                document.getElementById("stat-total-queries").textContent = totalQueries.toLocaleString();
+                document.getElementById("stat-popular-exam").textContent = popularExam;
+                document.getElementById("stat-class-count").textContent = classCount;
+                
+                // Son yenilənmə vaxtını güncəllə
+                const now = new Date();
+                const timeString = now.toLocaleTimeString('az-AZ', { 
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    second: '2-digit'
+                });
+                document.getElementById("last-update-time").textContent = timeString;
+                
+            } catch (error) {
+                console.error("Statistika yüklənərkən xəta:", error);
+                
+                // Xəta halında standart dəyərləri göstər
+                document.getElementById("stat-total-queries").textContent = "0";
+                document.getElementById("stat-popular-exam").textContent = "Xəta baş verdi";
+                document.getElementById("stat-class-count").textContent = "14";
+                document.getElementById("last-update-time").textContent = "Xəta";
+            }
+        }
 
         function playSuccessTone() {
             try {
@@ -858,6 +1344,9 @@
                         setTimeout(() => resultContainer.classList.remove("opacity-0"), 50);
                         resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
+                        // YENİ: Sorğu tamamlandıqdan sonra statistikanı yenilə
+                        fetchStats();
+
                     } else {
                         showNotification(`"${student.name}" şagirdi üçün "${examText}" nəticəsi tapılmadı.`, "error");
                         studentInfoSection.classList.add("hidden"); // Məlumat tapılmadısa məlumat kartını gizlət
@@ -900,6 +1389,12 @@
         document.addEventListener('DOMContentLoaded', () => {
             setInitialTheme();
             
+            // YENİ: Nav düymələrini aktiv et
+            showSection('search-section');
+            
+            // YENİ: İmtahan statistikalarını yenilə
+            updateExamStats();
+            
             // Sistem teması değiştiğinde otomatik güncelle (sadece kullanıcı tercihi yoksa)
             window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
                 if (!localStorage.getItem('theme')) {
@@ -912,7 +1407,7 @@
             });
             
             setTimeout(() => {
-                showNotification("Kiçik Summativ Qiymətləndirmə-2 və Mövzu Sınağı-2 imtahanlarının nəticələri elan edilmişdir!", 'announcement'); 
+                showNotification("KSQ-2 və MS-2 imtahanlarının nəticələri elan edilmişdir!", 'announcement'); 
             }, 500);
 
             document.addEventListener('keypress', function(e) {
