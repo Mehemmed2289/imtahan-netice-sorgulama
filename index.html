@@ -621,7 +621,7 @@
                     <h3 class="text-xl font-semibold text-primary-dark dark:text-primary-dark-override mb-4">📋 Sistem Haqqında</h3>
                     <div class="space-y-4">
                         <p class="text-gray-700 dark:text-gray-300">
-                            Bu sistem vasitəsilə Azərbaycan Beynəlxalq Maarif Məktəbləri Nəsimi kampusunun şagirdləri imtahan nəticələrini onlayn formada yoxlaya bilərlər.
+                            Bu sistem vasitəsilə Azərbaycan Beynəlxalq Maarif Məktəblərinin şagirdləri imtahan nəticələrini onlayn yoxlaya bilərlər.
                         </p>
                         <div class="grid grid-cols-2 gap-4 mt-6">
                             <!-- Nəticə sayı -->
@@ -629,10 +629,10 @@
                                 <div class="text-2xl font-bold stats-number mb-1" id="total-results-count">579</div>
                                 <div class="text-sm stats-label">Nəticə Sayı</div>
                             </div>
-                            <!-- İmtahan sayı -->
+                            <!-- İmtahan növü sayı -->
                             <div class="stats-card-bg p-4 rounded-lg">
                                 <div class="text-2xl font-bold stats-number mb-1" id="total-exams-count">5</div>
-                                <div class="text-sm stats-label">İmtahan sayı</div>
+                                <div class="text-sm stats-label">İmtahan Növü</div>
                             </div>
                         </div>
                     </div>
@@ -1096,8 +1096,8 @@
         // YENİ: İmtahan statistikalarını yenilə
         function updateExamStats() {
             try {
-                // Nəticə sayını 300 olaraq təyin et
-                const totalResults = 300;
+                // Nəticə sayını 579 olaraq təyin et
+                const totalResults = 579;
                 
                 // İmtahan sayı
                 const totalExams = 5;
@@ -1108,7 +1108,7 @@
                 
             } catch (error) {
                 console.error("İmtahan statistikaları yenilənərkən xəta:", error);
-                document.getElementById("total-results-count").textContent = "300";
+                document.getElementById("total-results-count").textContent = "579";
                 document.getElementById("total-exams-count").textContent = "5";
             }
         }
