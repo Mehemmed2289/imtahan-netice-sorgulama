@@ -1273,27 +1273,12 @@ function toggleFAQ(id) {
         }
         
         function setInitialTheme() {
-            // 1. Əvvəlcə localStorage-dan yadda saxlanılan temaya bax
-            const savedTheme = localStorage.getItem('theme');
+            // HƏR ZAMAN GECƏ MODU - localStorage heç yoxlanmır
+            document.documentElement.classList.add('dark');
+            updateThemeIcons(true);
             
-            let isDarkMode;
-            
-            // 2. Əgər istifadəçi əvvəlcədən seçim etmişsə, onu istifadə et
-            if (savedTheme === 'light' || savedTheme === 'dark') {
-                isDarkMode = savedTheme === 'dark';
-            } else {
-                // 3. İlk dəfə açılışda və ya heç bir seçim yoxdursa, AVTOMATİK olaraq GECƏ MODU
-                isDarkMode = true; // ← BU SƏTR DƏYİŞİLDİ
-            }
-            
-            if (isDarkMode) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-            updateThemeIcons(isDarkMode);
-            // localStorage'a kaydet
-            localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+            // localStorage-u TAMAMEN SİLİRİK - heç bir şey yaddaşda saxlanmır
+            localStorage.removeItem('theme');
         }
 
         function updateThemeIcons(isDark) {
@@ -1308,8 +1293,8 @@ function toggleFAQ(id) {
             document.documentElement.classList.toggle('dark', isDark);
             updateThemeIcons(isDark);
             
-            // Kullanıcı tercihini localStorage'a kaydet
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            // localStorage-a HEÇ NƏ YAZMIRIQ - yaddaşda saxlanmır
+            // localStorage.setItem('theme', isDark ? 'dark' : 'light');
             
             showNotification(isDark ? "Gecə rejimi aktivləşdirildi." : "Gündüz rejimi aktivləşdirildi.", 'info'); 
         }
@@ -1449,8 +1434,8 @@ function toggleFAQ(id) {
             // YENİ: İmtahan statistikalarını yenilə
             updateExamStats();
             
-            // Sistem teması değişikliklerini dinleyen kodu TAMAMEN SİLİN (isteğinize göre)
-            // Bu kod artık sistem temasına bakmayacak
+            // Sistem teması değişikliklerini dinleyen kodu TAMAMEN SİLİN
+            // localStorage heç istifadə edilmir
             
             setTimeout(() => {
                 showNotification("Kiçik Summativ Qiymətləndirmə-2 və Mövzu Sınağı-2 imtahanlarının nəticələri elan edilmişdir!", 'announcement'); 
