@@ -51,11 +51,6 @@
             color: #fcfcfc;
             transition: background-color 0.3s, color 0.3s;
         }
-        
-        /* Logo sabitlendiği için içeriği aşağı itiyoruz */
-        body {
-            padding-top: 115px !important;
-        }
 
         /* Gecə rejimi stilləri */
         .dark body {
@@ -63,14 +58,9 @@
             color: #fcfcfc;
         }
 
-.header-bg {
-    background-image: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-}
-
-
-
+        .dark .header-bg {
+             background-color: #2d3748;
+        }
         
         .dark .text-header-title {
             color: #fcfcfc;
@@ -446,79 +436,12 @@
                 font-size: 1rem;
             }
         }
-/* Qar dənəciklərinin ümumi stili */
-.snowflake {
-  color: #fff;
-  font-size: 1.2em;
-  font-family: Arial, sans-serif;
-  text-shadow: 0 0 5px #000;
-  position: fixed;
-  top: -10%;
-  z-index: 9999;
-  user-select: none;
-  cursor: default;
-  animation-name: snowflakes-fall, snowflakes-shake;
-  animation-duration: 10s, 3s;
-  animation-timing-function: linear, ease-in-out;
-  animation-iteration-count: infinite, infinite;
-  animation-play-state: running, running;
-}
-
-/* Düşmə animasiyası */
-@keyframes snowflakes-fall {
-  0% { top: -10%; }
-  100% { top: 100%; }
-}
-
-/* Yırğalanma animasiyası */
-@keyframes snowflakes-shake {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(80px); }
-}
-
-/* Hər bir qar dənəciyi üçün fərqli gecikmələr (təbiilik üçün) */
-.snowflake:nth-of-type(0) { left: 1%; animation-delay: 0s, 0s; }
-.snowflake:nth-of-type(1) { left: 10%; animation-delay: 1s, 1s; }
-.snowflake:nth-of-type(2) { left: 20%; animation-delay: 6s, 0.5s; }
-.snowflake:nth-of-type(3) { left: 30%; animation-delay: 4s, 2s; }
-.snowflake:nth-of-type(4) { left: 40%; animation-delay: 2s, 2s; }
-.snowflake:nth-of-type(5) { left: 50%; animation-delay: 8s, 3s; }
-.snowflake:nth-of-type(6) { left: 60%; animation-delay: 6s, 2s; }
-.snowflake:nth-of-type(7) { left: 70%; animation-delay: 2.5s, 1s; }
-.snowflake:nth-of-type(8) { left: 80%; animation-delay: 1s, 0s; }
-.snowflake:nth-of-type(9) { left: 90%; animation-delay: 3s, 1.5s; }
-.snowflake:nth-of-type(10) { left: 25%; animation-delay: 2s, 0s; }
-.snowflake:nth-of-type(11) { left: 65%; animation-delay: 4s, 2.5s; }
 
     </style>
 </head>
 <body class="bg-primary-dark">
-    <div class="snowflakes" aria-hidden="true">
-  <div class="snowflake">❅</div>
-  <div class="snowflake" style="color: #afeeee;">❅</div>
-<div class="snowflake">❄</div>
-<div class="snowflake" style="color: #e0ffff;">❆</div>
-
-  <div class="snowflake">❆</div>
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❄</div>
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-  <div class="snowflake">❄</div>
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-  <div class="snowflake">❄</div>
-  <div class="snowflake">❅</div>
-  <div class="snowflake">❆</div>
-</div>
-
     <!-- Başlıq / Header -->
-<header class="bg-white/20 dark:bg-black/30 header-bg shadow-xl fixed top-0 left-0 w-full z-50 backdrop-blur-xl border-b border-white/10">
-
-
-
-
-
+    <header class="bg-white header-bg shadow-xl relative z-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-5">
                 <!-- Loqo -->
@@ -529,17 +452,26 @@
                      onerror="this.onerror=null; this.src='https://placehold.co/80x80/ccc/333?text=Logo';" 
                 />
                 <!-- Məktəb adı -->
-                <div class="flex flex-col items-start leading-tight">
-                    <p class="text-base sm:text-lg font-medium text-tmv">
-                        🇹🇷 🇦🇿 Türkiyə Maarif Vəqfi
-                    </p>
-                    <h1 class="header-title-text font-normal text-gray-900 text-header-title tracking-tight mt-0.5 sm:text-2xl">
-                        Azərbaycan Beynəlxalq Maarif Məktəbləri
-                    </h1>
-                    <div class="mt-1 text-xs sm:text-sm text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 px-3 py-0.5 rounded-full font-medium">
-                        Nəsimi Kampusu
-                    </div>
-                </div>
+<div class="flex flex-col items-start leading-tight">
+    <div class="flex items-center space-x-2 mb-0.5">
+        <div class="flex items-center space-x-1 flex-shrink-0">
+            <img src="https://flagcdn.com/tr.svg" alt="TR" class="w-5 h-auto shadow-sm" style="border: 0.5px solid rgba(0,0,0,0.1); border-radius: 1px;">
+            <img src="https://flagcdn.com/az.svg" alt="AZ" class="w-5 h-auto shadow-sm" style="border: 0.5px solid rgba(0,0,0,0.1); border-radius: 1px;">
+        </div>
+        <span class="text-sm sm:text-base font-medium text-tmv whitespace-nowrap">
+            Türkiyə Maarif Vəqfi
+        </span>
+    </div>
+    
+    <h1 class="header-title-text font-normal text-gray-900 text-header-title tracking-tight sm:text-2xl">
+        Azərbaycan Beynəlxalq Maarif Məktəbləri
+    </h1>
+    
+    <div class="mt-1 text-xs sm:text-sm text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 px-3 py-0.5 rounded-full font-medium">
+        Nəsimi Kampusu
+    </div>
+</div>
+
             </div>
             <!-- Gecə/Gündüz Rejimi Düyməsi -->
             <div class="flex items-center space-x-4">
@@ -1530,5 +1462,4 @@ function toggleFAQ(id) {
         });
     </script>
 </body>
-</html>
-
+    </html>
