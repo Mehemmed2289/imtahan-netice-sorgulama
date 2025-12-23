@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="az">
 <head>
@@ -51,6 +52,11 @@
             color: #fcfcfc;
             transition: background-color 0.3s, color 0.3s;
         }
+        
+        /* Logo sabitlendiği için içeriği aşağı itiyoruz */
+        body {
+            padding-top: 115px !important;
+        }
 
         /* Gecə rejimi stilləri */
         .dark body {
@@ -59,8 +65,10 @@
         }
 
         .dark .header-bg {
-             background-color: #2d3748;
+             background-image: linear-gradient(rgba(26,32,44,0.5), rgba(26,32,44,0.5)), url('https://maarif.edu.az/assets/images/header-bg.png');
         }
+
+
         
         .dark .text-header-title {
             color: #fcfcfc;
@@ -441,7 +449,12 @@
 </head>
 <body class="bg-primary-dark">
     <!-- Başlıq / Header -->
-    <header class="bg-white header-bg shadow-xl relative z-20">
+<header class="bg-white/20 dark:bg-black/30 header-bg shadow-xl fixed top-0 left-0 w-full z-50 backdrop-blur-xl border-b border-white/10">
+
+
+
+
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-5">
                 <!-- Loqo -->
