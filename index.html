@@ -662,6 +662,7 @@
                                 <div class="relative">
                                     <select id="exam" required class="custom-select-icon block w-full px-4 py-3 border border-gray-300 rounded-xl shadow-md form-input-bg focus:outline-none focus:ring-2 focus:ring-[#00525d] focus:ring-offset-0 focus-ring-primary text-base transition duration-150 ease-in-out">
                                         <option value="" disabled selected>İmtahanı seçin</option>
+                                        <option value="Mövzu Sınağı III">Mövzu Sınağı III</option>
                                         <option value="Kiçik Summativ Qiymətləndirmə III">Kiçik Summativ Qiymətləndirmə III</option>         
                                         <option value="Mövzu Sınağı II">Mövzu Sınağı II</option>
                                         <option value="Kiçik Summativ Qiymətləndirmə II">Kiçik Summativ Qiymətləndirmə II</option>
@@ -1257,11 +1258,11 @@ function toggleFAQ(id) {
         // YENİ: İmtahan statistikalarını yenilə
         function updateExamStats() {
             try {
-                // Nəticə sayını 758 olaraq təyin et
-                const totalResults = 758;
+                // Nəticə sayını 775 olaraq təyin et
+                const totalResults = 775;
                 
                 // İmtahan sayı
-                const totalExams = 6;
+                const totalExams = 7;
                 
                 // Dəyərləri yenilə
                 document.getElementById("total-results-count").textContent = totalResults;
@@ -1583,7 +1584,7 @@ function toggleFAQ(id) {
             // localStorage heç istifadə edilmir
             
             setTimeout(() => {
-                showNotification("Kiçik Summativ Qiymətləndirmə-3 imtahanının nəticələri elan edilmişdir!", 'announcement'); 
+                showNotification("Kiçik Summativ Qiymətləndirmə-3 və Mövzu Sınağı-3 imtahanlarının nəticələri elan edilmişdir!", 'announcement'); 
             }, 500);
 
             document.addEventListener('keypress', function(e) {
