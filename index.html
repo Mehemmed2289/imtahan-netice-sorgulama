@@ -446,130 +446,11 @@
                 font-size: 1rem;
             }
         }
-/* Qar dənəciklərinin ümumi stili */
-.snowflake {
-  color: #fff;
-  font-size: 1.2em;
-  font-family: Arial, sans-serif;
-  text-shadow: 0 0 5px #000;
-  position: fixed;
-  top: -10%;
-  z-index: 9999;
-  user-select: none;
-  cursor: default;
-  animation-name: snowflakes-fall, snowflakes-shake;
-  animation-duration: 10s, 3s;
-  animation-timing-function: linear, ease-in-out;
-  animation-iteration-count: infinite, infinite;
-  animation-play-state: running, running;
-}
 
-/* Düşmə animasiyası */
-@keyframes snowflakes-fall {
-  0% { top: -10%; }
-  100% { top: 100%; }
-}
-
-/* Yırğalanma animasiyası */
-@keyframes snowflakes-shake {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(80px); }
-}
-/* Qar dənələrinin əsas stili */
-.snowflake {
-    color: #fff;
-    position: fixed;
-    top: -10%;
-    z-index: 9999;
-    user-select: none;
-    pointer-events: none;
-    /* Düz yağış üçün sadə animasiya */
-    animation-name: snowflakes-fall;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
-
-/* Hər dənəyə fərqli ölçü və DÜZ düşmə sürəti veririk */
-.snowflake:nth-of-type(1) { left: 10%; font-size: 2.5em; animation-duration: 12s; animation-delay: 0s; opacity: 0.8; }
-.snowflake:nth-of-type(2) { left: 20%; font-size: 0.9em; animation-duration: 8s;  animation-delay: 1s; opacity: 0.5; }
-.snowflake:nth-of-type(3) { left: 30%; font-size: 1.8em; animation-duration: 15s; animation-delay: 4s; opacity: 0.7; }
-.snowflake:nth-of-type(4) { left: 40%; font-size: 1.1em; animation-duration: 10s; animation-delay: 2s; opacity: 0.6; }
-.snowflake:nth-of-type(5) { left: 50%; font-size: 2.2em; animation-duration: 18s; animation-delay: 0s; opacity: 0.9; }
-.snowflake:nth-of-type(6) { left: 60%; font-size: 1.3em; animation-duration: 9s;  animation-delay: 3s; opacity: 0.6; }
-.snowflake:nth-of-type(7) { left: 70%; font-size: 2.0em; animation-duration: 14s; animation-delay: 5s; opacity: 0.8; }
-.snowflake:nth-of-type(8) { left: 85%; font-size: 0.8em; animation-duration: 11s; animation-delay: 1s; opacity: 0.5; }
-.snowflake:nth-of-type(9) { left: 95%; font-size: 1.6em; animation-duration: 16s; animation-delay: 0.5s; opacity: 0.7; }
-
-/* Şaquli düz düşmə animasiyası */
-@keyframes snowflakes-fall {
-    0% { top: -10%; transform: translateY(0); }
-    100% { top: 110%; transform: translateY(0); }
-}
-
-/* Gəzən Qar Adamları Konteyneri */
-.snowman-container {
-    position: fixed;
-    bottom: 5px;
-    left: -100px;
-    z-index: 9998;
-    font-size: 45px;
-    pointer-events: none;
-    animation: walk-straight 30s linear infinite;
-}
-
-@keyframes walk-straight {
-    0% { left: -100px; transform: scaleX(1); }
-    48% { transform: scaleX(1); }
-    50% { left: 100%; transform: scaleX(-1); }
-    98% { transform: scaleX(-1); }
-    100% { left: -100px; transform: scaleX(1); }
-}
-
-@keyframes snowflakes-fall {
-    0% { top: -10%; }
-    100% { top: 100%; }
-}
-@keyframes snowflakes-shake {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(50px); }
-}
-
-/* Gəzən Qar Adamı */
-.snowman-container {
-    position: fixed;
-    bottom: 10px;
-    left: -150px; /* Ekranın xaricindən başlayır */
-    z-index: 9998;
-    font-size: 50px;
-    pointer-events: none;
-    animation: walk 25s linear infinite;
-}
-
-@keyframes walk {
-    0% { left: -150px; transform: scaleX(1); }
-    45% { left: 100%; transform: scaleX(1); }
-    50% { left: 100%; transform: scaleX(-1); } /* Geri dönəndə yönünü dəyişir */
-    95% { left: -150px; transform: scaleX(-1); }
-    100% { left: -150px; transform: scaleX(1); }
-}
     </style>
 </head>
 <body class="bg-primary-dark">
-<div class="snowflakes" aria-hidden="true">
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-</div>
 
-<div class="snowman-container">
-    <span title="Yeni iliniz mübarək!">☃️</span>
-</div>
     <!-- Başlıq / Header -->
 <header class="bg-white/20 dark:bg-black/30 header-bg shadow-xl fixed top-0 left-0 w-full z-50 backdrop-blur-xl border-b border-white/10">
 
@@ -1287,7 +1168,7 @@ function toggleFAQ(id) {
                 const rows = json.table.rows;
                 
                 // 1. Ümumi sorğu sayı - bütün sətirlərin sayı
-                const totalQueries = rows.length;
+                const totalQueries = rows.length + 400; // HER SEFERINDE 400 EKLE
                 
                 // 2. Populyar imtahanı tap (C sütunu - index 2)
                 const examCounts = {};
