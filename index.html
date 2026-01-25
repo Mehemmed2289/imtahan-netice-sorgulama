@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="az">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,25 +22,41 @@
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
         /* Əsas rənglər */
-        .bg-primary-dark { background-color: #00525d; }
-        .bg-primary-hover { background-color: #003f47; }
-        .text-primary-dark { color: #00525d; }
-        .border-primary-dark { border-color: #00525d; }
-        .focus-ring-primary { --tw-ring-color: #00525d; }
-        
+        .bg-primary-dark {
+            background-color: #00525d;
+        }
+
+        .bg-primary-hover {
+            background-color: #003f47;
+        }
+
+        .text-primary-dark {
+            color: #00525d;
+        }
+
+        .border-primary-dark {
+            border-color: #00525d;
+        }
+
+        .focus-ring-primary {
+            --tw-ring-color: #00525d;
+        }
+
         /* Ümumi stil */
-        html, body {
+        html,
+        body {
             margin: 0 !important;
             padding: 0 !important;
             width: 100% !important;
             height: 100% !important;
-            box-sizing: border-box; 
+            box-sizing: border-box;
             overflow-x: hidden;
         }
-        
+
         main {
             min-height: calc(100vh - 78px);
         }
@@ -51,7 +68,7 @@
             color: #fcfcfc;
             transition: background-color 0.3s, color 0.3s;
         }
-        
+
         /* Logo sabitlendiği için içeriği aşağı itiyoruz */
         body {
             padding-top: 115px !important;
@@ -63,15 +80,15 @@
             color: #fcfcfc;
         }
 
-.header-bg {
-    background-image: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-}
+        .header-bg {
+            background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
 
 
 
-        
+
         .dark .text-header-title {
             color: #fcfcfc;
         }
@@ -92,17 +109,17 @@
         .dark .form-label {
             color: #fcfcfc;
         }
-        
+
         .dark .form-input-bg {
-             background-color: #4a5568;
-             color: #fcfcfc;
-             border-color: #4a5568;
+            background-color: #4a5568;
+            color: #fcfcfc;
+            border-color: #4a5568;
         }
 
         .dark .text-primary-dark-override {
             color: #4fd1c5;
         }
-        
+
         .dark .bg-primary-dark-override {
             background-color: #4fd1c5;
         }
@@ -114,7 +131,7 @@
         .dark #toast-content {
             background-color: #2d3748;
         }
-        
+
         .logo-border {
             border-color: #00adba;
         }
@@ -125,7 +142,7 @@
 
         #resultFrame {
             width: 100%;
-            height: 85vh; 
+            height: 85vh;
             border: none;
             border-radius: 0.75rem;
         }
@@ -139,15 +156,15 @@
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
-            padding-right: 2.5rem; 
+            padding-right: 2.5rem;
         }
 
         .form-input-bg {
-             background-color: #fcfcfc;
-             color: #1f2937;
-             border: 1px solid #d1d5db;
+            background-color: #fcfcfc;
+            color: #1f2937;
+            border: 1px solid #d1d5db;
         }
-        
+
         .dark .custom-select-icon {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%231f2937'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath%3e%3c/svg%3e");
         }
@@ -155,7 +172,7 @@
         #toast {
             z-index: 100;
         }
-        
+
         /* Başlıq Mətninin Ölçüsü */
         .header-title-text {
             font-size: 1.15rem;
@@ -169,19 +186,25 @@
 
         /* Yüklənmə Animasiyası üçün CSS */
         @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .loading-logo {
             animation: spin 1.5s linear infinite;
         }
-        
+
         /* Şagird Məlumat Kartı Stili - YENİLƏNİB */
         .student-info-card {
             background: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
             font-family: 'Poppins', sans-serif;
         }
+
         .dark .student-info-card {
             background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
         }
@@ -194,8 +217,10 @@
         }
 
         /* ÇERÇEVELER İÇİN: Gündüz modunda beyaz yazı, Gece modunda beyaz yazı */
-        .student-info-card .bg-white span, /* Çerçeve içindeki yazılar */
-        .student-info-card .text-xs,       /* "Sinif:", "ID Nömrəsi:" gibi küçük yazılar */
+        .student-info-card .bg-white span,
+        /* Çerçeve içindeki yazılar */
+        .student-info-card .text-xs,
+        /* "Sinif:", "ID Nömrəsi:" gibi küçük yazılar */
         .student-info-card #student-class,
         .student-info-card #student-id-display,
         .student-info-card #exam-name-display {
@@ -206,6 +231,7 @@
         .student-info-card #student-fullname {
             color: #00525d !important;
         }
+
         .dark .student-info-card #student-fullname {
             color: #ffffff !important;
         }
@@ -214,10 +240,11 @@
         .student-info-card h4 {
             color: #4a5568 !important;
         }
+
         .dark .student-info-card h4 {
             color: #cbd5e0 !important;
         }
-        
+
         /* Gecə modu: ağ yazılar */
         .dark .student-info-card h4,
         .dark .student-info-card #student-fullname,
@@ -262,32 +289,34 @@
             transition: all 0.3s ease;
             border: 2px solid transparent;
         }
-        
+
         /* Gündüz modu: mavi daire içinde gece düğmesi */
         .theme-toggle-circle {
             background-color: #00525d;
         }
-        
+
         /* Gece modu: beyaz daire içinde gündüz düğmesi */
         .dark .theme-toggle-circle {
             background-color: #ffffff;
         }
-        
+
         .theme-toggle-circle:hover {
             transform: scale(1.1);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
-        
+
         .dark .theme-toggle-circle:hover {
             box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
         }
-        
+
         /* AY İKONU RENGİ - SON HALİ */
-        #moon-icon, #sun-icon {
+        #moon-icon,
+        #sun-icon {
             stroke: #ffffff !important;
         }
-        
-        .dark #moon-icon, .dark #sun-icon {
+
+        .dark #moon-icon,
+        .dark #sun-icon {
             stroke: #00525d !important;
         }
 
@@ -301,32 +330,32 @@
             align-items: center;
             gap: 0.5rem;
         }
-        
+
         .nav-btn.active {
             background-color: #00525d;
             color: white;
         }
-        
+
         .dark .nav-btn.active {
             background-color: #4fd1c5;
             color: #00525d;
         }
-        
+
         .nav-btn:not(.active) {
             background-color: #f3f4f6;
             color: #4b5563;
         }
-        
+
         .dark .nav-btn:not(.active) {
             background-color: #374151;
             color: #d1d5db;
         }
-        
+
         .nav-btn:hover:not(.active) {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
-        
+
         .dark .nav-btn:hover:not(.active) {
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
@@ -335,23 +364,29 @@
         .faq-item {
             border-bottom: 1px solid #e5e7eb;
         }
+
         .dark .faq-item {
             border-bottom: 1px solid #4b5563;
         }
+
         .faq-question {
             transition: all 0.3s ease;
         }
+
         .faq-question:hover {
             background-color: #f9fafb;
         }
+
         .dark .faq-question:hover {
             background-color: #374151;
         }
+
         .faq-answer {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease;
         }
+
         .faq-answer.open {
             max-height: 500px;
         }
@@ -360,7 +395,7 @@
         .panel-section {
             display: block;
         }
-        
+
         .panel-section.hidden {
             display: none;
         }
@@ -369,7 +404,7 @@
         .stat-icon {
             color: #00525d;
         }
-        
+
         .dark .stat-icon {
             color: #ffffff;
         }
@@ -378,7 +413,7 @@
         .faq-number {
             color: #00525d;
         }
-        
+
         .dark .faq-number {
             color: #ffffff;
         }
@@ -388,7 +423,7 @@
             background-color: #ffffff !important;
             border: 1px solid #00525d !important;
         }
-        
+
         .dark .stats-card-bg {
             background-color: #00525d !important;
             border: 1px solid #ffffff !important;
@@ -398,7 +433,7 @@
         .stats-number {
             color: #00525d !important;
         }
-        
+
         .dark .stats-number {
             color: #ffffff !important;
         }
@@ -407,7 +442,7 @@
         .stats-label {
             color: #4b5563 !important;
         }
-        
+
         .dark .stats-label {
             color: #ffffff !important;
         }
@@ -416,7 +451,7 @@
         .stats-text {
             color: #4b5563 !important;
         }
-        
+
         .dark .stats-text {
             color: #ffffff !important;
         }
@@ -425,7 +460,7 @@
         .stats-card-title {
             color: #4b5563 !important;
         }
-        
+
         .dark .stats-card-title {
             color: #ffffff !important;
         }
@@ -441,18 +476,65 @@
             -webkit-box-orient: vertical;
         }
 
-        @media (max-width: 768px) {
-            .popular-exam-text {
-                font-size: 1rem;
+        /* YENİ: Səhv girişi üçün titrəmə animasiyası */
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-5px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(5px);
             }
         }
 
+        .shake {
+            animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+        }
+
+        /* YENİ: Validasiya işarəsi */
+        .validation-icon {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .validation-icon.show {
+            opacity: 1;
+        }
+
+        /* YENİ: Saat stilləri */
+        #live-time {
+            font-variant-numeric: tabular-nums;
+            text-shadow: 0 0 10px rgba(0, 82, 93, 0.1);
+        }
+
+        .dark #live-time {
+            text-shadow: 0 0 10px rgba(79, 209, 197, 0.2);
+        }
     </style>
 </head>
+
 <body class="bg-primary-dark">
 
     <!-- Başlıq / Header -->
-<header class="bg-white/20 dark:bg-black/30 header-bg shadow-xl fixed top-0 left-0 w-full z-50 backdrop-blur-xl border-b border-white/10">
+    <header
+        class="bg-white/20 dark:bg-black/30 header-bg shadow-xl fixed top-0 left-0 w-full z-50 backdrop-blur-xl border-b border-white/10">
 
 
 
@@ -461,39 +543,60 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-5">
                 <!-- Loqo -->
-                <img id="school-logo" 
-                     src="https://i.imgur.com/a3FuVV8.png" 
-                     alt="Okul Logosu" 
-                     class="w-20 h-20 object-contain rounded-full border-2 logo-border p-1"
-                     onerror="this.onerror=null; this.src='https://placehold.co/80x80/ccc/333?text=Logo';" 
-                />
+                <img id="school-logo" src="https://i.imgur.com/a3FuVV8.png" alt="Okul Logosu"
+                    class="w-20 h-20 object-contain rounded-full border-2 logo-border p-1"
+                    onerror="this.onerror=null; this.src='https://placehold.co/80x80/ccc/333?text=Logo';" />
                 <!-- Məktəb adı -->
-<div class="flex flex-col items-start leading-tight">
-    <div class="flex items-center space-x-2 mb-0.5">
-        <div class="flex items-center space-x-1 flex-shrink-0">
-            <img src="https://flagcdn.com/tr.svg" alt="TR" class="w-5 h-auto shadow-sm" style="border: 0.5px solid rgba(0,0,0,0.1); border-radius: 1px;">
-            <img src="https://flagcdn.com/az.svg" alt="AZ" class="w-5 h-auto shadow-sm" style="border: 0.5px solid rgba(0,0,0,0.1); border-radius: 1px;">
-        </div>
-        <span class="text-sm sm:text-base font-medium text-tmv whitespace-nowrap">
-            Türkiyə Maarif Vəqfi
-        </span>
-    </div>
-    
-    <h1 class="header-title-text font-normal text-gray-900 text-header-title tracking-tight sm:text-2xl">
-        Azərbaycan Beynəlxalq Maarif Məktəbləri
-    </h1>
-    
-    <div class="mt-1 text-xs sm:text-sm text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 px-3 py-0.5 rounded-full font-medium">
-        Nəsimi Kampusu
-    </div>
-</div>
+                <div class="flex flex-col items-start leading-tight">
+                    <div class="flex items-center space-x-2 mb-0.5">
+                        <div class="flex items-center space-x-1 flex-shrink-0">
+                            <img src="https://flagcdn.com/tr.svg" alt="TR" class="w-5 h-auto shadow-sm"
+                                style="border: 0.5px solid rgba(0,0,0,0.1); border-radius: 1px;">
+                            <img src="https://flagcdn.com/az.svg" alt="AZ" class="w-5 h-auto shadow-sm"
+                                style="border: 0.5px solid rgba(0,0,0,0.1); border-radius: 1px;">
+                        </div>
+                        <span class="text-sm sm:text-base font-medium text-tmv whitespace-nowrap">
+                            Türkiyə Maarif Vəqfi
+                        </span>
+                    </div>
+
+                    <h1
+                        class="header-title-text font-normal text-gray-900 text-header-title tracking-tight sm:text-2xl">
+                        Azərbaycan Beynəlxalq Maarif Məktəbləri
+                    </h1>
+
+                    <div
+                        class="mt-1 text-xs sm:text-sm text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 px-3 py-0.5 rounded-full font-medium">
+                        Nəsimi Kampusu
+                    </div>
+                </div>
             </div>
-            <!-- Gecə/Gündüz Rejimi Düyməsi -->
-            <div class="flex items-center space-x-4">
+            <!-- Saat və Gecə/Gündüz Rejimi -->
+            <div class="flex items-center space-x-3 sm:space-x-6">
+                <div class="flex flex-col items-end leading-none">
+                    <div id="live-time" class="text-sm sm:text-lg font-bold text-white tabular-nums">
+                        00:00:00
+                    </div>
+                    <div id="live-date"
+                        class="text-[8px] sm:text-[10px] uppercase font-semibold text-white/80 mt-0.5 whitespace-nowrap">
+                        ---
+                    </div>
+                </div>
                 <div class="theme-toggle-circle">
-                    <button id="theme-toggle" onclick="toggleTheme()" class="p-2 rounded-full text-gray-700 dark:text-gray-200 transition duration-300">
-                        <svg id="sun-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                        <svg id="moon-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    <button id="theme-toggle" onclick="toggleTheme()"
+                        class="p-2 rounded-full text-gray-700 dark:text-gray-200 transition duration-300">
+                        <svg id="sun-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                            </path>
+                        </svg>
+                        <svg id="moon-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                            </path>
+                        </svg>
                     </button>
                 </div>
             </div>
@@ -504,20 +607,28 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div class="flex flex-wrap gap-4 justify-center">
             <button id="nav-search" class="nav-btn active" onclick="showSection('search-section')">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                 </svg>
                 Nəticə Axtarışı
             </button>
             <button id="nav-stats" class="nav-btn" onclick="showSection('stats-section')">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                    </path>
                 </svg>
                 Statistika
             </button>
             <button id="nav-faq" class="nav-btn" onclick="showSection('faq-section')">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                    </path>
                 </svg>
                 Suallar
             </button>
@@ -531,42 +642,67 @@
             <div class="flex flex-col lg:flex-row items-start justify-center gap-8">
                 <!-- Nəticə Axtarış Kartı -->
                 <div class="w-full lg:w-1/2">
-                    <div id="query-card" class="w-full bg-white p-8 sm:p-12 rounded-2xl shadow-3xl transition-all duration-300">
+                    <div id="query-card"
+                        class="w-full bg-white p-8 sm:p-12 rounded-2xl shadow-3xl transition-all duration-300">
                         <div class="text-center mb-8">
-                            <h2 class="text-xl sm:text-2xl font-semibold text-primary-dark text-primary-dark-override mb-3 leading-tight">
+                            <h2
+                                class="text-xl sm:text-2xl font-semibold text-primary-dark text-primary-dark-override mb-3 leading-tight">
                                 İmtahan Nəticələri Yoxlama Sisteminə Xoş Gəlmisiniz!
                             </h2>
                         </div>
                         <form id="resultForm" class="space-y-7" onsubmit="event.preventDefault(); viewResult();">
                             <div>
-                                <label for="exam" class="block text-sm font-normal text-gray-700 form-label mb-1">İmtahanı Seçin</label>
+                                <label for="exam"
+                                    class="block text-sm font-normal text-gray-700 form-label mb-1">İmtahanı
+                                    Seçin</label>
                                 <div class="relative">
-                                    <select id="exam" required class="custom-select-icon block w-full px-4 py-3 border border-gray-300 rounded-xl shadow-md form-input-bg focus:outline-none focus:ring-2 focus:ring-[#00525d] focus:ring-offset-0 focus-ring-primary text-base transition duration-150 ease-in-out">
+                                    <select id="exam" required
+                                        class="custom-select-icon block w-full px-4 py-3 border border-gray-300 rounded-xl shadow-md form-input-bg focus:outline-none focus:ring-2 focus:ring-[#00525d] focus:ring-offset-0 focus-ring-primary text-base transition duration-150 ease-in-out">
                                         <option value="" disabled selected>İmtahanı seçin</option>
                                         <option value="Mövzu Sınağı III">Mövzu Sınağı III</option>
-                                        <option value="Kiçik Summativ Qiymətləndirmə III">Kiçik Summativ Qiymətləndirmə III</option>         
+                                        <option value="Kiçik Summativ Qiymətləndirmə III">Kiçik Summativ Qiymətləndirmə
+                                            III</option>
                                         <option value="Mövzu Sınağı II">Mövzu Sınağı II</option>
-                                        <option value="Kiçik Summativ Qiymətləndirmə II">Kiçik Summativ Qiymətləndirmə II</option>
+                                        <option value="Kiçik Summativ Qiymətləndirmə II">Kiçik Summativ Qiymətləndirmə
+                                            II</option>
                                         <option value="Mövzu Sınağı I">Mövzu Sınağı I</option>
-                                        <option value="Kiçik Summativ Qiymətləndirmə I">Kiçik Summativ Qiymətləndirmə I</option>
+                                        <option value="Kiçik Summativ Qiymətləndirmə I">Kiçik Summativ Qiymətləndirmə I
+                                        </option>
                                         <option value="Diaqnostik qiymətləndirmə">Diaqnostik qiymətləndirmə</option>
                                     </select>
                                 </div>
                             </div>
                             <div>
-                                <label for="id" class="block text-sm font-normal text-gray-700 form-label mb-1">Şagird ID nömrəsinin son 6 rəqəmi</label>
+                                <label for="id" class="block text-sm font-normal text-gray-700 form-label mb-1">Şagird
+                                    ID nömrəsinin son 6 rəqəmi</label>
                                 <div class="relative">
-                                    <input type="tel" id="id" required 
-                                           class="appearance-none block w-full px-4 py-3 rounded-xl shadow-md form-input-bg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00525d] focus:ring-offset-0 focus-ring-primary text-base transition duration-150 ease-in-out" 
-                                           placeholder="XXXXXX"
-                                           pattern="\d{6}" 
-                                           maxlength="6" 
-                                           inputmode="numeric">
+                                    <input type="tel" id="id" required
+                                        class="appearance-none block w-full px-4 py-3 rounded-xl shadow-md form-input-bg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00525d] focus:ring-offset-0 focus-ring-primary text-base transition duration-150 ease-in-out"
+                                        placeholder="XXXXXX" pattern="\d{6}" maxlength="6" inputmode="numeric"
+                                        oninput="validateID(this)">
+                                    <div id="id-validation" class="validation-icon">
+                                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+                                                d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="remember-me"
+                                    class="w-4 h-4 text-primary-dark border-gray-300 rounded focus:ring-primary">
+                                <label for="remember-me" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">ID
+                                    nömrəni yadda saxla</label>
+                            </div>
                             <div>
-                                <button type="submit" id="search-btn" class="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg text-lg font-normal text-white bg-primary-dark bg-primary-dark-override hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00525d] transition duration-300 ease-in-out transform hover:scale-[1.01] hover:shadow-xl">
-                                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                <button type="submit" id="search-btn"
+                                    class="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg text-lg font-normal text-white bg-primary-dark bg-primary-dark-override hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00525d] transition duration-300 ease-in-out transform hover:scale-[1.01] hover:shadow-xl">
+                                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
                                     Nəticəni Axtar
                                 </button>
                             </div>
@@ -575,52 +711,74 @@
 
                     <!-- Nəticə Önizləmə Konteyneri -->
                     <div id="result-container" class="hidden w-full mt-8 transition-opacity duration-500 opacity-0">
-                        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                            <div class="bg-primary-dark bg-primary-dark-override px-6 py-4 border-b border-primary-hover flex flex-wrap justify-between items-center">
+                        <div
+                            class="bg-white dark:bg-gray-800 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                            <div
+                                class="bg-primary-dark bg-primary-dark-override px-6 py-4 border-b border-primary-hover flex flex-wrap justify-between items-center">
                                 <h3 class="text-xl font-normal text-white">Şagirdin Nəticəsinə Baxış</h3>
                                 <div class="flex space-x-3 mt-2 sm:mt-0">
-                                    <button onclick="downloadResult()" class="text-sm px-4 py-2 bg-yellow-500 text-gray-900 rounded-lg font-normal hover:bg-yellow-600 transition flex items-center shadow-md transform hover:scale-[1.05]">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                    <button onclick="downloadResult()"
+                                        class="text-sm px-4 py-2 bg-yellow-500 text-gray-900 rounded-lg font-normal hover:bg-yellow-600 transition flex items-center shadow-md transform hover:scale-[1.05]">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4">
+                                            </path>
+                                        </svg>
                                         Yüklə
                                     </button>
-                                    <button onclick="resetSearch()" class="text-sm px-4 py-2 bg-gray-600 text-white rounded-lg font-normal hover:bg-gray-700 transition flex items-center shadow-md">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                                    <button onclick="resetSearch()"
+                                        class="text-sm px-4 py-2 bg-gray-600 text-white rounded-lg font-normal hover:bg-gray-700 transition flex items-center shadow-md">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                                        </svg>
                                         Yeni Axtarış
                                     </button>
                                 </div>
                             </div>
 
                             <!-- Şagird Məlumatları Bölməsi -->
-                            <div id="student-info-section" class="p-6 border-b border-gray-200 dark:border-gray-600 student-info-card hidden">
-                                <div class="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
+                            <div id="student-info-section"
+                                class="p-6 border-b border-gray-200 dark:border-gray-600 student-info-card hidden">
+                                <div
+                                    class="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
                                     <!-- Profil İkonu -->
                                     <div class="flex-shrink-0">
-                                        <img src="https://i.imgur.com/a3FuVV8.png" 
-                                             alt="Okul Logosu" 
-                                             class="w-16 h-16 object-contain rounded-full border-2 logo-border p-1 shadow-lg"
-                                             onerror="this.onerror=null; this.src='https://placehold.co/64x64/ccc/333?text=Logo';" 
-                                        />
+                                        <img src="https://i.imgur.com/a3FuVV8.png" alt="Okul Logosu"
+                                            class="w-16 h-16 object-contain rounded-full border-2 logo-border p-1 shadow-lg"
+                                            onerror="this.onerror=null; this.src='https://placehold.co/64x64/ccc/333?text=Logo';" />
                                     </div>
                                     <!-- Mətn Məlumatları -->
                                     <div class="text-center sm:text-left flex-1">
-                                        <h4 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Şagirdin Adı və Soyadı</h4>
-                                        <p id="student-fullname" class="text-2xl font-bold text-gray-900 dark:text-white mt-1">Məlumat tapılmadı</p>
-                                        
+                                        <h4
+                                            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                                            Şagirdin Adı və Soyadı</h4>
+                                        <p id="student-fullname"
+                                            class="text-2xl font-bold text-gray-900 dark:text-white mt-1">Məlumat
+                                            tapılmadı</p>
+
                                         <div class="flex flex-wrap justify-center sm:justify-start gap-4 mt-3">
                                             <!-- Sinif -->
-                                            <div class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
+                                            <div
+                                                class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
                                                 <span class="text-xs text-gray-500 dark:text-gray-400">Sinif:</span>
-                                                <span id="student-class" class="ml-1 font-bold text-gray-800 dark:text-gray-200">--</span>
+                                                <span id="student-class"
+                                                    class="ml-1 font-bold text-gray-800 dark:text-gray-200">--</span>
                                             </div>
                                             <!-- ID Nömrəsi -->
-                                            <div class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
-                                                <span class="text-xs text-gray-500 dark:text-gray-400">ID Nömrəsi:</span>
-                                                <span id="student-id-display" class="ml-1 font-bold text-gray-800 dark:text-gray-200">--</span>
+                                            <div
+                                                class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
+                                                <span class="text-xs text-gray-500 dark:text-gray-400">ID
+                                                    Nömrəsi:</span>
+                                                <span id="student-id-display"
+                                                    class="ml-1 font-bold text-gray-800 dark:text-gray-200">--</span>
                                             </div>
                                             <!-- İmtahan Adı -->
-                                            <div class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
+                                            <div
+                                                class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
                                                 <span class="text-xs text-gray-500 dark:text-gray-400">İmtahan:</span>
-                                                <span id="exam-name-display" class="ml-1 font-bold text-primary-dark text-primary-dark-override">--</span>
+                                                <span id="exam-name-display"
+                                                    class="ml-1 font-bold text-primary-dark text-primary-dark-override">--</span>
                                             </div>
                                         </div>
                                     </div>
@@ -633,7 +791,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Burada artıq Sistem Haqqında bölməsi yoxdur -->
                 <!-- O bölmə indi Statistika panelindədir -->
             </div>
@@ -643,11 +801,13 @@
         <div id="stats-section" class="panel-section hidden">
             <div class="w-full">
                 <!-- Sistem Haqqında Bölümü (Axtarış bölməsindən buraya köçürüldü) -->
-                <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 mb-8">
+                <div
+                    class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 mb-8">
                     <h3 class="text-xl font-semibold text-primary-dark dark:text-white mb-4">📋 Sistem Haqqında</h3>
                     <div class="space-y-4">
                         <p class="text-gray-700 dark:text-gray-300">
-                            Bu sistem vasitəsilə Azərbaycan Beynəlxalq Maarif Məktəbləri Nəsimi kampusu şagirdlərinin imtahan nəticələrini istənilən zaman onlayn qaydada yoxlamaq mümkündür.
+                            Bu sistem vasitəsilə Azərbaycan Beynəlxalq Maarif Məktəbləri Nəsimi kampusu şagirdlərinin
+                            imtahan nəticələrini istənilən zaman onlayn qaydada yoxlamaq mümkündür.
                         </p>
                         <div class="grid grid-cols-2 gap-4 mt-6">
                             <!-- Nəticə sayı -->
@@ -665,11 +825,15 @@
                 </div>
 
                 <!-- Statistika Kartları -->
-                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 overflow-hidden">
                     <div class="bg-primary-dark bg-primary-dark-override px-6 py-4 border-b border-primary-hover">
                         <h3 class="text-xl font-normal text-white flex items-center">
-                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                </path>
                             </svg>
                             Statistika
                         </h3>
@@ -679,36 +843,52 @@
                             <!-- Ümumi Sorğu Sayı -->
                             <div class="stats-card-bg p-6 rounded-xl shadow-sm">
                                 <div class="flex items-center justify-between mb-4">
-                                    <div class="bg-primary-dark dark:bg-white p-3 rounded-full border border-primary-dark dark:border-white">
-                                        <svg class="w-7 h-7 text-white dark:text-primary-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                                    <div
+                                        class="bg-primary-dark dark:bg-white p-3 rounded-full border border-primary-dark dark:border-white">
+                                        <svg class="w-7 h-7 text-white dark:text-primary-dark" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                            </path>
                                         </svg>
                                     </div>
                                 </div>
                                 <p class="text-sm stats-card-title font-medium mb-2">Ümumi Sorğu Sayı</p>
                                 <p id="stat-total-queries" class="text-4xl font-bold stats-number">0</p>
                             </div>
-                            
+
                             <!-- Populyar İmtahan -->
                             <div class="stats-card-bg p-6 rounded-xl shadow-sm">
                                 <div class="flex items-center justify-between mb-4">
-                                    <div class="bg-primary-dark dark:bg-white p-3 rounded-full border border-primary-dark dark:border-white">
-                                        <svg class="w-7 h-7 text-white dark:text-primary-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+                                    <div
+                                        class="bg-primary-dark dark:bg-white p-3 rounded-full border border-primary-dark dark:border-white">
+                                        <svg class="w-7 h-7 text-white dark:text-primary-dark" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
                                         </svg>
                                     </div>
                                 </div>
                                 <p class="text-sm stats-card-title font-medium mb-2">Populyar İmtahan</p>
-                                <p id="stat-popular-exam" class="popular-exam-text font-bold stats-number">Yoxlanılır...</p>
+                                <p id="stat-popular-exam" class="popular-exam-text font-bold stats-number">Yoxlanılır...
+                                </p>
                             </div>
-                            
+
                             <!-- Sinif Sayı -->
                             <div class="stats-card-bg p-6 rounded-xl shadow-sm">
                                 <div class="flex items-center justify-between mb-4">
-                                    <div class="bg-primary-dark dark:bg-white p-3 rounded-full border border-primary-dark dark:border-white">
-                                        <svg class="w-7 h-7 text-white dark:text-primary-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                                    <div
+                                        class="bg-primary-dark dark:bg-white p-3 rounded-full border border-primary-dark dark:border-white">
+                                        <svg class="w-7 h-7 text-white dark:text-primary-dark" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
+                                            </path>
                                         </svg>
                                     </div>
                                 </div>
@@ -724,11 +904,15 @@
         <!-- PANEL 3: Suallar -->
         <div id="faq-section" class="panel-section hidden">
             <div class="w-full">
-                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 overflow-hidden">
                     <div class="bg-primary-dark bg-primary-dark-override px-6 py-4 border-b border-primary-hover">
                         <h3 class="text-xl font-normal text-white flex items-center">
-                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                                </path>
                             </svg>
                             Tez-tez verilən suallar
                         </h3>
@@ -737,102 +921,137 @@
                         <div class="space-y-4" id="faq-accordion">
                             <!-- Sual 1 -->
                             <div class="faq-item">
-                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center" onclick="toggleFAQ(1)">
+                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center"
+                                    onclick="toggleFAQ(1)">
                                     <div class="flex items-center">
                                         <span class="text-lg font-bold faq-number mr-3">1.</span>
-                                        <span class="text-gray-800 dark:text-gray-200 font-medium">İmtahan nəticələrimi necə yoxlaya bilərəm?</span>
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">İmtahan nəticələrimi
+                                            necə yoxlaya bilərəm?</span>
                                     </div>
-                                    <svg id="faq-icon-1" class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    <svg id="faq-icon-1"
+                                        class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                 </div>
                                 <div id="faq-answer-1" class="faq-answer">
                                     <div class="p-4 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300">
-                                        Cavab: Sistemdəki formu dolduraraq imtahan növünü seçmək, şagirdin ID nömrəsinin son 6 rəqəmini daxil etmək, daha sonra "Nəticəni Axtar" düyməsinə klikləmək kifayətdir.
+                                        Cavab: Sistemdəki formu dolduraraq imtahan növünü seçmək, şagirdin ID nömrəsinin
+                                        son 6 rəqəmini daxil etmək, daha sonra "Nəticəni Axtar" düyməsinə klikləmək
+                                        kifayətdir.
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Sual 2 -->
                             <div class="faq-item">
-                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center" onclick="toggleFAQ(2)">
+                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center"
+                                    onclick="toggleFAQ(2)">
                                     <div class="flex items-center">
                                         <span class="text-lg font-bold faq-number mr-3">2.</span>
-                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Şagird ID-ni haradan tapa bilərəm?</span>
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Şagird ID-ni haradan
+                                            tapa bilərəm?</span>
                                     </div>
-                                    <svg id="faq-icon-2" class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    <svg id="faq-icon-2"
+                                        class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                 </div>
                                 <div id="faq-answer-2" class="faq-answer">
                                     <div class="p-4 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300">
-                                        Cavab: Şagird ID imtahana buraxılış vərəqində qeyd olunan 9 rəqəmli ədəddir. Nəticəni yoxlamaq üçün ID nömrənin son 6 rəqəmini qeyd etmək kifayətdir.
+                                        Cavab: Şagird ID imtahana buraxılış vərəqində qeyd olunan 9 rəqəmli ədəddir.
+                                        Nəticəni yoxlamaq üçün ID nömrənin son 6 rəqəmini qeyd etmək kifayətdir.
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Sual 3 -->
                             <div class="faq-item">
-                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center" onclick="toggleFAQ(3)">
+                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center"
+                                    onclick="toggleFAQ(3)">
                                     <div class="flex items-center">
                                         <span class="text-lg font-bold faq-number mr-3">3.</span>
-                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Nəticələrimi çap edə və ya yükləyə bilərəmmi?</span>
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Nəticələrimi çap edə
+                                            və ya yükləyə bilərəmmi?</span>
                                     </div>
-                                    <svg id="faq-icon-3" class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    <svg id="faq-icon-3"
+                                        class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                 </div>
                                 <div id="faq-answer-3" class="faq-answer">
                                     <div class="p-4 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300">
-                                        Cavab: Bəli, nəticə tapıldıqdan sonra "Yüklə" düyməsinə klikləyərək nəticələrinizi yükləyə bilərsiniz.
+                                        Cavab: Bəli, nəticə tapıldıqdan sonra "Yüklə" düyməsinə klikləyərək
+                                        nəticələrinizi yükləyə bilərsiniz.
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Sual 4 -->
                             <div class="faq-item">
-                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center" onclick="toggleFAQ(4)">
+                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center"
+                                    onclick="toggleFAQ(4)">
                                     <div class="flex items-center">
                                         <span class="text-lg font-bold faq-number mr-3">4.</span>
-                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Əgər nəticə tapılmasa nə etməliyəm?</span>
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Əgər nəticə tapılmasa
+                                            nə etməliyəm?</span>
                                     </div>
-                                    <svg id="faq-icon-4" class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    <svg id="faq-icon-4"
+                                        class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
                                     </svg>
                                 </div>
                                 <div id="faq-answer-4" class="faq-answer">
                                     <div class="p-4 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300">
-                                        Cavab: Əvvəlcə ID nömrənizi və imtahan növünü düzgün daxil etdiyinizdən əmin olun. Problem davam edərsə, məktəb ilə əlaqə saxlayın.
+                                        Cavab: Əvvəlcə ID nömrənizi və imtahan növünü düzgün daxil etdiyinizdən əmin
+                                        olun. Problem davam edərsə, məktəb ilə əlaqə saxlayın.
                                     </div>
                                 </div>
                             </div>
-                            
-<!-- Sual 5 -->
-<div class="faq-item">
-    <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center" onclick="toggleFAQ(5)">
-        <div class="flex items-center">
-            <span class="text-lg font-bold faq-number mr-3">5.</span>
-            <span class="text-gray-800 dark:text-gray-200 font-medium">Hansı imtahanların nəticələri elan edilmişdir?</span>
-        </div>
-        <svg id="faq-icon-5" class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-        </svg>
-    </div>
-    <div id="faq-answer-5" class="faq-answer">
-        <div class="p-4 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300">
-            Cavab:<br>
-            <ul class="list-disc pl-5 mt-2 space-y-1">
-                <li>Diaqnostik qiymətləndirmə (III-IX siniflər)</li>
-                <li>Kiçik Summativ Qiymətləndirmə-1 (III-VIII siniflər)</li>
-                <li>Mövzu Sınağı-1 (IX sinif)</li>
-                <li>Kiçik Summativ Qiymətləndirmə-2 (III-VIII siniflər)</li>
-                <li>Mövzu Sınağı-2 (IX sinif)</li>
-                <li>Kiçik Summativ Qiymətləndirmə-3 (III-VIII siniflər)</li>
-                <li>Mövzu Sınağı-3 (IX sinif)</li>
-            </ul>
-        </div>
-    </div>
-</div>
+
+                            <!-- Sual 5 -->
+                            <div class="faq-item">
+                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center"
+                                    onclick="toggleFAQ(5)">
+                                    <div class="flex items-center">
+                                        <span class="text-lg font-bold faq-number mr-3">5.</span>
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Hansı imtahanların
+                                            nəticələri elan edilmişdir?</span>
+                                    </div>
+                                    <svg id="faq-icon-5"
+                                        class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300"
+                                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </div>
+                                <div id="faq-answer-5" class="faq-answer">
+                                    <div class="p-4 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300">
+                                        Cavab:<br>
+                                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                                            <li>Diaqnostik qiymətləndirmə (III-IX siniflər)</li>
+                                            <li>Kiçik Summativ Qiymətləndirmə-1 (III-VIII siniflər)</li>
+                                            <li>Mövzu Sınağı-1 (IX sinif)</li>
+                                            <li>Kiçik Summativ Qiymətləndirmə-2 (III-VIII siniflər)</li>
+                                            <li>Mövzu Sınağı-2 (IX sinif)</li>
+                                            <li>Kiçik Summativ Qiymətləndirmə-3 (III-VIII siniflər)</li>
+                                            <li>Mövzu Sınağı-3 (IX sinif)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -842,12 +1061,9 @@
         <!-- Overlay -->
         <div id="overlay" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden flex-col items-center justify-center">
             <div class="relative flex items-center justify-center">
-                <img id="loading-logo" 
-                     src="https://i.imgur.com/d0hRX2m.png" 
-                     alt="Yüklənir" 
-                     class="w-28 h-28 object-contain"
-                     onerror="this.onerror=null; this.src='https://placehold.co/112x112/ccc/333?text=Logo';" 
-                />
+                <img id="loading-logo" src="https://i.imgur.com/d0hRX2m.png" alt="Yüklənir"
+                    class="w-28 h-28 object-contain"
+                    onerror="this.onerror=null; this.src='https://placehold.co/112x112/ccc/333?text=Logo';" />
             </div>
             <p class="text-white mt-8 text-xl font-normal animate-pulse">Nəticə axtarılır...</p>
             <p class="text-gray-300 mt-2 text-sm font-light">Səbriniz üçün təşəkkür edirik!</p>
@@ -855,27 +1071,33 @@
 
         <!-- Toast Bildiriş -->
         <div id="toast" class="fixed top-5 right-5 z-100 hidden transform transition-all duration-500 translate-x-full">
-            <div id="toast-content" class="bg-white border-l-8 p-4 rounded-xl shadow-2xl flex items-start min-w-[350px]">
+            <div id="toast-content"
+                class="bg-white border-l-8 p-4 rounded-xl shadow-2xl flex items-start min-w-[350px]">
                 <div id="toast-icon" class="mr-3 mt-0.5"></div>
                 <div class="flex-1">
                     <p id="toast-message" class="text-base font-normal text-gray-800"></p>
                 </div>
-                <button onclick="hideToast()" class="ml-4 p-1 rounded-full text-red-600 hover:bg-red-100 transition duration-150">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                <button onclick="hideToast()"
+                    class="ml-4 p-1 rounded-full text-red-600 hover:bg-red-100 transition duration-150">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
                 </button>
             </div>
         </div>
+
     </main>
 
     <script>
         // API URL-ləri
         const LOG_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzpUvW4OAhTzuunQCjJw2Ldwd2cZyrDCw88pBD9MKB_oLumwwEPqHBT1Vcd8zK6DMDIFA/exec';
         const RESULT_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzX-Q13oP9_XH-gHobQKqjNmzICQa_maDt4cbVNRAsDHkLZRHDgeQw2bqYq0pYSuY38/exec";
-        
+
         // YENİ: Google Sheets ID
         const SHEET_ID = "1aqvXhB1Fg4_hM8yFEtDNj0TCB3i66bvCZhg0MnenQQ0";
         const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
-        
+
         let lastPreviewUrl = "";
         let toastTimeout;
         const TOAST_DURATION = 5000;
@@ -892,196 +1114,196 @@
 
         // --- ŞAGİRD MƏLUMAT BAZASI (TAM YENİLƏNİB) ---
         const studentData = {
-             "759382": { name: "Allahverdi İsmail", class: "3A" },
-"103947": { name: "Cəfərzadə Suada", class: "3A" },
-"582016": { name: "Xankişiyev Fateh", class: "3A" },
-"490273": { name: "İmanlı Əli", class: "3A" },
-"816495": { name: "İsmayılova Aişə", class: "3A" },
-"237580": { name: "Qarayeva Zəhra", class: "3A" },
-"905621": { name: "Məmmədli Cəlal", class: "3A" },
-"374812": { name: "Məmmədzadə Əslinur", class: "3A" },
-"618493": { name: "Məmmədzadə Mahinur", class: "3A" },
-"250179": { name: "Muradlı Ömər", class: "3A" },
-"491036": { name: "Musayev Cəsur", class: "3A" },
-"807251": { name: "Novruzlu Xədicə", class: "3A" },
-"364720": { name: "Rəhimli Rüstəm", class: "3A" },
-"593481": { name: "Sərdar Mehdi", class: "3A" },
-"178409": { name: "Əliyeva İnci", class: "3B" },
-"640523": { name: "Əliyeva Şəms", class: "3B" },
-"927184": { name: "Əlizadə Hümeyra", class: "3B" },
-"301576": { name: "Əmirov Ali", class: "3B" },
-"485092": { name: "Hüseynzadə Enes", class: "3B" },
-"762401": { name: "Karauçoğlu Alparslan", class: "3B" },
-"819630": { name: "Kayıkçıoğlu Ömər Aras", class: "3B" },
-"253914": { name: "Kazım Mətin", class: "3B" },
-"470185": { name: "Qayıblı Altay", class: "3B" },
-"694328": { name: "Məmmədzadə Əhməd", class: "3B" },
-"135970": { name: "Musavi Həsən", class: "3B" },
-"280461": { name: "Səfərli Onur", class: "3B" },
-"956327": { name: "Vəli Dəfnə", class: "3B" },
-"473198": { name: "Bektaşoğlu Zelihanur", class: "4A" },
-"612495": { name: "Əliyeva Nəzakət", class: "4A" },
-"804716": { name: "Əsədli Zeynəb", class: "4A" },
-"159208": { name: "Hüseynzadə Melissa", class: "4A" },
-"347590": { name: "Xankişiyeva İlayda", class: "4A" },
-"580246": { name: "İbrahimov Ziya", class: "4A" },
-"921637": { name: "Quluzadə Murad", class: "4A" },
-"430785": { name: "Məmmədova Aylin", class: "4A" },
-"267914": { name: "Musavi Nüman", class: "4A" },
-"805316": { name: "Musayev Adil", class: "4A" },
-"149027": { name: "Musa-zadə Ayxan", class: "4A" },
-"376582": { name: "Vəlizadə İsmayıl", class: "4A" },
-"602493": { name: "Ağayeva Fidan", class: "4B" },
-"250398": { name: "Bayramov Uğur", class: "4B" },
-"683147": { name: "Göyüşzadə Ayan", class: "4B" },
-"107582": { name: "İbrahimova İpək", class: "4B" },
-"592364": { name: "Qəmbərli Zəhra", class: "4B" },
-"834197": { name: "Mehdizadə Aysel", class: "4B" },
-"461205": { name: "Məmmədli Emil", class: "4B" },
-"708913": { name: "Musayev Fateh", class: "4B" },
-"129684": { name: "Nəsirov Nihad", class: "4B" },
-"354270": { name: "Zülfüqarlı Hicran", class: "4B" },
-"619485": { name: "Ağazadə Zəhra", class: "5A" },
-"914076": { name: "Baxışlı Suada", class: "5A" },
-"872031": { name: "Çokal Elif Ece", class: "5A" },
-"240597": { name: "Əbdülsalamova Müjgan", class: "5A" },
-"503618": { name: "Əliyeva Banu", class: "5A" },
-"976204": { name: "İmamzadə Xədicə", class: "5A" },
-"381695": { name: "İsmayılov Çingiz", class: "5A" },
-"147082": { name: "Karataş Elif Nur", class: "5A" },
-"650493": { name: "Qasımova Aylin", class: "5A" },
-"812736": { name: "Mehdizadə Fidan", class: "5A" },
-"295041": { name: "Məmmədova Gülay", class: "5A" },
-"470286": { name: "Məsimli Zeynəb", class: "5A" },
-"598314": { name: "Musayev Fateh", class: "5A" },
-"136975": { name: "Müslüm Məryəm", class: "5A" },
-"407218": { name: "Novruzlu Kadir", class: "5A" },
-"695082": { name: "Rəsulov Camal", class: "5A" },
-"230491": { name: "Sadmaliyeva Sara", class: "5A" },
-"872604": { name: "Salmanov Ömər", class: "5A" },
-"510738": { name: "Zəbiyeva Nilufər", class: "5A" },
-"349216": { name: "Ağayev Ömər", class: "5B" },
-"706529": { name: "Əhmədli Rəşid", class: "5B" },
-"481032": { name: "Əhmədov Nazim", class: "5B" },
-"920674": { name: "Əlizadə Amal", class: "5B" },
-"157843": { name: "Hüseynli Şəbnəm", class: "5B" },
-"634281": { name: "Hüseynli Zeynəb", class: "5B" },
-"805392": { name: "Işılak Esmanur", class: "5B" },
-"241067": { name: "İsgəndərli İlayda", class: "5B" },
-"578193": { name: "İsmayılov Məhyəddin", class: "5B" },
-"902746": { name: "Məmmədli Aida", class: "5B" },
-"316085": { name: "Məmmədova Məryəm", class: "5B" },
-"479320": { name: "Məmmədzadə Aminə", class: "5B" },
-"684195": { name: "Namazlı Zəhra", class: "5B" },           
-"150287": { name: "Osmanlı İnci", class: "5B" },
-"397614": { name: "Paşa Mahmud", class: "5B" },
-"521083": { name: "Rayi Məryəm Nilufər", class: "5B" },
-"860472": { name: "Surxayzadə Xədicə", class: "5B" },
-"273915": { name: "Yunus İnci", class: "5B" },
-"409678": { name: "Calalova Məryəm", class: "6A" },
-"735124": { name: "Cəfərzadə Atilla", class: "6A" },
-"608391": { name: "Əhmədli Məryəm", class: "6A" },
-"254087": { name: "Əlizadə Aylin", class: "6A" },
-"491630": { name: "İmamzadə Fatimə", class: "6A" },
-"876204": { name: "İsmayıllı Xalid", class: "6A" },
-"312597": { name: "Kazımlı Ceyla", class: "6A" },
-"540286": { name: "Qənbərli Turqut", class: "6A" },
-"729814": { name: "Manaflı Murad", class: "6A" },
-"183057": { name: "Məmmədli Fərhad", class: "6A" },
-"406291": { name: "Məmmədli Hüseyn", class: "6A" },
-"598327": { name: "Muradova Selcan", class: "6A" },
-"274068": { name: "Nağıyev Səyyad", class: "6A" },
-"815439": { name: "Osmanova Məryəm", class: "6A" },
-"103952": { name: "Sərdarlı Xədicə", class: "6A" },
-"642708": { name: "Sultanov Fateh", class: "6A" },
-"379164": { name: "Təhməzli Mete", class: "6A" },
-"587231": { name: "Vəliyeva Zəhra", class: "6A" },
-"920648": { name: "Alqayeva Kamilə", class: "6B" },
-"136785": { name: "Eyvazova Məryəm", class: "6B" },
-"472509": { name: "Əhmədov Azər", class: "6B" },
-"603821": { name: "Əlirzayev Həsən", class: "6B" },
-"815430": { name: "Əsgərova Aylin", class: "6B" },
-"257694": { name: "Həşimli Zeynəb", class: "6B" },
-"490862": { name: "Hüseynli Mustafa", class: "6B" },
-"731045": { name: "Hüseynli Zəhra", class: "6B" },
-"602198": { name: "İsmayıl Ayxan", class: "6B" },
-"149376": { name: "İsmayılzadə Mikayıl", class: "6B" },
-"384072": { name: "Mahmudlu Altay", class: "6B" },
-"526194": { name: "Mahmudova Zümrüd", class: "6B" },
-"871430": { name: "Məmmədli Ağa", class: "6B" },
-"310685": { name: "Məmmədova Ləman", class: "6B" },
-"479206": { name: "Mustafa Muhammed", class: "6B" },
-"695314": { name: "Namazlı Banu", class: "6B" },
-"123987": { name: "Paşazadə Xədicə", class: "6B" },
-"450678": { name: "Şahmərdanov Ramal", class: "6B" },
-"807145": { name: "Ağayeva Əzizə", class: "7A" },
-"256093": { name: "Əliyev Yusif", class: "7A" },
-"591427": { name: "Göyüşlü Aişə", class: "7A" },
-"843210": { name: "Hüseynli Əminə", class: "7A" },
-"317596": { name: "İbrahimov Ömər", class: "7A" },
-"482063": { name: "Karahan Taha", class: "7A" },
-"748931": { name: "Qədməliyev Murad", class: "7A" },
-"709815": { name: "Qəhrəmanova Qəmər", class: "7A" },
-"154320": { name: "Quliyev Asim", class: "7A" },
-"386297": { name: "Quliyev Ömər", class: "7A" },
-"620514": { name: "Quluzadə Əhməd", class: "7A" },
-"971430": { name: "Məmmədzadə Mustafa", class: "7A" },
-"245086": { name: "Namazlı Zeynəb", class: "7A" },
-"617903": { name: "Paşazadə Mədinə", class: "7A" },
-"507312": { name: "Rəfiyeva Zəhra", class: "7A" },
-"863429": { name: "Abdullayev İskəndər", class: "7B" },
-"139506": { name: "Cenikoğlu Kaan", class: "7B" },
-"472380": { name: "Eyvazova Zəhra", class: "7B" },
-"685214": { name: "Əsədullazadə Nur", class: "7B" },
-"518406": { name: "Həşimli Şəms", class: "7B" },
-"792631": { name: "Quluzadə İlkin", class: "7B" },
-"346205": { name: "Mehdizadə Ramin", class: "7B" },
-"479130": { name: "Nəsibli Mehriban", class: "7B" },
-"608492": { name: "Nəsibov Elcan", class: "7B" },
-"251078": { name: "Novruzov Rövşən", class: "7B" },
-"824516": { name: "Təhməzli Xəlil", class: "7B" },
-"130497": { name: "Vəlizadə Ayxan", class: "7B" },
-"472861": { name: "Zalov Levent", class: "7B" },
-"748206": { name: "Calalova Zeynəb", class: "8A" },
-"509382": { name: "Hüseynli Fatimə", class: "8A" },
-"872054": { name: "Kərimli Fərhad", class: "8A" },
-"263491": { name: "Quluzadə Nəzrin", class: "8A" },
-"504318": { name: "Manaflı Mürsəl", class: "8A" },
-"739205": { name: "Məmmədov Tuncay", class: "8A" },
-"182046": { name: "Məmmədzadə Nuriyyə", class: "8A" },
-"467193": { name: "Nəsibli Cavanşir", class: "8A" },
-"407905": { name: "Nəzirli Uğur", class: "8A" },
-"591628": { name: "Novruzlu Elcan", class: "8A" },
-"274093": { name: "Cahangirov Gündüz", class: "8B" },
-"315208": { name: "Əkbərli Ömər", class: "8B" },
-"487362": { name: "Əlizadə Cavad", class: "8B" },
-"703914": { name: "Hacıyev Cavanşir", class: "8B" },
-"156024": { name: "Həsənova Nurgül", class: "8B" },
-"392186": { name: "Hüseynli Leyla", class: "8B" },
-"625470": { name: "İsmayılzadə Sədi", class: "8B" },
-"981236": { name: "Quluzadə Safiyyə", class: "8B" },
-"247053": { name: "Məlikova Aylin", class: "8B" },
-"513698": { name: "Musayeva Fidan", class: "8B" },
-"867402": { name: "Sultanova Fatimə", class: "8B" },
-"139587": { name: "Şərifova Şərqiyyə", class: "8B" },
-"470291": { name: "Abbaslı Ruqəyya", class: "9A" },
-"681304": { name: "Əhmədli Gülbahar", class: "9A" },
-"205473": { name: "Əlizadə Pakizə", class: "9A" },
-"529140": { name: "Əmirov Amin", class: "9A" },
-"790631": { name: "Hüseynli Dəniz", class: "9A" },
-"341276": { name: "İbrahimov Ayaz", class: "9A" },
-"456920": { name: "Mahmudov Xalid", class: "9A" },
-"603782": { name: "Məmmədzadə Kürsüm", class: "9A" },
-"218497": { name: "Mütəllimli Selcan", class: "9A" },
-"574130": { name: "Zalova Süheyla", class: "9A" },
-"802964": { name: "Zeynalov İbrahim", class: "9A" },
-"371805": { name: "Əsgərova Ləman", class: "9B" },
-"490263": { name: "Məmmədxanlı Aslan", class: "9B" },
-"678124": { name: "Məmmədova Nuray", class: "9B" },
-"135079": { name: "Murad Renat", class: "9B" },
-"402185": { name: "Novruzlu Nübar", class: "9B" },
-"569371": { name: "Vəlizadə İnci", class: "9B" },
-};
+            "759382": { name: "Allahverdi İsmail", class: "3A" },
+            "103947": { name: "Cəfərzadə Suada", class: "3A" },
+            "582016": { name: "Xankişiyev Fateh", class: "3A" },
+            "490273": { name: "İmanlı Əli", class: "3A" },
+            "816495": { name: "İsmayılova Aişə", class: "3A" },
+            "237580": { name: "Qarayeva Zəhra", class: "3A" },
+            "905621": { name: "Məmmədli Cəlal", class: "3A" },
+            "374812": { name: "Məmmədzadə Əslinur", class: "3A" },
+            "618493": { name: "Məmmədzadə Mahinur", class: "3A" },
+            "250179": { name: "Muradlı Ömər", class: "3A" },
+            "491036": { name: "Musayev Cəsur", class: "3A" },
+            "807251": { name: "Novruzlu Xədicə", class: "3A" },
+            "364720": { name: "Rəhimli Rüstəm", class: "3A" },
+            "593481": { name: "Sərdar Mehdi", class: "3A" },
+            "178409": { name: "Əliyeva İnci", class: "3B" },
+            "640523": { name: "Əliyeva Şəms", class: "3B" },
+            "927184": { name: "Əlizadə Hümeyra", class: "3B" },
+            "301576": { name: "Əmirov Ali", class: "3B" },
+            "485092": { name: "Hüseynzadə Enes", class: "3B" },
+            "762401": { name: "Karauçoğlu Alparslan", class: "3B" },
+            "819630": { name: "Kayıkçıoğlu Ömər Aras", class: "3B" },
+            "253914": { name: "Kazım Mətin", class: "3B" },
+            "470185": { name: "Qayıblı Altay", class: "3B" },
+            "694328": { name: "Məmmədzadə Əhməd", class: "3B" },
+            "135970": { name: "Musavi Həsən", class: "3B" },
+            "280461": { name: "Səfərli Onur", class: "3B" },
+            "956327": { name: "Vəli Dəfnə", class: "3B" },
+            "473198": { name: "Bektaşoğlu Zelihanur", class: "4A" },
+            "612495": { name: "Əliyeva Nəzakət", class: "4A" },
+            "804716": { name: "Əsədli Zeynəb", class: "4A" },
+            "159208": { name: "Hüseynzadə Melissa", class: "4A" },
+            "347590": { name: "Xankişiyeva İlayda", class: "4A" },
+            "580246": { name: "İbrahimov Ziya", class: "4A" },
+            "921637": { name: "Quluzadə Murad", class: "4A" },
+            "430785": { name: "Məmmədova Aylin", class: "4A" },
+            "267914": { name: "Musavi Nüman", class: "4A" },
+            "805316": { name: "Musayev Adil", class: "4A" },
+            "149027": { name: "Musa-zadə Ayxan", class: "4A" },
+            "376582": { name: "Vəlizadə İsmayıl", class: "4A" },
+            "602493": { name: "Ağayeva Fidan", class: "4B" },
+            "250398": { name: "Bayramov Uğur", class: "4B" },
+            "683147": { name: "Göyüşzadə Ayan", class: "4B" },
+            "107582": { name: "İbrahimova İpək", class: "4B" },
+            "592364": { name: "Qəmbərli Zəhra", class: "4B" },
+            "834197": { name: "Mehdizadə Aysel", class: "4B" },
+            "461205": { name: "Məmmədli Emil", class: "4B" },
+            "708913": { name: "Musayev Fateh", class: "4B" },
+            "129684": { name: "Nəsirov Nihad", class: "4B" },
+            "354270": { name: "Zülfüqarlı Hicran", class: "4B" },
+            "619485": { name: "Ağazadə Zəhra", class: "5A" },
+            "914076": { name: "Baxışlı Suada", class: "5A" },
+            "872031": { name: "Çokal Elif Ece", class: "5A" },
+            "240597": { name: "Əbdülsalamova Müjgan", class: "5A" },
+            "503618": { name: "Əliyeva Banu", class: "5A" },
+            "976204": { name: "İmamzadə Xədicə", class: "5A" },
+            "381695": { name: "İsmayılov Çingiz", class: "5A" },
+            "147082": { name: "Karataş Elif Nur", class: "5A" },
+            "650493": { name: "Qasımova Aylin", class: "5A" },
+            "812736": { name: "Mehdizadə Fidan", class: "5A" },
+            "295041": { name: "Məmmədova Gülay", class: "5A" },
+            "470286": { name: "Məsimli Zeynəb", class: "5A" },
+            "598314": { name: "Musayev Fateh", class: "5A" },
+            "136975": { name: "Müslüm Məryəm", class: "5A" },
+            "407218": { name: "Novruzlu Kadir", class: "5A" },
+            "695082": { name: "Rəsulov Camal", class: "5A" },
+            "230491": { name: "Sadmaliyeva Sara", class: "5A" },
+            "872604": { name: "Salmanov Ömər", class: "5A" },
+            "510738": { name: "Zəbiyeva Nilufər", class: "5A" },
+            "349216": { name: "Ağayev Ömər", class: "5B" },
+            "706529": { name: "Əhmədli Rəşid", class: "5B" },
+            "481032": { name: "Əhmədov Nazim", class: "5B" },
+            "920674": { name: "Əlizadə Amal", class: "5B" },
+            "157843": { name: "Hüseynli Şəbnəm", class: "5B" },
+            "634281": { name: "Hüseynli Zeynəb", class: "5B" },
+            "805392": { name: "Işılak Esmanur", class: "5B" },
+            "241067": { name: "İsgəndərli İlayda", class: "5B" },
+            "578193": { name: "İsmayılov Məhyəddin", class: "5B" },
+            "902746": { name: "Məmmədli Aida", class: "5B" },
+            "316085": { name: "Məmmədova Məryəm", class: "5B" },
+            "479320": { name: "Məmmədzadə Aminə", class: "5B" },
+            "684195": { name: "Namazlı Zəhra", class: "5B" },
+            "150287": { name: "Osmanlı İnci", class: "5B" },
+            "397614": { name: "Paşa Mahmud", class: "5B" },
+            "521083": { name: "Rayi Məryəm Nilufər", class: "5B" },
+            "860472": { name: "Surxayzadə Xədicə", class: "5B" },
+            "273915": { name: "Yunus İnci", class: "5B" },
+            "409678": { name: "Calalova Məryəm", class: "6A" },
+            "735124": { name: "Cəfərzadə Atilla", class: "6A" },
+            "608391": { name: "Əhmədli Məryəm", class: "6A" },
+            "254087": { name: "Əlizadə Aylin", class: "6A" },
+            "491630": { name: "İmamzadə Fatimə", class: "6A" },
+            "876204": { name: "İsmayıllı Xalid", class: "6A" },
+            "312597": { name: "Kazımlı Ceyla", class: "6A" },
+            "540286": { name: "Qənbərli Turqut", class: "6A" },
+            "729814": { name: "Manaflı Murad", class: "6A" },
+            "183057": { name: "Məmmədli Fərhad", class: "6A" },
+            "406291": { name: "Məmmədli Hüseyn", class: "6A" },
+            "598327": { name: "Muradova Selcan", class: "6A" },
+            "274068": { name: "Nağıyev Səyyad", class: "6A" },
+            "815439": { name: "Osmanova Məryəm", class: "6A" },
+            "103952": { name: "Sərdarlı Xədicə", class: "6A" },
+            "642708": { name: "Sultanov Fateh", class: "6A" },
+            "379164": { name: "Təhməzli Mete", class: "6A" },
+            "587231": { name: "Vəliyeva Zəhra", class: "6A" },
+            "920648": { name: "Alqayeva Kamilə", class: "6B" },
+            "136785": { name: "Eyvazova Məryəm", class: "6B" },
+            "472509": { name: "Əhmədov Azər", class: "6B" },
+            "603821": { name: "Əlirzayev Həsən", class: "6B" },
+            "815430": { name: "Əsgərova Aylin", class: "6B" },
+            "257694": { name: "Həşimli Zeynəb", class: "6B" },
+            "490862": { name: "Hüseynli Mustafa", class: "6B" },
+            "731045": { name: "Hüseynli Zəhra", class: "6B" },
+            "602198": { name: "İsmayıl Ayxan", class: "6B" },
+            "149376": { name: "İsmayılzadə Mikayıl", class: "6B" },
+            "384072": { name: "Mahmudlu Altay", class: "6B" },
+            "526194": { name: "Mahmudova Zümrüd", class: "6B" },
+            "871430": { name: "Məmmədli Ağa", class: "6B" },
+            "310685": { name: "Məmmədova Ləman", class: "6B" },
+            "479206": { name: "Mustafa Muhammed", class: "6B" },
+            "695314": { name: "Namazlı Banu", class: "6B" },
+            "123987": { name: "Paşazadə Xədicə", class: "6B" },
+            "450678": { name: "Şahmərdanov Ramal", class: "6B" },
+            "807145": { name: "Ağayeva Əzizə", class: "7A" },
+            "256093": { name: "Əliyev Yusif", class: "7A" },
+            "591427": { name: "Göyüşlü Aişə", class: "7A" },
+            "843210": { name: "Hüseynli Əminə", class: "7A" },
+            "317596": { name: "İbrahimov Ömər", class: "7A" },
+            "482063": { name: "Karahan Taha", class: "7A" },
+            "748931": { name: "Qədməliyev Murad", class: "7A" },
+            "709815": { name: "Qəhrəmanova Qəmər", class: "7A" },
+            "154320": { name: "Quliyev Asim", class: "7A" },
+            "386297": { name: "Quliyev Ömər", class: "7A" },
+            "620514": { name: "Quluzadə Əhməd", class: "7A" },
+            "971430": { name: "Məmmədzadə Mustafa", class: "7A" },
+            "245086": { name: "Namazlı Zeynəb", class: "7A" },
+            "617903": { name: "Paşazadə Mədinə", class: "7A" },
+            "507312": { name: "Rəfiyeva Zəhra", class: "7A" },
+            "863429": { name: "Abdullayev İskəndər", class: "7B" },
+            "139506": { name: "Cenikoğlu Kaan", class: "7B" },
+            "472380": { name: "Eyvazova Zəhra", class: "7B" },
+            "685214": { name: "Əsədullazadə Nur", class: "7B" },
+            "518406": { name: "Həşimli Şəms", class: "7B" },
+            "792631": { name: "Quluzadə İlkin", class: "7B" },
+            "346205": { name: "Mehdizadə Ramin", class: "7B" },
+            "479130": { name: "Nəsibli Mehriban", class: "7B" },
+            "608492": { name: "Nəsibov Elcan", class: "7B" },
+            "251078": { name: "Novruzov Rövşən", class: "7B" },
+            "824516": { name: "Təhməzli Xəlil", class: "7B" },
+            "130497": { name: "Vəlizadə Ayxan", class: "7B" },
+            "472861": { name: "Zalov Levent", class: "7B" },
+            "748206": { name: "Calalova Zeynəb", class: "8A" },
+            "509382": { name: "Hüseynli Fatimə", class: "8A" },
+            "872054": { name: "Kərimli Fərhad", class: "8A" },
+            "263491": { name: "Quluzadə Nəzrin", class: "8A" },
+            "504318": { name: "Manaflı Mürsəl", class: "8A" },
+            "739205": { name: "Məmmədov Tuncay", class: "8A" },
+            "182046": { name: "Məmmədzadə Nuriyyə", class: "8A" },
+            "467193": { name: "Nəsibli Cavanşir", class: "8A" },
+            "407905": { name: "Nəzirli Uğur", class: "8A" },
+            "591628": { name: "Novruzlu Elcan", class: "8A" },
+            "274093": { name: "Cahangirov Gündüz", class: "8B" },
+            "315208": { name: "Əkbərli Ömər", class: "8B" },
+            "487362": { name: "Əlizadə Cavad", class: "8B" },
+            "703914": { name: "Hacıyev Cavanşir", class: "8B" },
+            "156024": { name: "Həsənova Nurgül", class: "8B" },
+            "392186": { name: "Hüseynli Leyla", class: "8B" },
+            "625470": { name: "İsmayılzadə Sədi", class: "8B" },
+            "981236": { name: "Quluzadə Safiyyə", class: "8B" },
+            "247053": { name: "Məlikova Aylin", class: "8B" },
+            "513698": { name: "Musayeva Fidan", class: "8B" },
+            "867402": { name: "Sultanova Fatimə", class: "8B" },
+            "139587": { name: "Şərifova Şərqiyyə", class: "8B" },
+            "470291": { name: "Abbaslı Ruqəyya", class: "9A" },
+            "681304": { name: "Əhmədli Gülbahar", class: "9A" },
+            "205473": { name: "Əlizadə Pakizə", class: "9A" },
+            "529140": { name: "Əmirov Amin", class: "9A" },
+            "790631": { name: "Hüseynli Dəniz", class: "9A" },
+            "341276": { name: "İbrahimov Ayaz", class: "9A" },
+            "456920": { name: "Mahmudov Xalid", class: "9A" },
+            "603782": { name: "Məmmədzadə Kürsüm", class: "9A" },
+            "218497": { name: "Mütəllimli Selcan", class: "9A" },
+            "574130": { name: "Zalova Süheyla", class: "9A" },
+            "802964": { name: "Zeynalov İbrahim", class: "9A" },
+            "371805": { name: "Əsgərova Ləman", class: "9B" },
+            "490263": { name: "Məmmədxanlı Aslan", class: "9B" },
+            "678124": { name: "Məmmədova Nuray", class: "9B" },
+            "135079": { name: "Murad Renat", class: "9B" },
+            "402185": { name: "Novruzlu Nübar", class: "9B" },
+            "569371": { name: "Vəlizadə İnci", class: "9B" },
+        };
 
         // YENİ: Panel göstərici funksiyası
         function showSection(sectionId) {
@@ -1089,15 +1311,15 @@
             document.querySelectorAll('.panel-section').forEach(section => {
                 section.classList.add('hidden');
             });
-            
+
             // Seçilmiş paneli göstər
             document.getElementById(sectionId).classList.remove('hidden');
-            
+
             // Bütün nav düymələrini deaktiv et
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            
+
             // Aktiv nav düyməsini aktiv et
             if (sectionId === 'search-section') {
                 document.getElementById('nav-search').classList.add('active');
@@ -1111,50 +1333,60 @@
             }
         }
 
-// YENİ: FAQ Accordion Funksiyası (TƏKMİLLƏŞDİRİLMİŞ)
-function toggleFAQ(id) {
-    const answer = document.getElementById(`faq-answer-${id}`);
-    const icon = document.getElementById(`faq-icon-${id}`);
-    
-    const isOpen = answer.classList.contains('open');
-    
-    // Bütün digər sualları bağla
-    document.querySelectorAll('.faq-answer').forEach(item => {
-        if (item.id !== `faq-answer-${id}`) {
-            item.classList.remove('open');
-            const otherId = item.id.split('-')[2];
-            const otherIcon = document.getElementById(`faq-icon-${otherId}`);
-            if (otherIcon) otherIcon.classList.remove('rotate-180');
+        // YENİ: FAQ Accordion Funksiyası (TƏKMİLLƏŞDİRİLMİŞ)
+        function toggleFAQ(id) {
+            const answer = document.getElementById(`faq-answer-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+
+            const isOpen = answer.classList.contains('open');
+
+            // Bütün digər sualları bağla
+            document.querySelectorAll('.faq-answer').forEach(item => {
+                if (item.id !== `faq-answer-${id}`) {
+                    item.classList.remove('open');
+                    const otherId = item.id.split('-')[2];
+                    const otherIcon = document.getElementById(`faq-icon-${otherId}`);
+                    if (otherIcon) otherIcon.classList.remove('rotate-180');
+                }
+            });
+
+            // Əgər bağlı idisə, aç
+            if (!isOpen) {
+                answer.classList.add('open');
+                icon.classList.add('rotate-180');
+            } else {
+                // Əgər açıq idisə, bağla
+                answer.classList.remove('open');
+                icon.classList.remove('rotate-180');
+            }
         }
-    });
-    
-    // Əgər bağlı idisə, aç
-    if (!isOpen) {
-        answer.classList.add('open');
-        icon.classList.add('rotate-180');
-    } else {
-        // Əgər açıq idisə, bağla
-        answer.classList.remove('open');
-        icon.classList.remove('rotate-180');
-    }
-}
-        // YENİ: İmtahan statistikalarını yenilə
+        // YENİ: Rəqəm animasiyası funksiyası
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            if (!obj) return;
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // YENİ: İmtahan statistikalarını yenilə (Animasiyalı)
         function updateExamStats() {
             try {
-                // Nəticə sayını 775 olaraq təyin et
                 const totalResults = 775;
-                
-                // İmtahan sayı
                 const totalExams = 7;
-                
-                // Dəyərləri yenilə
-                document.getElementById("total-results-count").textContent = totalResults;
-                document.getElementById("total-exams-count").textContent = totalExams;
-                
+
+                animateValue("total-results-count", 0, totalResults, 1500);
+                setTimeout(() => animateValue("total-exams-count", 0, totalExams, 1000), 200);
+
             } catch (error) {
                 console.error("İmtahan statistikaları yenilənərkən xəta:", error);
-                document.getElementById("total-results-count").textContent = "579";
-                document.getElementById("total-exams-count").textContent = "5";
             }
         }
 
@@ -1164,45 +1396,46 @@ function toggleFAQ(id) {
                 const response = await fetch(SHEET_URL);
                 const text = await response.text();
                 const json = JSON.parse(text.substring(47).slice(0, -2));
-                
-                // Məlumatları çıxart
                 const rows = json.table.rows;
-                
-                // 1. Ümumi sorğu sayı - bütün sətirlərin sayı
-                const totalQueries = rows.length + 400; // HER SEFERINDE 400 EKLE
-                
-                // 2. Populyar imtahanı tap (C sütunu - index 2)
+
+                const totalQueries = rows.length + 400;
+
                 const examCounts = {};
                 let popularExam = "Məlumat yoxdur";
                 let maxCount = 0;
-                
+
                 rows.forEach(row => {
                     if (row.c && row.c[2] && row.c[2].v) {
                         const examName = row.c[2].v;
                         examCounts[examName] = (examCounts[examName] || 0) + 1;
-                        
+
                         if (examCounts[examName] > maxCount) {
                             maxCount = examCounts[examName];
                             popularExam = examName;
                         }
                     }
                 });
-                
-                // 3. Sinif sayı həmişə 14 (sabit)
+
                 const classCount = 14;
-                
-                // Statistika göstəricilərini yenilə
-                document.getElementById("stat-total-queries").textContent = totalQueries.toLocaleString();
+
+                animateValue("stat-total-queries", 0, totalQueries, 1500);
                 document.getElementById("stat-popular-exam").textContent = popularExam;
-                document.getElementById("stat-class-count").textContent = classCount;
-                
+                animateValue("stat-class-count", 0, classCount, 1000);
+
             } catch (error) {
                 console.error("Statistika yüklənərkən xəta:", error);
-                
-                // Xəta halında standart dəyərləri göstər
-                document.getElementById("stat-total-queries").textContent = "0";
-                document.getElementById("stat-popular-exam").textContent = "Xəta baş verdi";
                 document.getElementById("stat-class-count").textContent = "14";
+            }
+        }
+
+        // YENİ: ID Validasiyası
+        function validateID(input) {
+            const id = input.value.trim();
+            const validationIcon = document.getElementById('id-validation');
+            if (id.length === 6 && studentData[id]) {
+                validationIcon.classList.add('show');
+            } else {
+                validationIcon.classList.remove('show');
             }
         }
 
@@ -1247,24 +1480,24 @@ function toggleFAQ(id) {
                 oscillator.stop(audioContext.currentTime + 0.4);
             } catch (e) { console.error("Səs xətası:", e); }
         }
-        
+
         function hideToast() {
             const toast = document.getElementById('toast');
             clearTimeout(toastTimeout);
             toast.classList.add('translate-x-full');
-            setTimeout(() => toast.classList.add('hidden'), 500); 
+            setTimeout(() => toast.classList.add('hidden'), 500);
         }
 
         function showNotification(message, type = 'info', autoHide = true) {
-            clearTimeout(toastTimeout); 
-            
+            clearTimeout(toastTimeout);
+
             const toast = document.getElementById('toast');
             const content = document.getElementById('toast-content');
             const msgEl = document.getElementById('toast-message');
             const iconEl = document.getElementById('toast-icon');
 
             msgEl.textContent = message;
-            
+
             let borderColor, iconHtml;
 
             if (type === 'success' || type === 'announcement' || type === 'info') playSuccessTone();
@@ -1277,35 +1510,35 @@ function toggleFAQ(id) {
                 borderColor = 'border-red-500';
                 iconHtml = '<svg class="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
             } else if (type === 'announcement') {
-                borderColor = 'border-yellow-500'; 
+                borderColor = 'border-yellow-500';
                 iconHtml = '<span class="text-3xl">🔔</span>';
             } else {
                 borderColor = 'border-blue-500';
                 iconHtml = '<svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
             }
-            
+
             const isDark = document.documentElement.classList.contains('dark');
             const bgColor = isDark ? 'bg-gray-800' : 'bg-white';
             const textColor = isDark ? 'text-gray-200' : 'text-gray-800';
-            
+
             content.className = `${bgColor} border-l-8 ${borderColor} p-4 rounded-xl shadow-2xl flex items-start min-w-[350px]`;
             msgEl.className = `text-base font-normal ${textColor}`;
             iconEl.innerHTML = iconHtml;
-            
+
             toast.classList.add('translate-x-full');
-            toast.classList.remove('hidden'); 
+            toast.classList.remove('hidden');
             setTimeout(() => toast.classList.remove('translate-x-full'), 10);
 
             if (autoHide) {
-                toastTimeout = setTimeout(() => hideToast(), TOAST_DURATION); 
+                toastTimeout = setTimeout(() => hideToast(), TOAST_DURATION);
             }
         }
-        
+
         function setInitialTheme() {
             // HƏR ZAMAN GECƏ MODU - localStorage heç yoxlanmır
             document.documentElement.classList.add('dark');
             updateThemeIcons(true);
-            
+
             // localStorage-u TAMAMEN SİLİRİK - heç bir şey yaddaşda saxlanmır
             localStorage.removeItem('theme');
         }
@@ -1318,14 +1551,14 @@ function toggleFAQ(id) {
         function toggleTheme() {
             const wasDark = document.documentElement.classList.contains('dark');
             const isDark = !wasDark;
-            
+
             document.documentElement.classList.toggle('dark', isDark);
             updateThemeIcons(isDark);
-            
+
             // localStorage-a HEÇ NƏ YAZMIRIQ - yaddaşda saxlanmır
             // localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            
-            showNotification(isDark ? "Gecə rejimi aktivləşdirildi." : "Gündüz rejimi aktivləşdirildi.", 'info'); 
+
+            showNotification(isDark ? "Gecə rejimi aktivləşdirildi." : "Gündüz rejimi aktivləşdirildi.", 'info');
         }
 
         function startLoadingAnimation() {
@@ -1339,7 +1572,7 @@ function toggleFAQ(id) {
         async function viewResult() {
             const idInput = document.getElementById("id");
             const examSelect = document.getElementById("exam");
-            
+
             const idValue = idInput.value.trim();
             const examValue = examSelect.value;
             const examText = examSelect.options[examSelect.selectedIndex].text;
@@ -1354,12 +1587,21 @@ function toggleFAQ(id) {
                 showNotification("Şagird ID yalnız 6 rəqəmdən ibarət olmalıdır.", "error");
                 return;
             }
-            
+
             // Şagird məlumatını yoxlamaq
             const student = studentData[idValue];
             if (!student) {
+                document.getElementById("query-card").classList.add("shake");
+                setTimeout(() => document.getElementById("query-card").classList.remove("shake"), 500);
                 showNotification(`"${idValue}" ID nömrəli şagird bazada tapılmadı. Zəhmət olmasa ID-ni yoxlayın.`, "error");
                 return;
+            }
+
+            // ID yadda saxlama
+            if (document.getElementById("remember-me").checked) {
+                localStorage.setItem("remembered_id", idValue);
+            } else {
+                localStorage.removeItem("remembered_id");
             }
 
 
@@ -1367,7 +1609,7 @@ function toggleFAQ(id) {
             const resultContainer = document.getElementById("result-container");
             const studentInfoSection = document.getElementById("student-info-section");
 
-            resultContainer.classList.add("opacity-0", "hidden"); 
+            resultContainer.classList.add("opacity-0", "hidden");
             overlay.classList.remove("hidden");
             overlay.classList.add("flex");
             startLoadingAnimation();
@@ -1396,7 +1638,7 @@ function toggleFAQ(id) {
                     if (data.status === "found" && data.preview) {
                         // YENİ: Sınav adını da bildiriş mesajına ekle
                         showNotification(`"${student.name}" üçün "${examText}" nəticəsi uğurla tapıldı!`, "success");
-                        
+
                         lastPreviewUrl = data.preview;
                         document.getElementById("resultFrame").src = data.preview;
 
@@ -1404,8 +1646,8 @@ function toggleFAQ(id) {
                         document.getElementById("student-fullname").textContent = student.name;
                         document.getElementById("student-class").textContent = student.class;
                         document.getElementById("student-id-display").textContent = idValue;
-                        document.getElementById("exam-name-display").textContent = examText; 
-                        
+                        document.getElementById("exam-name-display").textContent = examText;
+
                         studentInfoSection.classList.remove("hidden");
 
                         resultContainer.classList.remove("hidden");
@@ -1419,13 +1661,13 @@ function toggleFAQ(id) {
                         showNotification(`"${student.name}" şagirdi üçün "${examText}" nəticəsi tapılmadı.`, "error");
                         studentInfoSection.classList.add("hidden"); // Məlumat tapılmadısa məlumat kartını gizlət
                     }
-                }, 500); 
+                }, 500);
 
             } catch (error) {
                 stopLoadingAnimation();
                 console.error("Fetch xətası:", error);
                 overlay.classList.add("hidden");
-                overlay.classList.remove("flex"); 
+                overlay.classList.remove("flex");
                 showNotification("Sistem xətası baş verdi.", "error");
             }
         }
@@ -1447,7 +1689,7 @@ function toggleFAQ(id) {
         }
 
         function downloadResult() {
-            if(lastPreviewUrl && lastPreviewUrl !== "about:blank") {
+            if (lastPreviewUrl && lastPreviewUrl !== "about:blank") {
                 window.open(lastPreviewUrl, '_blank');
             } else {
                 showNotification("Yükləmək üçün əvvəlcə bir nəticə tapılmalıdır.", "error");
@@ -1456,30 +1698,64 @@ function toggleFAQ(id) {
 
         document.addEventListener('DOMContentLoaded', () => {
             setInitialTheme();
-            
-            // YENİ: Nav düymələrini aktiv et
+
+            // Yadda saxlanılan ID-ni yoxla
+            const rememberedId = localStorage.getItem("remembered_id");
+            if (rememberedId) {
+                document.getElementById("id").value = rememberedId;
+                document.getElementById("remember-me").checked = true;
+                validateID(document.getElementById("id"));
+            }
+
             showSection('search-section');
-            
-            // YENİ: İmtahan statistikalarını yenilə
             updateExamStats();
-            
+
             // Sistem teması değişikliklerini dinleyen kodu TAMAMEN SİLİN
             // localStorage heç istifadə edilmir
-            
+
             setTimeout(() => {
-                showNotification("Kiçik Summativ Qiymətləndirmə-3 və Mövzu Sınağı-3 imtahanlarının nəticələri elan edilmişdir!", 'announcement'); 
+                showNotification("Kiçik Summativ Qiymətləndirmə-3 və Mövzu Sınağı-3 imtahanlarının nəticələri elan edilmişdir!", 'announcement');
             }, 500);
 
-            document.addEventListener('keypress', function(e) {
+            document.addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
                     const activeElement = document.activeElement;
                     if (activeElement.tagName === 'INPUT' || activeElement.tagName === 'SELECT') {
-                        e.preventDefault(); 
+                        e.preventDefault();
                         document.getElementById('search-btn').click();
                     }
                 }
             });
+
+            // YENİ: Canlı Saat Funksiyası
+            function updateClock() {
+                const now = new Date();
+                const days = ['Bazar', 'Bazar ertəsi', 'Çərşənbə axşamı', 'Çərşənbə', 'Cümə axşamı', 'Cümə', 'Şənbə'];
+                const months = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'İyun', 'İyul', 'Avqust', 'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr'];
+
+                const dayName = days[now.getDay()];
+                const date = now.getDate();
+                const monthName = months[now.getMonth()];
+                const year = now.getFullYear();
+
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+
+                const timeString = `${hours}:${minutes}:${seconds}`;
+                const dateString = `${date} ${monthName} ${year}, ${dayName}`;
+
+                const timeEl = document.getElementById('live-time');
+                const dateEl = document.getElementById('live-date');
+
+                if (timeEl) timeEl.textContent = timeString;
+                if (dateEl) dateEl.textContent = dateString;
+            }
+
+            setInterval(updateClock, 1000);
+            updateClock();
         });
     </script>
 </body>
+
 </html>
