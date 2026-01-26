@@ -280,21 +280,14 @@
 
         /* GEÇE/GÜNDÜZ DÜĞMESİ DAİRE STİLİ - YENİ */
         .theme-toggle-circle {
-            width: 32px;
-            height: 32px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
             border: 2px solid transparent;
-        }
-
-        @media (min-width: 640px) {
-            .theme-toggle-circle {
-                width: 44px;
-                height: 44px;
-            }
         }
 
         /* Gündüz modu: mavi daire içinde gece düğmesi */
@@ -320,17 +313,6 @@
         #moon-icon,
         #sun-icon {
             stroke: #ffffff !important;
-            width: 1rem;
-            height: 1rem;
-        }
-
-        @media (min-width: 640px) {
-
-            #moon-icon,
-            #sun-icon {
-                width: 1.5rem;
-                height: 1.5rem;
-            }
         }
 
         .dark #moon-icon,
@@ -540,42 +522,18 @@
         #live-time {
             font-variant-numeric: tabular-nums;
             text-shadow: 0 0 10px rgba(0, 82, 93, 0.1);
-            font-size: 0.65rem;
-            line-height: 1.2;
         }
 
         .dark #live-time {
             text-shadow: 0 0 10px rgba(79, 209, 197, 0.2);
         }
 
-        /* Mobil için saat ve tarih responsive stilleri */
-        @media (min-width: 640px) {
-            #live-time {
-                font-size: 1.125rem;
-                line-height: 1.75rem;
-            }
-        }
-
-        #live-date {
-            font-size: 0.5rem;
-            line-height: 1;
-        }
-
-        @media (min-width: 640px) {
-            #live-date {
-                font-size: 0.625rem;
-            }
-        }
-
-        /* Saat konteyneri için responsive düzenleme */
+        /* Zaman konteyneri - tek satır için */
         .time-container {
-            min-width: 60px;
-        }
-
-        @media (min-width: 640px) {
-            .time-container {
-                min-width: auto;
-            }
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
         }
     </style>
 </head>
@@ -621,25 +579,27 @@
                 </div>
             </div>
             <!-- Saat və Gecə/Gündüz Rejimi -->
-            <div class="flex items-center space-x-1 sm:space-x-6">
-                <div class="flex flex-col items-end leading-none time-container">
-                    <div id="live-time" class="font-bold text-white tabular-nums">
+            <div class="flex items-center space-x-2 sm:space-x-6">
+                <div class="time-container">
+                    <div id="live-time" class="text-xs sm:text-lg font-bold text-white tabular-nums">
                         00:00:00
                     </div>
-                    <div id="live-date" class="uppercase font-semibold text-white/80 mt-0.5 whitespace-nowrap">
+                    <span class="text-white/60 hidden sm:inline">•</span>
+                    <div id="live-date"
+                        class="text-[8px] sm:text-[10px] uppercase font-semibold text-white/80 whitespace-nowrap">
                         ---
                     </div>
                 </div>
                 <div class="theme-toggle-circle">
                     <button id="theme-toggle" onclick="toggleTheme()"
-                        class="p-1 sm:p-2 rounded-full text-gray-700 dark:text-gray-200 transition duration-300">
-                        <svg id="sun-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        class="p-2 rounded-full text-gray-700 dark:text-gray-200 transition duration-300">
+                        <svg id="sun-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
                             </path>
                         </svg>
-                        <svg id="moon-icon" class="hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        <svg id="moon-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
