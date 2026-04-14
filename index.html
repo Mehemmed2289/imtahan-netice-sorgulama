@@ -681,6 +681,7 @@
                                     <select id="exam" required
                                         class="custom-select-icon block w-full px-4 py-3 border border-gray-300 rounded-xl shadow-md form-input-bg focus:outline-none focus:ring-2 focus:ring-[#00525d] focus:ring-offset-0 focus-ring-primary text-base transition duration-150 ease-in-out">
                                         <option value="" disabled selected>İmtahanı seçin</option>
+                                        <option value="Ümumi Sınaq II">Ümumi Sınaq II</option>
                                         <option value="Kiçik Summativ Qiymətləndirmə V">Kiçik Summativ Qiymətləndirmə
                                             V</option>
                                         <option value="Ümumi Sınaq I">Ümumi Sınaq I</option>
@@ -1080,6 +1081,7 @@
                                             <li>Mövzu Sınağı-4 (IX sinif)</li>
                                             <li>Ümumi Sınaq-1 (IX sinif)</li>                           
                                             <li>Kiçik Summativ Qiymətləndirmə-5 (III-VIII siniflər)</li>
+                                            <li>Ümumi Sınaq-2 (IX sinif)</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -1408,8 +1410,8 @@
         // YENİ: İmtahan statistikalarını yenilə (Animasiyalı)
         function updateExamStats() {
             try {
-                const totalResults = 955;
-                const totalExams = 11;
+                const totalResults = 972;
+                const totalExams = 12;
 
                 animateValue("total-results-count", 0, totalResults, 1500);
                 setTimeout(() => animateValue("total-exams-count", 0, totalExams, 1000), 200);
