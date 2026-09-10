@@ -1,1137 +1,939 @@
 <!DOCTYPE html>
-<html lang="az">
-
+<html lang="az" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Azərbaycan Beynəlxalq Maarif | İmtahan Nəticəsi Sorgulama</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        primary: {
-                            DEFAULT: '#00525d',
-                            dark: '#00525d',
-                            hover: '#003f47',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+    <meta name="theme-color" content="#00343b">
+    <meta name="description" content="Azərbaycan Beynəlxalq Maarif Məktəbləri — İmtahan Nəticəsi Sorgulama">
+    <title>İmtahan Nəticəsi Sorgulama · Nəsimi Kampusu</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <style>
-        /* Əsas rənglər */
-        .bg-primary-dark {
-            background-color: #00525d;
+        /* ================================================================
+           THEME TOKENS — Maarif Nəsimi tasarım sistemi ilə eyni
+           ================================================================ */
+        :root {
+            color-scheme: light;
+            --bg-app: #002229;
+            --bg-page: #002229;
+            --surface: rgba(255, 255, 255, 0.72);
+            --surface-strong: rgba(255, 255, 255, 0.92);
+            --surface-soft: rgba(255, 255, 255, 0.48);
+            --surface-muted: rgba(248, 250, 252, 0.80);
+            --border: rgba(0, 82, 93, 0.08);
+            --border-strong: rgba(0, 82, 93, 0.12);
+            --text-1: #0f172a;
+            --text-2: #475569;
+            --text-3: #4e5d70;
+            --text-muted: #6e7d8c;
+            --brand-700: #00525d;
+            --brand-600: #00757d;
+            --brand-500: #009097;
+            --brand-800: #004550;
+            --brand-300: #5ab8c4;
+            --brand-400: #22d3ee;
+            --brand-gradient: linear-gradient(135deg, #00757d 0%, #00525d 100%);
+            --ok: #10b981;
+            --warn: #f59e0b;
+            --err: #ef4444;
+            --glass-blur: 20px;
+            --glass-sat: 180%;
+            --r-sm: 12px;
+            --r-md: 16px;
+            --r-lg: 20px;
+            --r-xl: 28px;
+            --ease: cubic-bezier(.4, 0, .2, 1);
+            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+            --z-header: 1000;
+            --z-toast: 9999;
+            --z-loading: 9999;
         }
 
-        .bg-primary-hover {
-            background-color: #003f47;
+        [data-theme="dark"] {
+            color-scheme: dark;
+            --bg-app: #002229;
+            --bg-page: #002229;
+            --surface: rgba(255, 255, 255, 0.05);
+            --surface-strong: rgba(255, 255, 255, 0.08);
+            --surface-soft: rgba(255, 255, 255, 0.03);
+            --surface-muted: rgba(255, 255, 255, 0.04);
+            --border: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.12);
+            --text-1: #f1f5f9;
+            --text-2: #cbd5e1;
+            --text-3: #a8b7c6;
+            --text-muted: #7f8ea0;
         }
 
-        .text-primary-dark {
-            color: #00525d;
-        }
-
-        .border-primary-dark {
-            border-color: #00525d;
-        }
-
-        .focus-ring-primary {
-            --tw-ring-color: #00525d;
-        }
-
-        /* Ümumi stil */
-        html,
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; }
         body {
-            margin: 0 !important;
-            padding: 0 !important;
-            width: 100% !important;
-            height: 100% !important;
-            box-sizing: border-box;
+            font-family: 'Poppins', system-ui, sans-serif;
+            background: var(--bg-app);
+            color: var(--text-1);
+            line-height: 1.5;
+            min-height: 100vh;
+            transition: background .3s var(--ease), color .3s var(--ease);
+            padding-top: 90px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
         }
+        ::selection { background: var(--brand-700); color: #fff; }
 
-        main {
-            min-height: calc(100vh - 78px);
+        /* ===== ANİMALI ARXA FON ===== */
+        .bg-stage {
+            position: fixed; inset: 0; z-index: -2; overflow: hidden;
+            background:
+                radial-gradient(ellipse at 18% 0%, rgba(8, 145, 178, .22) 0%, transparent 55%),
+                radial-gradient(ellipse at 82% 100%, rgba(16, 185, 129, .15) 0%, transparent 55%),
+                linear-gradient(180deg, #0a1c23 0%, #0e2830 100%);
+        }
+        [data-theme="light"] .bg-stage {
+            background:
+                radial-gradient(ellipse at 18% 0%, rgba(0, 82, 93, .12) 0%, transparent 55%),
+                radial-gradient(ellipse at 82% 100%, rgba(0, 117, 125, .12) 0%, transparent 55%),
+                linear-gradient(180deg, #eef7f8 0%, #e1f1f2 100%);
+        }
+        .bg-stage::before, .bg-stage::after {
+            content: ''; position: absolute; border-radius: 50%; will-change: transform;
+        }
+        .bg-stage::before {
+            width: 60vw; height: 60vw; top: -20%; left: -10%;
+            background: radial-gradient(circle, rgba(6, 182, 212, .45) 0%, transparent 65%);
+            animation: floatBlob 22s ease-in-out infinite;
+        }
+        .bg-stage::after {
+            width: 50vw; height: 50vw; bottom: -20%; right: -10%;
+            background: radial-gradient(circle, rgba(16, 185, 129, .40) 0%, transparent 65%);
+            animation: floatBlob 28s ease-in-out infinite reverse;
+        }
+        [data-theme="light"] .bg-stage::before { opacity: .5; }
+        [data-theme="light"] .bg-stage::after { opacity: .45; }
+        @keyframes floatBlob {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(6vw, 4vh) scale(1.1); }
+            66% { transform: translate(-4vw, 6vh) scale(.95); }
+        }
+        .bg-grain {
+            position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: .035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
         }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            font-weight: 400;
-            background-color: #00525d;
-            color: #fcfcfc;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        /* Logo sabitlendiği için içeriği aşağı itiyoruz */
-        body {
-            padding-top: 170px !important;
-        }
-
-        @media (min-width: 640px) {
-            body {
-                padding-top: 180px !important;
-            }
-        }
-
-        /* Gecə rejimi stilləri */
-        .dark body {
-            background-color: #1a202c;
-            color: #fcfcfc;
-        }
-
-        .header-bg {
-            background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-        }
-
-
-
-
-        .dark .text-header-title {
-            color: #fcfcfc;
-        }
-
-        .text-tmv {
-            color: #4a5568;
-        }
-
-        .dark .text-tmv {
-            color: #fcfcfc;
-        }
-
-        .dark #query-card {
-            background-color: #2d3748;
-            border: 1px solid #4a5568;
-        }
-
-        .dark .form-label {
-            color: #fcfcfc;
-        }
-
-        .dark .form-input-bg {
-            background-color: #4a5568;
-            color: #fcfcfc;
-            border-color: #4a5568;
-        }
-
-        .dark .text-primary-dark-override {
-            color: #4fd1c5;
-        }
-
-        .dark .bg-primary-dark-override {
-            background-color: #4fd1c5;
-        }
-
-        .dark .bg-primary-dark-override:hover {
-            background-color: #38b2ac;
-        }
-
-        .dark #toast-content {
-            background-color: #2d3748;
-        }
-
-        .logo-border {
-            border-color: #00adba;
-        }
-
-        .shadow-3xl {
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
-        }
-
-        #resultFrame {
-            width: 100%;
-            height: 85vh;
-            border: none;
-            border-radius: 0.75rem;
-        }
-
-        /* Xüsusi seçim (select) sahəsinin stili */
-        .custom-select-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%23ffffff'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 0.75rem center;
-            background-size: 1.5em 1.5em;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-            padding-right: 2.5rem;
-        }
-
-        .form-input-bg {
-            background-color: #fcfcfc;
-            color: #1f2937;
-            border: 1px solid #d1d5db;
-        }
-
-        .dark .custom-select-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%231f2937'%3e%3cpath d='M7 7l3-3 3 3m0 6l-3 3-3-3' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath%3e%3c/svg%3e");
-        }
-
-        #toast {
-            z-index: 100;
-        }
-
-        /* Başlıq Mətninin Ölçüsü */
-        .header-title-text {
-            font-size: 1.1rem;
-        }
-
-        @media (min-width: 640px) {
-            .header-title-text {
-                font-size: 1.5rem;
-            }
-        }
-
-        /* Yüklənmə Animasiyası üçün CSS */
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .loading-logo {
-            animation: spin 1.5s linear infinite;
-        }
-
-        /* Şagird Məlumat Kartı Stili - YENİLƏNİB */
-        .student-info-card {
-            background: linear-gradient(135deg, #f3f4f6 0%, #ffffff 100%);
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .dark .student-info-card {
-            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-        }
-
-        /* Şagird məlumatları yazı rəngləri - YENİ (TAMAMEN DEĞİŞTİRİLDİ) */
-        /* Gündüz modu: mavi (#00525d) arka plan, beyaz yazılar */
-        .student-info-card .bg-white {
-            background-color: #00525d !important;
-            border-color: #003f47 !important;
-        }
-
-        /* ÇERÇEVELER İÇİN: Gündüz modunda beyaz yazı, Gece modunda beyaz yazı */
-        .student-info-card .bg-white span,
-        /* Çerçeve içindeki yazılar */
-        .student-info-card .text-xs,
-        /* "Sinif:", "ID Nömrəsi:" gibi küçük yazılar */
-        .student-info-card #student-class,
-        .student-info-card #student-id-display,
-        .student-info-card #exam-name-display {
-            color: #ffffff !important;
-        }
-
-        /* ŞAGİRD ADI SOYADI: Gündüz modunda siyah, Gece modunda beyaz */
-        .student-info-card #student-fullname {
-            color: #00525d !important;
-        }
-
-        .dark .student-info-card #student-fullname {
-            color: #ffffff !important;
-        }
-
-        /* "Şagirdin Adı və Soyadı" başlığı: Gündüz modunda gri, Gece modunda gri */
-        .student-info-card h4 {
-            color: #4a5568 !important;
-        }
-
-        .dark .student-info-card h4 {
-            color: #cbd5e0 !important;
-        }
-
-        /* Gecə modu: ağ yazılar */
-        .dark .student-info-card h4,
-        .dark .student-info-card #student-fullname,
-        .dark .student-info-card #student-class,
-        .dark .student-info-card #student-id-display,
-        .dark .student-info-card #exam-name-display,
-        .dark .student-info-card .text-xs,
-        .dark .student-info-card .bg-gray-700 {
-            color: #ffffff !important;
-        }
-
-        /* Font stilleri */
-        .student-info-card h4 {
-            font-weight: 500 !important;
-        }
-
-        .student-info-card #student-fullname,
-        .student-info-card #student-class,
-        .student-info-card #student-id-display,
-        .student-info-card #exam-name-display {
-            font-weight: 600 !important;
-        }
-
-        /* Gündüz modunda "İmtahan" yazısının rengi - açık mavi */
-        .student-info-card #exam-name-display {
-            color: #4fd1c5 !important;
-        }
-
-        /* Gecə modunda "İmtahan" yazısının rengi - açık mavi */
-        .dark .student-info-card #exam-name-display {
-            color: #4fd1c5 !important;
-        }
-
-        /* GEÇE/GÜNDÜZ DÜĞMESİ DAİRE STİLİ - YENİ */
-        .theme-toggle-circle {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
+        /* ===== HEADER ===== */
+        .header-top {
+            background: rgba(0, 56, 67, 0.85);
+            color: #fff;
+            padding: 14px 24px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
+            justify-content: space-between;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: var(--z-header);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 4px 24px rgba(0, 0, 0, 0.12);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            gap: 16px;
+            flex-wrap: nowrap;
+            backdrop-filter: blur(40px) saturate(200%);
+            -webkit-backdrop-filter: blur(40px) saturate(200%);
         }
+        .header-left { display: flex; align-items: center; gap: 20px; width: 100%; max-width: max-content; }
+        .brand-logo { width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .brand-logo img { width: 100%; height: 100%; object-fit: contain; }
+        .brand-text { display: flex; flex-direction: column; min-width: 0; line-height: 1.2; }
+        .brand-title-wrap { display: flex; align-items: center; gap: 8px; }
+        .brand-title { font-size: 16px; font-weight: 800; letter-spacing: -0.5px; }
+        .brand-emblem { width: 20px; height: 20px; flex-shrink: 0; }
+        .brand-emblem img { width: 100%; height: 100%; object-fit: contain; animation: brand-emblem-spin 8s linear infinite; }
+        @keyframes brand-emblem-spin { 100% { transform: rotate(360deg); } }
+        .brand-subtitle { font-size: 12px; font-weight: 500; color: rgba(255, 255, 255, 0.95); margin-top: 2px; }
+        .brand-meta { font-size: 11px; color: rgba(255, 255, 255, 0.8); display: flex; align-items: center; gap: 8px; margin-top: 4px; }
+        .brand-flags { display: flex; gap: 4px; }
+        .brand-flags img { height: 12px; width: 18px; object-fit: cover; border-radius: 2px; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); }
+        .brand-campus { font-weight: 700; color: rgba(255, 255, 255, 0.95); background: rgba(17, 94, 89, 0.6); padding: 2px 8px; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .header-right { display: flex; align-items: center; gap: 12px; flex-wrap: nowrap; justify-content: flex-end; flex-grow: 1; min-width: 0; }
 
-        /* Gündüz modu: mavi daire içinde gece düğmesi */
-        .theme-toggle-circle {
-            background-color: #00525d;
+        .header-widget {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 9px 14px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+            transition: all .3s var(--ease);
         }
+        .time-display { flex-direction: column; align-items: center; gap: 2px; justify-content: center; min-width: 140px; height: 62px; font-variant-numeric: tabular-nums; }
+        .time-dot { width: 8px; height: 8px; border-radius: 50%; background: #34d399; animation: pulse 2s infinite; box-shadow: 0 0 8px #34d399; }
+        @keyframes pulse { 50% { opacity: 0.5; } }
+        .time-time { font-size: 14px; font-weight: 700; letter-spacing: 1px; min-width: 70px; display: flex; align-items: center; gap: 6px; }
+        .time-date { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; color: rgba(255, 255, 255, 0.9); white-space: nowrap; }
 
-        /* Gece modu: beyaz daire içinde gündüz düğmesi */
-        .dark .theme-toggle-circle {
-            background-color: #ffffff;
+        .header-actions {
+            display: flex; align-items: center; height: 62px; padding: 0 5px;
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+            flex-shrink: 0;
         }
-
-        .theme-toggle-circle:hover {
-            transform: scale(1.1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        .header-actions > * { position: relative; margin: 0 5px; }
+        .header-actions > *:not(:first-child)::before {
+            content: ""; position: absolute; left: -5px; top: 13px; bottom: 13px; width: 1px; background: rgba(255, 255, 255, 0.15);
         }
+        .header-actions .fullscreen-toggle { width: 44px; height: 44px; border: none; background: transparent; box-shadow: none; border-radius: 12px; color: white; font-size: 16px; flex-shrink: 0; cursor: pointer; transition: all .2s ease; }
+        .header-actions .fullscreen-toggle:hover { background: rgba(255, 255, 255, 0.14); transform: scale(1.06); }
 
-        .dark .theme-toggle-circle:hover {
-            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.15);
+        /* ===== GECƏ/GÜNDÜZ DÜYMƏSİ — günəş fırlanır, ay yellənir ===== */
+        .theme-orb {
+            position: relative; display: inline-block; width: 44px; height: 44px;
+            cursor: pointer; border: none; background: transparent; flex-shrink: 0;
+            transition: background .25s ease, transform .25s var(--ease-out);
+            -webkit-tap-highlight-color: transparent; user-select: none;
         }
+        .theme-orb:hover { background: rgba(255, 255, 255, 0.08); border-radius: 12px; }
+        .theme-orb:active { transform: scale(0.92); }
+        .theme-orb input { position: absolute; top: 0; left: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; z-index: 5; }
+        .theme-orb i { position: absolute; top: 50%; left: 50%; font-size: 22px; line-height: 1; pointer-events: none; transition: opacity .45s var(--ease), filter .45s var(--ease); }
+        .theme-orb .sun { margin: -11px 0 0 -11px; color: #F2C94C; opacity: 0; filter: drop-shadow(0 0 9px rgba(242, 201, 76, 0.85)); animation: orb-sunspin 11s linear infinite; }
+        .theme-orb input:checked ~ .sun { opacity: 1; }
+        @keyframes orb-sunspin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .theme-orb .moon { margin: -11px 0 0 -11px; color: #ffffff; opacity: 1; filter: drop-shadow(0 0 7px rgba(210, 225, 255, 0.75)); animation: orb-moonsway 4.2s ease-in-out infinite; }
+        .theme-orb input:checked ~ .moon { opacity: 0; }
+        @keyframes orb-moonsway { 0%, 100% { transform: translateY(0) rotate(-9deg); } 50% { transform: translateY(-2px) rotate(9deg); } }
+        .orb-stars { position: absolute; inset: 0; pointer-events: none; z-index: 6; transition: opacity .5s var(--ease); }
+        .orb-stars i { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #ffffff; box-shadow: 0 0 5px rgba(255, 255, 255, 0.9); opacity: 0; animation: orb-twinkle 2.2s ease-in-out infinite; }
+        .orb-stars i:nth-child(1) { top: 16%; left: 22%; animation-delay: 0s; }
+        .orb-stars i:nth-child(2) { top: 24%; left: 66%; width: 2px; height: 2px; animation-delay: .6s; }
+        .orb-stars i:nth-child(3) { top: 58%; left: 28%; width: 2px; height: 2px; animation-delay: 1.2s; }
+        .theme-orb input:checked ~ .orb-stars { opacity: 0; }
+        @keyframes orb-twinkle { 0%, 100% { opacity: 0; transform: scale(0.5); } 50% { opacity: 1; transform: scale(1.2); } }
 
-        /* AY İKONU RENGİ - SON HALİ */
-        #moon-icon,
-        #sun-icon {
-            stroke: #ffffff !important;
-        }
+        /* ===== SƏHİFƏ KONTEYNERİ ===== */
+        .dashboard-container { max-width: 1200px; margin: 0 auto; padding: 24px 24px 60px; width: 100%; }
+        @media (min-width: 1600px) { .dashboard-container { max-width: 1400px; } }
 
-        .dark #moon-icon,
-        .dark #sun-icon {
-            stroke: #00525d !important;
-        }
-
-        /* YENİ: Nav Düymələri Stili */
+        /* ===== NAV DÜYMƏLƏRİ (3 yarımbaşlıq) — öncəki kimi ===== */
+        .tab-nav { display: flex; gap: 14px; margin-bottom: 26px; flex-wrap: wrap; align-items: center; justify-content: center; }
         .nav-btn {
-            transition: all 0.3s ease;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.75rem;
+            transition: all .3s ease;
+            padding: 12px 22px;
+            border-radius: 14px;
             font-weight: 500;
+            font-size: 14px;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 10px;
+            border: 1px solid var(--border-strong);
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-2);
+            backdrop-filter: blur(12px) saturate(150%);
+            -webkit-backdrop-filter: blur(12px) saturate(150%);
+            -webkit-tap-highlight-color: transparent;
         }
-
+        [data-theme="light"] .nav-btn { background: #f3f4f6; color: #4b5563; }
+        .nav-btn i { font-size: 15px; }
         .nav-btn.active {
-            background-color: #00525d;
+            background: var(--brand-gradient);
             color: white;
+            border-color: transparent;
+            box-shadow: 0 8px 22px rgba(8, 145, 178, 0.35);
         }
-
-        .dark .nav-btn.active {
-            background-color: #4fd1c5;
-            color: #00525d;
-        }
-
-        .nav-btn:not(.active) {
-            background-color: #f3f4f6;
-            color: #4b5563;
-        }
-
-        .dark .nav-btn:not(.active) {
-            background-color: #374151;
-            color: #d1d5db;
-        }
-
-        .nav-btn:hover:not(.active) {
+        .nav-btn:not(.active):hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+            border-color: var(--brand-600);
+            color: var(--brand-400);
+        }
+        [data-theme="light"] .nav-btn:not(.active):hover { color: var(--brand-600); box-shadow: 0 8px 20px rgba(0, 82, 93, 0.14); }
+        .nav-btn.active { animation: navPop .35s var(--ease-out); }
+        @keyframes navPop { from { transform: scale(.94); } to { transform: scale(1); } }
+
+        /* ===== GLASS CARD ===== */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: var(--r-xl);
+            padding: 28px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 4px 24px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(0, 0, 0, 0.02);
+            transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out);
+        }
+        .glass-card:hover { transform: translateY(-2px); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 8px 32px rgba(0, 0, 0, 0.08); }
+        [data-theme="dark"] .glass-card {
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 4px 24px rgba(0, 0, 0, 0.4);
+        }
+        [data-theme="dark"] .glass-card:hover { box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 8px 32px rgba(0, 0, 0, 0.5); }
+
+        .card-title { font-size: 19px; font-weight: 800; color: var(--text-1); display: flex; align-items: center; gap: 10px; margin: 0 0 6px; }
+        .card-title i { color: var(--brand-600); }
+        .card-sub { font-size: 13px; color: var(--text-3); margin: 0 0 20px; }
+
+        /* ===== FORM ===== */
+        .form-grid { display: flex; flex-direction: column; gap: 18px; }
+        .control-group { display: flex; flex-direction: column; gap: 6px; }
+        .control-group label { font-size: 12px; font-weight: 600; color: var(--text-2); }
+        .field-wrap { position: relative; }
+        .field-wrap .field-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 14px; z-index: 2; }
+        .control-group input,
+        .control-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-strong);
+            border-radius: var(--r-sm);
+            background: var(--surface-strong);
+            color: var(--text-1);
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Poppins', sans-serif;
+            backdrop-filter: blur(8px) saturate(120%);
+            -webkit-backdrop-filter: blur(8px) saturate(120%);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: all .2s ease;
+            -webkit-appearance: none; -moz-appearance: none; appearance: none;
+        }
+        .control-group input.with-icon { padding-left: 42px; }
+        .control-group select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7e87' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right 14px center; background-size: 16px;
+            padding-right: 40px;
+        }
+        .control-group input:focus,
+        .control-group select:focus {
+            outline: 2px solid var(--brand-600); outline-offset: -1px;
+            box-shadow: 0 4px 12px rgba(0, 82, 93, 0.15);
+            border-color: var(--brand-600);
+        }
+        .control-group select option { background: #00525d !important; color: #ffffff !important; }
+        .field-hint { font-size: 11px; color: var(--text-muted); }
+        .checkbox-row { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-2); cursor: pointer; user-select: none; }
+        .checkbox-row input { width: 16px; height: 16px; accent-color: var(--brand-600); cursor: pointer; }
+
+        /* Validasiya işarəsi */
+        .validation-icon { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); opacity: 0; transition: all .3s ease; pointer-events: none; color: var(--ok); }
+        .validation-icon.show { opacity: 1; }
+
+        /* Titrəmə (səhv giriş) */
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); } 20%, 40%, 60%, 80% { transform: translateX(5px); } }
+        .shake { animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both; }
+
+        /* ===== DÜYMƏLƏR ===== */
+        .btn {
+            padding: 12px 24px; border: none; border-radius: var(--r-md);
+            font-size: 15px; font-weight: 600;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            cursor: pointer;
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 4px 16px rgba(0, 0, 0, 0.08);
+            position: relative; overflow: hidden;
+            font-family: 'Poppins', sans-serif;
+            transition: transform .22s var(--ease-out), box-shadow .22s var(--ease-out), background .22s ease, filter .22s ease;
+        }
+        .btn::after {
+            content: " "; width: 0%; height: 100%; background: rgba(255, 255, 255, 0.15);
+            position: absolute; transition: width .8s var(--ease-out); right: 0; z-index: 1;
+        }
+        .btn:hover::after { right: auto; left: 0; width: 100%; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0, 82, 93, 0.18); filter: brightness(1.06); }
+        .btn:active { transform: translateY(0) scale(0.97); box-shadow: 0 3px 8px rgba(0, 82, 93, 0.12); }
+        .btn span, .btn i { z-index: 2; }
+        .btn-primary { background: linear-gradient(180deg, var(--brand-600) 0%, var(--brand-700) 100%); color: white; }
+        .btn-primary:hover { box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 6px 20px rgba(0, 82, 93, 0.3); }
+        .btn-outline { background: rgba(255, 255, 255, 0.6); border: 1px solid var(--border-strong); color: var(--text-1); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset, 0 2px 8px rgba(0, 0, 0, 0.04); }
+        .btn-outline::after { background: rgba(0, 82, 93, 0.08); }
+        [data-theme="dark"] .btn-outline { background: rgba(255, 255, 255, 0.06); color: var(--text-1); border-color: rgba(255, 255, 255, 0.15); }
+        .btn-success { background: linear-gradient(180deg, #34d399 0%, #10b981 100%); color: white; }
+        .btn-success:hover { box-shadow: 0 1px 0 rgba(255, 255, 255, 0.3) inset, 0 6px 20px rgba(16, 185, 129, 0.3); }
+        .btn-warning { background: linear-gradient(180deg, #fbbf24 0%, #f59e0b 100%); color: #422006; }
+        .btn-block { width: 100%; }
+        .btn-sm { padding: 8px 14px; font-size: 13px; border-radius: var(--r-sm); }
+        .btn:disabled { cursor: not-allowed; opacity: .6; }
+
+        /* ===== LAYOUT: SORĞU (ortada) + NƏTİCƏ (altda, geniş) ===== */
+        .query-wrap { max-width: 640px; margin: 0 auto; }
+        .result-wrap { max-width: 1180px; margin: 0 auto; }
+        @media (min-width: 1400px) { .result-wrap { max-width: 1280px; } }
+
+        .hidden { display: none !important; }
+
+        .panel-section { display: block; animation: panelOpen .7s cubic-bezier(0.22, 0.61, 0.36, 1); }
+        .panel-section.hidden { display: none; }
+        @keyframes panelOpen {
+            from { opacity: 0; transform: translateY(-16px) scale(0.985); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        .dark .nav-btn:hover:not(.active) {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        .result-container { display: none; }
+        .result-container.visible { display: block; animation: panelOpen .5s var(--ease-out); }
+
+        /* Nəticə kartı — başlıq zolağı */
+        .result-card { padding: 0; overflow: hidden; }
+        .result-card .glass-card-inner { padding: 24px; }
+        .result-header-bar {
+            display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+            padding: 16px 24px;
+            background: linear-gradient(180deg, var(--brand-600) 0%, var(--brand-700) 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
         }
+        .result-header-title { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 10px; margin: 0; }
+        .result-header-title i { color: rgba(255, 255, 255, 0.9); }
+        .result-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .result-header-bar .btn-warning { border: 1px solid rgba(255, 255, 255, 0.25); }
+        .result-header-bar .btn-outline { background: rgba(255, 255, 255, 0.14); color: #fff; border: 1px solid rgba(255, 255, 255, 0.35); }
+        .result-header-bar .btn-outline::after { background: rgba(255, 255, 255, 0.12); }
+        .result-header-bar .btn-outline:hover { background: rgba(255, 255, 255, 0.22); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); }
 
-        /* YENİ: FAQ Accordion Stili */
-        .faq-item {
-            border-bottom: 1px solid #e5e7eb;
+        .result-frame-wrap {
+            overflow: hidden; border-radius: var(--r-md);
+            border: 1px solid var(--border-strong);
+            background: rgba(255, 255, 255, 0.18);
+            box-shadow: 0 2px 0 rgba(255, 255, 255, 0.5) inset, 0 6px 28px rgba(0, 82, 93, 0.08);
         }
+        [data-theme="dark"] .result-frame-wrap { background: rgba(15, 28, 32, 0.28); }
+        #resultFrame { width: 100%; height: 74vh; min-height: 480px; border: none; display: block; background: #fff; }
 
-        .dark .faq-item {
-            border-bottom: 1px solid #4b5563;
+        /* Şagird məlumat kartı — daha böyük və oxunaqlı */
+        .student-card {
+            display: flex; flex-wrap: wrap; align-items: center; gap: 18px;
+            margin: 20px 24px; padding: 18px 20px;
+            border-radius: var(--r-md);
+            background: var(--surface-muted);
+            border: 1px solid var(--border);
         }
-
-        .faq-question {
-            transition: all 0.3s ease;
+        .student-avatar {
+            width: 72px; height: 72px; flex-shrink: 0;
+            border-radius: 50%; padding: 3px;
+            background: linear-gradient(150deg, var(--brand-500), var(--brand-800));
+            display: flex; align-items: center; justify-content: center;
         }
-
-        .faq-question:hover {
-            background-color: #f9fafb;
-        }
-
-        .dark .faq-question:hover {
-            background-color: #374151;
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .faq-answer.open {
-            max-height: 1500px;
-        }
-
-        /* YENİ: Panel Göstəriciləri */
-        .panel-section {
-            display: block;
-        }
-
-        .panel-section.hidden {
-            display: none;
-        }
-
-        /* YENİ: Statistika ikonları rengi */
-        .stat-icon {
-            color: #00525d;
-        }
-
-        .dark .stat-icon {
-            color: #ffffff;
-        }
-
-        /* YENİ: FAQ nömrələri */
-        .faq-number {
-            color: #00525d;
-        }
-
-        .dark .faq-number {
-            color: #ffffff;
-        }
-
-        /* YENİ: Statistika kartları stili */
-        .stats-card-bg {
-            background-color: #ffffff !important;
-            border: 1px solid #00525d !important;
-        }
-
-        .dark .stats-card-bg {
-            background-color: #00525d !important;
-            border: 1px solid #ffffff !important;
-        }
-
-        /* YENİ: Statistika nömrələri */
-        .stats-number {
-            color: #00525d !important;
-        }
-
-        .dark .stats-number {
-            color: #ffffff !important;
-        }
-
-        /* YENİ: Statistika başlıqları */
-        .stats-label {
-            color: #4b5563 !important;
-        }
-
-        .dark .stats-label {
-            color: #ffffff !important;
-        }
-
-        /* YENİ: Statistika kartlarındakı yazılar */
-        .stats-text {
-            color: #4b5563 !important;
-        }
-
-        .dark .stats-text {
-            color: #ffffff !important;
-        }
-
-        /* YENİ: Statistika kartları başlıqları (Ümumi Sorğu Sayı, Populyar İmtahan, Sinif Sayı) */
-        .stats-card-title {
-            color: #4b5563 !important;
-        }
-
-        .dark .stats-card-title {
-            color: #ffffff !important;
-        }
-
-        /* YENİ: Populyar imtahan adı üçün xüsusi stil */
-        .popular-exam-text {
-            font-size: 1.25rem;
-            line-height: 1.4;
-            max-height: 3.5rem;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-        }
-
-        /* YENİ: Səhv girişi üçün titrəmə animasiyası */
-        @keyframes shake {
-
-            0%,
-            100% {
-                transform: translateX(0);
-            }
-
-            10%,
-            30%,
-            50%,
-            70%,
-            90% {
-                transform: translateX(-5px);
-            }
-
-            20%,
-            40%,
-            60%,
-            80% {
-                transform: translateX(5px);
-            }
-        }
-
-        .shake {
-            animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
-        }
-
-        /* YENİ: Validasiya işarəsi */
-        .validation-icon {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            transition: all 0.3s ease;
-            opacity: 0;
-        }
-
-        .validation-icon.show {
-            opacity: 1;
-        }
-
-        /* YENİ: Saat stilləri */
-        #live-time {
-            font-variant-numeric: tabular-nums;
-            text-shadow: 0 0 10px rgba(0, 82, 93, 0.1);
-        }
-
-        .dark #live-time {
-            text-shadow: 0 0 10px rgba(79, 209, 197, 0.2);
-        }
-
-        /* Zaman konteyneri - tek satır için */
-        .time-container {
-            display: flex;
+        .student-avatar img { width: 100%; height: 100%; object-fit: contain; border-radius: 50%; }
+        .student-main { flex: 1; min-width: 0; }
+        .student-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--text-3); }
+        .student-name { font-size: 22px; font-weight: 800; color: var(--text-1); margin-top: 2px; letter-spacing: -0.3px; }
+        .student-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+        .chip {
+            background: var(--surface-strong);
+            border: 1px solid var(--border-strong);
+            border-radius: 10px;
+            padding: 6px 14px;
+            font-size: 13px;
+            color: var(--text-2);
+            display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            white-space: nowrap;
+            gap: 6px;
+        }
+        .chip .chip-label { color: var(--text-muted); font-weight: 500; }
+        .chip b { color: var(--text-1); font-weight: 700; }
+        .chip .chip-check { color: var(--ok); }
+
+        /* ===== STATİSTİKA ===== */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+        .stat-mini { display: flex; flex-direction: column; gap: 4px; background: var(--surface-muted); border: 1px solid var(--border); border-radius: var(--r-md); padding: 18px; }
+        .stat-mini .stat-num { font-size: 28px; font-weight: 800; color: var(--brand-400); }
+        [data-theme="light"] .stat-mini .stat-num { color: var(--brand-600); }
+        .stat-mini .stat-label { font-size: 12px; font-weight: 600; color: var(--text-3); }
+        .stat-card { position: relative; overflow: hidden; background: var(--surface-muted); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px; transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out); }
+        .stat-card:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(0, 0, 0, .18); border-color: rgba(34, 211, 238, .35); }
+        .stat-card::before { content: ''; position: absolute; top: -40%; right: -30%; width: 90px; height: 90px; border-radius: 50%; background: radial-gradient(circle, rgba(34, 211, 238, .25), transparent 70%); }
+        .stat-icon-box { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 19px; color: var(--brand-400); background: linear-gradient(150deg, rgba(34, 211, 238, .18), rgba(255, 255, 255, .03)); border: 1px solid rgba(34, 211, 238, .18); margin-bottom: 14px; }
+        [data-theme="light"] .stat-icon-box { color: var(--brand-600); background: linear-gradient(150deg, rgba(0, 117, 125, .1), rgba(0, 117, 125, .03)); border-color: rgba(0, 117, 125, .15); }
+        .stat-title { font-size: 13px; font-weight: 600; color: var(--text-3); margin-bottom: 6px; }
+        .stat-value { font-size: 26px; font-weight: 800; color: var(--text-1); }
+        .stat-value.popular { font-size: 16px; line-height: 1.4; font-weight: 700; }
+
+        /* ===== FAQ ===== */
+        .faq-item { border-bottom: 1px solid var(--border); }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-question { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 8px; cursor: pointer; border-radius: var(--r-sm); transition: background .2s ease; }
+        .faq-question:hover { background: var(--surface-muted); }
+        .faq-q-left { display: flex; align-items: center; gap: 12px; }
+        .faq-num { width: 30px; height: 30px; flex-shrink: 0; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #fff; background: var(--brand-gradient); }
+        .faq-q-text { font-size: 14px; font-weight: 600; color: var(--text-1); }
+        .faq-icon { font-size: 14px; color: var(--text-muted); transition: transform .3s var(--ease); }
+        .faq-item.open .faq-icon { transform: rotate(180deg); color: var(--brand-400); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height .35s var(--ease); }
+        .faq-answer-inner { padding: 0 8px 16px 50px; font-size: 13.5px; color: var(--text-2); line-height: 1.65; }
+        .faq-answer-inner ul { margin: 6px 0 0; padding-left: 18px; }
+
+        /* ===== TOAST ===== */
+        .toasts { position: fixed; top: 100px; right: 20px; z-index: var(--z-toast); display: flex; flex-direction: column; gap: 10px; }
+        .toast {
+            position: relative; overflow: hidden;
+            padding: 12px 18px; border-radius: var(--r-sm);
+            background: rgba(255, 255, 255, 0.32);
+            backdrop-filter: blur(36px) saturate(200%);
+            -webkit-backdrop-filter: blur(36px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.40);
+            border-top: 1px solid rgba(255, 255, 255, 0.62);
+            color: var(--text-1);
+            font-size: 14px; font-weight: 500;
+            box-shadow: 0 2px 0 rgba(255, 255, 255, 0.60) inset, 0 12px 36px rgba(0, 0, 0, 0.14);
+            display: flex; align-items: center; gap: 12px;
+            min-width: 280px; max-width: 340px;
+            transform: translateX(120%);
+            transition: transform .3s var(--ease);
+            border-left: 4px solid var(--brand-700);
+        }
+        [data-theme="dark"] .toast {
+            background: rgba(15, 28, 32, 0.38);
+            border: 1px solid rgba(90, 184, 196, 0.20);
+            border-top: 1px solid rgba(90, 184, 196, 0.36);
+            box-shadow: 0 2px 0 rgba(90, 184, 196, 0.08) inset, 0 12px 36px rgba(0, 0, 0, 0.50);
+        }
+        .toast.show { transform: translateX(0); }
+        .toast.hide { animation: toastOut .3s var(--ease) forwards; }
+        .toast-success { border-left-color: var(--ok); }
+        .toast-error { border-left-color: var(--err); }
+        .toast-warning { border-left-color: var(--warn); }
+        .toast-info { border-left-color: var(--brand-600); }
+        .toast-ic { font-size: 16px; flex-shrink: 0; }
+        .toast-success .toast-ic { color: var(--ok); }
+        .toast-error .toast-ic { color: var(--err); }
+        .toast-warning .toast-ic { color: var(--warn); }
+        .toast-info .toast-ic { color: var(--brand-400); }
+        .toast-msg { flex: 1; }
+        .toast-line { position: absolute; left: 0; bottom: 0; height: 3px; width: 100%; background: rgba(255, 255, 255, .85); pointer-events: none; }
+        [data-theme="light"] .toast-line { background: rgba(0, 82, 93, .75); }
+        @keyframes toastOut { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+
+        /* ===== LOADİNG OVERLAY ===== */
+        .loading-overlay {
+            position: fixed; inset: 0; z-index: var(--z-loading);
+            background: rgba(0, 0, 0, 0.72); backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            opacity: 0; visibility: hidden; transition: all .3s var(--ease);
+        }
+        .loading-overlay.active { opacity: 1; visibility: visible; }
+        .loading-logo { width: 110px; height: 110px; object-fit: contain; }
+        .loading-logo.spin { animation: logoRotate 2.4s linear infinite; }
+        @keyframes logoRotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .loading-text-main { color: #fff; font-size: 17px; font-weight: 600; margin-top: 22px; }
+        .loading-text-sub { color: rgba(255, 255, 255, 0.75); font-size: 13px; margin-top: 6px; }
+        .loading-dots::after { content: '...'; animation: dots 1.5s steps(4, end) infinite; }
+        @keyframes dots { 0%, 20% { content: ''; } 40% { content: '.'; } 60% { content: '..'; } 80%, 100% { content: '...'; } }
+
+        /* ===== SCROLL PROGRESS + BACK TO TOP ===== */
+        #lms-scroll-progress {
+            position: fixed; top: 0; left: 0; right: 0; height: 4px; z-index: 1500; pointer-events: none;
+            background: rgba(255, 255, 255, .85); opacity: 0; transition: opacity .3s var(--ease); overflow: hidden;
+        }
+        #lms-scroll-progress.visible { opacity: 1; }
+        #lms-scroll-progress::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, var(--brand-600), var(--brand-400)); transform: scaleX(var(--lms-p, 0)); transform-origin: 0 50%; will-change: transform; }
+        #lms-back-to-top {
+            position: fixed; right: 20px; bottom: 26px; z-index: 1500;
+            width: 46px; height: 46px; border-radius: 50%;
+            background: var(--brand-gradient); border: 1px solid rgba(255, 255, 255, .3);
+            color: #fff; font-size: 15px; cursor: pointer; padding: 0;
+            display: grid; place-items: center;
+            box-shadow: 0 10px 26px rgba(8, 145, 178, .45);
+            opacity: 0; visibility: hidden; transform: translateY(14px) scale(.88);
+            transition: opacity .35s var(--ease), transform .35s var(--ease-out), visibility .35s;
+        }
+        #lms-back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+        #lms-back-to-top:hover { transform: translateY(-3px) scale(1.07); box-shadow: 0 14px 34px rgba(8, 145, 178, .6); }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 10px; height: 10px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(90, 184, 196, .28); border-radius: 8px; border: 2px solid transparent; background-clip: padding-box; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(34, 211, 238, .5); border: 2px solid transparent; background-clip: padding-box; }
+        html { scrollbar-width: thin; scrollbar-color: rgba(90, 184, 196, .4) transparent; }
+
+        :focus-visible { outline: 3px solid var(--brand-300); outline-offset: 2px; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1100px) {
+            body { padding-top: 78px; }
+            .header-top { padding: 8px 14px; gap: 10px; }
+            .header-left { gap: 12px; }
+            .brand-logo { width: 46px; height: 46px; }
+            .brand-title { font-size: 14px; }
+            .brand-subtitle { font-size: 11px; }
+            .brand-meta { display: none; }
+            .brand-emblem { display: none; }
+            .time-display { min-width: 0; height: 54px; }
+            .time-time { font-size: 13px; }
+            .time-date { font-size: 10px; }
+        }
+        @media (max-width: 820px) {
+            .header-actions .fullscreen-toggle { display: none; }
+        }
+        @media (max-width: 640px) {
+            body { padding-top: 62px; }
+            .header-top { padding: 6px 10px; gap: 8px; }
+            .header-left { gap: 8px; }
+            .brand-logo { width: 40px; height: 40px; }
+            .brand-title { font-size: 12px; letter-spacing: -0.3px; }
+            .brand-subtitle { font-size: 9px; }
+            .time-display { display: none; }
+            .header-actions { height: 44px; padding: 0 3px; }
+            .header-actions > * { margin: 0 3px; }
+            .header-actions .theme-orb { width: 40px; height: 40px; }
+            .dashboard-container { padding: 14px 12px 40px; }
+            .glass-card { padding: 18px; border-radius: 20px; }
+            .tab-nav { flex-wrap: nowrap; overflow-x: auto; margin-bottom: 16px; padding-bottom: 2px; scrollbar-width: none; }
+            .tab-nav::-webkit-scrollbar { display: none; }
+            .nav-btn { flex: 0 0 auto; min-width: max-content; white-space: nowrap; padding: 10px 16px; font-size: 14px; }
+            .toasts { top: 70px; right: 12px; left: 12px; }
+            .toast { min-width: 0; max-width: 100%; width: 100%; padding: 12px 14px; }
+            .control-group input, .control-group select { font-size: 16px !important; }
+            #resultFrame { height: 56vh; }
+        }
+        @media (max-width: 420px) {
+            .brand-text { display: none; }
+            .header-left { gap: 6px; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
         }
     </style>
 </head>
+<body>
 
-<body class="bg-primary-dark">
+    <!-- Anımalı arxa fon -->
+    <div class="bg-stage"></div>
+    <div class="bg-grain"></div>
 
-    <!-- Başlıq / Header -->
-    <header
-        class="bg-white/20 dark:bg-black/30 header-bg shadow-xl fixed top-0 left-0 w-full z-50 backdrop-blur-xl border-b border-white/10">
+    <!-- Scroll progress -->
+    <div id="lms-scroll-progress"></div>
 
-
-
-
-
-        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-3 sm:space-x-5">
-                <!-- Loqo -->
-                <img id="school-logo" src="https://i.imgur.com/a3FuVV8.png" alt="Okul Logosu"
-                    class="w-16 h-16 sm:w-20 sm:h-20 object-contain rounded-full border-2 logo-border p-1"
-                    onerror="this.onerror=null; this.src='https://placehold.co/80x80/ccc/333?text=Logo';" />
-                <!-- Məktəb adı -->
-                <div class="flex flex-col items-start leading-tight">
-                    <div class="flex items-center space-x-1.5 mb-1">
-                        <div class="flex items-center space-x-0.5 flex-shrink-0">
-                            <img src="https://flagcdn.com/tr.svg" alt="TR" class="w-5 h-auto shadow-sm"
-                                style="border: 0.5px solid rgba(0,0,0,0.1); border-radius: 1px;">
-                            <img src="https://flagcdn.com/az.svg" alt="AZ" class="w-5 h-auto shadow-sm"
-                                style="border: 0.5px solid rgba(0,0,0,0.1); border-radius: 1px;">
-                        </div>
-                        <span class="text-xs sm:text-sm font-medium text-tmv whitespace-nowrap">
-                            Türkiyə Maarif Vəqfi
-                        </span>
-                    </div>
-
-                    <div class="flex items-center gap-2 flex-wrap">
-                        <h1 class="header-title-text font-normal text-gray-900 text-header-title tracking-tight">
-                            Azərbaycan Beynəlxalq Maarif Məktəbləri
-                        </h1>
-                        <span
-                            class="text-xs sm:text-sm text-gray-600 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 px-2 sm:px-3 py-1 rounded-full font-medium whitespace-nowrap">
-                            Nəsimi Kampusu
-                        </span>
+    <!-- HEADER -->
+    <header class="header-top">
+        <div class="header-left">
+            <div class="brand-logo">
+                <img src="https://i.imgur.com/a3FuVV8.png" alt="Türkiyə Maarif Vəqfi Logo">
+            </div>
+            <div class="brand-text">
+                <div class="brand-title-wrap">
+                    <div class="brand-title">Türkiyə Maarif Vəqfi</div>
+                    <div class="brand-emblem" title="TMV Loqosu">
+                        <img src="https://i.imgur.com/d0hRX2m.png" alt="TMV Emblem">
                     </div>
                 </div>
+                <div class="brand-subtitle">Azərbaycan Beynəlxalq Maarif Məktəbləri</div>
+                <div class="brand-meta">
+                    <span class="brand-flags">
+                        <img src="https://flagcdn.com/tr.svg" alt="TR">
+                        <img src="https://flagcdn.com/az.svg" alt="AZ">
+                    </span>
+                    <span class="brand-campus">Nəsimi Kampusu</span>
+                </div>
             </div>
-            <!-- Gecə/Gündüz Rejimi -->
-            <div class="theme-toggle-circle">
-                <button id="theme-toggle" onclick="toggleTheme()"
-                    class="p-2 rounded-full text-gray-700 dark:text-gray-200 transition duration-300">
-                    <svg id="sun-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
-                        </path>
-                    </svg>
-                    <svg id="moon-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
-                        </path>
-                    </svg>
+        </div>
+        <div class="header-right">
+            <div class="header-widget time-display">
+                <div class="time-time">
+                    <div class="time-dot"></div>
+                    <span id="clock-time">00:00:00</span>
+                </div>
+                <div class="time-date" id="clock-date">-- ----- ----</div>
+            </div>
+            <div class="header-actions">
+                <label class="theme-orb" title="Gecə / Gündüz modu" aria-label="Gecə / Gündüz modu">
+                    <input type="checkbox" id="theme-switch">
+                    <span class="orb-stars"><i></i><i></i><i></i></span>
+                    <i class="fa-solid fa-sun sun"></i>
+                    <i class="fa-solid fa-moon moon"></i>
+                </label>
+                <button class="fullscreen-toggle" id="fullscreen-toggle" title="Bütün Ekran">
+                    <i class="fa-solid fa-expand" id="fullscreen-icon"></i>
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Saat və Tarix Paneli -->
-    <div
-        class="bg-white/10 dark:bg-black/20 backdrop-blur-md border-b border-white/10 fixed top-[110px] sm:top-[120px] left-0 w-full z-40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
-            <div class="flex justify-center items-center">
-                <div class="time-container">
-                    <div id="live-time" class="text-sm sm:text-xl font-bold text-white tabular-nums">
-                        00:00:00
-                    </div>
-                    <span class="text-white/60 mx-2">•</span>
-                    <div id="live-date"
-                        class="text-xs sm:text-base uppercase font-semibold text-white/80 whitespace-nowrap">
-                        ---
-                    </div>
+    <main class="dashboard-container">
+
+        <!-- Tab Naviqasiyası — 3 yarımbaşlıq (öncəki kimi) -->
+        <div class="tab-nav">
+            <button class="nav-btn active" id="nav-search" onclick="showSection('search-section')">
+                <i class="fa-solid fa-magnifying-glass"></i> Nəticə Axtarışı
+            </button>
+            <button class="nav-btn" id="nav-stats" onclick="showSection('stats-section')">
+                <i class="fa-solid fa-chart-simple"></i> Statistika
+            </button>
+            <button class="nav-btn" id="nav-faq" onclick="showSection('faq-section')">
+                <i class="fa-solid fa-circle-question"></i> Suallar
+            </button>
+        </div>
+
+        <!-- PANEL 1: Nəticə Axtarışı -->
+        <section id="search-section" class="panel-section">
+
+            <!-- Sorğu kartı — ortada -->
+            <div class="query-wrap">
+                <div class="glass-card" id="query-card">
+                    <h2 class="card-title" style="justify-content:center;text-align:center;font-size:21px;line-height:1.35">
+                        <i class="fa-solid fa-magnifying-glass-chart" style="flex-shrink:0"></i>
+                        İmtahan Nəticələri Yoxlama Sisteminə Xoş Gəlmisiniz!
+                    </h2>
+                    <p class="card-sub" style="text-align:center">Aşağıdakı formu dolduraraq nəticənizi yoxlaya bilərsiniz.</p>
+                    <form id="resultForm" class="form-grid" onsubmit="event.preventDefault(); viewResult();">
+                        <div class="control-group">
+                            <label for="exam">İmtahanı seçin</label>
+                            <div class="field-wrap">
+                                <i class="fa-solid fa-file-lines field-icon"></i>
+                                <select id="exam" required>
+                                    <option value="" disabled selected>İmtahanı seçin</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="id">Şagird ID nömrəsinin son 6 rəqəmi</label>
+                            <div class="field-wrap">
+                                <i class="fa-solid fa-id-card field-icon"></i>
+                                <input type="tel" id="id" required inputmode="numeric" autocomplete="off"
+                                    placeholder="XXXXXX" pattern="\d{6}" maxlength="6"
+                                    class="with-icon" oninput="validateID(this)">
+                                <span id="id-validation" class="validation-icon">
+                                    <i class="fa-solid fa-circle-check"></i>
+                                </span>
+                            </div>
+                            <span class="field-hint">İmtahana buraxılış vərəqindəki 9 rəqəmli ID-nin son 6 rəqəmi.</span>
+                        </div>
+                        <label class="checkbox-row">
+                            <input type="checkbox" id="remember-me">
+                            ID nömrəni yadda saxla
+                        </label>
+                        <button type="submit" id="search-btn" class="btn btn-primary btn-block">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <span>Nəticəni Axtar</span>
+                        </button>
+                    </form>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- YENİ: Naviqasiya Düymələri -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <div class="flex flex-wrap gap-4 justify-center">
-            <button id="nav-search" class="nav-btn active" onclick="showSection('search-section')">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                </svg>
-                Nəticə Axtarışı
-            </button>
-            <button id="nav-stats" class="nav-btn" onclick="showSection('stats-section')">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
-                    </path>
-                </svg>
-                Statistika
-            </button>
-            <button id="nav-faq" class="nav-btn" onclick="showSection('faq-section')">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                    </path>
-                </svg>
-                Suallar
-            </button>
-        </div>
-    </div>
-
-    <!-- Əsas Məzmun -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
-        <!-- PANEL 1: Nəticə Axtarışı -->
-        <div id="search-section" class="panel-section">
-            <div class="flex flex-col lg:flex-row items-start justify-center gap-8">
-                <!-- Nəticə Axtarış Kartı -->
-                <div class="w-full lg:w-1/2">
-                    <div id="query-card"
-                        class="w-full bg-white p-8 sm:p-12 rounded-2xl shadow-3xl transition-all duration-300">
-                        <div class="text-center mb-8">
-                            <h2
-                                class="text-xl sm:text-2xl font-semibold text-primary-dark text-primary-dark-override mb-3 leading-tight">
-                                İmtahan Nəticələri Yoxlama Sisteminə Xoş Gəlmisiniz!
-                            </h2>
-                        </div>
-                        <form id="resultForm" class="space-y-7" onsubmit="event.preventDefault(); viewResult();">
-                            <div>
-                                <label for="exam"
-                                    class="block text-sm font-normal text-gray-700 form-label mb-1">İmtahanı
-                                    Seçin</label>
-                                <div class="relative">
-                                    <select id="exam" required
-                                        class="custom-select-icon block w-full px-4 py-3 border border-gray-300 rounded-xl shadow-md form-input-bg focus:outline-none focus:ring-2 focus:ring-[#00525d] focus:ring-offset-0 focus-ring-primary text-base transition duration-150 ease-in-out">
-                                        <option value="" disabled selected>İmtahanı seçin</option>
-                                        <option value="Kiçik Summativ Qiymətləndirmə VI">Kiçik Summativ Qiymətləndirmə
-                                            VI</option>
-                                        <option value="Ümumi Sınaq II">Ümumi Sınaq II</option>
-                                        <option value="Kiçik Summativ Qiymətləndirmə V">Kiçik Summativ Qiymətləndirmə
-                                            V</option>
-                                        <option value="Ümumi Sınaq I">Ümumi Sınaq I</option>
-                                        <option value="Mövzu Sınağı IV">Mövzu Sınağı IV</option>
-                                        <option value="Kiçik Summativ Qiymətləndirmə IV">Kiçik Summativ Qiymətləndirmə
-                                            IV</option>
-                                        <option value="Mövzu Sınağı III">Mövzu Sınağı III</option>
-                                        <option value="Kiçik Summativ Qiymətləndirmə III">Kiçik Summativ Qiymətləndirmə
-                                            III</option>
-                                        <option value="Mövzu Sınağı II">Mövzu Sınağı II</option>
-                                        <option value="Kiçik Summativ Qiymətləndirmə II">Kiçik Summativ Qiymətləndirmə
-                                            II</option>
-                                        <option value="Mövzu Sınağı I">Mövzu Sınağı I</option>
-                                        <option value="Kiçik Summativ Qiymətləndirmə I">Kiçik Summativ Qiymətləndirmə I
-                                        </option>
-                                        <option value="Diaqnostik qiymətləndirmə">Diaqnostik qiymətləndirmə</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div>
-                                <label for="id" class="block text-sm font-normal text-gray-700 form-label mb-1">Şagird
-                                    ID nömrəsinin son 6 rəqəmi</label>
-                                <div class="relative">
-                                    <input type="tel" id="id" required
-                                        class="appearance-none block w-full px-4 py-3 rounded-xl shadow-md form-input-bg placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00525d] focus:ring-offset-0 focus-ring-primary text-base transition duration-150 ease-in-out"
-                                        placeholder="XXXXXX" pattern="\d{6}" maxlength="6" inputmode="numeric"
-                                        oninput="validateID(this)">
-                                    <div id="id-validation" class="validation-icon">
-                                        <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                d="M5 13l4 4L19 7"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex items-center">
-                                <input type="checkbox" id="remember-me"
-                                    class="w-4 h-4 text-primary-dark border-gray-300 rounded focus:ring-primary">
-                                <label for="remember-me" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">ID
-                                    nömrəni yadda saxla</label>
-                            </div>
-                            <div>
-                                <button type="submit" id="search-btn"
-                                    class="w-full flex justify-center items-center py-3.5 px-4 border border-transparent rounded-xl shadow-lg text-lg font-normal text-white bg-primary-dark bg-primary-dark-override hover:bg-primary-hover focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#00525d] transition duration-300 ease-in-out transform hover:scale-[1.01] hover:shadow-xl">
-                                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                    </svg>
-                                    Nəticəni Axtar
+            <!-- Nəticə önizləmə — geniş, rahat oxuna bilən -->
+            <div id="result-container" class="result-container">
+                <div class="result-wrap">
+                    <div class="glass-card result-card">
+                        <div class="result-header-bar">
+                            <h3 class="result-header-title">
+                                <i class="fa-solid fa-file-circle-check"></i> Şagirdin Nəticəsinə Baxış
+                            </h3>
+                            <div class="result-actions">
+                                <button onclick="downloadResult()" class="btn btn-warning btn-sm">
+                                    <i class="fa-solid fa-download"></i><span>Yüklə</span>
+                                </button>
+                                <button onclick="resetSearch()" class="btn btn-outline btn-sm">
+                                    <i class="fa-solid fa-rotate-left"></i><span>Yeni Axtarış</span>
                                 </button>
                             </div>
-                        </form>
-                    </div>
+                        </div>
 
-                    <!-- Nəticə Önizləmə Konteyneri -->
-                    <div id="result-container" class="hidden w-full mt-8 transition-opacity duration-500 opacity-0">
-                        <div
-                            class="bg-white dark:bg-gray-800 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                            <div
-                                class="bg-primary-dark bg-primary-dark-override px-6 py-4 border-b border-primary-hover flex flex-wrap justify-between items-center">
-                                <h3 class="text-xl font-normal text-white">Şagirdin Nəticəsinə Baxış</h3>
-                                <div class="flex space-x-3 mt-2 sm:mt-0">
-                                    <button onclick="downloadResult()"
-                                        class="text-sm px-4 py-2 bg-yellow-500 text-gray-900 rounded-lg font-normal hover:bg-yellow-600 transition flex items-center shadow-md transform hover:scale-[1.05]">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4">
-                                            </path>
-                                        </svg>
-                                        Yüklə
-                                    </button>
-                                    <button onclick="resetSearch()"
-                                        class="text-sm px-4 py-2 bg-gray-600 text-white rounded-lg font-normal hover:bg-gray-700 transition flex items-center shadow-md">
-                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                                        </svg>
-                                        Yeni Axtarış
-                                    </button>
+                        <div id="student-info-section" class="student-card hidden">
+                            <div class="student-avatar">
+                                <img src="https://i.imgur.com/a3FuVV8.png" alt="Məktəb Loqosu">
+                            </div>
+                            <div class="student-main">
+                                <div class="student-label">Şagirdin Adı və Soyadı</div>
+                                <div class="student-name" id="student-fullname">Məlumat tapılmadı</div>
+                                <div class="student-chips">
+                                    <span class="chip"><i class="fa-solid fa-layer-group chip-label"></i><span class="chip-label">Sinif:</span><b id="student-class">--</b></span>
+                                    <span class="chip"><i class="fa-solid fa-id-card chip-label"></i><span class="chip-label">ID:</span><b id="student-id-display">--</b></span>
+                                    <span class="chip"><i class="fa-solid fa-file-lines chip-label"></i><span class="chip-label">İmtahan:</span><b id="exam-name-display">--</b></span>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Şagird Məlumatları Bölməsi -->
-                            <div id="student-info-section"
-                                class="p-6 border-b border-gray-200 dark:border-gray-600 student-info-card hidden">
-                                <div
-                                    class="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
-                                    <!-- Profil İkonu -->
-                                    <div class="flex-shrink-0">
-                                        <img src="https://i.imgur.com/a3FuVV8.png" alt="Okul Logosu"
-                                            class="w-16 h-16 object-contain rounded-full border-2 logo-border p-1 shadow-lg"
-                                            onerror="this.onerror=null; this.src='https://placehold.co/64x64/ccc/333?text=Logo';" />
-                                    </div>
-                                    <!-- Mətn Məlumatları -->
-                                    <div class="text-center sm:text-left flex-1">
-                                        <h4
-                                            class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-                                            Şagirdin Adı və Soyadı</h4>
-                                        <p id="student-fullname"
-                                            class="text-2xl font-bold text-gray-900 dark:text-white mt-1">Məlumat
-                                            tapılmadı</p>
-
-                                        <div class="flex flex-wrap justify-center sm:justify-start gap-4 mt-3">
-                                            <!-- Sinif -->
-                                            <div
-                                                class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
-                                                <span class="text-xs text-gray-500 dark:text-gray-400">Sinif:</span>
-                                                <span id="student-class"
-                                                    class="ml-1 font-bold text-gray-800 dark:text-gray-200">--</span>
-                                            </div>
-                                            <!-- ID Nömrəsi -->
-                                            <div
-                                                class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
-                                                <span class="text-xs text-gray-500 dark:text-gray-400">ID
-                                                    Nömrəsi:</span>
-                                                <span id="student-id-display"
-                                                    class="ml-1 font-bold text-gray-800 dark:text-gray-200">--</span>
-                                            </div>
-                                            <!-- İmtahan Adı -->
-                                            <div
-                                                class="bg-white dark:bg-gray-700 px-3 py-1 rounded-lg border border-gray-200 dark:border-gray-600 shadow-sm">
-                                                <span class="text-xs text-gray-500 dark:text-gray-400">İmtahan:</span>
-                                                <span id="exam-name-display"
-                                                    class="ml-1 font-bold text-primary-dark text-primary-dark-override">--</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="p-2 bg-gray-100 dark:bg-gray-700">
-                                <iframe id="resultFrame" src="" allowfullscreen class="w-full h-96"></iframe>
+                        <div class="glass-card-inner">
+                            <div class="result-frame-wrap">
+                                <iframe id="resultFrame" src="" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- Burada artıq Sistem Haqqında bölməsi yoxdur -->
-                <!-- O bölmə indi Statistika panelindədir -->
             </div>
-        </div>
+
+        </section>
 
         <!-- PANEL 2: Statistika -->
-        <div id="stats-section" class="panel-section hidden">
-            <div class="w-full">
-                <!-- Sistem Haqqında Bölümü (Axtarış bölməsindən buraya köçürüldü) -->
-                <div
-                    class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 mb-8">
-                    <h3 class="text-xl font-semibold text-primary-dark dark:text-white mb-4">📋 Sistem Haqqında</h3>
-                    <div class="space-y-4">
-                        <p class="text-gray-700 dark:text-gray-300">
-                            Bu sistem vasitəsilə Azərbaycan Beynəlxalq Maarif Məktəbləri Nəsimi kampusu şagirdlərinin
-                            imtahan nəticələrini istənilən zaman onlayn qaydada yoxlamaq mümkündür.
-                        </p>
-                        <div class="grid grid-cols-2 gap-4 mt-6">
-                            <!-- Nəticə sayı -->
-                            <div class="stats-card-bg p-4 rounded-lg">
-                                <div class="text-2xl font-bold stats-number mb-1" id="total-results-count">752</div>
-                                <div class="text-sm stats-label">Nəticə Sayı</div>
-                            </div>
-                            <!-- İmtahan növü sayı -->
-                            <div class="stats-card-bg p-4 rounded-lg">
-                                <div class="text-2xl font-bold stats-number mb-1" id="total-exams-count">7</div>
-                                <div class="text-sm stats-label">İmtahan Növü</div>
-                            </div>
-                        </div>
+        <section id="stats-section" class="panel-section hidden">
+            <div class="glass-card">
+                <h3 class="card-title">📋 Sistem Haqqında</h3>
+                <p style="font-size:13.5px;color:var(--text-2);margin:0 0 18px">
+                    Bu sistem vasitəsilə Azərbaycan Beynəlxalq Maarif Məktəbləri Nəsimi kampusu
+                    şagirdlərinin imtahan nəticələrini istənilən zaman onlayn qaydada yoxlamaq mümkündür.
+                </p>
+                <div class="stats-grid">
+                    <div class="stat-mini">
+                        <span class="stat-num" id="total-results-count">752</span>
+                        <span class="stat-label">Nəticə Sayı</span>
                     </div>
-                </div>
-
-                <!-- Statistika Kartları -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                    <div class="bg-primary-dark bg-primary-dark-override px-6 py-4 border-b border-primary-hover">
-                        <h3 class="text-xl font-normal text-white flex items-center">
-                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
-                                </path>
-                            </svg>
-                            Statistika
-                        </h3>
-                    </div>
-                    <div class="p-8">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <!-- Ümumi Sorğu Sayı -->
-                            <div class="stats-card-bg p-6 rounded-xl shadow-sm">
-                                <div class="flex items-center justify-between mb-4">
-                                    <div
-                                        class="bg-primary-dark dark:bg-white p-3 rounded-full border border-primary-dark dark:border-white">
-                                        <svg class="w-7 h-7 text-white dark:text-primary-dark" fill="none"
-                                            stroke="currentColor" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
-                                            </path>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <p class="text-sm stats-card-title font-medium mb-2">Ümumi Sorğu Sayı</p>
-                                <p id="stat-total-queries" class="text-4xl font-bold stats-number">0</p>
-                            </div>
-
-                            <!-- Populyar İmtahan -->
-                            <div class="stats-card-bg p-6 rounded-xl shadow-sm">
-                                <div class="flex items-center justify-between mb-4">
-                                    <div
-                                        class="bg-primary-dark dark:bg-white p-3 rounded-full border border-primary-dark dark:border-white">
-                                        <svg class="w-7 h-7 text-white dark:text-primary-dark" fill="none"
-                                            stroke="currentColor" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <p class="text-sm stats-card-title font-medium mb-2">Populyar İmtahan</p>
-                                <p id="stat-popular-exam" class="popular-exam-text font-bold stats-number">Yoxlanılır...
-                                </p>
-                            </div>
-
-                            <!-- Sinif Sayı -->
-                            <div class="stats-card-bg p-6 rounded-xl shadow-sm">
-                                <div class="flex items-center justify-between mb-4">
-                                    <div
-                                        class="bg-primary-dark dark:bg-white p-3 rounded-full border border-primary-dark dark:border-white">
-                                        <svg class="w-7 h-7 text-white dark:text-primary-dark" fill="none"
-                                            stroke="currentColor" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
-                                            </path>
-                                        </svg>
-                                    </div>
-                                </div>
-                                <p class="text-sm stats-card-title font-medium mb-2">Sinif Sayı</p>
-                                <p id="stat-class-count" class="text-4xl font-bold stats-number">14</p>
-                            </div>
-                        </div>
+                    <div class="stat-mini">
+                        <span class="stat-num" id="total-exams-count">7</span>
+                        <span class="stat-label">İmtahan Növü</span>
                     </div>
                 </div>
             </div>
-        </div>
+
+            <div class="glass-card">
+                <h3 class="card-title"><i class="fa-solid fa-chart-column"></i> Statistika</h3>
+                <div class="stats-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+                    <div class="stat-card">
+                        <div class="stat-icon-box"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <div class="stat-title">Ümumi Sorğu Sayı</div>
+                        <div class="stat-value" id="stat-total-queries">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon-box"><i class="fa-solid fa-fire"></i></div>
+                        <div class="stat-title">Populyar İmtahan</div>
+                        <div class="stat-value popular" id="stat-popular-exam">Yoxlanılır...</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon-box"><i class="fa-solid fa-people-group"></i></div>
+                        <div class="stat-title">Sinif Sayı</div>
+                        <div class="stat-value" id="stat-class-count">14</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- PANEL 3: Suallar -->
-        <div id="faq-section" class="panel-section hidden">
-            <div class="w-full">
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-3xl border border-gray-200 dark:border-gray-700 overflow-hidden">
-                    <div class="bg-primary-dark bg-primary-dark-override px-6 py-4 border-b border-primary-hover">
-                        <h3 class="text-xl font-normal text-white flex items-center">
-                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                                </path>
-                            </svg>
-                            Tez-tez verilən suallar
-                        </h3>
-                    </div>
-                    <div class="p-8">
-                        <div class="space-y-4" id="faq-accordion">
-                            <!-- Sual 1 -->
-                            <div class="faq-item">
-                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center"
-                                    onclick="toggleFAQ(1)">
-                                    <div class="flex items-center">
-                                        <span class="text-lg font-bold faq-number mr-3">1.</span>
-                                        <span class="text-gray-800 dark:text-gray-200 font-medium">İmtahan nəticələrimi
-                                            necə yoxlaya bilərəm?</span>
-                                    </div>
-                                    <svg id="faq-icon-1"
-                                        class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300"
-                                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7"></path>
-                                    </svg>
-                                </div>
-                                <div id="faq-answer-1" class="faq-answer">
-                                    <div class="p-4 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300">
-                                        Cavab: Sistemdəki formu dolduraraq imtahan növünü seçmək, şagirdin ID nömrəsinin
-                                        son 6 rəqəmini daxil etmək, daha sonra "Nəticəni Axtar" düyməsinə klikləmək
-                                        kifayətdir.
-                                    </div>
-                                </div>
-                            </div>
+        <section id="faq-section" class="panel-section hidden">
+            <div class="glass-card">
+                <h3 class="card-title"><i class="fa-solid fa-circle-question"></i> Tez-tez verilən suallar</h3>
+                <div id="faq-accordion">
 
-                            <!-- Sual 2 -->
-                            <div class="faq-item">
-                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center"
-                                    onclick="toggleFAQ(2)">
-                                    <div class="flex items-center">
-                                        <span class="text-lg font-bold faq-number mr-3">2.</span>
-                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Şagird ID-ni haradan
-                                            tapa bilərəm?</span>
-                                    </div>
-                                    <svg id="faq-icon-2"
-                                        class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300"
-                                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7"></path>
-                                    </svg>
-                                </div>
-                                <div id="faq-answer-2" class="faq-answer">
-                                    <div class="p-4 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300">
-                                        Cavab: Şagird ID imtahana buraxılış vərəqində qeyd olunan 9 rəqəmli ədəddir.
-                                        Nəticəni yoxlamaq üçün ID nömrənin son 6 rəqəmini qeyd etmək kifayətdir.
-                                    </div>
-                                </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(1)">
+                            <div class="faq-q-left">
+                                <span class="faq-num">1</span>
+                                <span class="faq-q-text">İmtahan nəticələrimi necə yoxlaya bilərəm?</span>
                             </div>
-
-                            <!-- Sual 3 -->
-                            <div class="faq-item">
-                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center"
-                                    onclick="toggleFAQ(3)">
-                                    <div class="flex items-center">
-                                        <span class="text-lg font-bold faq-number mr-3">3.</span>
-                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Nəticələrimi çap edə
-                                            və ya yükləyə bilərəmmi?</span>
-                                    </div>
-                                    <svg id="faq-icon-3"
-                                        class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300"
-                                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7"></path>
-                                    </svg>
-                                </div>
-                                <div id="faq-answer-3" class="faq-answer">
-                                    <div class="p-4 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300">
-                                        Cavab: Bəli, nəticə tapıldıqdan sonra "Yüklə" düyməsinə klikləyərək
-                                        nəticələrinizi yükləyə bilərsiniz.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Sual 4 -->
-                            <div class="faq-item">
-                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center"
-                                    onclick="toggleFAQ(4)">
-                                    <div class="flex items-center">
-                                        <span class="text-lg font-bold faq-number mr-3">4.</span>
-                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Əgər nəticə tapılmasa
-                                            nə etməliyəm?</span>
-                                    </div>
-                                    <svg id="faq-icon-4"
-                                        class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300"
-                                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7"></path>
-                                    </svg>
-                                </div>
-                                <div id="faq-answer-4" class="faq-answer">
-                                    <div class="p-4 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300">
-                                        Cavab: Əvvəlcə ID nömrənizi və imtahan növünü düzgün daxil etdiyinizdən əmin
-                                        olun. Problem davam edərsə, məktəb ilə əlaqə saxlayın.
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Sual 5 -->
-                            <div class="faq-item">
-                                <div class="faq-question cursor-pointer p-4 rounded-lg bg-gray-50 dark:bg-gray-700 flex justify-between items-center"
-                                    onclick="toggleFAQ(5)">
-                                    <div class="flex items-center">
-                                        <span class="text-lg font-bold faq-number mr-3">5.</span>
-                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Hansı imtahanların
-                                            nəticələri elan edilmişdir?</span>
-                                    </div>
-                                    <svg id="faq-icon-5"
-                                        class="w-5 h-5 text-gray-500 dark:text-gray-400 transform transition-transform duration-300"
-                                        fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7"></path>
-                                    </svg>
-                                </div>
-                                <div id="faq-answer-5" class="faq-answer">
-                                    <div class="p-4 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300">
-                                        Cavab:<br>
-                                        <ul class="list-disc pl-5 mt-2 space-y-1">
-                                            <li>Diaqnostik qiymətləndirmə (III-IX siniflər)</li>
-                                            <li>Kiçik Summativ Qiymətləndirmə-1 (III-VIII siniflər)</li>
-                                            <li>Mövzu Sınağı-1 (IX sinif)</li>
-                                            <li>Kiçik Summativ Qiymətləndirmə-2 (III-VIII siniflər)</li>
-                                            <li>Mövzu Sınağı-2 (IX sinif)</li>
-                                            <li>Kiçik Summativ Qiymətləndirmə-3 (III-VIII siniflər)</li>
-                                            <li>Mövzu Sınağı-3 (IX sinif)</li>
-                                            <li>Kiçik Summativ Qiymətləndirmə-4 (III-VIII siniflər)</li>
-                                            <li>Mövzu Sınağı-4 (IX sinif)</li>
-                                            <li>Ümumi Sınaq-1 (IX sinif)</li>                           
-                                            <li>Kiçik Summativ Qiymətləndirmə-5 (III-VIII siniflər)</li>
-                                            <li>Ümumi Sınaq-2 (IX sinif)</li>
-                                            <li>Kiçik Summativ Qiymətləndirmə-6 (III-VIII siniflər)</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div id="faq-answer-1" class="faq-answer">
+                            <div class="faq-answer-inner">
+                                Sistemdəki formu dolduraraq imtahan növünü seçmək, şagirdin ID nömrəsinin son
+                                6 rəqəmini daxil etmək, daha sonra "Nəticəni Axtar" düyməsinə klikləmək kifayətdir.
                             </div>
                         </div>
                     </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(2)">
+                            <div class="faq-q-left">
+                                <span class="faq-num">2</span>
+                                <span class="faq-q-text">Şagird ID-ni haradan tapa bilərəm?</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div id="faq-answer-2" class="faq-answer">
+                            <div class="faq-answer-inner">
+                                Şagird ID imtahana buraxılış vərəqində qeyd olunan 9 rəqəmli ədəddir.
+                                Nəticəni yoxlamaq üçün ID nömrənin son 6 rəqəmini qeyd etmək kifayətdir.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(3)">
+                            <div class="faq-q-left">
+                                <span class="faq-num">3</span>
+                                <span class="faq-q-text">Nəticələrimi çap edə və ya yükləyə bilərəmmi?</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div id="faq-answer-3" class="faq-answer">
+                            <div class="faq-answer-inner">
+                                Bəli, nəticə tapıldıqdan sonra "Yüklə" düyməsinə klikləyərək nəticələrinizi yükləyə bilərsiniz.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(4)">
+                            <div class="faq-q-left">
+                                <span class="faq-num">4</span>
+                                <span class="faq-q-text">Əgər nəticə tapılmasa nə etməliyəm?</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div id="faq-answer-4" class="faq-answer">
+                            <div class="faq-answer-inner">
+                                Əvvəlcə ID nömrənizi və imtahan növünü düzgün daxil etdiyinizdən əmin olun.
+                                Problem davam edərsə, məktəb ilə əlaqə saxlayın.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(5)">
+                            <div class="faq-q-left">
+                                <span class="faq-num">5</span>
+                                <span class="faq-q-text">Hansı imtahanların nəticələri elan edilmişdir?</span>
+                            </div>
+                            <i class="fa-solid fa-chevron-down faq-icon"></i>
+                        </div>
+                        <div id="faq-answer-5" class="faq-answer">
+                            <div class="faq-answer-inner">
+                                <ul>
+                                    <li>Diaqnostik qiymətləndirmə (III-IX siniflər)</li>
+                                    <li>Kiçik Summativ Qiymətləndirmə-1 (III-VIII siniflər)</li>
+                                    <li>Mövzu Sınağı-1 (IX sinif)</li>
+                                    <li>Kiçik Summativ Qiymətləndirmə-2 (III-VIII siniflər)</li>
+                                    <li>Mövzu Sınağı-2 (IX sinif)</li>
+                                    <li>Kiçik Summativ Qiymətləndirmə-3 (III-VIII siniflər)</li>
+                                    <li>Mövzu Sınağı-3 (IX sinif)</li>
+                                    <li>Kiçik Summativ Qiymətləndirmə-4 (III-VIII siniflər)</li>
+                                    <li>Mövzu Sınağı-4 (IX sinif)</li>
+                                    <li>Ümumi Sınaq-1 (IX sinif)</li>
+                                    <li>Kiçik Summativ Qiymətləndirmə-5 (III-VIII siniflər)</li>
+                                    <li>Ümumi Sınaq-2 (IX sinif)</li>
+                                    <li>Kiçik Summativ Qiymətləndirmə-6 (III-VIII siniflər)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-        </div>
-
-        <!-- Overlay -->
-        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden flex-col items-center justify-center">
-            <div class="relative flex items-center justify-center">
-                <img id="loading-logo" src="https://i.imgur.com/d0hRX2m.png" alt="Yüklənir"
-                    class="w-28 h-28 object-contain"
-                    onerror="this.onerror=null; this.src='https://placehold.co/112x112/ccc/333?text=Logo';" />
-            </div>
-            <p class="text-white mt-8 text-xl font-normal animate-pulse">Nəticə axtarılır...</p>
-            <p class="text-gray-300 mt-2 text-sm font-light">Səbriniz üçün təşəkkür edirik!</p>
-        </div>
-
-        <!-- Toast Bildiriş -->
-        <div id="toast" class="fixed top-5 right-5 z-100 hidden transform transition-all duration-500 translate-x-full">
-            <div id="toast-content"
-                class="bg-white border-l-8 p-4 rounded-xl shadow-2xl flex items-start min-w-[350px]">
-                <div id="toast-icon" class="mr-3 mt-0.5"></div>
-                <div class="flex-1">
-                    <p id="toast-message" class="text-base font-normal text-gray-800"></p>
-                </div>
-                <button onclick="hideToast()"
-                    class="ml-4 p-1 rounded-full text-red-600 hover:bg-red-100 transition duration-150">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                        </path>
-                    </svg>
-                </button>
-            </div>
-        </div>
+        </section>
 
     </main>
+
+    <!-- Loading overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <img id="loading-logo" src="https://i.imgur.com/d0hRX2m.png" alt="Yüklənir" class="loading-logo">
+        <p class="loading-text-main">Nəticə axtarılır<span class="loading-dots"></span></p>
+        <p class="loading-text-sub">Səbriniz üçün təşəkkür edirik!</p>
+    </div>
+
+    <!-- Toastlar -->
+    <div class="toasts" id="toasts"></div>
+
+    <!-- Back to top -->
+    <button id="lms-back-to-top" title="Yuxarı qayıt">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
 
     <script>
         // API URL-ləri
         const LOG_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzpUvW4OAhTzuunQCjJw2Ldwd2cZyrDCw88pBD9MKB_oLumwwEPqHBT1Vcd8zK6DMDIFA/exec';
         const RESULT_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzX-Q13oP9_XH-gHobQKqjNmzICQa_maDt4cbVNRAsDHkLZRHDgeQw2bqYq0pYSuY38/exec";
-
-        // YENİ: Google Sheets ID
         const SHEET_ID = "1aqvXhB1Fg4_hM8yFEtDNj0TCB3i66bvCZhg0MnenQQ0";
         const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
@@ -1139,263 +941,86 @@
         let toastTimeout;
         const TOAST_DURATION = 5000;
 
-        // YENİ: İmtahanlar və nəticə sayı (nümunə dəyərlər)
-        // Bu dəyərlər real drive məlumatları ilə əvəz olunmalıdır
-        const examData = {
-            "Mövzu Sınağı II": 45,
-            "Kiçik Summativ Qiymətləndirmə II": 52,
-            "Mövzu Sınağı I": 38,
-            "Kiçik Summativ Qiymətləndirmə I": 47,
-            "Diaqnostik qiymətləndirmə": 29
-        };
+        let examData = {};
+        let studentData = {};
 
-        // --- ŞAGİRD MƏLUMAT BAZASI (TAM YENİLƏNİB) ---
-        const studentData = {
-            "759382": { name: "Allahverdi İsmail", class: "3A" },
-            "103947": { name: "Cəfərzadə Suada", class: "3A" },
-            "582016": { name: "Xankişiyev Fateh", class: "3A" },
-            "490273": { name: "İmanlı Əli", class: "3A" },
-            "816495": { name: "İsmayılova Aişə", class: "3A" },
-            "237580": { name: "Qarayeva Zəhra", class: "3A" },
-            "905621": { name: "Məmmədli Cəlal", class: "3A" },
-            "374812": { name: "Məmmədzadə Əslinur", class: "3A" },
-            "618493": { name: "Məmmədzadə Mahinur", class: "3A" },
-            "250179": { name: "Muradlı Ömər", class: "3A" },
-            "491036": { name: "Musayev Cəsur", class: "3A" },
-            "807251": { name: "Novruzlu Xədicə", class: "3A" },
-            "364720": { name: "Rəhimli Rüstəm", class: "3A" },
-            "593481": { name: "Sərdar Mehdi", class: "3A" },
-            "178409": { name: "Əliyeva İnci", class: "3B" },
-            "640523": { name: "Əliyeva Şəms", class: "3B" },
-            "927184": { name: "Əlizadə Hümeyra", class: "3B" },
-            "301576": { name: "Əmirov Ali", class: "3B" },
-            "485092": { name: "Hüseynzadə Enes", class: "3B" },
-            "762401": { name: "Karauçoğlu Alparslan", class: "3B" },
-            "819630": { name: "Kayıkçıoğlu Ömər Aras", class: "3B" },
-            "253914": { name: "Kazım Mətin", class: "3B" },
-            "470185": { name: "Qayıblı Altay", class: "3B" },
-            "694328": { name: "Məmmədzadə Əhməd", class: "3B" },
-            "135970": { name: "Musavi Həsən", class: "3B" },
-            "280461": { name: "Səfərli Onur", class: "3B" },
-            "956327": { name: "Vəli Dəfnə", class: "3B" },
-            "473198": { name: "Bektaşoğlu Zelihanur", class: "4A" },
-            "612495": { name: "Əliyeva Nəzakət", class: "4A" },
-            "804716": { name: "Əsədli Zeynəb", class: "4A" },
-            "159208": { name: "Hüseynzadə Melissa", class: "4A" },
-            "347590": { name: "Xankişiyeva İlayda", class: "4A" },
-            "580246": { name: "İbrahimov Ziya", class: "4A" },
-            "921637": { name: "Quluzadə Murad", class: "4A" },
-            "430785": { name: "Məmmədova Aylin", class: "4A" },
-            "267914": { name: "Musavi Nüman", class: "4A" },
-            "805316": { name: "Musayev Adil", class: "4A" },
-            "149027": { name: "Musa-zadə Ayxan", class: "4A" },
-            "376582": { name: "Vəlizadə İsmayıl", class: "4A" },
-            "602493": { name: "Ağayeva Fidan", class: "4B" },
-            "250398": { name: "Bayramov Uğur", class: "4B" },
-            "683147": { name: "Göyüşzadə Ayan", class: "4B" },
-            "107582": { name: "İbrahimova İpək", class: "4B" },
-            "592364": { name: "Qəmbərli Zəhra", class: "4B" },
-            "834197": { name: "Mehdizadə Aysel", class: "4B" },
-            "461205": { name: "Məmmədli Emil", class: "4B" },
-            "708913": { name: "Musayev Fateh", class: "4B" },
-            "129684": { name: "Nəsirov Nihad", class: "4B" },
-            "354270": { name: "Zülfüqarlı Hicran", class: "4B" },
-            "619485": { name: "Ağazadə Zəhra", class: "5A" },
-            "914076": { name: "Baxışlı Suada", class: "5A" },
-            "872031": { name: "Çokal Elif Ece", class: "5A" },
-            "240597": { name: "Əbdülsalamova Müjgan", class: "5A" },
-            "503618": { name: "Əliyeva Banu", class: "5A" },
-            "976204": { name: "İmamzadə Xədicə", class: "5A" },
-            "381695": { name: "İsmayılov Çingiz", class: "5A" },
-            "147082": { name: "Karataş Elif Nur", class: "5A" },
-            "650493": { name: "Qasımova Aylin", class: "5A" },
-            "812736": { name: "Mehdizadə Fidan", class: "5A" },
-            "295041": { name: "Məmmədova Gülay", class: "5A" },
-            "470286": { name: "Məsimli Zeynəb", class: "5A" },
-            "598314": { name: "Musayev Fateh", class: "5A" },
-            "136975": { name: "Müslüm Məryəm", class: "5A" },
-            "407218": { name: "Novruzlu Kadir", class: "5A" },
-            "695082": { name: "Rəsulov Camal", class: "5A" },
-            "230491": { name: "Sadmaliyeva Sara", class: "5A" },
-            "872604": { name: "Salmanov Ömər", class: "5A" },
-            "510738": { name: "Zəbiyeva Nilufər", class: "5A" },
-            "349216": { name: "Ağayev Ömər", class: "5B" },
-            "642853": { name: "Ağayev Ziya", class: "5B" },            
-            "706529": { name: "Əhmədli Rəşid", class: "5B" },
-            "481032": { name: "Əhmədov Nazim", class: "5B" },
-            "920674": { name: "Əlizadə Amal", class: "5B" },
-            "157843": { name: "Hüseynli Şəbnəm", class: "5B" },
-            "634281": { name: "Hüseynli Zeynəb", class: "5B" },
-            "805392": { name: "Işılak Esmanur", class: "5B" },
-            "241067": { name: "İsgəndərli İlayda", class: "5B" },
-            "578193": { name: "İsmayılov Məhyəddin", class: "5B" },
-            "902746": { name: "Məmmədli Aida", class: "5B" },
-            "316085": { name: "Məmmədova Məryəm", class: "5B" },
-            "479320": { name: "Məmmədzadə Aminə", class: "5B" },
-            "150287": { name: "Osmanlı İnci", class: "5B" },
-            "397614": { name: "Paşa Mahmud", class: "5B" },
-            "521083": { name: "Rayi Məryəm Nilufər", class: "5B" },
-            "860472": { name: "Surxayzadə Xədicə", class: "5B" },
-            "273915": { name: "Yunus İnci", class: "5B" },
-            "409678": { name: "Calalova Məryəm", class: "6A" },
-            "735124": { name: "Cəfərzadə Atilla", class: "6A" },
-            "608391": { name: "Əhmədli Məryəm", class: "6A" },
-            "254087": { name: "Əlizadə Aylin", class: "6A" },
-            "491630": { name: "İmamzadə Fatimə", class: "6A" },
-            "876204": { name: "İsmayıllı Xalid", class: "6A" },
-            "312597": { name: "Kazımlı Ceyla", class: "6A" },
-            "540286": { name: "Qənbərli Turqut", class: "6A" },
-            "729814": { name: "Manaflı Murad", class: "6A" },
-            "183057": { name: "Məmmədli Fərhad", class: "6A" },
-            "406291": { name: "Məmmədli Hüseyn", class: "6A" },
-            "598327": { name: "Muradova Selcan", class: "6A" },
-            "274068": { name: "Nağıyev Səyyad", class: "6A" },
-            "815439": { name: "Osmanova Məryəm", class: "6A" },
-            "103952": { name: "Sərdarlı Xədicə", class: "6A" },
-            "642708": { name: "Sultanov Fateh", class: "6A" },
-            "379164": { name: "Təhməzli Mete", class: "6A" },
-            "587231": { name: "Vəliyeva Zəhra", class: "6A" },
-            "920648": { name: "Alqayeva Kamilə", class: "6B" },
-            "136785": { name: "Eyvazova Məryəm", class: "6B" },
-            "472509": { name: "Əhmədov Azər", class: "6B" },
-            "603821": { name: "Əlirzayev Həsən", class: "6B" },
-            "815430": { name: "Əsgərova Aylin", class: "6B" },
-            "257694": { name: "Həşimli Zeynəb", class: "6B" },
-            "490862": { name: "Hüseynli Mustafa", class: "6B" },
-            "731045": { name: "Hüseynli Zəhra", class: "6B" },
-            "602198": { name: "İsmayıl Ayxan", class: "6B" },
-            "384072": { name: "Mahmudlu Altay", class: "6B" },
-            "526194": { name: "Mahmudova Zümrüd", class: "6B" },
-            "871430": { name: "Məmmədli Ağa", class: "6B" },
-            "310685": { name: "Məmmədova Ləman", class: "6B" },
-            "479206": { name: "Mustafa Muhammed", class: "6B" },
-            "695314": { name: "Namazlı Banu", class: "6B" },
-            "123987": { name: "Paşazadə Xədicə", class: "6B" },
-            "450678": { name: "Şahmərdanov Ramal", class: "6B" },
-            "807145": { name: "Ağayeva Əzizə", class: "7A" },
-            "256093": { name: "Əliyev Yusif", class: "7A" },
-            "591427": { name: "Göyüşlü Aişə", class: "7A" },
-            "843210": { name: "Hüseynli Əminə", class: "7A" },
-            "317596": { name: "İbrahimov Ömər", class: "7A" },
-            "748931": { name: "Qədməliyev Murad", class: "7A" },
-            "709815": { name: "Qəhrəmanova Qəmər", class: "7A" },
-            "154320": { name: "Quliyev Asim", class: "7A" },
-            "386297": { name: "Quliyev Ömər", class: "7A" },
-            "620514": { name: "Quluzadə Əhməd", class: "7A" },
-            "971430": { name: "Məmmədzadə Mustafa", class: "7A" },
-            "245086": { name: "Namazlı Zeynəb", class: "7A" },
-            "617903": { name: "Paşazadə Mədinə", class: "7A" },
-            "507312": { name: "Rəfiyeva Zəhra", class: "7A" },
-            "863429": { name: "Abdullayev İskəndər", class: "7B" },
-            "139506": { name: "Cenikoğlu Kaan", class: "7B" },
-            "472380": { name: "Eyvazova Zəhra", class: "7B" },
-            "685214": { name: "Əsədullazadə Nur", class: "7B" },
-            "518406": { name: "Həşimli Şəms", class: "7B" },
-            "792631": { name: "Quluzadə İlkin", class: "7B" },
-            "346205": { name: "Mehdizadə Ramin", class: "7B" },
-            "479130": { name: "Nəsibli Mehriban", class: "7B" },
-            "608492": { name: "Nəsibov Elcan", class: "7B" },
-            "251078": { name: "Novruzov Rövşən", class: "7B" },
-            "824516": { name: "Təhməzli Xəlil", class: "7B" },
-            "130497": { name: "Vəlizadə Ayxan", class: "7B" },
-            "472861": { name: "Zalov Levent", class: "7B" },
-            "748206": { name: "Calalova Zeynəb", class: "8A" },
-            "509382": { name: "Hüseynli Fatimə", class: "8A" },
-            "872054": { name: "Kərimli Fərhad", class: "8A" },
-            "263491": { name: "Quluzadə Nəzrin", class: "8A" },
-            "504318": { name: "Manaflı Mürsəl", class: "8A" },
-            "739205": { name: "Məmmədov Tuncay", class: "8A" },
-            "182046": { name: "Məmmədzadə Nuriyyə", class: "8A" },
-            "467193": { name: "Nəsibli Cavanşir", class: "8A" },
-            "407905": { name: "Nəzirli Uğur", class: "8A" },
-            "591628": { name: "Novruzlu Elcan", class: "8A" },
-            "426743": { name: "Semiz Dilay", class: "8A" },
-            "274093": { name: "Cahangirov Gündüz", class: "8B" },
-            "315208": { name: "Əkbərli Ömər", class: "8B" },
-            "487362": { name: "Əlizadə Cavad", class: "8B" },
-            "703914": { name: "Hacıyev Cavanşir", class: "8B" },
-            "156024": { name: "Həsənova Nurgül", class: "8B" },
-            "392186": { name: "Hüseynli Leyla", class: "8B" },
-            "981236": { name: "Quluzadə Safiyyə", class: "8B" },
-            "247053": { name: "Məlikova Aylin", class: "8B" },
-            "513698": { name: "Musayeva Fidan", class: "8B" },
-            "867402": { name: "Sultanova Fatimə", class: "8B" },
-            "139587": { name: "Şərifova Şərqiyyə", class: "8B" },
-            "470291": { name: "Abbaslı Ruqəyya", class: "9A" },
-            "681304": { name: "Əhmədli Gülbahar", class: "9A" },
-            "205473": { name: "Əlizadə Pakizə", class: "9A" },
-            "529140": { name: "Əmirov Amin", class: "9A" },
-            "790631": { name: "Hüseynli Dəniz", class: "9A" },
-            "341276": { name: "İbrahimov Ayaz", class: "9A" },
-            "456920": { name: "Mahmudov Xalid", class: "9A" },
-            "603782": { name: "Məmmədzadə Kürsüm", class: "9A" },
-            "218497": { name: "Mütəllimli Selcan", class: "9A" },
-            "574130": { name: "Zalova Süheyla", class: "9A" },
-            "802964": { name: "Zeynalov İbrahim", class: "9A" },
-            "371805": { name: "Əsgərova Ləman", class: "9B" },
-            "490263": { name: "Məmmədxanlı Aslan", class: "9B" },
-            "678124": { name: "Məmmədova Nuray", class: "9B" },
-            "135079": { name: "Murad Renat", class: "9B" },
-            "402185": { name: "Novruzlu Nübar", class: "9B" },
-            "569371": { name: "Vəlizadə İnci", class: "9B" },
-        };
+        async function loadExternalData() {
+            try {
+                const resp = await fetch('data.json');
+                if (!resp.ok) throw new Error(resp.status);
+                const data = await resp.json();
+                examData = data.examData || {};
+                studentData = data.students || {};
 
-        // YENİ: Panel göstərici funksiyası
+                const examSelect = document.getElementById('exam');
+                if (examSelect && data.exams) {
+                    data.exams.forEach(exam => {
+                        const opt = document.createElement('option');
+                        opt.value = exam.value;
+                        opt.textContent = exam.label;
+                        examSelect.appendChild(opt);
+                    });
+                }
+            } catch (e) {
+                console.warn("JSON yüklənə bilmədi, daxili data istifadə olunur:", e);
+                await loadEmbeddedData();
+            }
+        }
+
+        async function loadEmbeddedData() {
+            const data = {"exams":[{"value":"Kiçik Summativ Qiymətləndirmə VI","label":"Kiçik Summativ Qiymətləndirmə VI"},{"value":"Ümumi Sınaq II","label":"Ümumi Sınaq II"},{"value":"Kiçik Summativ Qiymətləndirmə V","label":"Kiçik Summativ Qiymətləndirmə V"},{"value":"Ümumi Sınaq I","label":"Ümumi Sınaq I"},{"value":"Mövzu Sınağı IV","label":"Mövzu Sınağı IV"},{"value":"Kiçik Summativ Qiymətləndirmə IV","label":"Kiçik Summativ Qiymətləndirmə IV"},{"value":"Mövzu Sınağı III","label":"Mövzu Sınağı III"},{"value":"Kiçik Summativ Qiymətləndirmə III","label":"Kiçik Summativ Qiymətləndirmə III"},{"value":"Mövzu Sınağı II","label":"Mövzu Sınağı II"},{"value":"Kiçik Summativ Qiymətləndirmə II","label":"Kiçik Summativ Qiymətləndirmə II"},{"value":"Mövzu Sınağı I","label":"Mövzu Sınağı I"},{"value":"Kiçik Summativ Qiymətləndirmə I","label":"Kiçik Summativ Qiymətləndirmə I"},{"value":"Diaqnostik qiymətləndirmə","label":"Diaqnostik qiymətləndirmə"}],"examData":{"Mövzu Sınağı II":45,"Kiçik Summativ Qiymətləndirmə II":52,"Mövzu Sınağı I":38,"Kiçik Summativ Qiymətləndirmə I":47,"Diaqnostik qiymətləndirmə":29},"students":{"759382":{"name":"Allahverdi İsmail","class":"3A"},"103947":{"name":"Cəfərzadə Suada","class":"3A"},"582016":{"name":"Xankişiyev Fateh","class":"3A"},"490273":{"name":"İmanlı Əli","class":"3A"},"816495":{"name":"İsmayılova Aişə","class":"3A"},"237580":{"name":"Qarayeva Zəhra","class":"3A"},"905621":{"name":"Məmmədli Cəlal","class":"3A"},"374812":{"name":"Məmmədzadə Əslinur","class":"3A"},"618493":{"name":"Məmmədzadə Mahinur","class":"3A"},"250179":{"name":"Muradlı Ömər","class":"3A"},"491036":{"name":"Musayev Cəsur","class":"3A"},"807251":{"name":"Novruzlu Xədicə","class":"3A"},"364720":{"name":"Rəhimli Rüstəm","class":"3A"},"593481":{"name":"Sərdar Mehdi","class":"3A"},"178409":{"name":"Əliyeva İnci","class":"3B"},"640523":{"name":"Əliyeva Şəms","class":"3B"},"927184":{"name":"Əlizadə Hümeyra","class":"3B"},"301576":{"name":"Əmirov Ali","class":"3B"},"485092":{"name":"Hüseynzadə Enes","class":"3B"},"762401":{"name":"Karauçoğlu Alparslan","class":"3B"},"819630":{"name":"Kayıkçıoğlu Ömər Aras","class":"3B"},"253914":{"name":"Kazım Mətin","class":"3B"},"470185":{"name":"Qayıblı Altay","class":"3B"},"694328":{"name":"Məmmədzadə Əhməd","class":"3B"},"135970":{"name":"Musavi Həsən","class":"3B"},"280461":{"name":"Səfərli Onur","class":"3B"},"956327":{"name":"Vəli Dəfnə","class":"3B"},"473198":{"name":"Bektaşoğlu Zelihanur","class":"4A"},"612495":{"name":"Əliyeva Nəzakət","class":"4A"},"804716":{"name":"Əsədli Zeynəb","class":"4A"},"159208":{"name":"Hüseynzadə Melissa","class":"4A"},"347590":{"name":"Xankişiyeva İlayda","class":"4A"},"580246":{"name":"İbrahimov Ziya","class":"4A"},"921637":{"name":"Quluzadə Murad","class":"4A"},"430785":{"name":"Məmmədova Aylin","class":"4A"},"267914":{"name":"Musavi Nüman","class":"4A"},"805316":{"name":"Musayev Adil","class":"4A"},"149027":{"name":"Musa-zadə Ayxan","class":"4A"},"376582":{"name":"Vəlizadə İsmayıl","class":"4A"},"602493":{"name":"Ağayeva Fidan","class":"4B"},"250398":{"name":"Bayramov Uğur","class":"4B"},"683147":{"name":"Göyüşzadə Ayan","class":"4B"},"107582":{"name":"İbrahimova İpək","class":"4B"},"592364":{"name":"Qəmbərli Zəhra","class":"4B"},"834197":{"name":"Mehdizadə Aysel","class":"4B"},"461205":{"name":"Məmmədli Emil","class":"4B"},"708913":{"name":"Musayev Fateh","class":"4B"},"129684":{"name":"Nəsirov Nihad","class":"4B"},"354270":{"name":"Zülfüqarlı Hicran","class":"4B"},"619485":{"name":"Ağazadə Zəhra","class":"5A"},"914076":{"name":"Baxışlı Suada","class":"5A"},"872031":{"name":"Çokal Elif Ece","class":"5A"},"240597":{"name":"Əbdülsalamova Müjgan","class":"5A"},"503618":{"name":"Əliyeva Banu","class":"5A"},"976204":{"name":"İmamzadə Xədicə","class":"5A"},"381695":{"name":"İsmayılov Çingiz","class":"5A"},"147082":{"name":"Karataş Elif Nur","class":"5A"},"650493":{"name":"Qasımova Aylin","class":"5A"},"812736":{"name":"Mehdizadə Fidan","class":"5A"},"295041":{"name":"Məmmədova Gülay","class":"5A"},"470286":{"name":"Məsimli Zeynəb","class":"5A"},"598314":{"name":"Musayev Fateh","class":"5A"},"136975":{"name":"Müslüm Məryəm","class":"5A"},"407218":{"name":"Novruzlu Kadir","class":"5A"},"695082":{"name":"Rəsulov Camal","class":"5A"},"230491":{"name":"Sadmaliyeva Sara","class":"5A"},"872604":{"name":"Salmanov Ömər","class":"5A"},"510738":{"name":"Zəbiyeva Nilufər","class":"5A"},"349216":{"name":"Ağayev Ömər","class":"5B"},"642853":{"name":"Ağayev Ziya","class":"5B"},"706529":{"name":"Əhmədli Rəşid","class":"5B"},"481032":{"name":"Əhmədov Nazim","class":"5B"},"920674":{"name":"Əlizadə Amal","class":"5B"},"157843":{"name":"Hüseynli Şəbnəm","class":"5B"},"634281":{"name":"Hüseynli Zeynəb","class":"5B"},"805392":{"name":"Işılak Esmanur","class":"5B"},"241067":{"name":"İsgəndərli İlayda","class":"5B"},"578193":{"name":"İsmayılov Məhyəddin","class":"5B"},"902746":{"name":"Məmmədli Aida","class":"5B"},"316085":{"name":"Məmmədova Məryəm","class":"5B"},"479320":{"name":"Məmmədzadə Aminə","class":"5B"},"150287":{"name":"Osmanlı İnci","class":"5B"},"397614":{"name":"Paşa Mahmud","class":"5B"},"521083":{"name":"Rayi Məryəm Nilufər","class":"5B"},"860472":{"name":"Surxayzadə Xədicə","class":"5B"},"273915":{"name":"Yunus İnci","class":"5B"},"409678":{"name":"Calalova Məryəm","class":"6A"},"735124":{"name":"Cəfərzadə Atilla","class":"6A"},"608391":{"name":"Əhmədli Məryəm","class":"6A"},"254087":{"name":"Əlizadə Aylin","class":"6A"},"491630":{"name":"İmamzadə Fatimə","class":"6A"},"876204":{"name":"İsmayıllı Xalid","class":"6A"},"312597":{"name":"Kazımlı Ceyla","class":"6A"},"540286":{"name":"Qənbərli Turqut","class":"6A"},"729814":{"name":"Manaflı Murad","class":"6A"},"183057":{"name":"Məmmədli Fərhad","class":"6A"},"406291":{"name":"Məmmədli Hüseyn","class":"6A"},"598327":{"name":"Muradova Selcan","class":"6A"},"274068":{"name":"Nağıyev Səyyad","class":"6A"},"815439":{"name":"Osmanova Məryəm","class":"6A"},"103952":{"name":"Sərdarlı Xədicə","class":"6A"},"642708":{"name":"Sultanov Fateh","class":"6A"},"379164":{"name":"Təhməzli Mete","class":"6A"},"587231":{"name":"Vəliyeva Zəhra","class":"6A"},"920648":{"name":"Alqayeva Kamilə","class":"6B"},"136785":{"name":"Eyvazova Məryəm","class":"6B"},"472509":{"name":"Əhmədov Azər","class":"6B"},"603821":{"name":"Əlirzayev Həsən","class":"6B"},"815430":{"name":"Əsgərova Aylin","class":"6B"},"257694":{"name":"Həşimli Zeynəb","class":"6B"},"490862":{"name":"Hüseynli Mustafa","class":"6B"},"731045":{"name":"Hüseynli Zəhra","class":"6B"},"602198":{"name":"İsmayıl Ayxan","class":"6B"},"384072":{"name":"Mahmudlu Altay","class":"6B"},"526194":{"name":"Mahmudova Zümrüd","class":"6B"},"871430":{"name":"Məmmədli Ağa","class":"6B"},"310685":{"name":"Məmmədova Ləman","class":"6B"},"479206":{"name":"Mustafa Muhammed","class":"6B"},"695314":{"name":"Namazlı Banu","class":"6B"},"123987":{"name":"Paşazadə Xədicə","class":"6B"},"450678":{"name":"Şahmərdanov Ramal","class":"6B"},"807145":{"name":"Ağayeva Əzizə","class":"7A"},"256093":{"name":"Əliyev Yusif","class":"7A"},"591427":{"name":"Göyüşlü Aişə","class":"7A"},"843210":{"name":"Hüseynli Əminə","class":"7A"},"317596":{"name":"İbrahimov Ömər","class":"7A"},"748931":{"name":"Qədməliyev Murad","class":"7A"},"709815":{"name":"Qəhrəmanova Qəmər","class":"7A"},"154320":{"name":"Quliyev Asim","class":"7A"},"386297":{"name":"Quliyev Ömər","class":"7A"},"620514":{"name":"Quluzadə Əhməd","class":"7A"},"971430":{"name":"Məmmədzadə Mustafa","class":"7A"},"245086":{"name":"Namazlı Zeynəb","class":"7A"},"617903":{"name":"Paşazadə Mədinə","class":"7A"},"507312":{"name":"Rəfiyeva Zəhra","class":"7A"},"863429":{"name":"Abdullayev İskəndər","class":"7B"},"139506":{"name":"Cenikoğlu Kaan","class":"7B"},"472380":{"name":"Eyvazova Zəhra","class":"7B"},"685214":{"name":"Əsədullazadə Nur","class":"7B"},"518406":{"name":"Həşimli Şəms","class":"7B"},"792631":{"name":"Quluzadə İlkin","class":"7B"},"346205":{"name":"Mehdizadə Ramin","class":"7B"},"479130":{"name":"Nəsibli Mehriban","class":"7B"},"608492":{"name":"Nəsibov Elcan","class":"7B"},"251078":{"name":"Novruzov Rövşən","class":"7B"},"824516":{"name":"Təhməzli Xəlil","class":"7B"},"130497":{"name":"Vəlizadə Ayxan","class":"7B"},"472861":{"name":"Zalov Levent","class":"7B"},"748206":{"name":"Calalova Zeynəb","class":"8A"},"509382":{"name":"Hüseynli Fatimə","class":"8A"},"872054":{"name":"Kərimli Fərhad","class":"8A"},"263491":{"name":"Quluzadə Nəzrin","class":"8A"},"504318":{"name":"Manaflı Mürsəl","class":"8A"},"739205":{"name":"Məmmədov Tuncay","class":"8A"},"182046":{"name":"Məmmədzadə Nuriyyə","class":"8A"},"467193":{"name":"Nəsibli Cavanşir","class":"8A"},"407905":{"name":"Nəzirli Uğur","class":"8A"},"591628":{"name":"Novruzlu Elcan","class":"8A"},"426743":{"name":"Semiz Dilay","class":"8A"},"274093":{"name":"Cahangirov Gündüz","class":"8B"},"315208":{"name":"Əkbərli Ömər","class":"8B"},"487362":{"name":"Əlizadə Cavad","class":"8B"},"703914":{"name":"Hacıyev Cavanşir","class":"8B"},"156024":{"name":"Həsənova Nurgül","class":"8B"},"392186":{"name":"Hüseynli Leyla","class":"8B"},"981236":{"name":"Quluzadə Safiyyə","class":"8B"},"247053":{"name":"Məlikova Aylin","class":"8B"},"513698":{"name":"Musayeva Fidan","class":"8B"},"867402":{"name":"Sultanova Fatimə","class":"8B"},"139587":{"name":"Şərifova Şərqiyyə","class":"8B"},"470291":{"name":"Abbaslı Ruqəyya","class":"9A"},"681304":{"name":"Əhmədli Gülbahar","class":"9A"},"205473":{"name":"Əlizadə Pakizə","class":"9A"},"529140":{"name":"Əmirov Amin","class":"9A"},"790631":{"name":"Hüseynli Dəniz","class":"9A"},"341276":{"name":"İbrahimov Ayaz","class":"9A"},"456920":{"name":"Mahmudov Xalid","class":"9A"},"603782":{"name":"Məmmədzadə Kürsüm","class":"9A"},"218497":{"name":"Mütəllimli Selcan","class":"9A"},"574130":{"name":"Zalova Süheyla","class":"9A"},"802964":{"name":"Zeynalov İbrahim","class":"9A"},"371805":{"name":"Əsgərova Ləman","class":"9B"},"490263":{"name":"Məmmədxanlı Aslan","class":"9B"},"678124":{"name":"Məmmədova Nuray","class":"9B"},"135079":{"name":"Murad Renat","class":"9B"},"402185":{"name":"Novruzlu Nübar","class":"9B"},"569371":{"name":"Vəlizadə İnci","class":"9B"}}};
+            examData = data.examData || {};
+            studentData = data.students || {};
+
+            const examSelect = document.getElementById('exam');
+            if (examSelect && data.exams) {
+                data.exams.forEach(exam => {
+                    const opt = document.createElement('option');
+                    opt.value = exam.value;
+                    opt.textContent = exam.label;
+                    examSelect.appendChild(opt);
+                });
+            }
+        }
+
+        /* ================= PANELLƏR ================= */
         function showSection(sectionId) {
-            // Bütün panelləri gizlət
             document.querySelectorAll('.panel-section').forEach(section => {
                 section.classList.add('hidden');
             });
-
-            // Seçilmiş paneli göstər
             document.getElementById(sectionId).classList.remove('hidden');
 
-            // Bütün nav düymələrini deaktiv et
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            const map = { 'search-section': 'nav-search', 'stats-section': 'nav-stats', 'faq-section': 'nav-faq' };
+            const activeBtn = document.getElementById(map[sectionId]);
+            if (activeBtn) activeBtn.classList.add('active');
 
-            // Aktiv nav düyməsini aktiv et
-            if (sectionId === 'search-section') {
-                document.getElementById('nav-search').classList.add('active');
-            } else if (sectionId === 'stats-section') {
-                document.getElementById('nav-stats').classList.add('active');
-                // Statistika panelinə keçəndə məlumatları yenilə
+            if (sectionId === 'stats-section') {
                 fetchStats();
                 updateExamStats();
-            } else if (sectionId === 'faq-section') {
-                document.getElementById('nav-faq').classList.add('active');
             }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // YENİ: FAQ Accordion Funksiyası (TƏKMİLLƏŞDİRİLMİŞ)
+        /* ================= FAQ ================= */
         function toggleFAQ(id) {
-            const answer = document.getElementById(`faq-answer-${id}`);
-            const icon = document.getElementById(`faq-icon-${id}`);
+            const item = document.getElementById('faq-answer-' + id).closest('.faq-item');
+            const answer = document.getElementById('faq-answer-' + id);
+            const isOpen = item.classList.contains('open');
 
-            const isOpen = answer.classList.contains('open');
-
-            // Bütün digər sualları bağla
-            document.querySelectorAll('.faq-answer').forEach(item => {
-                if (item.id !== `faq-answer-${id}`) {
-                    item.classList.remove('open');
-                    const otherId = item.id.split('-')[2];
-                    const otherIcon = document.getElementById(`faq-icon-${otherId}`);
-                    if (otherIcon) otherIcon.classList.remove('rotate-180');
-                }
+            document.querySelectorAll('.faq-item.open').forEach(el => {
+                el.classList.remove('open');
+                const a = el.querySelector('.faq-answer');
+                a.style.maxHeight = null;
             });
 
-            // Əgər bağlı idisə, aç
             if (!isOpen) {
-                answer.classList.add('open');
-                icon.classList.add('rotate-180');
-            } else {
-                // Əgər açıq idisə, bağla
-                answer.classList.remove('open');
-                icon.classList.remove('rotate-180');
+                item.classList.add('open');
+                answer.style.maxHeight = answer.scrollHeight + 'px';
             }
         }
-        // YENİ: Rəqəm animasiyası funksiyası
+
+        /* ================= RƏQƏM ANİMASİYASI ================= */
         function animateValue(id, start, end, duration) {
             const obj = document.getElementById(id);
             if (!obj) return;
@@ -1403,29 +1028,23 @@
             const step = (timestamp) => {
                 if (!startTimestamp) startTimestamp = timestamp;
                 const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-                obj.innerHTML = Math.floor(progress * (end - start) + start).toLocaleString();
-                if (progress < 1) {
-                    window.requestAnimationFrame(step);
-                }
+                obj.textContent = Math.floor(progress * (end - start) + start).toLocaleString();
+                if (progress < 1) window.requestAnimationFrame(step);
             };
             window.requestAnimationFrame(step);
         }
 
-        // YENİ: İmtahan statistikalarını yenilə (Animasiyalı)
         function updateExamStats() {
             try {
                 const totalResults = 1142;
                 const totalExams = 13;
-
                 animateValue("total-results-count", 0, totalResults, 1500);
                 setTimeout(() => animateValue("total-exams-count", 0, totalExams, 1000), 200);
-
             } catch (error) {
                 console.error("İmtahan statistikaları yenilənərkən xəta:", error);
             }
         }
 
-        // YENİ: Statistika məlumatlarını Google Sheets-dən çəkən funksiya
         async function fetchStats() {
             try {
                 const response = await fetch(SHEET_URL);
@@ -1434,7 +1053,6 @@
                 const rows = json.table.rows;
 
                 const totalQueries = rows.length + 400;
-
                 const examCounts = {};
                 let popularExam = "Məlumat yoxdur";
                 let maxCount = 0;
@@ -1443,7 +1061,6 @@
                     if (row.c && row.c[2] && row.c[2].v) {
                         const examName = row.c[2].v;
                         examCounts[examName] = (examCounts[examName] || 0) + 1;
-
                         if (examCounts[examName] > maxCount) {
                             maxCount = examCounts[examName];
                             popularExam = examName;
@@ -1452,18 +1069,16 @@
                 });
 
                 const classCount = 14;
-
                 animateValue("stat-total-queries", 0, totalQueries, 1500);
                 document.getElementById("stat-popular-exam").textContent = popularExam;
                 animateValue("stat-class-count", 0, classCount, 1000);
-
             } catch (error) {
                 console.error("Statistika yüklənərkən xəta:", error);
                 document.getElementById("stat-class-count").textContent = "14";
             }
         }
 
-        // YENİ: ID Validasiyası
+        /* ================= VALİDASİYA ================= */
         function validateID(input) {
             const id = input.value.trim();
             const validationIcon = document.getElementById('id-validation');
@@ -1474,6 +1089,7 @@
             }
         }
 
+        /* ================= SƏS EFFEKTLƏRİ ================= */
         function playSuccessTone() {
             try {
                 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -1516,94 +1132,90 @@
             } catch (e) { console.error("Səs xətası:", e); }
         }
 
-        function hideToast() {
-            const toast = document.getElementById('toast');
-            clearTimeout(toastTimeout);
-            toast.classList.add('translate-x-full');
-            setTimeout(() => toast.classList.add('hidden'), 500);
-        }
+        /* ================= TOAST ================= */
+        const TOAST_ICONS = {
+            success: 'fa-circle-check',
+            error: 'fa-circle-exclamation',
+            warning: 'fa-triangle-exclamation',
+            info: 'fa-circle-info',
+            announcement: 'fa-bell'
+        };
 
         function showNotification(message, type = 'info', autoHide = true) {
-            clearTimeout(toastTimeout);
+            const container = document.getElementById('toasts');
+            if (!container) return;
+            const t = type === 'announcement' ? 'warning' : type;
+            const icon = TOAST_ICONS[t] || TOAST_ICONS.info;
 
-            const toast = document.getElementById('toast');
-            const content = document.getElementById('toast-content');
-            const msgEl = document.getElementById('toast-message');
-            const iconEl = document.getElementById('toast-icon');
+            if (t === 'success' || t === 'info') playSuccessTone();
+            else if (t === 'error') playErrorTone();
 
-            msgEl.textContent = message;
+            const el = document.createElement('div');
+            el.className = 'toast toast-' + t;
+            el.innerHTML = '<span class="toast-ic"><i class="fa-solid ' + icon + '"></i></span>' +
+                '<span class="toast-msg"></span>' +
+                '<span class="toast-line"></span>';
+            el.querySelector('.toast-msg').textContent = message;
+            container.appendChild(el);
 
-            let borderColor, iconHtml;
+            requestAnimationFrame(() => el.classList.add('show'));
 
-            if (type === 'success' || type === 'announcement' || type === 'info') playSuccessTone();
-            else if (type === 'error') playErrorTone();
+            const line = el.querySelector('.toast-line');
+            const duration = autoHide ? TOAST_DURATION : 7000;
+            line.style.transition = 'width ' + duration + 'ms linear';
+            requestAnimationFrame(() => line.style.width = '0%');
 
-            if (type === 'success') {
-                borderColor = 'border-green-500';
-                iconHtml = '<svg class="w-7 h-7 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-            } else if (type === 'error') {
-                borderColor = 'border-red-500';
-                iconHtml = '<svg class="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-            } else if (type === 'announcement') {
-                borderColor = 'border-yellow-500';
-                iconHtml = '<span class="text-3xl">🔔</span>';
-            } else {
-                borderColor = 'border-blue-500';
-                iconHtml = '<svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-            }
-
-            const isDark = document.documentElement.classList.contains('dark');
-            const bgColor = isDark ? 'bg-gray-800' : 'bg-white';
-            const textColor = isDark ? 'text-gray-200' : 'text-gray-800';
-
-            content.className = `${bgColor} border-l-8 ${borderColor} p-4 rounded-xl shadow-2xl flex items-start min-w-[350px]`;
-            msgEl.className = `text-base font-normal ${textColor}`;
-            iconEl.innerHTML = iconHtml;
-
-            toast.classList.add('translate-x-full');
-            toast.classList.remove('hidden');
-            setTimeout(() => toast.classList.remove('translate-x-full'), 10);
-
-            if (autoHide) {
-                toastTimeout = setTimeout(() => hideToast(), TOAST_DURATION);
-            }
+            setTimeout(() => {
+                el.classList.add('hide');
+                setTimeout(() => el.remove(), 350);
+            }, duration);
         }
 
+        /* ================= TEMA ================= */
         function setInitialTheme() {
-            // HƏR ZAMAN GECƏ MODU - localStorage heç yoxlanmır
-            document.documentElement.classList.add('dark');
-            updateThemeIcons(true);
-
-            // localStorage-u TAMAMEN SİLİRİK - heç bir şey yaddaşda saxlanmır
-            localStorage.removeItem('theme');
-        }
-
-        function updateThemeIcons(isDark) {
-            document.getElementById('sun-icon').classList.toggle('hidden', isDark);
-            document.getElementById('moon-icon').classList.toggle('hidden', !isDark);
+            document.documentElement.setAttribute('data-theme', 'dark');
+            const sw = document.getElementById('theme-switch');
+            if (sw) sw.checked = false;
         }
 
         function toggleTheme() {
-            const wasDark = document.documentElement.classList.contains('dark');
-            const isDark = !wasDark;
-
-            document.documentElement.classList.toggle('dark', isDark);
-            updateThemeIcons(isDark);
-
-            // localStorage-a HEÇ NƏ YAZMIRIQ - yaddaşda saxlanmır
-            // localStorage.setItem('theme', isDark ? 'dark' : 'light');
-
+            const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+            const isDark = current === 'light';
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            const sw = document.getElementById('theme-switch');
+            if (sw) sw.checked = !isDark;
             showNotification(isDark ? "Gecə rejimi aktivləşdirildi." : "Gündüz rejimi aktivləşdirildi.", 'info');
         }
 
-        function startLoadingAnimation() {
-            document.getElementById('loading-logo').classList.add('loading-logo');
+        /* ================= SAAT ================= */
+        function updateClock() {
+            const now = new Date();
+            const days = ['Bazar', 'Bazar ertəsi', 'Çərşənbə axşamı', 'Çərşənbə', 'Cümə axşamı', 'Cümə', 'Şənbə'];
+            const months = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'İyun', 'İyul', 'Avqust', 'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr'];
+            const timeEl = document.getElementById('clock-time');
+            const dateEl = document.getElementById('clock-date');
+            if (timeEl) timeEl.textContent =
+                String(now.getHours()).padStart(2, '0') + ':' +
+                String(now.getMinutes()).padStart(2, '0') + ':' +
+                String(now.getSeconds()).padStart(2, '0');
+            if (dateEl) dateEl.textContent =
+                now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear() + ', ' + days[now.getDay()];
         }
 
-        function stopLoadingAnimation() {
-            document.getElementById('loading-logo').classList.remove('loading-logo');
+        /* ================= YÜKLƏMƏ ================= */
+        function startLoading() {
+            const overlay = document.getElementById('loading-overlay');
+            overlay.classList.add('active');
+            document.getElementById('loading-logo').classList.add('spin');
         }
 
+        function stopLoading() {
+            const overlay = document.getElementById('loading-overlay');
+            overlay.classList.remove('active');
+            document.getElementById('loading-logo').classList.remove('spin');
+        }
+
+        /* ================= ƏSAS SORĞU ================= */
         async function viewResult() {
             const idInput = document.getElementById("id");
             const examSelect = document.getElementById("exam");
@@ -1623,40 +1235,34 @@
                 return;
             }
 
-            // Şagird məlumatını yoxlamaq
             const student = studentData[idValue];
             if (!student) {
-                document.getElementById("query-card").classList.add("shake");
-                setTimeout(() => document.getElementById("query-card").classList.remove("shake"), 500);
+                const card = document.getElementById("query-card");
+                card.classList.add("shake");
+                setTimeout(() => card.classList.remove("shake"), 500);
                 showNotification(`"${idValue}" ID nömrəli şagird bazada tapılmadı. Zəhmət olmasa ID-ni yoxlayın.`, "error");
                 return;
             }
 
-            // ID yadda saxlama
             if (document.getElementById("remember-me").checked) {
                 localStorage.setItem("remembered_id", idValue);
             } else {
                 localStorage.removeItem("remembered_id");
             }
 
-
-            const overlay = document.getElementById("overlay");
             const resultContainer = document.getElementById("result-container");
             const studentInfoSection = document.getElementById("student-info-section");
 
-            resultContainer.classList.add("opacity-0", "hidden");
-            overlay.classList.remove("hidden");
-            overlay.classList.add("flex");
-            startLoadingAnimation();
+            resultContainer.classList.remove("visible");
+            studentInfoSection.classList.add("hidden");
+            startLoading();
 
             try {
-                // API-dən nəticəni yoxlayır
                 const response = await fetch(RESULT_SCRIPT_URL + "?id=" + encodeURIComponent(idValue) + "&exam=" + encodeURIComponent(examValue));
                 const data = await response.json();
 
-                stopLoadingAnimation();
+                stopLoading();
 
-                // Loglamanı fon rejimində edirik
                 fetch(LOG_SCRIPT_URL, {
                     method: 'POST',
                     body: new URLSearchParams({
@@ -1667,42 +1273,31 @@
                 }).catch(e => console.error("Log error", e));
 
                 setTimeout(() => {
-                    overlay.classList.add("hidden");
-                    overlay.classList.remove("flex");
-
                     if (data.status === "found" && data.preview) {
-                        // YENİ: Sınav adını da bildiriş mesajına ekle
                         showNotification(`"${student.name}" üçün "${examText}" nəticəsi uğurla tapıldı!`, "success");
 
                         lastPreviewUrl = data.preview;
                         document.getElementById("resultFrame").src = data.preview;
 
-                        // --- ŞAGİRD VƏ İMTAHAN MƏLUMATINI YERLƏŞDİR (YENİLƏNİB) ---
                         document.getElementById("student-fullname").textContent = student.name;
                         document.getElementById("student-class").textContent = student.class;
                         document.getElementById("student-id-display").textContent = idValue;
                         document.getElementById("exam-name-display").textContent = examText;
 
                         studentInfoSection.classList.remove("hidden");
-
-                        resultContainer.classList.remove("hidden");
-                        setTimeout(() => resultContainer.classList.remove("opacity-0"), 50);
+                        resultContainer.classList.add("visible");
                         resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-                        // YENİ: Sorğu tamamlandıqdan sonra statistikanı yenilə
                         fetchStats();
-
                     } else {
                         showNotification(`"${student.name}" şagirdi üçün "${examText}" nəticəsi tapılmadı.`, "error");
-                        studentInfoSection.classList.add("hidden"); // Məlumat tapılmadısa məlumat kartını gizlət
+                        studentInfoSection.classList.add("hidden");
                     }
                 }, 500);
 
             } catch (error) {
-                stopLoadingAnimation();
+                stopLoading();
                 console.error("Fetch xətası:", error);
-                overlay.classList.add("hidden");
-                overlay.classList.remove("flex");
                 showNotification("Sistem xətası baş verdi.", "error");
             }
         }
@@ -1711,13 +1306,11 @@
             const resultContainer = document.getElementById("result-container");
             const resultFrame = document.getElementById("resultFrame");
 
-            resultContainer.classList.add("opacity-0");
+            resultContainer.classList.remove("visible");
             setTimeout(() => {
-                resultContainer.classList.add("hidden");
                 resultFrame.src = "";
                 lastPreviewUrl = "";
                 document.getElementById("resultForm").reset();
-                // Təmizləyəndə məlumat kartını da gizlət
                 document.getElementById("student-info-section").classList.add("hidden");
                 showNotification("Axtarış nəticəsi gizlədildi.", "info");
             }, 300);
@@ -1731,10 +1324,61 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        /* ================= TAM EKRAN ================= */
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().then(() => {
+                    document.getElementById('fullscreen-icon').className = 'fa-solid fa-compress';
+                }).catch(() => {});
+            } else {
+                document.exitFullscreen().then(() => {
+                    document.getElementById('fullscreen-icon').className = 'fa-solid fa-expand';
+                }).catch(() => {});
+            }
+        }
+
+        /* ================= SCROLL ================= */
+        function initScrollEffects() {
+            const progress = document.getElementById('lms-scroll-progress');
+            const backToTop = document.getElementById('lms-back-to-top');
+
+            const onScroll = () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const p = docHeight > 0 ? scrollTop / docHeight : 0;
+                progress.style.setProperty('--lms-p', p);
+                progress.classList.toggle('visible', scrollTop > 40);
+                backToTop.classList.toggle('visible', scrollTop > 400);
+            };
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            document.getElementById('fullscreen-toggle').addEventListener('click', toggleFullscreen);
+        }
+
+        /* ================= BAŞLANĞIC ================= */
+        document.addEventListener('DOMContentLoaded', async () => {
+            const overlay = document.getElementById('loading-overlay');
+            const mainText = overlay.querySelector('.loading-text-main');
+            const subText = overlay.querySelector('.loading-text-sub');
+            const origMain = mainText.innerHTML;
+            const origSub = subText.textContent;
+            mainText.innerHTML = 'Sistem yüklənir<span class="loading-dots"></span>';
+            subText.textContent = 'Xoş gəlmisiniz!';
+            startLoading();
+
+            await loadExternalData();
+            await new Promise(r => setTimeout(r, 3000));
+
+            stopLoading();
+            mainText.innerHTML = origMain;
+            subText.textContent = origSub;
             setInitialTheme();
 
-            // Yadda saxlanılan ID-ni yoxla
+            document.getElementById('theme-switch').addEventListener('change', toggleTheme);
+
             const rememberedId = localStorage.getItem("remembered_id");
             if (rememberedId) {
                 document.getElementById("id").value = rememberedId;
@@ -1744,13 +1388,14 @@
 
             showSection('search-section');
             updateExamStats();
+            initScrollEffects();
 
-            // Sistem teması değişikliklerini dinleyen kodu TAMAMEN SİLİN
-            // localStorage heç istifadə edilmir
+            updateClock();
+            setInterval(updateClock, 1000);
 
             setTimeout(() => {
                 showNotification("Kiçik Summativ Qiymətləndirmə VI imtahanının nəticələri elan edilmişdir!", 'announcement');
-            }, 500);
+            }, 800);
 
             document.addEventListener('keypress', function (e) {
                 if (e.key === 'Enter') {
@@ -1761,36 +1406,7 @@
                     }
                 }
             });
-
-            // YENİ: Canlı Saat Funksiyası
-            function updateClock() {
-                const now = new Date();
-                const days = ['Bazar', 'Bazar ertəsi', 'Çərşənbə axşamı', 'Çərşənbə', 'Cümə axşamı', 'Cümə', 'Şənbə'];
-                const months = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'İyun', 'İyul', 'Avqust', 'Sentyabr', 'Oktyabr', 'Noyabr', 'Dekabr'];
-
-                const dayName = days[now.getDay()];
-                const date = now.getDate();
-                const monthName = months[now.getMonth()];
-                const year = now.getFullYear();
-
-                const hours = String(now.getHours()).padStart(2, '0');
-                const minutes = String(now.getMinutes()).padStart(2, '0');
-                const seconds = String(now.getSeconds()).padStart(2, '0');
-
-                const timeString = `${hours}:${minutes}:${seconds}`;
-                const dateString = `${date} ${monthName} ${year}, ${dayName}`;
-
-                const timeEl = document.getElementById('live-time');
-                const dateEl = document.getElementById('live-date');
-
-                if (timeEl) timeEl.textContent = timeString;
-                if (dateEl) dateEl.textContent = dateString;
-            }
-
-            setInterval(updateClock, 1000);
-            updateClock();
         });
     </script>
 </body>
-
 </html>
