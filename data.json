@@ -1,17 +1,5 @@
 {
     "exams": [
-        { "value": "Kiçik Summativ Qiymətləndirmə VI", "label": "Kiçik Summativ Qiymətləndirmə VI" },
-        { "value": "Ümumi Sınaq II", "label": "Ümumi Sınaq II" },
-        { "value": "Kiçik Summativ Qiymətləndirmə V", "label": "Kiçik Summativ Qiymətləndirmə V" },
-        { "value": "Ümumi Sınaq I", "label": "Ümumi Sınaq I" },
-        { "value": "Mövzu Sınağı IV", "label": "Mövzu Sınağı IV" },
-        { "value": "Kiçik Summativ Qiymətləndirmə IV", "label": "Kiçik Summativ Qiymətləndirmə IV" },
-        { "value": "Mövzu Sınağı III", "label": "Mövzu Sınağı III" },
-        { "value": "Kiçik Summativ Qiymətləndirmə III", "label": "Kiçik Summativ Qiymətləndirmə III" },
-        { "value": "Mövzu Sınağı II", "label": "Mövzu Sınağı II" },
-        { "value": "Kiçik Summativ Qiymətləndirmə II", "label": "Kiçik Summativ Qiymətləndirmə II" },
-        { "value": "Mövzu Sınağı I", "label": "Mövzu Sınağı I" },
-        { "value": "Kiçik Summativ Qiymətləndirmə I", "label": "Kiçik Summativ Qiymətləndirmə I" },
         { "value": "Diaqnostik qiymətləndirmə", "label": "Diaqnostik qiymətləndirmə" }
     ],
     "examData": {
