@@ -430,6 +430,7 @@
             border-radius: var(--r-md);
             background: var(--surface-muted);
             border: 1px solid var(--border);
+            overflow: hidden;
         }
         .student-avatar {
             width: 72px; height: 72px; flex-shrink: 0;
@@ -454,6 +455,8 @@
             gap: 6px;
         }
         .chip .chip-label { color: var(--text-muted); font-weight: 500; }
+        .chip i.chip-label { color: var(--brand-600); }
+        [data-theme="dark"] .chip i.chip-label { color: var(--brand-300); }
         .chip b { color: var(--text-1); font-weight: 700; }
         .chip .chip-check { color: var(--ok); }
 
@@ -598,6 +601,7 @@
             .brand-title { font-size: 12px; letter-spacing: -0.3px; }
             .brand-subtitle { font-size: 9px; }
             .time-display { display: none; }
+            .greeting-widget { display: none; }
             .header-actions { height: 44px; padding: 0 3px; }
             .header-actions > * { margin: 0 3px; }
             .header-actions .theme-orb { width: 40px; height: 40px; }
@@ -609,6 +613,10 @@
             .toasts { top: 70px; right: 12px; left: 12px; }
             .toast { min-width: 0; max-width: 100%; width: 100%; padding: 12px 14px; }
             .control-group input, .control-group select { font-size: 16px !important; }
+            .student-card { margin: 14px 0; padding: 14px; gap: 12px; }
+            .student-avatar { width: 56px; height: 56px; }
+            .student-name { font-size: 17px; }
+            .chip { padding: 5px 10px; font-size: 12px; }
             #resultFrame { height: 56vh; }
         }
         @media (max-width: 420px) {
@@ -754,21 +762,6 @@
                                 <button onclick="resetSearch()" class="btn btn-outline btn-sm">
                                     <i class="fa-solid fa-rotate-left"></i><span>Yeni Axtarış</span>
                                 </button>
-                            </div>
-                        </div>
-
-                        <div id="student-info-section" class="student-card hidden">
-                            <div class="student-avatar">
-                                <img src="https://i.imgur.com/a3FuVV8.png" alt="Məktəb Loqosu">
-                            </div>
-                            <div class="student-main">
-                                <div class="student-label">Şagirdin Adı və Soyadı</div>
-                                <div class="student-name" id="student-fullname">Məlumat tapılmadı</div>
-                                <div class="student-chips">
-                                    <span class="chip"><i class="fa-solid fa-layer-group chip-label"></i><span class="chip-label">Sinif:</span><b id="student-class">--</b></span>
-                                    <span class="chip"><i class="fa-solid fa-id-card chip-label"></i><span class="chip-label">ID:</span><b id="student-id-display">--</b></span>
-                                    <span class="chip"><i class="fa-solid fa-file-lines chip-label"></i><span class="chip-label">İmtahan:</span><b id="exam-name-display">--</b></span>
-                                </div>
                             </div>
                         </div>
 
@@ -970,7 +963,7 @@
         }
 
         async function loadEmbeddedData() {
-            const data = {"exams":[{"value":"Kiçik Summativ Qiymətləndirmə VI","label":"Kiçik Summativ Qiymətləndirmə VI"},{"value":"Ümumi Sınaq II","label":"Ümumi Sınaq II"},{"value":"Kiçik Summativ Qiymətləndirmə V","label":"Kiçik Summativ Qiymətləndirmə V"},{"value":"Ümumi Sınaq I","label":"Ümumi Sınaq I"},{"value":"Mövzu Sınağı IV","label":"Mövzu Sınağı IV"},{"value":"Kiçik Summativ Qiymətləndirmə IV","label":"Kiçik Summativ Qiymətləndirmə IV"},{"value":"Mövzu Sınağı III","label":"Mövzu Sınağı III"},{"value":"Kiçik Summativ Qiymətləndirmə III","label":"Kiçik Summativ Qiymətləndirmə III"},{"value":"Mövzu Sınağı II","label":"Mövzu Sınağı II"},{"value":"Kiçik Summativ Qiymətləndirmə II","label":"Kiçik Summativ Qiymətləndirmə II"},{"value":"Mövzu Sınağı I","label":"Mövzu Sınağı I"},{"value":"Kiçik Summativ Qiymətləndirmə I","label":"Kiçik Summativ Qiymətləndirmə I"},{"value":"Diaqnostik qiymətləndirmə","label":"Diaqnostik qiymətləndirmə"}],"examData":{"Mövzu Sınağı II":45,"Kiçik Summativ Qiymətləndirmə II":52,"Mövzu Sınağı I":38,"Kiçik Summativ Qiymətləndirmə I":47,"Diaqnostik qiymətləndirmə":29},"students":{"759382":{"name":"Allahverdi İsmail","class":"3A"},"103947":{"name":"Cəfərzadə Suada","class":"3A"},"582016":{"name":"Xankişiyev Fateh","class":"3A"},"490273":{"name":"İmanlı Əli","class":"3A"},"816495":{"name":"İsmayılova Aişə","class":"3A"},"237580":{"name":"Qarayeva Zəhra","class":"3A"},"905621":{"name":"Məmmədli Cəlal","class":"3A"},"374812":{"name":"Məmmədzadə Əslinur","class":"3A"},"618493":{"name":"Məmmədzadə Mahinur","class":"3A"},"250179":{"name":"Muradlı Ömər","class":"3A"},"491036":{"name":"Musayev Cəsur","class":"3A"},"807251":{"name":"Novruzlu Xədicə","class":"3A"},"364720":{"name":"Rəhimli Rüstəm","class":"3A"},"593481":{"name":"Sərdar Mehdi","class":"3A"},"178409":{"name":"Əliyeva İnci","class":"3B"},"640523":{"name":"Əliyeva Şəms","class":"3B"},"927184":{"name":"Əlizadə Hümeyra","class":"3B"},"301576":{"name":"Əmirov Ali","class":"3B"},"485092":{"name":"Hüseynzadə Enes","class":"3B"},"762401":{"name":"Karauçoğlu Alparslan","class":"3B"},"819630":{"name":"Kayıkçıoğlu Ömər Aras","class":"3B"},"253914":{"name":"Kazım Mətin","class":"3B"},"470185":{"name":"Qayıblı Altay","class":"3B"},"694328":{"name":"Məmmədzadə Əhməd","class":"3B"},"135970":{"name":"Musavi Həsən","class":"3B"},"280461":{"name":"Səfərli Onur","class":"3B"},"956327":{"name":"Vəli Dəfnə","class":"3B"},"473198":{"name":"Bektaşoğlu Zelihanur","class":"4A"},"612495":{"name":"Əliyeva Nəzakət","class":"4A"},"804716":{"name":"Əsədli Zeynəb","class":"4A"},"159208":{"name":"Hüseynzadə Melissa","class":"4A"},"347590":{"name":"Xankişiyeva İlayda","class":"4A"},"580246":{"name":"İbrahimov Ziya","class":"4A"},"921637":{"name":"Quluzadə Murad","class":"4A"},"430785":{"name":"Məmmədova Aylin","class":"4A"},"267914":{"name":"Musavi Nüman","class":"4A"},"805316":{"name":"Musayev Adil","class":"4A"},"149027":{"name":"Musa-zadə Ayxan","class":"4A"},"376582":{"name":"Vəlizadə İsmayıl","class":"4A"},"602493":{"name":"Ağayeva Fidan","class":"4B"},"250398":{"name":"Bayramov Uğur","class":"4B"},"683147":{"name":"Göyüşzadə Ayan","class":"4B"},"107582":{"name":"İbrahimova İpək","class":"4B"},"592364":{"name":"Qəmbərli Zəhra","class":"4B"},"834197":{"name":"Mehdizadə Aysel","class":"4B"},"461205":{"name":"Məmmədli Emil","class":"4B"},"708913":{"name":"Musayev Fateh","class":"4B"},"129684":{"name":"Nəsirov Nihad","class":"4B"},"354270":{"name":"Zülfüqarlı Hicran","class":"4B"},"619485":{"name":"Ağazadə Zəhra","class":"5A"},"914076":{"name":"Baxışlı Suada","class":"5A"},"872031":{"name":"Çokal Elif Ece","class":"5A"},"240597":{"name":"Əbdülsalamova Müjgan","class":"5A"},"503618":{"name":"Əliyeva Banu","class":"5A"},"976204":{"name":"İmamzadə Xədicə","class":"5A"},"381695":{"name":"İsmayılov Çingiz","class":"5A"},"147082":{"name":"Karataş Elif Nur","class":"5A"},"650493":{"name":"Qasımova Aylin","class":"5A"},"812736":{"name":"Mehdizadə Fidan","class":"5A"},"295041":{"name":"Məmmədova Gülay","class":"5A"},"470286":{"name":"Məsimli Zeynəb","class":"5A"},"598314":{"name":"Musayev Fateh","class":"5A"},"136975":{"name":"Müslüm Məryəm","class":"5A"},"407218":{"name":"Novruzlu Kadir","class":"5A"},"695082":{"name":"Rəsulov Camal","class":"5A"},"230491":{"name":"Sadmaliyeva Sara","class":"5A"},"872604":{"name":"Salmanov Ömər","class":"5A"},"510738":{"name":"Zəbiyeva Nilufər","class":"5A"},"349216":{"name":"Ağayev Ömər","class":"5B"},"642853":{"name":"Ağayev Ziya","class":"5B"},"706529":{"name":"Əhmədli Rəşid","class":"5B"},"481032":{"name":"Əhmədov Nazim","class":"5B"},"920674":{"name":"Əlizadə Amal","class":"5B"},"157843":{"name":"Hüseynli Şəbnəm","class":"5B"},"634281":{"name":"Hüseynli Zeynəb","class":"5B"},"805392":{"name":"Işılak Esmanur","class":"5B"},"241067":{"name":"İsgəndərli İlayda","class":"5B"},"578193":{"name":"İsmayılov Məhyəddin","class":"5B"},"902746":{"name":"Məmmədli Aida","class":"5B"},"316085":{"name":"Məmmədova Məryəm","class":"5B"},"479320":{"name":"Məmmədzadə Aminə","class":"5B"},"150287":{"name":"Osmanlı İnci","class":"5B"},"397614":{"name":"Paşa Mahmud","class":"5B"},"521083":{"name":"Rayi Məryəm Nilufər","class":"5B"},"860472":{"name":"Surxayzadə Xədicə","class":"5B"},"273915":{"name":"Yunus İnci","class":"5B"},"409678":{"name":"Calalova Məryəm","class":"6A"},"735124":{"name":"Cəfərzadə Atilla","class":"6A"},"608391":{"name":"Əhmədli Məryəm","class":"6A"},"254087":{"name":"Əlizadə Aylin","class":"6A"},"491630":{"name":"İmamzadə Fatimə","class":"6A"},"876204":{"name":"İsmayıllı Xalid","class":"6A"},"312597":{"name":"Kazımlı Ceyla","class":"6A"},"540286":{"name":"Qənbərli Turqut","class":"6A"},"729814":{"name":"Manaflı Murad","class":"6A"},"183057":{"name":"Məmmədli Fərhad","class":"6A"},"406291":{"name":"Məmmədli Hüseyn","class":"6A"},"598327":{"name":"Muradova Selcan","class":"6A"},"274068":{"name":"Nağıyev Səyyad","class":"6A"},"815439":{"name":"Osmanova Məryəm","class":"6A"},"103952":{"name":"Sərdarlı Xədicə","class":"6A"},"642708":{"name":"Sultanov Fateh","class":"6A"},"379164":{"name":"Təhməzli Mete","class":"6A"},"587231":{"name":"Vəliyeva Zəhra","class":"6A"},"920648":{"name":"Alqayeva Kamilə","class":"6B"},"136785":{"name":"Eyvazova Məryəm","class":"6B"},"472509":{"name":"Əhmədov Azər","class":"6B"},"603821":{"name":"Əlirzayev Həsən","class":"6B"},"815430":{"name":"Əsgərova Aylin","class":"6B"},"257694":{"name":"Həşimli Zeynəb","class":"6B"},"490862":{"name":"Hüseynli Mustafa","class":"6B"},"731045":{"name":"Hüseynli Zəhra","class":"6B"},"602198":{"name":"İsmayıl Ayxan","class":"6B"},"384072":{"name":"Mahmudlu Altay","class":"6B"},"526194":{"name":"Mahmudova Zümrüd","class":"6B"},"871430":{"name":"Məmmədli Ağa","class":"6B"},"310685":{"name":"Məmmədova Ləman","class":"6B"},"479206":{"name":"Mustafa Muhammed","class":"6B"},"695314":{"name":"Namazlı Banu","class":"6B"},"123987":{"name":"Paşazadə Xədicə","class":"6B"},"450678":{"name":"Şahmərdanov Ramal","class":"6B"},"807145":{"name":"Ağayeva Əzizə","class":"7A"},"256093":{"name":"Əliyev Yusif","class":"7A"},"591427":{"name":"Göyüşlü Aişə","class":"7A"},"843210":{"name":"Hüseynli Əminə","class":"7A"},"317596":{"name":"İbrahimov Ömər","class":"7A"},"748931":{"name":"Qədməliyev Murad","class":"7A"},"709815":{"name":"Qəhrəmanova Qəmər","class":"7A"},"154320":{"name":"Quliyev Asim","class":"7A"},"386297":{"name":"Quliyev Ömər","class":"7A"},"620514":{"name":"Quluzadə Əhməd","class":"7A"},"971430":{"name":"Məmmədzadə Mustafa","class":"7A"},"245086":{"name":"Namazlı Zeynəb","class":"7A"},"617903":{"name":"Paşazadə Mədinə","class":"7A"},"507312":{"name":"Rəfiyeva Zəhra","class":"7A"},"863429":{"name":"Abdullayev İskəndər","class":"7B"},"139506":{"name":"Cenikoğlu Kaan","class":"7B"},"472380":{"name":"Eyvazova Zəhra","class":"7B"},"685214":{"name":"Əsədullazadə Nur","class":"7B"},"518406":{"name":"Həşimli Şəms","class":"7B"},"792631":{"name":"Quluzadə İlkin","class":"7B"},"346205":{"name":"Mehdizadə Ramin","class":"7B"},"479130":{"name":"Nəsibli Mehriban","class":"7B"},"608492":{"name":"Nəsibov Elcan","class":"7B"},"251078":{"name":"Novruzov Rövşən","class":"7B"},"824516":{"name":"Təhməzli Xəlil","class":"7B"},"130497":{"name":"Vəlizadə Ayxan","class":"7B"},"472861":{"name":"Zalov Levent","class":"7B"},"748206":{"name":"Calalova Zeynəb","class":"8A"},"509382":{"name":"Hüseynli Fatimə","class":"8A"},"872054":{"name":"Kərimli Fərhad","class":"8A"},"263491":{"name":"Quluzadə Nəzrin","class":"8A"},"504318":{"name":"Manaflı Mürsəl","class":"8A"},"739205":{"name":"Məmmədov Tuncay","class":"8A"},"182046":{"name":"Məmmədzadə Nuriyyə","class":"8A"},"467193":{"name":"Nəsibli Cavanşir","class":"8A"},"407905":{"name":"Nəzirli Uğur","class":"8A"},"591628":{"name":"Novruzlu Elcan","class":"8A"},"426743":{"name":"Semiz Dilay","class":"8A"},"274093":{"name":"Cahangirov Gündüz","class":"8B"},"315208":{"name":"Əkbərli Ömər","class":"8B"},"487362":{"name":"Əlizadə Cavad","class":"8B"},"703914":{"name":"Hacıyev Cavanşir","class":"8B"},"156024":{"name":"Həsənova Nurgül","class":"8B"},"392186":{"name":"Hüseynli Leyla","class":"8B"},"981236":{"name":"Quluzadə Safiyyə","class":"8B"},"247053":{"name":"Məlikova Aylin","class":"8B"},"513698":{"name":"Musayeva Fidan","class":"8B"},"867402":{"name":"Sultanova Fatimə","class":"8B"},"139587":{"name":"Şərifova Şərqiyyə","class":"8B"},"470291":{"name":"Abbaslı Ruqəyya","class":"9A"},"681304":{"name":"Əhmədli Gülbahar","class":"9A"},"205473":{"name":"Əlizadə Pakizə","class":"9A"},"529140":{"name":"Əmirov Amin","class":"9A"},"790631":{"name":"Hüseynli Dəniz","class":"9A"},"341276":{"name":"İbrahimov Ayaz","class":"9A"},"456920":{"name":"Mahmudov Xalid","class":"9A"},"603782":{"name":"Məmmədzadə Kürsüm","class":"9A"},"218497":{"name":"Mütəllimli Selcan","class":"9A"},"574130":{"name":"Zalova Süheyla","class":"9A"},"802964":{"name":"Zeynalov İbrahim","class":"9A"},"371805":{"name":"Əsgərova Ləman","class":"9B"},"490263":{"name":"Məmmədxanlı Aslan","class":"9B"},"678124":{"name":"Məmmədova Nuray","class":"9B"},"135079":{"name":"Murad Renat","class":"9B"},"402185":{"name":"Novruzlu Nübar","class":"9B"},"569371":{"name":"Vəlizadə İnci","class":"9B"}}};
+            const data = {"exams":[{"value":"Kiçik Summativ Qiymətləndirmə VI","label":"Kiçik Summativ Qiymətləndirmə VI"},{"value":"Ümumi Sınaq II","label":"Ümumi Sınaq II"},{"value":"Kiçik Summativ Qiymətləndirmə V","label":"Kiçik Summativ Qiymətləndirmə V"},{"value":"Ümumi Sınaq I","label":"Ümumi Sınaq I"},{"value":"Mövzu Sınağı IV","label":"Mövzu Sınağı IV"},{"value":"Kiçik Summativ Qiymətləndirmə IV","label":"Kiçik Summativ Qiymətləndirmə IV"},{"value":"Mövzu Sınağı III","label":"Mövzu Sınağı III"},{"value":"Kiçik Summativ Qiymətləndirmə III","label":"Kiçik Summativ Qiymətləndirmə III"},{"value":"Mövzu Sınağı II","label":"Mövzu Sınağı II"},{"value":"Kiçik Summativ Qiymətləndirmə II","label":"Kiçik Summativ Qiymətləndirmə II"},{"value":"Mövzu Sınağı I","label":"Mövzu Sınağı I"},{"value":"Kiçik Summativ Qiymətləndirmə I","label":"Kiçik Summativ Qiymətləndirmə I"},{"value":"Diaqnostik qiymətləndirmə","label":"Diaqnostik qiymətləndirmə"}],"examData":{"Mövzu Sinağı II":45,"Kiçik Summativ Qiymətləndirmə II":52,"Mövzu Sinağı I":38,"Kiçik Summativ Qiymətləndirmə I":47,"Diaqnostik qiymətləndirmə":29}};
             examData = data.examData || {};
             studentData = data.students || {};
 
@@ -1264,10 +1257,8 @@
             }
 
             const resultContainer = document.getElementById("result-container");
-            const studentInfoSection = document.getElementById("student-info-section");
 
             resultContainer.classList.remove("visible");
-            studentInfoSection.classList.add("hidden");
             startLoading();
 
             try {
@@ -1292,19 +1283,12 @@
                         lastPreviewUrl = data.preview;
                         document.getElementById("resultFrame").src = data.preview;
 
-                        document.getElementById("student-fullname").textContent = student.name;
-                        document.getElementById("student-class").textContent = student.class;
-                        document.getElementById("student-id-display").textContent = idValue;
-                        document.getElementById("exam-name-display").textContent = examText;
-
-                        studentInfoSection.classList.remove("hidden");
                         resultContainer.classList.add("visible");
                         resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
                         fetchStats();
                     } else {
                         showNotification(`"${student.name}" şagirdi üçün "${examText}" nəticəsi tapılmadı.`, "error");
-                        studentInfoSection.classList.add("hidden");
                     }
                 }, 500);
 
@@ -1324,7 +1308,6 @@
                 resultFrame.src = "";
                 lastPreviewUrl = "";
                 document.getElementById("resultForm").reset();
-                document.getElementById("student-info-section").classList.add("hidden");
                 showNotification("Axtarış nəticəsi gizlədildi.", "info");
             }, 300);
         }
