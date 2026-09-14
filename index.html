@@ -585,7 +585,7 @@
             .brand-title { font-size: 14px; }
             .brand-subtitle { font-size: 11px; }
             .brand-meta { display: none; }
-            .brand-emblem { display: none; }
+            .brand-emblem { width: 16px; height: 16px; }
             .time-display { min-width: 0; height: 54px; }
             .time-time { font-size: 13px; }
             .time-date { font-size: 10px; }
@@ -620,7 +620,10 @@
             #resultFrame { height: 56vh; }
         }
         @media (max-width: 420px) {
-            .brand-text { display: none; }
+            .brand-subtitle { display: none; }
+            .brand-meta { display: none; }
+            .brand-emblem { width: 14px; height: 14px; }
+            .brand-title { font-size: 11px; }
             .header-left { gap: 6px; }
         }
         @media (prefers-reduced-motion: reduce) {
