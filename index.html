@@ -414,6 +414,20 @@
         .result-header-bar .btn-outline::after { background: rgba(255, 255, 255, 0.12); }
         .result-header-bar .btn-outline:hover { background: rgba(255, 255, 255, 0.22); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); }
 
+        .result-student-info {
+            display: flex; flex-wrap: wrap; gap: 10px; padding: 14px 24px;
+            background: var(--surface-muted);
+            border-bottom: 1px solid var(--border);
+        }
+        .rsi-chip {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--surface-strong); border: 1px solid var(--border-strong);
+            border-radius: 8px; padding: 6px 12px;
+            font-size: 13px; font-weight: 600; color: var(--text-1);
+        }
+        .rsi-chip i { color: var(--brand-600); font-size: 13px; }
+        [data-theme="dark"] .rsi-chip i { color: var(--brand-300); }
+
         .result-frame-wrap {
             overflow: hidden; border-radius: var(--r-md);
             border: 1px solid var(--border-strong);
@@ -584,7 +598,7 @@
             .brand-logo { width: 46px; height: 46px; }
             .brand-title { font-size: 14px; }
             .brand-subtitle { font-size: 11px; }
-            .brand-meta { display: none; }
+            .brand-meta { gap: 6px; }
             .brand-emblem { width: 16px; height: 16px; }
             .time-display { min-width: 0; height: 54px; }
             .time-time { font-size: 13px; }
@@ -620,10 +634,12 @@
             #resultFrame { height: 56vh; }
         }
         @media (max-width: 420px) {
-            .brand-subtitle { display: none; }
-            .brand-meta { display: none; }
-            .brand-emblem { width: 14px; height: 14px; }
-            .brand-title { font-size: 11px; }
+            .brand-title { font-size: 10px; }
+            .brand-subtitle { font-size: 8px; }
+            .brand-emblem { width: 12px; height: 12px; }
+            .brand-meta { gap: 4px; }
+            .brand-meta img { height: 10px; width: 14px; }
+            .brand-campus { font-size: 9px; padding: 1px 5px; }
             .header-left { gap: 6px; }
         }
         @media (prefers-reduced-motion: reduce) {
@@ -766,6 +782,12 @@
                                     <i class="fa-solid fa-rotate-left"></i><span>Yeni Axtarış</span>
                                 </button>
                             </div>
+                        </div>
+
+                        <div class="result-student-info" id="result-student-info">
+                            <div class="rsi-chip"><i class="fa-solid fa-user"></i> <span id="rsi-name"></span></div>
+                            <div class="rsi-chip"><i class="fa-solid fa-layer-group"></i> <span id="rsi-class"></span></div>
+                            <div class="rsi-chip"><i class="fa-solid fa-file-lines"></i> <span id="rsi-exam"></span></div>
                         </div>
 
                         <div class="glass-card-inner">
@@ -966,7 +988,7 @@
         }
 
         async function loadEmbeddedData() {
-            const data = {"exams":[{"value":"Kiçik Summativ Qiymətləndirmə VI","label":"Kiçik Summativ Qiymətləndirmə VI"},{"value":"Ümumi Sınaq II","label":"Ümumi Sınaq II"},{"value":"Kiçik Summativ Qiymətləndirmə V","label":"Kiçik Summativ Qiymətləndirmə V"},{"value":"Ümumi Sınaq I","label":"Ümumi Sınaq I"},{"value":"Mövzu Sınağı IV","label":"Mövzu Sınağı IV"},{"value":"Kiçik Summativ Qiymətləndirmə IV","label":"Kiçik Summativ Qiymətləndirmə IV"},{"value":"Mövzu Sınağı III","label":"Mövzu Sınağı III"},{"value":"Kiçik Summativ Qiymətləndirmə III","label":"Kiçik Summativ Qiymətləndirmə III"},{"value":"Mövzu Sınağı II","label":"Mövzu Sınağı II"},{"value":"Kiçik Summativ Qiymətləndirmə II","label":"Kiçik Summativ Qiymətləndirmə II"},{"value":"Mövzu Sınağı I","label":"Mövzu Sınağı I"},{"value":"Kiçik Summativ Qiymətləndirmə I","label":"Kiçik Summativ Qiymətləndirmə I"},{"value":"Diaqnostik qiymətləndirmə","label":"Diaqnostik qiymətləndirmə"}],"examData":{"Mövzu Sinağı II":45,"Kiçik Summativ Qiymətləndirmə II":52,"Mövzu Sinağı I":38,"Kiçik Summativ Qiymətləndirmə I":47,"Diaqnostik qiymətləndirmə":29}};
+            const data = {"exams":[{"value":"Diaqnostik qiymətləndirmə","label":"Diaqnostik qiymətləndirmə"}],"examData":{"Diaqnostik qiymətləndirmə":29}};
             examData = data.examData || {};
             studentData = data.students || {};
 
@@ -1035,7 +1057,7 @@
         function updateExamStats() {
             try {
                 const totalResults = 1142;
-                const totalExams = 13;
+                const totalExams = 1;
                 animateValue("total-results-count", 0, totalResults, 1500);
                 setTimeout(() => animateValue("total-exams-count", 0, totalExams, 1000), 200);
             } catch (error) {
@@ -1286,6 +1308,10 @@
                         lastPreviewUrl = data.preview;
                         document.getElementById("resultFrame").src = data.preview;
 
+                        document.getElementById("rsi-name").textContent = student.name;
+                        document.getElementById("rsi-class").textContent = student.class;
+                        document.getElementById("rsi-exam").textContent = examText;
+
                         resultContainer.classList.add("visible");
                         resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
@@ -1310,6 +1336,9 @@
             setTimeout(() => {
                 resultFrame.src = "";
                 lastPreviewUrl = "";
+                document.getElementById("rsi-name").textContent = "";
+                document.getElementById("rsi-class").textContent = "";
+                document.getElementById("rsi-exam").textContent = "";
                 document.getElementById("resultForm").reset();
                 showNotification("Axtarış nəticəsi gizlədildi.", "info");
             }, 300);

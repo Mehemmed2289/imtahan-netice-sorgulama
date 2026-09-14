@@ -3,10 +3,6 @@
         { "value": "Diaqnostik qiymətləndirmə", "label": "Diaqnostik qiymətləndirmə" }
     ],
     "examData": {
-        "Mövzu Sinağı II": 45,
-        "Kiçik Summativ Qiymətləndirmə II": 52,
-        "Mövzu Sinağı I": 38,
-        "Kiçik Summativ Qiymətləndirmə I": 47,
         "Diaqnostik qiymətləndirmə": 29
     },
     "students": {
