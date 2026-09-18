@@ -1,927 +1,234 @@
 {
-    "stats":  {
-                  "totalResults":  0,
-                  "totalExams":  1,
-                  "classCount":  16
-              },
-    "exams":  [
-                  {
-                      "value":  "Diaqnostik qiymətləndirmə",
-                      "label":  "Diaqnostik qiymətləndirmə"
-                  }
-              ],
-    "students":  {
-                     "160835":  {
-                                    "name":  "Aslan Məmmədxanlı",
-                                    "class":  "10A"
-                                },
-                     "183389":  {
-                                    "name":  "Aylin İzzətli",
-                                    "class":  "10A"
-                                },
-                     "184125":  {
-                                    "name":  "Əli Həsənli",
-                                    "class":  "10A"
-                                },
-                     "538275":  {
-                                    "name":  "İlhan Altınkaya",
-                                    "class":  "10A"
-                                },
-                     "259126":  {
-                                    "name":  "Mahmud Həmzəli",
-                                    "class":  "10A"
-                                },
-                     "701470":  {
-                                    "name":  "Nurgül Şahməmmədova",
-                                    "class":  "10A"
-                                },
-                     "938491":  {
-                                    "name":  "Pakizə Əlizadə",
-                                    "class":  "10A"
-                                },
-                     "418755":  {
-                                    "name":  "Ruqəyya Abbaslı",
-                                    "class":  "10A"
-                                },
-                     "989921":  {
-                                    "name":  "Səadət Məlikova",
-                                    "class":  "10A"
-                                },
-                     "670855":  {
-                                    "name":  "Uras Yekta Aydın",
-                                    "class":  "10A"
-                                },
-                     "233354":  {
-                                    "name":  "Yusif Məmmədli",
-                                    "class":  "10A"
-                                },
-                     "419899":  {
-                                    "name":  "Amin Əmirov",
-                                    "class":  "10B"
-                                },
-                     "958031":  {
-                                    "name":  "Ayaz İbrahimov",
-                                    "class":  "10B"
-                                },
-                     "508208":  {
-                                    "name":  "Gülbahar Əhmədli",
-                                    "class":  "10B"
-                                },
-                     "466900":  {
-                                    "name":  "Xalid Mahmudov",
-                                    "class":  "10B"
-                                },
-                     "887004":  {
-                                    "name":  "İbrahim Zeynalov",
-                                    "class":  "10B"
-                                },
-                     "477770":  {
-                                    "name":  "Kürsüm Məmmədzadə",
-                                    "class":  "10B"
-                                },
-                     "206278":  {
-                                    "name":  "Nuray Məmmədova",
-                                    "class":  "10B"
-                                },
-                     "249906":  {
-                                    "name":  "Renat Murad",
-                                    "class":  "10B"
-                                },
-                     "242490":  {
-                                    "name":  "Selcan Mütəllimli",
-                                    "class":  "10B"
-                                },
-                     "663748":  {
-                                    "name":  "Süheyla Zalova",
-                                    "class":  "10B"
-                                },
-                     "744545":  {
-                                    "name":  "Fərəh Abbaslı",
-                                    "class":  "3A"
-                                },
-                     "137861":  {
-                                    "name":  "Gülnarə Vəlizadə",
-                                    "class":  "3A"
-                                },
-                     "592453":  {
-                                    "name":  "Hüseyn Qafarzadə",
-                                    "class":  "3A"
-                                },
-                     "443525":  {
-                                    "name":  "İbrahim Ağazadə",
-                                    "class":  "3A"
-                                },
-                     "500381":  {
-                                    "name":  "İbrahim Əmirli",
-                                    "class":  "3A"
-                                },
-                     "619962":  {
-                                    "name":  "İdel Əsədli",
-                                    "class":  "3A"
-                                },
-                     "127571":  {
-                                    "name":  "İnci Nizamova",
-                                    "class":  "3A"
-                                },
-                     "841822":  {
-                                    "name":  "Kənan Baxışov",
-                                    "class":  "3A"
-                                },
-                     "626442":  {
-                                    "name":  "Mədinə Aslanlı",
-                                    "class":  "3A"
-                                },
-                     "308483":  {
-                                    "name":  "Mədinə Zülfüqarlı",
-                                    "class":  "3A"
-                                },
-                     "395417":  {
-                                    "name":  "Məhəmməd Məmmədli",
-                                    "class":  "3A"
-                                },
-                     "997836":  {
-                                    "name":  "Məryəm Aslanlı",
-                                    "class":  "3A"
-                                },
-                     "667309":  {
-                                    "name":  "Murad Aslanlı",
-                                    "class":  "3A"
-                                },
-                     "885051":  {
-                                    "name":  "Rafiq İskəndərzadə",
-                                    "class":  "3A"
-                                },
-                     "391913":  {
-                                    "name":  "Rauf Rəsulov",
-                                    "class":  "3A"
-                                },
-                     "117341":  {
-                                    "name":  "Tuncay Muradov",
-                                    "class":  "3A"
-                                },
-                     "885132":  {
-                                    "name":  "Vahid Murad",
-                                    "class":  "3A"
-                                },
-                     "771672":  {
-                                    "name":  "Yunus Mönsüm",
-                                    "class":  "3A"
-                                },
-                     "747593":  {
-                                    "name":  "Yusub Hacıyev",
-                                    "class":  "3A"
-                                },
-                     "467602":  {
-                                    "name":  "Ahu Göyüşzadə",
-                                    "class":  "3B"
-                                },
-                     "791349":  {
-                                    "name":  "Atilla Nuriyev",
-                                    "class":  "3B"
-                                },
-                     "499368":  {
-                                    "name":  "Aylin Nəsirova",
-                                    "class":  "3B"
-                                },
-                     "625031":  {
-                                    "name":  "Elşən Musayev",
-                                    "class":  "3B"
-                                },
-                     "251584":  {
-                                    "name":  "Hiranur Həsənzadə",
-                                    "class":  "3B"
-                                },
-                     "797688":  {
-                                    "name":  "İbrahim Hüseynov",
-                                    "class":  "3B"
-                                },
-                     "856342":  {
-                                    "name":  "Mehparə Səbizova",
-                                    "class":  "3B"
-                                },
-                     "449613":  {
-                                    "name":  "Mikayıl İbrahimli",
-                                    "class":  "3B"
-                                },
-                     "683052":  {
-                                    "name":  "Miray Əliyeva",
-                                    "class":  "3B"
-                                },
-                     "254150":  {
-                                    "name":  "Rəcəb Həsənli",
-                                    "class":  "3B"
-                                },
-                     "613917":  {
-                                    "name":  "Sevinc Muxtarlı",
-                                    "class":  "3B"
-                                },
-                     "158875":  {
-                                    "name":  "Səma Quliyeva",
-                                    "class":  "3B"
-                                },
-                     "490831":  {
-                                    "name":  "Süleyman Məmmədzadə",
-                                    "class":  "3B"
-                                },
-                     "229933":  {
-                                    "name":  "Uğur Babayev",
-                                    "class":  "3B"
-                                },
-                     "563330":  {
-                                    "name":  "Vural Qədirli",
-                                    "class":  "3B"
-                                },
-                     "532187":  {
-                                    "name":  "Yusuf Musayev",
-                                    "class":  "3B"
-                                },
-                     "574988":  {
-                                    "name":  "Zeynəb Müslüm",
-                                    "class":  "3B"
-                                },
-                     "188999":  {
-                                    "name":  "Zəhra Əsədullayeva",
-                                    "class":  "3B"
-                                },
-                     "371619":  {
-                                    "name":  "Cəlal Məmmədli",
-                                    "class":  "4A"
-                                },
-                     "316677":  {
-                                    "name":  "Cəsur Musayev",
-                                    "class":  "4A"
-                                },
-                     "361829":  {
-                                    "name":  "Əli İmanlı",
-                                    "class":  "4A"
-                                },
-                     "627578":  {
-                                    "name":  "Əslinur Məmmədzadə",
-                                    "class":  "4A"
-                                },
-                     "608797":  {
-                                    "name":  "Xədicə Novruzlu",
-                                    "class":  "4A"
-                                },
-                     "824409":  {
-                                    "name":  "İsmail Allahverdi",
-                                    "class":  "4A"
-                                },
-                     "372063":  {
-                                    "name":  "Aişə Quliyeva",
-                                    "class":  "4A"
-                                },
-                     "577485":  {
-                                    "name":  "Mahinur Məmmədzadə",
-                                    "class":  "4A"
-                                },
-                     "232696":  {
-                                    "name":  "Mehdi Sərdar",
-                                    "class":  "4A"
-                                },
-                     "146443":  {
-                                    "name":  "Ömər Muradlı",
-                                    "class":  "4A"
-                                },
-                     "319915":  {
-                                    "name":  "Rüstəm Rəhimli",
-                                    "class":  "4A"
-                                },
-                     "259447":  {
-                                    "name":  "Suada Cəfərzadə",
-                                    "class":  "4A"
-                                },
-                     "103622":  {
-                                    "name":  "Zəhra Qarayeva",
-                                    "class":  "4A"
-                                },
-                     "322668":  {
-                                    "name":  "Ali Əmirov",
-                                    "class":  "4B"
-                                },
-                     "146306":  {
-                                    "name":  "Alparslan Karauçoğlu",
-                                    "class":  "4B"
-                                },
-                     "995487":  {
-                                    "name":  "Alperen Osman",
-                                    "class":  "4B"
-                                },
-                     "155490":  {
-                                    "name":  "Altay Qayıblı",
-                                    "class":  "4B"
-                                },
-                     "796728":  {
-                                    "name":  "Cahan Qurban",
-                                    "class":  "4B"
-                                },
-                     "912007":  {
-                                    "name":  "Enes Hüseynzadə",
-                                    "class":  "4B"
-                                },
-                     "409742":  {
-                                    "name":  "Əhməd Məmmədzadə",
-                                    "class":  "4B"
-                                },
-                     "225942":  {
-                                    "name":  "Həsən Musavi",
-                                    "class":  "4B"
-                                },
-                     "623500":  {
-                                    "name":  "Hümeyra Əlizadə",
-                                    "class":  "4B"
-                                },
-                     "743683":  {
-                                    "name":  "İnci Əliyeva",
-                                    "class":  "4B"
-                                },
-                     "499903":  {
-                                    "name":  "Mətin Kazım",
-                                    "class":  "4B"
-                                },
-                     "391846":  {
-                                    "name":  "Onur Səfərli",
-                                    "class":  "4B"
-                                },
-                     "490498":  {
-                                    "name":  "Ömər Aras Kayıkçıoğlu",
-                                    "class":  "4B"
-                                },
-                     "311543":  {
-                                    "name":  "Raul Qədirli",
-                                    "class":  "4B"
-                                },
-                     "526368":  {
-                                    "name":  "Şəms Əliyeva",
-                                    "class":  "4B"
-                                },
-                     "590724":  {
-                                    "name":  "Adil Musayev",
-                                    "class":  "5A"
-                                },
-                     "362532":  {
-                                    "name":  "Ayxan Musazadə",
-                                    "class":  "5A"
-                                },
-                     "937509":  {
-                                    "name":  "Aylin Məmmədova",
-                                    "class":  "5A"
-                                },
-                     "865541":  {
-                                    "name":  "İsmayıl Vəlizadə",
-                                    "class":  "5A"
-                                },
-                     "949195":  {
-                                    "name":  "Fatimə Quliyeva",
-                                    "class":  "5A"
-                                },
-                     "760462":  {
-                                    "name":  "Melissa Hüseynzadə",
-                                    "class":  "5A"
-                                },
-                     "956140":  {
-                                    "name":  "Murad Quluzadə",
-                                    "class":  "5A"
-                                },
-                     "387508":  {
-                                    "name":  "Nəzakət Əliyeva",
-                                    "class":  "5A"
-                                },
-                     "936541":  {
-                                    "name":  "Nüman Musavi",
-                                    "class":  "5A"
-                                },
-                     "702386":  {
-                                    "name":  "Sudə Bağırova",
-                                    "class":  "5A"
-                                },
-                     "875493":  {
-                                    "name":  "Zelihanur Bektaşoğlu",
-                                    "class":  "5A"
-                                },
-                     "941625":  {
-                                    "name":  "Zeynəb Əsədli",
-                                    "class":  "5A"
-                                },
-                     "752517":  {
-                                    "name":  "Ziya İbrahimov",
-                                    "class":  "5A"
-                                },
-                     "662171":  {
-                                    "name":  "Ayan Göyüşzadə",
-                                    "class":  "5B"
-                                },
-                     "248770":  {
-                                    "name":  "Aysel Mehdizadə",
-                                    "class":  "5B"
-                                },
-                     "766335":  {
-                                    "name":  "Cəmil Həsənzadə",
-                                    "class":  "5B"
-                                },
-                     "984453":  {
-                                    "name":  "Emil Məmmədli",
-                                    "class":  "5B"
-                                },
-                     "673782":  {
-                                    "name":  "Fateh Musayev",
-                                    "class":  "5B"
-                                },
-                     "985092":  {
-                                    "name":  "Fəridə Həsənova",
-                                    "class":  "5B"
-                                },
-                     "533105":  {
-                                    "name":  "Hicran Zülfüqarlı",
-                                    "class":  "5B"
-                                },
-                     "313982":  {
-                                    "name":  "İpək İbrahimova",
-                                    "class":  "5B"
-                                },
-                     "662345":  {
-                                    "name":  "Nihad Nəsirov",
-                                    "class":  "5B"
-                                },
-                     "660310":  {
-                                    "name":  "Uğur Bayramov",
-                                    "class":  "5B"
-                                },
-                     "108088":  {
-                                    "name":  "Yusif Naxçıvanski",
-                                    "class":  "5B"
-                                },
-                     "226774":  {
-                                    "name":  "Zəhra Qəmbərli",
-                                    "class":  "5B"
-                                },
-                     "711937":  {
-                                    "name":  "Aylin Qasımova",
-                                    "class":  "6A"
-                                },
-                     "538633":  {
-                                    "name":  "Banu Əliyeva",
-                                    "class":  "6A"
-                                },
-                     "277521":  {
-                                    "name":  "Camal Rəsulov",
-                                    "class":  "6A"
-                                },
-                     "968917":  {
-                                    "name":  "Çingiz İsmayılov",
-                                    "class":  "6A"
-                                },
-                     "615946":  {
-                                    "name":  "Elif Nur Karataş",
-                                    "class":  "6A"
-                                },
-                     "895168":  {
-                                    "name":  "Fateh Musayev",
-                                    "class":  "6A"
-                                },
-                     "646942":  {
-                                    "name":  "Fidan Mehdizadə",
-                                    "class":  "6A"
-                                },
-                     "319368":  {
-                                    "name":  "Gülay Məmmədova",
-                                    "class":  "6A"
-                                },
-                     "809525":  {
-                                    "name":  "Xədicə İmamzadə",
-                                    "class":  "6A"
-                                },
-                     "407965":  {
-                                    "name":  "Kadir Novruzlu",
-                                    "class":  "6A"
-                                },
-                     "894171":  {
-                                    "name":  "Məryəm Müslüm",
-                                    "class":  "6A"
-                                },
-                     "875702":  {
-                                    "name":  "Müjgan Əbdülsalamova",
-                                    "class":  "6A"
-                                },
-                     "189225":  {
-                                    "name":  "Ömər Salmanov",
-                                    "class":  "6A"
-                                },
-                     "911498":  {
-                                    "name":  "Sara Sadmaliyeva",
-                                    "class":  "6A"
-                                },
-                     "723687":  {
-                                    "name":  "Suada Baxışlı",
-                                    "class":  "6A"
-                                },
-                     "529925":  {
-                                    "name":  "Zeynəb Məsimli",
-                                    "class":  "6A"
-                                },
-                     "611989":  {
-                                    "name":  "Zəhra Ağazadə",
-                                    "class":  "6A"
-                                },
-                     "528828":  {
-                                    "name":  "Aida Məmmədli",
-                                    "class":  "6B"
-                                },
-                     "605569":  {
-                                    "name":  "Altay Əzimli",
-                                    "class":  "6B"
-                                },
-                     "995041":  {
-                                    "name":  "Amal Əlizadə",
-                                    "class":  "6B"
-                                },
-                     "603134":  {
-                                    "name":  "Aminə Məmmədzadə",
-                                    "class":  "6B"
-                                },
-                     "398825":  {
-                                    "name":  "Esmanur Işılak",
-                                    "class":  "6B"
-                                },
-                     "346130":  {
-                                    "name":  "Xanım Qasımova",
-                                    "class":  "6B"
-                                },
-                     "424371":  {
-                                    "name":  "İlayda İsgəndərli",
-                                    "class":  "6B"
-                                },
-                     "931188":  {
-                                    "name":  "İnci Osmanlı",
-                                    "class":  "6B"
-                                },
-                     "903388":  {
-                                    "name":  "İnci Yunus",
-                                    "class":  "6B"
-                                },
-                     "580616":  {
-                                    "name":  "Mahmud Paşa",
-                                    "class":  "6B"
-                                },
-                     "144732":  {
-                                    "name":  "Məryəm Məmmədova",
-                                    "class":  "6B"
-                                },
-                     "649175":  {
-                                    "name":  "Məryəm Nilufər Rayi",
-                                    "class":  "6B"
-                                },
-                     "609387":  {
-                                    "name":  "Murad Həsənli",
-                                    "class":  "6B"
-                                },
-                     "777310":  {
-                                    "name":  "Zeynəb Quliyeva",
-                                    "class":  "6B"
-                                },
-                     "297715":  {
-                                    "name":  "Zenfira Qurbanlı",
-                                    "class":  "6B"
-                                },
-                     "125817":  {
-                                    "name":  "Ziya Ağayev",
-                                    "class":  "6B"
-                                },
-                     "547097":  {
-                                    "name":  "Atilla Cəfərzadə",
-                                    "class":  "7A"
-                                },
-                     "541556":  {
-                                    "name":  "Aylin Əlizadə",
-                                    "class":  "7A"
-                                },
-                     "874129":  {
-                                    "name":  "Ceyla Kazımlı",
-                                    "class":  "7A"
-                                },
-                     "633015":  {
-                                    "name":  "Fateh Sultanov",
-                                    "class":  "7A"
-                                },
-                     "651445":  {
-                                    "name":  "Fatimə İmamzadə",
-                                    "class":  "7A"
-                                },
-                     "419190":  {
-                                    "name":  "Fərhad Məmmədli",
-                                    "class":  "7A"
-                                },
-                     "200777":  {
-                                    "name":  "Hira Yade Aydın",
-                                    "class":  "7A"
-                                },
-                     "139048":  {
-                                    "name":  "Hüseyn Məmmədli",
-                                    "class":  "7A"
-                                },
-                     "380260":  {
-                                    "name":  "Xədicə Sərdarlı",
-                                    "class":  "7A"
-                                },
-                     "563611":  {
-                                    "name":  "Mete Təhməzli",
-                                    "class":  "7A"
-                                },
-                     "328329":  {
-                                    "name":  "Məryəm Calalova",
-                                    "class":  "7A"
-                                },
-                     "571572":  {
-                                    "name":  "Məryəm Əhmədli",
-                                    "class":  "7A"
-                                },
-                     "589702":  {
-                                    "name":  "Murad Manaflı",
-                                    "class":  "7A"
-                                },
-                     "393323":  {
-                                    "name":  "Selcan Muradova",
-                                    "class":  "7A"
-                                },
-                     "849931":  {
-                                    "name":  "Səyyad Nağıyev",
-                                    "class":  "7A"
-                                },
-                     "828430":  {
-                                    "name":  "Turqut Qənbərli",
-                                    "class":  "7A"
-                                },
-                     "789833":  {
-                                    "name":  "Zəhra Vəliyeva",
-                                    "class":  "7A"
-                                },
-                     "766582":  {
-                                    "name":  "Ağa Məmmədli",
-                                    "class":  "7B"
-                                },
-                     "719489":  {
-                                    "name":  "Altay Mahmudlu",
-                                    "class":  "7B"
-                                },
-                     "474141":  {
-                                    "name":  "Ayxan İsmayıl",
-                                    "class":  "7B"
-                                },
-                     "882172":  {
-                                    "name":  "Ayla Əliməmmədova",
-                                    "class":  "7B"
-                                },
-                     "247316":  {
-                                    "name":  "Aylin Əsgərova",
-                                    "class":  "7B"
-                                },
-                     "779033":  {
-                                    "name":  "Azər Əhmədov",
-                                    "class":  "7B"
-                                },
-                     "987824":  {
-                                    "name":  "Banu Namazlı",
-                                    "class":  "7B"
-                                },
-                     "758201":  {
-                                    "name":  "Fəridə Naxçıvanski",
-                                    "class":  "7B"
-                                },
-                     "852389":  {
-                                    "name":  "Xədicə Paşazadə",
-                                    "class":  "7B"
-                                },
-                     "583528":  {
-                                    "name":  "Ləman Məmmədova",
-                                    "class":  "7B"
-                                },
-                     "692239":  {
-                                    "name":  "Məryəm Eyvazova",
-                                    "class":  "7B"
-                                },
-                     "589727":  {
-                                    "name":  "Muhammed Mustafa",
-                                    "class":  "7B"
-                                },
-                     "695139":  {
-                                    "name":  "Mustafa Hüseynli",
-                                    "class":  "7B"
-                                },
-                     "833656":  {
-                                    "name":  "Ramal Şahmərdanov",
-                                    "class":  "7B"
-                                },
-                     "306422":  {
-                                    "name":  "Zeynəb Həşimli",
-                                    "class":  "7B"
-                                },
-                     "382801":  {
-                                    "name":  "Zəhra Hüseynli",
-                                    "class":  "7B"
-                                },
-                     "679606":  {
-                                    "name":  "Zümrüd Mahmudova",
-                                    "class":  "7B"
-                                },
-                     "993759":  {
-                                    "name":  "Aişə Göyüşlü",
-                                    "class":  "8A"
-                                },
-                     "265088":  {
-                                    "name":  "Asim Quliyev",
-                                    "class":  "8A"
-                                },
-                     "933899":  {
-                                    "name":  "Əhməd Quluzadə",
-                                    "class":  "8A"
-                                },
-                     "127534":  {
-                                    "name":  "Əminə Hüseynli",
-                                    "class":  "8A"
-                                },
-                     "181945":  {
-                                    "name":  "Qəmər Qəhrəmanova",
-                                    "class":  "8A"
-                                },
-                     "397247":  {
-                                    "name":  "Leyla Naxçıvanski",
-                                    "class":  "8A"
-                                },
-                     "518070":  {
-                                    "name":  "Mədinə Paşazadə",
-                                    "class":  "8A"
-                                },
-                     "733967":  {
-                                    "name":  "Mustafa Məmmədzadə",
-                                    "class":  "8A"
-                                },
-                     "283878":  {
-                                    "name":  "Ömər İbrahimov",
-                                    "class":  "8A"
-                                },
-                     "217234":  {
-                                    "name":  "Ömər Quliyev",
-                                    "class":  "8A"
-                                },
-                     "526721":  {
-                                    "name":  "Ümid İsalı",
-                                    "class":  "8A"
-                                },
-                     "296371":  {
-                                    "name":  "Yusif Əliyev",
-                                    "class":  "8A"
-                                },
-                     "215777":  {
-                                    "name":  "Zeynəb Namazlı",
-                                    "class":  "8A"
-                                },
-                     "406037":  {
-                                    "name":  "Xəlil Təhməzli",
-                                    "class":  "8B"
-                                },
-                     "817528":  {
-                                    "name":  "İlkin Quluzadə",
-                                    "class":  "8B"
-                                },
-                     "430358":  {
-                                    "name":  "İskəndər Abdullayev",
-                                    "class":  "8B"
-                                },
-                     "504518":  {
-                                    "name":  "Kaan Cenikoğlu",
-                                    "class":  "8B"
-                                },
-                     "263881":  {
-                                    "name":  "Levent Zalov",
-                                    "class":  "8B"
-                                },
-                     "817549":  {
-                                    "name":  "Mehriban Nəsibli",
-                                    "class":  "8B"
-                                },
-                     "289486":  {
-                                    "name":  "Nur Əsədullazadə",
-                                    "class":  "8B"
-                                },
-                     "467707":  {
-                                    "name":  "Ramin Mehdizadə",
-                                    "class":  "8B"
-                                },
-                     "611918":  {
-                                    "name":  "Rövşən Novruzov",
-                                    "class":  "8B"
-                                },
-                     "184151":  {
-                                    "name":  "Şəms Həşimli",
-                                    "class":  "8B"
-                                },
-                     "809516":  {
-                                    "name":  "Zəhra Eyvazova",
-                                    "class":  "8B"
-                                },
-                     "574800":  {
-                                    "name":  "Cavanşir Nəsibli",
-                                    "class":  "9A"
-                                },
-                     "565046":  {
-                                    "name":  "Dilay Semiz",
-                                    "class":  "9A"
-                                },
-                     "833235":  {
-                                    "name":  "Elcan Novruzlu",
-                                    "class":  "9A"
-                                },
-                     "594599":  {
-                                    "name":  "Fatimə Hüseynli",
-                                    "class":  "9A"
-                                },
-                     "182902":  {
-                                    "name":  "Fərhad Kərimli",
-                                    "class":  "9A"
-                                },
-                     "941895":  {
-                                    "name":  "Mürsəl Manaflı",
-                                    "class":  "9A"
-                                },
-                     "679969":  {
-                                    "name":  "Nəzrin Quluzadə",
-                                    "class":  "9A"
-                                },
-                     "776002":  {
-                                    "name":  "Nilay Şahməmmədli",
-                                    "class":  "9A"
-                                },
-                     "646195":  {
-                                    "name":  "Nuriyyə Məmmədzadə",
-                                    "class":  "9A"
-                                },
-                     "936462":  {
-                                    "name":  "Tuncay Məmmədov",
-                                    "class":  "9A"
-                                },
-                     "430252":  {
-                                    "name":  "Uğur Nəzirli",
-                                    "class":  "9A"
-                                },
-                     "860710":  {
-                                    "name":  "Zeynəb Calalova",
-                                    "class":  "9A"
-                                },
-                     "605674":  {
-                                    "name":  "Aylin Məlikova",
-                                    "class":  "9B"
-                                },
-                     "270525":  {
-                                    "name":  "Cahid Murğuzzadə",
-                                    "class":  "9B"
-                                },
-                     "428538":  {
-                                    "name":  "Cavad Əlizadə",
-                                    "class":  "9B"
-                                },
-                     "120518":  {
-                                    "name":  "Cavanşir Hacıyev",
-                                    "class":  "9B"
-                                },
-                     "778038":  {
-                                    "name":  "Fidan Musayeva",
-                                    "class":  "9B"
-                                },
-                     "535568":  {
-                                    "name":  "Gündüz Cahangirov",
-                                    "class":  "9B"
-                                },
-                     "494492":  {
-                                    "name":  "İsmayıl Məsimli",
-                                    "class":  "9B"
-                                },
-                     "510018":  {
-                                    "name":  "Qəmər Bağırova",
-                                    "class":  "9B"
-                                },
-                     "789743":  {
-                                    "name":  "Leyla Hüseynli",
-                                    "class":  "9B"
-                                },
-                     "910704":  {
-                                    "name":  "Nuran Muradzadə",
-                                    "class":  "9B"
-                                },
-                     "296874":  {
-                                    "name":  "Nurgül Həsənova",
-                                    "class":  "9B"
-                                },
-                     "873634":  {
-                                    "name":  "Ömər Əkbərli",
-                                    "class":  "9B"
-                                },
-                     "988737":  {
-                                    "name":  "Safiyyə Quluzadə",
-                                    "class":  "9B"
-                                },
-                     "479666":  {
-                                    "name":  "Şərqiyyə Şərifova",
-                                    "class":  "9B"
-                                }
-                 }
+    "stats":{"totalResults":0,"totalExams":1,"classCount":16},
+    "exams":[{"value":"Diaqnostik qiymətləndirmə","label":"Diaqnostik qiymətləndirmə"}],
+    "students":{
+        "103622":{"name":"Zəhra Qarayeva","class":"4A"},
+        "108088":{"name":"Yusif Naxçıvanski","class":"5B"},
+        "117341":{"name":"Tuncay Muradov","class":"3A"},
+        "120518":{"name":"Cavanşir Hacıyev","class":"9B"},
+        "125817":{"name":"Ziya Ağayev","class":"6B"},
+        "127534":{"name":"Əminə Hüseynli","class":"8A"},
+        "127571":{"name":"İnci Nizamova","class":"3A"},
+        "137861":{"name":"Gülnarə Vəlizadə","class":"3A"},
+        "139048":{"name":"Hüseyn Məmmədli","class":"7A"},
+        "144732":{"name":"Məryəm Məmmədova","class":"6B"},
+        "146306":{"name":"Alparslan Karauçoğlu","class":"4B"},
+        "146443":{"name":"Ömər Muradlı","class":"4A"},
+        "155490":{"name":"Altay Qayıblı","class":"4B"},
+        "158875":{"name":"Səma Quliyeva","class":"3B"},
+        "160835":{"name":"Aslan Məmmədxanlı","class":"10A"},
+        "181945":{"name":"Qəmər Qəhrəmanova","class":"8A"},
+        "182902":{"name":"Fərhad Kərimli","class":"9A"},
+        "183389":{"name":"Aylin İzzətli","class":"10A"},
+        "184125":{"name":"Əli Həsənli","class":"10A"},
+        "184151":{"name":"Şəms Həşimli","class":"8B"},
+        "188999":{"name":"Zəhra Əsədullayeva","class":"3B"},
+        "189225":{"name":"Ömər Salmanov","class":"6A"},
+        "200777":{"name":"Hira Yade Aydın","class":"7A"},
+        "206278":{"name":"Nuray Məmmədova","class":"10B"},
+        "215777":{"name":"Zeynəb Namazlı","class":"8A"},
+        "217234":{"name":"Ömər Quliyev","class":"8A"},
+        "225942":{"name":"Həsən Musavi","class":"4B"},
+        "226774":{"name":"Zəhra Qəmbərli","class":"5B"},
+        "229933":{"name":"Uğur Babayev","class":"3B"},
+        "232696":{"name":"Mehdi Sərdar","class":"4A"},
+        "233354":{"name":"Yusif Məmmədli","class":"10A"},
+        "242490":{"name":"Selcan Mütəllimli","class":"10B"},
+        "247316":{"name":"Aylin Əsgərova","class":"7B"},
+        "248770":{"name":"Aysel Mehdizadə","class":"5B"},
+        "249906":{"name":"Renat Murad","class":"10B"},
+        "251584":{"name":"Hiranur Həsənzadə","class":"3B"},
+        "254150":{"name":"Rəcəb Həsənli","class":"3B"},
+        "259126":{"name":"Mahmud Həmzəli","class":"10A"},
+        "259447":{"name":"Suada Cəfərzadə","class":"4A"},
+        "263881":{"name":"Levent Zalov","class":"8B"},
+        "265088":{"name":"Asim Quliyev","class":"8A"},
+        "270525":{"name":"Cahid Murğuzzadə","class":"9B"},
+        "277521":{"name":"Camal Rəsulov","class":"6A"},
+        "283878":{"name":"Ömər İbrahimov","class":"8A"},
+        "289486":{"name":"Nur Əsədullazadə","class":"8B"},
+        "296371":{"name":"Yusif Əliyev","class":"8A"},
+        "296874":{"name":"Nurgül Həsənova","class":"9B"},
+        "297715":{"name":"Zenfira Qurbanlı","class":"6B"},
+        "306422":{"name":"Zeynəb Həşimli","class":"7B"},
+        "308483":{"name":"Mədinə Zülfüqarlı","class":"3A"},
+        "311543":{"name":"Raul Qədirli","class":"4B"},
+        "313982":{"name":"İpək İbrahimova","class":"5B"},
+        "316677":{"name":"Cəsur Musayev","class":"4A"},
+        "319368":{"name":"Gülay Məmmədova","class":"6A"},
+        "319915":{"name":"Rüstəm Rəhimli","class":"4A"},
+        "322668":{"name":"Ali Əmirov","class":"4B"},
+        "328329":{"name":"Məryəm Calalova","class":"7A"},
+        "346130":{"name":"Xanım Qasımova","class":"6B"},
+        "361829":{"name":"Əli İmanlı","class":"4A"},
+        "362532":{"name":"Ayxan Musazadə","class":"5A"},
+        "371619":{"name":"Cəlal Məmmədli","class":"4A"},
+        "372063":{"name":"Aişə Quliyeva","class":"4A"},
+        "380260":{"name":"Xədicə Sərdarlı","class":"7A"},
+        "382801":{"name":"Zəhra Hüseynli","class":"7B"},
+        "387508":{"name":"Nəzakət Əliyeva","class":"5A"},
+        "391846":{"name":"Onur Səfərli","class":"4B"},
+        "391913":{"name":"Rauf Rəsulov","class":"3A"},
+        "393323":{"name":"Selcan Muradova","class":"7A"},
+        "395417":{"name":"Məhəmməd Məmmədli","class":"3A"},
+        "397247":{"name":"Leyla Naxçıvanski","class":"8A"},
+        "398825":{"name":"Esmanur Işılak","class":"6B"},
+        "406037":{"name":"Xəlil Təhməzli","class":"8B"},
+        "407965":{"name":"Kadir Novruzlu","class":"6A"},
+        "409742":{"name":"Əhməd Məmmədzadə","class":"4B"},
+        "418755":{"name":"Ruqəyya Abbaslı","class":"10A"},
+        "419190":{"name":"Fərhad Məmmədli","class":"7A"},
+        "419899":{"name":"Amin Əmirov","class":"10B"},
+        "424371":{"name":"İlayda İsgəndərli","class":"6B"},
+        "428538":{"name":"Cavad Əlizadə","class":"9B"},
+        "430252":{"name":"Uğur Nəzirli","class":"9A"},
+        "430358":{"name":"İskəndər Abdullayev","class":"8B"},
+        "443525":{"name":"İbrahim Ağazadə","class":"3A"},
+        "449613":{"name":"Mikayıl İbrahimli","class":"3B"},
+        "466900":{"name":"Xalid Mahmudov","class":"10B"},
+        "467602":{"name":"Ahu Göyüşzadə","class":"3B"},
+        "467707":{"name":"Ramin Mehdizadə","class":"8B"},
+        "474141":{"name":"Ayxan İsmayıl","class":"7B"},
+        "477770":{"name":"Kürsüm Məmmədzadə","class":"10B"},
+        "479666":{"name":"Şərqiyyə Şərifova","class":"9B"},
+        "490498":{"name":"Ömər Aras Kayıkçıoğlu","class":"4B"},
+        "490831":{"name":"Süleyman Məmmədzadə","class":"3B"},
+        "494492":{"name":"İsmayıl Məsimli","class":"9B"},
+        "499368":{"name":"Aylin Nəsirova","class":"3B"},
+        "499903":{"name":"Mətin Kazım","class":"4B"},
+        "500381":{"name":"İbrahim Əmirli","class":"3A"},
+        "504518":{"name":"Kaan Cenikoğlu","class":"8B"},
+        "508208":{"name":"Gülbahar Əhmədli","class":"10B"},
+        "510018":{"name":"Qəmər Bağırova","class":"9B"},
+        "518070":{"name":"Mədinə Paşazadə","class":"8A"},
+        "526368":{"name":"Şəms Əliyeva","class":"4B"},
+        "526721":{"name":"Ümid İsalı","class":"8A"},
+        "528828":{"name":"Aida Məmmədli","class":"6B"},
+        "529925":{"name":"Zeynəb Məsimli","class":"6A"},
+        "532187":{"name":"Yusuf Musayev","class":"3B"},
+        "533105":{"name":"Hicran Zülfüqarlı","class":"5B"},
+        "535568":{"name":"Gündüz Cahangirov","class":"9B"},
+        "538275":{"name":"İlhan Altınkaya","class":"10A"},
+        "538633":{"name":"Banu Əliyeva","class":"6A"},
+        "541556":{"name":"Aylin Əlizadə","class":"7A"},
+        "547097":{"name":"Atilla Cəfərzadə","class":"7A"},
+        "563330":{"name":"Vural Qədirli","class":"3B"},
+        "563611":{"name":"Mete Təhməzli","class":"7A"},
+        "565046":{"name":"Dilay Semiz","class":"9A"},
+        "571572":{"name":"Məryəm Əhmədli","class":"7A"},
+        "574800":{"name":"Cavanşir Nəsibli","class":"9A"},
+        "574988":{"name":"Zeynəb Müslüm","class":"3B"},
+        "577485":{"name":"Mahinur Məmmədzadə","class":"4A"},
+        "580616":{"name":"Mahmud Paşa","class":"6B"},
+        "583528":{"name":"Ləman Məmmədova","class":"7B"},
+        "589702":{"name":"Murad Manaflı","class":"7A"},
+        "589727":{"name":"Muhammed Mustafa","class":"7B"},
+        "590724":{"name":"Adil Musayev","class":"5A"},
+        "592453":{"name":"Hüseyn Qafarzadə","class":"3A"},
+        "594599":{"name":"Fatimə Hüseynli","class":"9A"},
+        "603134":{"name":"Aminə Məmmədzadə","class":"6B"},
+        "605569":{"name":"Altay Əzimli","class":"6B"},
+        "605674":{"name":"Aylin Məlikova","class":"9B"},
+        "608797":{"name":"Xədicə Novruzlu","class":"4A"},
+        "609387":{"name":"Murad Həsənli","class":"6B"},
+        "611918":{"name":"Rövşən Novruzov","class":"8B"},
+        "611989":{"name":"Zəhra Ağazadə","class":"6A"},
+        "613917":{"name":"Sevinc Muxtarlı","class":"3B"},
+        "615946":{"name":"Elif Nur Karataş","class":"6A"},
+        "619962":{"name":"İdel Əsədli","class":"3A"},
+        "623500":{"name":"Hümeyra Əlizadə","class":"4B"},
+        "625031":{"name":"Elşən Musayev","class":"3B"},
+        "626442":{"name":"Mədinə Aslanlı","class":"3A"},
+        "627578":{"name":"Əslinur Məmmədzadə","class":"4A"},
+        "633015":{"name":"Fateh Sultanov","class":"7A"},
+        "646195":{"name":"Nuriyyə Məmmədzadə","class":"9A"},
+        "646942":{"name":"Fidan Mehdizadə","class":"6A"},
+        "649175":{"name":"Məryəm Nilufər Rayi","class":"6B"},
+        "651445":{"name":"Fatimə İmamzadə","class":"7A"},
+        "660310":{"name":"Uğur Bayramov","class":"5B"},
+        "662171":{"name":"Ayan Göyüşzadə","class":"5B"},
+        "662345":{"name":"Nihad Nəsirov","class":"5B"},
+        "663748":{"name":"Süheyla Zalova","class":"10B"},
+        "667309":{"name":"Murad Aslanlı","class":"3A"},
+        "670855":{"name":"Uras Yekta Aydın","class":"10A"},
+        "673782":{"name":"Fateh Musayev","class":"5B"},
+        "679606":{"name":"Zümrüd Mahmudova","class":"7B"},
+        "679969":{"name":"Nəzrin Quluzadə","class":"9A"},
+        "683052":{"name":"Miray Əliyeva","class":"3B"},
+        "692239":{"name":"Məryəm Eyvazova","class":"7B"},
+        "695139":{"name":"Mustafa Hüseynli","class":"7B"},
+        "701470":{"name":"Nurgül Şahməmmədova","class":"10A"},
+        "702386":{"name":"Sudə Bağırova","class":"5A"},
+        "711937":{"name":"Aylin Qasımova","class":"6A"},
+        "719489":{"name":"Altay Mahmudlu","class":"7B"},
+        "723687":{"name":"Suada Baxışlı","class":"6A"},
+        "733967":{"name":"Mustafa Məmmədzadə","class":"8A"},
+        "743683":{"name":"İnci Əliyeva","class":"4B"},
+        "744545":{"name":"Fərəh Abbaslı","class":"3A"},
+        "747593":{"name":"Yusub Hacıyev","class":"3A"},
+        "752517":{"name":"Ziya İbrahimov","class":"5A"},
+        "758201":{"name":"Fəridə Naxçıvanski","class":"7B"},
+        "760462":{"name":"Melissa Hüseynzadə","class":"5A"},
+        "766335":{"name":"Cəmil Həsənzadə","class":"5B"},
+        "766582":{"name":"Ağa Məmmədli","class":"7B"},
+        "771672":{"name":"Yunus Mönsüm","class":"3A"},
+        "776002":{"name":"Nilay Şahməmmədli","class":"9A"},
+        "777310":{"name":"Zeynəb Quliyeva","class":"6B"},
+        "778038":{"name":"Fidan Musayeva","class":"9B"},
+        "779033":{"name":"Azər Əhmədov","class":"7B"},
+        "789743":{"name":"Leyla Hüseynli","class":"9B"},
+        "789833":{"name":"Zəhra Vəliyeva","class":"7A"},
+        "791349":{"name":"Atilla Nuriyev","class":"3B"},
+        "796728":{"name":"Cahan Qurban","class":"4B"},
+        "797688":{"name":"İbrahim Hüseynov","class":"3B"},
+        "809516":{"name":"Zəhra Eyvazova","class":"8B"},
+        "809525":{"name":"Xədicə İmamzadə","class":"6A"},
+        "817528":{"name":"İlkin Quluzadə","class":"8B"},
+        "817549":{"name":"Mehriban Nəsibli","class":"8B"},
+        "824409":{"name":"İsmail Allahverdi","class":"4A"},
+        "828430":{"name":"Turqut Qənbərli","class":"7A"},
+        "833235":{"name":"Elcan Novruzlu","class":"9A"},
+        "833656":{"name":"Ramal Şahmərdanov","class":"7B"},
+        "841822":{"name":"Kənan Baxışov","class":"3A"},
+        "849931":{"name":"Səyyad Nağıyev","class":"7A"},
+        "852389":{"name":"Xədicə Paşazadə","class":"7B"},
+        "856342":{"name":"Mehparə Səbizova","class":"3B"},
+        "860710":{"name":"Zeynəb Calalova","class":"9A"},
+        "865541":{"name":"İsmayıl Vəlizadə","class":"5A"},
+        "873634":{"name":"Ömər Əkbərli","class":"9B"},
+        "874129":{"name":"Ceyla Kazımlı","class":"7A"},
+        "875493":{"name":"Zelihanur Bektaşoğlu","class":"5A"},
+        "875702":{"name":"Müjgan Əbdülsalamova","class":"6A"},
+        "882172":{"name":"Ayla Əliməmmədova","class":"7B"},
+        "885051":{"name":"Rafiq İskəndərzadə","class":"3A"},
+        "885132":{"name":"Vahid Murad","class":"3A"},
+        "887004":{"name":"İbrahim Zeynalov","class":"10B"},
+        "894171":{"name":"Məryəm Müslüm","class":"6A"},
+        "895168":{"name":"Fateh Musayev","class":"6A"},
+        "903388":{"name":"İnci Yunus","class":"6B"},
+        "910704":{"name":"Nuran Muradzadə","class":"9B"},
+        "911498":{"name":"Sara Sadmaliyeva","class":"6A"},
+        "912007":{"name":"Enes Hüseynzadə","class":"4B"},
+        "931188":{"name":"İnci Osmanlı","class":"6B"},
+        "933899":{"name":"Əhməd Quluzadə","class":"8A"},
+        "936462":{"name":"Tuncay Məmmədov","class":"9A"},
+        "936541":{"name":"Nüman Musavi","class":"5A"},
+        "937509":{"name":"Aylin Məmmədova","class":"5A"},
+        "938491":{"name":"Pakizə Əlizadə","class":"10A"},
+        "941625":{"name":"Zeynəb Əsədli","class":"5A"},
+        "941895":{"name":"Mürsəl Manaflı","class":"9A"},
+        "949195":{"name":"Fatimə Quliyeva","class":"5A"},
+        "956140":{"name":"Murad Quluzadə","class":"5A"},
+        "958031":{"name":"Ayaz İbrahimov","class":"10B"},
+        "968917":{"name":"Çingiz İsmayılov","class":"6A"},
+        "984453":{"name":"Emil Məmmədli","class":"5B"},
+        "985092":{"name":"Fəridə Həsənova","class":"5B"},
+        "987824":{"name":"Banu Namazlı","class":"7B"},
+        "988737":{"name":"Safiyyə Quluzadə","class":"9B"},
+        "989921":{"name":"Səadət Məlikova","class":"10A"},
+        "993759":{"name":"Aişə Göyüşlü","class":"8A"},
+        "995041":{"name":"Amal Əlizadə","class":"6B"},
+        "995487":{"name":"Alperen Osman","class":"4B"},
+        "997836":{"name":"Məryəm Aslanlı","class":"3A"}
+    }
 }

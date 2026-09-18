@@ -414,30 +414,15 @@
         .result-header-bar .btn-outline::after { background: rgba(255, 255, 255, 0.12); }
         .result-header-bar .btn-outline:hover { background: rgba(255, 255, 255, 0.22); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25); }
 
-        .result-student-info {
-            display: flex; flex-wrap: wrap; gap: 10px; padding: 14px 24px;
-            background: var(--surface-muted);
-            border-bottom: 1px solid var(--border);
-        }
-        .rsi-chip {
-            display: inline-flex; align-items: center; gap: 6px;
-            background: var(--surface-strong); border: 1px solid var(--border-strong);
-            border-radius: 8px; padding: 6px 12px;
-            font-size: 13px; font-weight: 600; color: var(--text-1);
-        }
-        .rsi-chip i { color: var(--brand-600); font-size: 13px; }
-        [data-theme="dark"] .rsi-chip i { color: var(--brand-300); }
-
         .result-frame-wrap {
             overflow: hidden; border-radius: var(--r-md);
             border: 1px solid var(--border-strong);
             background: rgba(255, 255, 255, 0.18);
-            box-shadow: 0 2px 0 rgba(255, 255, 255, 0.5) inset, 0 6px 28px rgba(0, 82, 93, 0.08);
+            box-shadow: 0 2px 0 rgba(255, 255, 255, 0.5) inset, 0 6px 28px rgba(8, 145, 178, 0.08);
         }
         [data-theme="dark"] .result-frame-wrap { background: rgba(15, 28, 32, 0.28); }
-        #resultFrame { width: 100%; height: 74vh; min-height: 480px; border: none; display: block; background: #fff; }
 
-        /* Şagird məlumat kartı — daha böyük və oxunaqlı */
+        /* Şagird məlumat kartı — responsive */
         .student-card {
             display: flex; flex-wrap: wrap; align-items: center; gap: 18px;
             margin: 20px 24px; padding: 18px 20px;
@@ -473,6 +458,36 @@
         [data-theme="dark"] .chip i.chip-label { color: var(--brand-300); }
         .chip b { color: var(--text-1); font-weight: 700; }
         .chip .chip-check { color: var(--ok); }
+
+        /* Nəticə konteyneri — responsive */
+        .result-student-info {
+            display: flex; flex-wrap: wrap; gap: 10px; padding: 14px 24px;
+            background: var(--surface-muted);
+            border-bottom: 1px solid var(--border);
+        }
+        .rsi-chip {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: var(--surface-strong); border: 1px solid var(--border-strong);
+            border-radius: 8px; padding: 6px 12px;
+            font-size: 13px; font-weight: 600; color: var(--text-1);
+        }
+        .rsi-chip i { color: var(--brand-600); font-size: 13px; }
+        [data-theme="dark"] .rsi-chip i { color: var(--brand-300); }
+        @media (max-width: 640px) {
+            .result-student-info { padding: 10px 12px; gap: 6px; }
+            .rsi-chip { padding: 5px 8px; font-size: 11px; }
+            .rsi-chip i { font-size: 11px; }
+            .result-header-bar { padding: 12px 14px; }
+            .result-header-title { font-size: 14px; }
+            .glass-card-inner { padding: 12px; }
+            #resultFrame { height: 50vh; min-height: 300px; }
+        }
+        @media (min-width: 641px) and (max-width: 1024px) {
+            #resultFrame { height: 65vh; min-height: 400px; }
+        }
+        @media (min-width: 1025px) {
+            #resultFrame { height: 74vh; min-height: 480px; }
+        }
 
         /* ===== STATİSTİKA ===== */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
@@ -631,7 +646,6 @@
             .student-avatar { width: 56px; height: 56px; }
             .student-name { font-size: 17px; }
             .chip { padding: 5px 10px; font-size: 12px; }
-            #resultFrame { height: 56vh; }
         }
         @media (max-width: 420px) {
             .brand-title { font-size: 10px; }
@@ -787,6 +801,7 @@
                         <div class="result-student-info" id="result-student-info">
                             <div class="rsi-chip"><i class="fa-solid fa-user"></i> <span id="rsi-name"></span></div>
                             <div class="rsi-chip"><i class="fa-solid fa-layer-group"></i> <span id="rsi-class"></span></div>
+                            <div class="rsi-chip"><i class="fa-solid fa-id-card"></i> <span id="rsi-id"></span></div>
                             <div class="rsi-chip"><i class="fa-solid fa-file-lines"></i> <span id="rsi-exam"></span></div>
                         </div>
 
@@ -811,11 +826,11 @@
                 </p>
                 <div class="stats-grid">
                     <div class="stat-mini">
-                        <span class="stat-num" id="total-results-count">752</span>
-                        <span class="stat-label">Nəticə Sayı</span>
+                        <span class="stat-num" id="total-results-count">228</span>
+                        <span class="stat-label">Şagird Sayı</span>
                     </div>
                     <div class="stat-mini">
-                        <span class="stat-num" id="total-exams-count">7</span>
+                        <span class="stat-num" id="total-exams-count">1</span>
                         <span class="stat-label">İmtahan Növü</span>
                     </div>
                 </div>
@@ -837,7 +852,7 @@
                     <div class="stat-card">
                         <div class="stat-icon-box"><i class="fa-solid fa-people-group"></i></div>
                         <div class="stat-title">Sinif Sayı</div>
-                        <div class="stat-value" id="stat-class-count">14</div>
+                        <div class="stat-value" id="stat-class-count">16</div>
                     </div>
                 </div>
             </div>
@@ -962,7 +977,7 @@
         const TOAST_DURATION = 5000;
 
         let studentData = {};
-        let statsData = { totalResults: 752, totalExams: 1, classCount: 14 };
+        let statsData = { totalResults: 228, totalExams: 1, classCount: 16 };
 
         async function loadExternalData() {
             try {
@@ -988,7 +1003,7 @@
         }
 
         async function loadEmbeddedData() {
-            const data = {"stats":{"totalResults":752,"totalExams":1,"classCount":14},"exams":[{"value":"Diaqnostik qiymətləndirmə","label":"Diaqnostik qiymətləndirmə"}]};
+            const data = {"stats":{"totalResults":228,"totalExams":1,"classCount":16},"exams":[{"value":"Diaqnostik qiymətləndirmə","label":"Diaqnostik qiymətləndirmə"}]};
             studentData = data.students || {};
             statsData = data.stats || statsData;
 
@@ -1309,6 +1324,7 @@
 
                         document.getElementById("rsi-name").textContent = student.name;
                         document.getElementById("rsi-class").textContent = student.class;
+                        document.getElementById("rsi-id").textContent = idValue;
                         document.getElementById("rsi-exam").textContent = examText;
 
                         resultContainer.classList.add("visible");
@@ -1337,6 +1353,7 @@
                 lastPreviewUrl = "";
                 document.getElementById("rsi-name").textContent = "";
                 document.getElementById("rsi-class").textContent = "";
+                document.getElementById("rsi-id").textContent = "";
                 document.getElementById("rsi-exam").textContent = "";
                 document.getElementById("resultForm").reset();
                 showNotification("Axtarış nəticəsi gizlədildi.", "info");
