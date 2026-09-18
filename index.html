@@ -380,9 +380,11 @@
         .btn:disabled { cursor: not-allowed; opacity: .6; }
 
         /* ===== LAYOUT: SORĞU (ortada) + NƏTİCƏ (altda, geniş) ===== */
-        .query-wrap { max-width: 640px; margin: 0 auto; }
-        .result-wrap { max-width: 1180px; margin: 0 auto; }
-        @media (min-width: 1400px) { .result-wrap { max-width: 1280px; } }
+        .query-wrap { max-width: 640px; margin: 0 auto; padding: 0 16px; }
+        .result-wrap { width: 100%; margin: 0 auto; padding: 0 16px; }
+        @media (min-width: 768px) { .result-wrap { max-width: 900px; padding: 0 24px; } }
+        @media (min-width: 1024px) { .result-wrap { max-width: 1100px; padding: 0 32px; } }
+        @media (min-width: 1400px) { .result-wrap { max-width: 1280px; padding: 0 40px; } }
 
         .hidden { display: none !important; }
 
@@ -397,7 +399,7 @@
         .result-container.visible { display: block; animation: panelOpen .5s var(--ease-out); }
 
         /* Nəticə kartı — başlıq zolağı */
-        .result-card { padding: 0; overflow: hidden; }
+        .result-card { padding: 0; overflow: hidden; width: 100%; }
         .result-card .glass-card-inner { padding: 24px; }
         .result-header-bar {
             display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
@@ -477,16 +479,23 @@
             .result-student-info { padding: 10px 12px; gap: 6px; }
             .rsi-chip { padding: 5px 8px; font-size: 11px; }
             .rsi-chip i { font-size: 11px; }
-            .result-header-bar { padding: 12px 14px; }
+            .result-header-bar { padding: 12px 14px; flex-direction: column; align-items: flex-start; }
             .result-header-title { font-size: 14px; }
-            .glass-card-inner { padding: 12px; }
-            #resultFrame { height: 50vh; min-height: 300px; }
+            .result-actions { width: 100%; }
+            .result-actions .btn { flex: 1; }
+            .glass-card-inner { padding: 8px; }
+            .result-frame-wrap { border-radius: 12px; }
+            #resultFrame { height: 50vh; min-height: 280px; width: 100%; }
         }
         @media (min-width: 641px) and (max-width: 1024px) {
-            #resultFrame { height: 65vh; min-height: 400px; }
+            .result-header-bar { padding: 14px 20px; }
+            .glass-card-inner { padding: 16px; }
+            #resultFrame { height: 65vh; min-height: 400px; width: 100%; }
         }
         @media (min-width: 1025px) {
-            #resultFrame { height: 74vh; min-height: 480px; }
+            .result-header-bar { padding: 16px 24px; }
+            .glass-card-inner { padding: 24px; }
+            #resultFrame { height: 74vh; min-height: 480px; width: 100%; }
         }
 
         /* ===== STATİSTİKA ===== */
@@ -826,11 +835,11 @@
                 </p>
                 <div class="stats-grid">
                     <div class="stat-mini">
-                        <span class="stat-num" id="total-results-count">228</span>
+                        <span class="stat-num" id="total-results-count">0</span>
                         <span class="stat-label">Şagird Sayı</span>
                     </div>
                     <div class="stat-mini">
-                        <span class="stat-num" id="total-exams-count">1</span>
+                        <span class="stat-num" id="total-exams-count">0</span>
                         <span class="stat-label">İmtahan Növü</span>
                     </div>
                 </div>
@@ -977,7 +986,7 @@
         const TOAST_DURATION = 5000;
 
         let studentData = {};
-        let statsData = { totalResults: 228, totalExams: 1, classCount: 16 };
+        let statsData = { totalResults: 0, totalExams: 0, classCount: 16 };
 
         async function loadExternalData() {
             try {
@@ -985,7 +994,11 @@
                 if (!resp.ok) throw new Error(resp.status);
                 const data = await resp.json();
                 studentData = data.students || {};
-                statsData = data.stats || statsData;
+                
+                // Dinamik sayğın
+                statsData.totalResults = Object.keys(studentData).length;
+                statsData.totalExams = data.exams ? data.exams.length : 1;
+                statsData.classCount = data.stats ? data.stats.classCount : 16;
 
                 const examSelect = document.getElementById('exam');
                 if (examSelect && data.exams) {
@@ -1003,9 +1016,13 @@
         }
 
         async function loadEmbeddedData() {
-            const data = {"stats":{"totalResults":228,"totalExams":1,"classCount":16},"exams":[{"value":"Diaqnostik qiymətləndirmə","label":"Diaqnostik qiymətləndirmə"}]};
+            const data = {"stats":{"totalResults":0,"totalExams":0,"classCount":16},"exams":[{"value":"Diaqnostik qiymətləndirmə","label":"Diaqnostik qiymətləndirmə"}]};
             studentData = data.students || {};
-            statsData = data.stats || statsData;
+            
+            // Dinamik sayğın
+            statsData.totalResults = Object.keys(studentData).length;
+            statsData.totalExams = data.exams ? data.exams.length : 1;
+            statsData.classCount = data.stats ? data.stats.classCount : 16;
 
             const examSelect = document.getElementById('exam');
             if (examSelect && data.exams) {
@@ -1086,7 +1103,7 @@
                 const json = JSON.parse(text.substring(47).slice(0, -2));
                 const rows = json.table.rows;
 
-                const totalQueries = rows.length + 400;
+                const totalQueries = rows.length;
                 const examCounts = {};
                 let popularExam = "Məlumat yoxdur";
                 let maxCount = 0;
