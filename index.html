@@ -961,16 +961,16 @@
         let toastTimeout;
         const TOAST_DURATION = 5000;
 
-        let examData = {};
         let studentData = {};
+        let statsData = { totalResults: 752, totalExams: 1, classCount: 14 };
 
         async function loadExternalData() {
             try {
                 const resp = await fetch('data.json');
                 if (!resp.ok) throw new Error(resp.status);
                 const data = await resp.json();
-                examData = data.examData || {};
                 studentData = data.students || {};
+                statsData = data.stats || statsData;
 
                 const examSelect = document.getElementById('exam');
                 if (examSelect && data.exams) {
@@ -988,9 +988,9 @@
         }
 
         async function loadEmbeddedData() {
-            const data = {"exams":[{"value":"Diaqnostik qiymətləndirmə","label":"Diaqnostik qiymətləndirmə"}],"examData":{"Diaqnostik qiymətləndirmə":29}};
-            examData = data.examData || {};
+            const data = {"stats":{"totalResults":752,"totalExams":1,"classCount":14},"exams":[{"value":"Diaqnostik qiymətləndirmə","label":"Diaqnostik qiymətləndirmə"}]};
             studentData = data.students || {};
+            statsData = data.stats || statsData;
 
             const examSelect = document.getElementById('exam');
             if (examSelect && data.exams) {
@@ -1056,10 +1056,9 @@
 
         function updateExamStats() {
             try {
-                const totalResults = 1142;
-                const totalExams = 1;
-                animateValue("total-results-count", 0, totalResults, 1500);
-                setTimeout(() => animateValue("total-exams-count", 0, totalExams, 1000), 200);
+                animateValue("total-results-count", 0, statsData.totalResults, 1500);
+                setTimeout(() => animateValue("total-exams-count", 0, statsData.totalExams, 1000), 200);
+                document.getElementById("stat-class-count").textContent = statsData.classCount;
             } catch (error) {
                 console.error("İmtahan statistikaları yenilənərkən xəta:", error);
             }
@@ -1088,13 +1087,13 @@
                     }
                 });
 
-                const classCount = 14;
+                const classCount = statsData.classCount;
                 animateValue("stat-total-queries", 0, totalQueries, 1500);
                 document.getElementById("stat-popular-exam").textContent = popularExam;
                 animateValue("stat-class-count", 0, classCount, 1000);
             } catch (error) {
                 console.error("Statistika yüklənərkən xəta:", error);
-                document.getElementById("stat-class-count").textContent = "14";
+                document.getElementById("stat-class-count").textContent = statsData.classCount;
             }
         }
 
@@ -1422,7 +1421,7 @@
             setInterval(updateClock, 1000);
 
             setTimeout(() => {
-                showNotification("Kiçik Summativ Qiymətləndirmə VI imtahanının nəticələri elan edilmişdir!", 'announcement');
+                showNotification("Hələ ki imtahan nəticələri daxil edilməmişdir", 'announcement');
             }, 800);
 
             document.addEventListener('keypress', function (e) {
