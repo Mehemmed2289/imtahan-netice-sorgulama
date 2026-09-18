@@ -381,7 +381,7 @@
 
         /* ===== LAYOUT: SORĞU (ortada) + NƏTİCƏ (altda, geniş) ===== */
         .query-wrap { max-width: 640px; margin: 0 auto; padding: 0 16px; }
-        .result-wrap { width: 100%; margin: 0 auto; padding: 0 16px; }
+        .result-wrap { width: 100%; margin: 0 auto; padding: 0; }
         @media (min-width: 768px) { .result-wrap { max-width: 900px; padding: 0 24px; } }
         @media (min-width: 1024px) { .result-wrap { max-width: 1100px; padding: 0 32px; } }
         @media (min-width: 1400px) { .result-wrap { max-width: 1280px; padding: 0 40px; } }
@@ -476,15 +476,16 @@
         .rsi-chip i { color: var(--brand-600); font-size: 13px; }
         [data-theme="dark"] .rsi-chip i { color: var(--brand-300); }
         @media (max-width: 640px) {
-            .result-student-info { padding: 10px 12px; gap: 6px; }
-            .rsi-chip { padding: 5px 8px; font-size: 11px; }
+            .result-student-info { padding: 8px 10px; gap: 5px; }
+            .rsi-chip { padding: 4px 7px; font-size: 11px; }
             .rsi-chip i { font-size: 11px; }
-            .result-header-bar { padding: 12px 14px; flex-direction: column; align-items: flex-start; }
-            .result-header-title { font-size: 14px; }
+            .result-header-bar { padding: 10px 12px; flex-direction: column; align-items: flex-start; }
+            .result-header-title { font-size: 13px; }
             .result-actions { width: 100%; }
             .result-actions .btn { flex: 1; }
+            .result-wrap { padding: 0; }
             .glass-card-inner { padding: 0; }
-            .result-frame-wrap { border-radius: 12px; }
+            .result-frame-wrap { border-radius: 0; border: none; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
             #resultFrame { height: 50vh; min-height: 280px; width: 100%; }
         }
         @media (min-width: 641px) and (max-width: 1024px) {
@@ -643,8 +644,9 @@
             .header-actions { height: 44px; padding: 0 3px; }
             .header-actions > * { margin: 0 3px; }
             .header-actions .theme-orb { width: 40px; height: 40px; }
-            .dashboard-container { padding: 10px 6px 40px; }
+            .dashboard-container { padding: 10px 0 40px; }
             .glass-card { padding: 14px; border-radius: 18px; }
+            .result-card.glass-card { padding: 0; border-radius: 0; }
             .tab-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
             .tab-nav::-webkit-scrollbar { display: none; }
             .nav-btn { flex: none; white-space: nowrap; padding: 10px 8px; font-size: 12px; justify-content: center; gap: 6px; }
