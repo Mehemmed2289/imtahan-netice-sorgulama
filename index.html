@@ -484,9 +484,9 @@
             .result-actions { width: 100%; }
             .result-actions .btn { flex: 1; }
             .result-wrap { padding: 0; }
-            .glass-card-inner { padding: 0; }
-            .result-frame-wrap { border-radius: 0; border: none; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-            #resultFrame { height: 50vh; min-height: 280px; width: 100%; }
+            .glass-card-inner { padding: 0; overflow: hidden; }
+            .result-frame-wrap { border-radius: 0; border: none; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; position: relative; }
+            #resultFrame { border: none; display: block; background: #fff; transform-origin: top left; }
         }
         @media (min-width: 641px) and (max-width: 1024px) {
             .result-header-bar { padding: 14px 20px; }
@@ -1279,6 +1279,39 @@
             document.getElementById('loading-logo').classList.remove('spin');
         }
 
+        /* ================= MOBİL İFRAME MİQYASI ================= */
+        function scaleFrameOnMobile() {
+            const frame = document.getElementById("resultFrame");
+            const wrap = frame.closest(".result-frame-wrap");
+            if (!frame || !wrap) return;
+
+            const containerWidth = wrap.clientWidth;
+            const A4_WIDTH = 794;
+            const scale = containerWidth / A4_WIDTH;
+
+            frame.style.width = A4_WIDTH + "px";
+            frame.style.height = Math.ceil(1123 * scale) + "px";
+            frame.style.transform = "scale(" + scale + ")";
+            frame.style.transformOrigin = "top left";
+            wrap.style.height = Math.ceil(1123 * scale) + "px";
+        }
+
+        window.addEventListener("resize", function() {
+            if (window.innerWidth <= 640) {
+                scaleFrameOnMobile();
+            } else {
+                const frame = document.getElementById("resultFrame");
+                if (frame) {
+                    frame.style.width = "";
+                    frame.style.height = "";
+                    frame.style.transform = "";
+                    frame.style.transformOrigin = "";
+                }
+                const wrap = document.querySelector(".result-frame-wrap");
+                if (wrap) wrap.style.height = "";
+            }
+        });
+
         /* ================= ƏSAS SORĞU ================= */
         async function viewResult() {
             const idInput = document.getElementById("id");
@@ -1339,7 +1372,14 @@
                         showNotification(`"${student.name}" üçün "${examText}" nəticəsi uğurla tapıldı!`, "success");
 
                         lastPreviewUrl = data.preview;
-                        document.getElementById("resultFrame").src = data.preview;
+                        const frame = document.getElementById("resultFrame");
+                        frame.src = data.preview;
+
+                        frame.onload = function() {
+                            if (window.innerWidth <= 640) {
+                                scaleFrameOnMobile();
+                            }
+                        };
 
                         document.getElementById("rsi-name").textContent = student.name;
                         document.getElementById("rsi-class").textContent = student.class;
