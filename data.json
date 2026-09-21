@@ -1,6 +1,6 @@
 {
     "stats":{"totalResults":0,"totalExams":1,"classCount":16},
-    "exams":[{"value":"Diaqnostik qiymətləndirmə","label":"Diaqnostik qiymətləndirmə"}],
+    "exams":[{"value":"İmtahan yoxdur","label":"İmtahan yoxdur"}],
     "students":{
         "103622":{"name":"Zəhra Qarayeva","class":"4A"},
         "108088":{"name":"Yusif Naxçıvanski","class":"5B"},
