@@ -1,6 +1,6 @@
 {
-    "stats":{"totalResults":0,"totalExams":1,"classCount":16},
-    "exams":[{"value":"İmtahan yoxdur","label":"İmtahan yoxdur"}],
+    "stats":{"totalResults":181,"totalExams":1,"classCount":16},
+    "exams":[{"value":"Diaqnostik qiymətləndirmə","label":"Diaqnostik qiymətləndirmə"}],
     "students":{
         "103622":{"name":"Zəhra Qarayeva","class":"4A"},
         "108088":{"name":"Yusif Naxçıvanski","class":"5B"},
@@ -52,7 +52,7 @@
         "297715":{"name":"Zenfira Qurbanlı","class":"6B"},
         "306422":{"name":"Zeynəb Həşimli","class":"7B"},
         "308483":{"name":"Mədinə Zülfüqarlı","class":"3A"},
-        "311543":{"name":"Raul Qədirli","class":"4B"},
+        "311543":{"name":"Raul Qədirli","class":"4A"},
         "313982":{"name":"İpək İbrahimova","class":"5B"},
         "316677":{"name":"Cəsur Musayev","class":"4A"},
         "319368":{"name":"Gülay Məmmədova","class":"6A"},
