@@ -423,8 +423,28 @@
             border: 1px solid var(--border-strong);
             background: rgba(255, 255, 255, 0.18);
             box-shadow: 0 2px 0 rgba(255, 255, 255, 0.5) inset, 0 6px 28px rgba(8, 145, 178, 0.08);
+            position: relative;
         }
         [data-theme="dark"] .result-frame-wrap { background: rgba(15, 28, 32, 0.28); }
+
+        .frame-skeleton {
+            position: absolute; inset: 0; z-index: 3;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+            background: rgba(0, 34, 41, 0.55);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            opacity: 0; visibility: hidden; pointer-events: none;
+            transition: opacity .3s var(--ease), visibility .3s;
+        }
+        .frame-skeleton.show { opacity: 1; visibility: visible; pointer-events: auto; }
+        .frame-skeleton-ring {
+            width: 46px; height: 46px; border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-top-color: var(--brand-400);
+            animation: frameSpin .8s linear infinite;
+        }
+        @keyframes frameSpin { to { transform: rotate(360deg); } }
+        .frame-skeleton-text { margin: 0; color: #fff; font-size: 14px; font-weight: 600; }
 
         /* Şagird məlumat kartı — responsive */
         .student-card {
@@ -821,6 +841,10 @@
 
                         <div class="glass-card-inner">
                             <div class="result-frame-wrap">
+                                <div class="frame-skeleton" id="frame-skeleton" aria-hidden="true">
+                                    <div class="frame-skeleton-ring"></div>
+                                    <p class="frame-skeleton-text">Şəkil yüklənir<span class="loading-dots"></span></p>
+                                </div>
                                 <iframe id="resultFrame" src="" allowfullscreen></iframe>
                             </div>
                         </div>
@@ -1367,11 +1391,17 @@
             const resultContainer = document.getElementById("result-container");
 
             resultContainer.classList.remove("visible");
+            const searchStartedAt = Date.now();
+            const MIN_ANIM_MS = 3000;
+            const sleep = (ms) => new Promise(r => setTimeout(r, ms));
             startLoading();
 
             try {
                 const response = await fetch(RESULT_SCRIPT_URL + "?id=" + encodeURIComponent(idValue) + "&exam=" + encodeURIComponent(examValue));
                 const data = await response.json();
+
+                const animLeft = MIN_ANIM_MS - (Date.now() - searchStartedAt);
+                if (animLeft > 0) await sleep(animLeft);
 
                 fetch(LOG_SCRIPT_URL, {
                     method: 'POST',
@@ -1384,45 +1414,45 @@
 
                 if (data.status === "found" && data.preview) {
                     lastPreviewUrl = data.preview;
-                    const frame = document.getElementById("resultFrame");
-                    const prevSrc = frame.getAttribute("src");
-
-                    if (prevSrc !== data.preview) {
-                        await new Promise((resolve) => {
-                            let settled = false;
-                            const finish = () => {
-                                if (settled) return;
-                                settled = true;
-                                resolve();
-                            };
-                            frame.onload = function() {
-                                if (window.innerWidth <= 640) {
-                                    scaleFrameOnMobile();
-                                }
-                                finish();
-                            };
-                            frame.onerror = finish;
-                            frame.src = data.preview;
-                            setTimeout(finish, 6000);
-                        });
-                    } else if (window.innerWidth <= 640) {
-                        scaleFrameOnMobile();
-                    }
 
                     stopLoading();
-                    showNotification(`"${student.name}" üçün "${examText}" nəticəsi uğurla tapıldı!`, "success");
+                    await sleep(320);
 
                     document.getElementById("rsi-name").textContent = student.name;
                     document.getElementById("rsi-class").textContent = student.class;
                     document.getElementById("rsi-id").textContent = idValue;
                     document.getElementById("rsi-exam").textContent = examText;
 
-                    resultContainer.classList.add("visible");
-                    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    const frame = document.getElementById("resultFrame");
+                    const skeleton = document.getElementById("frame-skeleton");
+                    const prevSrc = frame.getAttribute("src");
+                    let frameDone = false;
 
+                    const hideSkeleton = () => {
+                        if (frameDone) return;
+                        frameDone = true;
+                        skeleton.classList.remove("show");
+                        if (window.innerWidth <= 640) scaleFrameOnMobile();
+                    };
+
+                    resultContainer.classList.add("visible");
+                    showNotification(`"${student.name}" üçün "${examText}" nəticəsi uğurla tapıldı!`, "success");
+
+                    if (prevSrc === data.preview) {
+                        hideSkeleton();
+                    } else {
+                        skeleton.classList.add("show");
+                        frame.onload = hideSkeleton;
+                        frame.onerror = hideSkeleton;
+                        frame.src = data.preview;
+                        setTimeout(hideSkeleton, 5000);
+                    }
+
+                    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     fetchStats();
                 } else {
                     stopLoading();
+                    await sleep(320);
                     showNotification(`"${student.name}" şagirdi üçün "${examText}" nəticəsi tapılmadı.`, "error");
                 }
 
@@ -1439,6 +1469,7 @@
 
             resultContainer.classList.remove("visible");
             setTimeout(() => {
+                document.getElementById("frame-skeleton").classList.remove("show");
                 resultFrame.src = "";
                 lastPreviewUrl = "";
                 document.getElementById("rsi-name").textContent = "";
@@ -1504,12 +1535,13 @@
             startLoading();
 
             await loadExternalData();
-            await new Promise(r => setTimeout(r, 3000));
 
             stopLoading();
             mainText.innerHTML = origMain;
             subText.textContent = origSub;
             setInitialTheme();
+
+            fetch(RESULT_SCRIPT_URL + "?warmup=1").catch(() => {});
 
             document.getElementById('theme-switch').addEventListener('change', toggleTheme);
 
