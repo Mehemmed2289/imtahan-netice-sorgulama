@@ -9,6 +9,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://script.google.com">
+    <link rel="dns-prefetch" href="https://script.google.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
@@ -1371,8 +1373,6 @@
                 const response = await fetch(RESULT_SCRIPT_URL + "?id=" + encodeURIComponent(idValue) + "&exam=" + encodeURIComponent(examValue));
                 const data = await response.json();
 
-                stopLoading();
-
                 fetch(LOG_SCRIPT_URL, {
                     method: 'POST',
                     body: new URLSearchParams({
@@ -1382,33 +1382,49 @@
                     })
                 }).catch(e => console.error("Log error", e));
 
-                setTimeout(() => {
-                    if (data.status === "found" && data.preview) {
-                        showNotification(`"${student.name}" üçün "${examText}" nəticəsi uğurla tapıldı!`, "success");
+                if (data.status === "found" && data.preview) {
+                    lastPreviewUrl = data.preview;
+                    const frame = document.getElementById("resultFrame");
+                    const prevSrc = frame.getAttribute("src");
 
-                        lastPreviewUrl = data.preview;
-                        const frame = document.getElementById("resultFrame");
-                        frame.src = data.preview;
-
-                        frame.onload = function() {
-                            if (window.innerWidth <= 640) {
-                                scaleFrameOnMobile();
-                            }
-                        };
-
-                        document.getElementById("rsi-name").textContent = student.name;
-                        document.getElementById("rsi-class").textContent = student.class;
-                        document.getElementById("rsi-id").textContent = idValue;
-                        document.getElementById("rsi-exam").textContent = examText;
-
-                        resultContainer.classList.add("visible");
-                        resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-                        fetchStats();
-                    } else {
-                        showNotification(`"${student.name}" şagirdi üçün "${examText}" nəticəsi tapılmadı.`, "error");
+                    if (prevSrc !== data.preview) {
+                        await new Promise((resolve) => {
+                            let settled = false;
+                            const finish = () => {
+                                if (settled) return;
+                                settled = true;
+                                resolve();
+                            };
+                            frame.onload = function() {
+                                if (window.innerWidth <= 640) {
+                                    scaleFrameOnMobile();
+                                }
+                                finish();
+                            };
+                            frame.onerror = finish;
+                            frame.src = data.preview;
+                            setTimeout(finish, 6000);
+                        });
+                    } else if (window.innerWidth <= 640) {
+                        scaleFrameOnMobile();
                     }
-                }, 500);
+
+                    stopLoading();
+                    showNotification(`"${student.name}" üçün "${examText}" nəticəsi uğurla tapıldı!`, "success");
+
+                    document.getElementById("rsi-name").textContent = student.name;
+                    document.getElementById("rsi-class").textContent = student.class;
+                    document.getElementById("rsi-id").textContent = idValue;
+                    document.getElementById("rsi-exam").textContent = examText;
+
+                    resultContainer.classList.add("visible");
+                    resultContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                    fetchStats();
+                } else {
+                    stopLoading();
+                    showNotification(`"${student.name}" şagirdi üçün "${examText}" nəticəsi tapılmadı.`, "error");
+                }
 
             } catch (error) {
                 stopLoading();
