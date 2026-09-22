@@ -843,7 +843,7 @@
                             <div class="result-frame-wrap">
                                 <div class="frame-skeleton" id="frame-skeleton" aria-hidden="true">
                                     <div class="frame-skeleton-ring"></div>
-                                    <p class="frame-skeleton-text">Şəkil yüklənir<span class="loading-dots"></span></p>
+                                    <p class="frame-skeleton-text">Nəticə yüklənir<span class="loading-dots"></span></p>
                                 </div>
                                 <iframe id="resultFrame" src="" allowfullscreen></iframe>
                             </div>
@@ -1532,9 +1532,13 @@
             const origSub = subText.textContent;
             mainText.innerHTML = 'Sistem yüklənir<span class="loading-dots"></span>';
             subText.textContent = 'Xoş gəlmisiniz!';
+            const openStartedAt = Date.now();
             startLoading();
 
             await loadExternalData();
+
+            const openAnimLeft = 3000 - (Date.now() - openStartedAt);
+            if (openAnimLeft > 0) await new Promise(r => setTimeout(r, openAnimLeft));
 
             stopLoading();
             mainText.innerHTML = origMain;
