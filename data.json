@@ -1,5 +1,5 @@
 {
-    "stats":{"totalResults":251,"totalExams":1,"classCount":16},
+    "stats":{"totalResults":252,"totalExams":1,"classCount":16},
     "exams":[{"value":"Diaqnostik qiymətləndirmə","label":"Diaqnostik qiymətləndirmə"}],
     "students":{
         "103622":{"name":"Zəhra Qarayeva","class":"4A"},
@@ -252,7 +252,7 @@
         "993759":{"name":"Aişə Göyüşlü","class":"8A"},
         "995041":{"name":"Amal Əlizadə","class":"6B"},
         "995487":{"name":"Alperen Osman","class":"4B"},
-        "997836":{"name":"Məryəm Aslanlı","class":"3A"}
+        "997836":{"name":"Məryəm Aslanlı","class":"3A"},
         "291583":{"name":"Məryəm Hümbətli","class":"6B"}
     }
 }
