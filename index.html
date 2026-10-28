@@ -1021,7 +1021,10 @@
         }
 
         async function loadEmbeddedData() {
-            const data = {"stats":{"totalResults":0,"totalExams":0,"classCount":16},"exams":[{"value":"Diaqnostik qiymətləndirmə","label":"Diaqnostik qiymətləndirmə"}]};
+            const data = {"stats":{"totalResults":0,"totalExams":2,"classCount":16},"exams":[
+                {"value":"Diaqnostik qiymətləndirmə","label":"Diaqnostik qiymətləndirmə"},
+                {"value":"Kiçik Summativ Qiymətləndirmə - I","label":"Kiçik Summativ Qiymətləndirmə - I"}
+            ]};
             studentData = data.students || {};
             
             // Dinamik sayğın
@@ -1528,7 +1531,7 @@
             setInterval(updateClock, 1000);
 
             setTimeout(() => {
-                showNotification("III-VIII siniflər üzrə Diaqnostik qiymətləndirmə imtahanının nəticələri elan edilmişdir", 'announcement');
+                showNotification("III-VIII siniflər üzrə Kiçik Summativ Qiymətləndirmə - I imtahanının nəticələri elan edilmişdir", 'announcement');
             }, 800);
 
             document.addEventListener('keypress', function (e) {
