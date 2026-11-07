@@ -992,6 +992,10 @@
         let toastTimeout;
         const TOAST_DURATION = 5000;
 
+        // Eyni anda başlayan köhnə sorğunun yeni sorğunun nəticəsini örtməsinin
+        // qarşısını alır.
+        let activeSearchRequest = 0;
+
         let studentData = {};
         let statsData = { totalResults: 0, totalExams: 0, classCount: 16 };
 
@@ -1287,6 +1291,23 @@
             document.getElementById('loading-logo').classList.remove('spin');
         }
 
+        function setLoadingMessage(main, sub) {
+            document.querySelector('#loading-overlay .loading-text-main').innerHTML =
+                main + '<span class="loading-dots"></span>';
+            document.querySelector('#loading-overlay .loading-text-sub').textContent = sub;
+        }
+
+        function waitForResultFrame(frame, previewUrl) {
+            return new Promise((resolve, reject) => {
+                frame.onload = () => {
+                    if (window.innerWidth <= 640) scaleFrameOnMobile();
+                    resolve();
+                };
+                frame.onerror = () => reject(new Error('Nəticə sənədi yüklənmədi.'));
+                frame.src = previewUrl;
+            });
+        }
+
         /* ================= MOBİL İFRAME MİQYASI ================= */
         function scaleFrameOnMobile() {
             const frame = document.getElementById("resultFrame");
@@ -1370,13 +1391,28 @@
             }
 
             const resultContainer = document.getElementById("result-container");
+            const requestId = ++activeSearchRequest;
+            const searchButton = document.getElementById("search-btn");
 
             resultContainer.classList.remove("visible");
+            searchButton.disabled = true;
+            searchButton.setAttribute('aria-busy', 'true');
+            setLoadingMessage('Nəticə axtarılır', 'Səbriniz üçün təşəkkür edirik!');
             startLoading();
+
+            const longWaitNotice = setTimeout(() => {
+                if (requestId === activeSearchRequest) {
+                    setLoadingMessage('Nəticə hazırlanır', 'Sənəd böyük olduqda bu, bir qədər uzun çəkə bilər.');
+                }
+            }, 10000);
 
             try {
                 const response = await fetch(RESULT_SCRIPT_URL + "?id=" + encodeURIComponent(idValue) + "&exam=" + encodeURIComponent(examValue));
+                if (!response.ok) throw new Error(`Sorğu xətası: ${response.status}`);
                 const data = await response.json();
+
+                // İstifadəçi yeni sorğu göndəribsə, köhnə cavabı nəzərə alma.
+                if (requestId !== activeSearchRequest) return;
 
                 fetch(LOG_SCRIPT_URL, {
                     method: 'POST',
@@ -1393,27 +1429,16 @@
                     const prevSrc = frame.getAttribute("src");
 
                     if (prevSrc !== data.preview) {
-                        await new Promise((resolve) => {
-                            let settled = false;
-                            const finish = () => {
-                                if (settled) return;
-                                settled = true;
-                                resolve();
-                            };
-                            frame.onload = function() {
-                                if (window.innerWidth <= 640) {
-                                    scaleFrameOnMobile();
-                                }
-                                finish();
-                            };
-                            frame.onerror = finish;
-                            frame.src = data.preview;
-                            setTimeout(finish, 6000);
-                        });
+                        // 6 saniyəlik süni vaxt limiti əvvəllər yükləmə ekranını
+                        // sənəd görünməzdən əvvəl bağlayırdı. İndi iframe həqiqətən
+                        // yüklənənə qədər gözlənilir.
+                        await waitForResultFrame(frame, data.preview);
+                        if (requestId !== activeSearchRequest) return;
                     } else if (window.innerWidth <= 640) {
                         scaleFrameOnMobile();
                     }
 
+                    clearTimeout(longWaitNotice);
                     stopLoading();
                     showNotification(`"${student.name}" üçün "${examText}" nəticəsi uğurla tapıldı!`, "success");
 
@@ -1427,14 +1452,22 @@
 
                     fetchStats();
                 } else {
+                    clearTimeout(longWaitNotice);
                     stopLoading();
                     showNotification(`"${student.name}" şagirdi üçün "${examText}" nəticəsi tapılmadı.`, "error");
                 }
 
             } catch (error) {
+                clearTimeout(longWaitNotice);
+                if (requestId !== activeSearchRequest) return;
                 stopLoading();
                 console.error("Fetch xətası:", error);
                 showNotification("Sistem xətası baş verdi.", "error");
+            } finally {
+                if (requestId === activeSearchRequest) {
+                    searchButton.disabled = false;
+                    searchButton.removeAttribute('aria-busy');
+                }
             }
         }
 
