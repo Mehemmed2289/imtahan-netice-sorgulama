@@ -5,7 +5,8 @@
         {"value":"Kiçik Summativ Qiymətləndirmə - I","label":"Kiçik Summativ Qiymətləndirmə - I"},
         {"value":"DİM - Mövzu Sınağı - I","label":"DİM - Mövzu Sınağı - I"},
         {"value":"SAT MS-1","label":"SAT  MS-1"},
-        {"value":"TR-YÖS-1","label":"TR-YÖS-1"}
+        {"value":"TR-YÖS-1","label":"TR-YÖS-1"},
+        {"value":"TYS-1","label":"TYS-1"}
     ],
     "students":{
         "103622":{"name":"Zəhra Qarayeva","class":"4A"},
